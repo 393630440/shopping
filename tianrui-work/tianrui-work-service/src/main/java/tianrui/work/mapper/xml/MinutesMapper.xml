@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.MinutesMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.Minutes" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="departmentid" property="departmentid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="usercode" property="usercode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="modifytime" property="modifytime" jdbcType="BIGINT" />
+    <result column="modifyer" property="modifyer" jdbcType="VARCHAR" />
+    <result column="desc1" property="desc1" jdbcType="VARCHAR" />
+    <result column="desc2" property="desc2" jdbcType="VARCHAR" />
+    <result column="desc3" property="desc3" jdbcType="VARCHAR" />
+    <result column="desc4" property="desc4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, departmentid, username, usercode, remark, createtime, creater, modifytime, 
+    modifyer, desc1, desc2, desc3, desc4
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from work_minutes
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from work_minutes
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.Minutes" >
+    insert into work_minutes (id, userid, departmentid, 
+      username, usercode, remark, 
+      createtime, creater, modifytime, 
+      modifyer, desc1, desc2, 
+      desc3, desc4)
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{departmentid,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT}, #{creater,jdbcType=VARCHAR}, #{modifytime,jdbcType=BIGINT}, 
+      #{modifyer,jdbcType=VARCHAR}, #{desc1,jdbcType=VARCHAR}, #{desc2,jdbcType=VARCHAR}, 
+      #{desc3,jdbcType=VARCHAR}, #{desc4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.Minutes" >
+    insert into work_minutes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="departmentid != null" >
+        departmentid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="usercode != null" >
+        usercode,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="modifytime != null" >
+        modifytime,
+      </if>
+      <if test="modifyer != null" >
+        modifyer,
+      </if>
+      <if test="desc1 != null" >
+        desc1,
+      </if>
+      <if test="desc2 != null" >
+        desc2,
+      </if>
+      <if test="desc3 != null" >
+        desc3,
+      </if>
+      <if test="desc4 != null" >
+        desc4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=BIGINT},
+      </if>
+      <if test="modifyer != null" >
+        #{modifyer,jdbcType=VARCHAR},
+      </if>
+      <if test="desc1 != null" >
+        #{desc1,jdbcType=VARCHAR},
+      </if>
+      <if test="desc2 != null" >
+        #{desc2,jdbcType=VARCHAR},
+      </if>
+      <if test="desc3 != null" >
+        #{desc3,jdbcType=VARCHAR},
+      </if>
+      <if test="desc4 != null" >
+        #{desc4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.Minutes" >
+    update work_minutes
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        departmentid = #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        usercode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        modifytime = #{modifytime,jdbcType=BIGINT},
+      </if>
+      <if test="modifyer != null" >
+        modifyer = #{modifyer,jdbcType=VARCHAR},
+      </if>
+      <if test="desc1 != null" >
+        desc1 = #{desc1,jdbcType=VARCHAR},
+      </if>
+      <if test="desc2 != null" >
+        desc2 = #{desc2,jdbcType=VARCHAR},
+      </if>
+      <if test="desc3 != null" >
+        desc3 = #{desc3,jdbcType=VARCHAR},
+      </if>
+      <if test="desc4 != null" >
+        desc4 = #{desc4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.Minutes" >
+    update work_minutes
+    set userid = #{userid,jdbcType=VARCHAR},
+      departmentid = #{departmentid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      usercode = #{usercode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=BIGINT},
+      creater = #{creater,jdbcType=VARCHAR},
+      modifytime = #{modifytime,jdbcType=BIGINT},
+      modifyer = #{modifyer,jdbcType=VARCHAR},
+      desc1 = #{desc1,jdbcType=VARCHAR},
+      desc2 = #{desc2,jdbcType=VARCHAR},
+      desc3 = #{desc3,jdbcType=VARCHAR},
+      desc4 = #{desc4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
