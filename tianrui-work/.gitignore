@@ -1,0 +1,12 @@
+/tianrui-work/tianrui-work-web/target/classes/com/tianrui/web/smvc/*.class
+/tianrui-work/tianrui-work-api/target/classes/tianrui/work/req/*.class
+/tianrui-work/tianrui-work-api/target/classes/tianrui/work/api/*.class
+/tianrui-work/.project
+/tianrui-work/.settings/*.prefs
+/tianrui-work/tianrui-work-api/*.classpath
+/tianrui-work/tianrui-work-api/target/classes/META-INF
+/tianrui-work/tianrui-work-api/.project
+/tianrui-work/tianrui-work-api/.settings/org.eclipse.core.resources.prefs
+/tianrui-work/tianrui-work-api/.settings/*.prefs
+/tianrui-work/tianrui-work-api/.settings/*.component
+/tianrui-work/tianrui-work-api/.settings/org.eclipse.wst.common.project.facet.core.xml

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>tianrui-work</groupId>
+  <artifactId>tianrui-work</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+	<properties>
+		<ver.junit>4.12</ver.junit>
+		<ver.log4j>1.2.16</ver.log4j>
+		<ver.slf4j>1.6.6</ver.slf4j>
+		<ver.trwl>0.0.1-SNAPSHOT</ver.trwl>
+		<ver.json>1.2.3</ver.json>
+		<ver.commons.lang>2.6</ver.commons.lang>
+		<ver.spring>4.0.9.RELEASE</ver.spring>
+		<ver.mybatis>3.3.0</ver.mybatis>
+  </properties>
+  <modules>
+    <module>tianrui-work-web</module>
+    <module>tianrui-work-service</module>
+    <module>tianrui-work-api</module>
+    <module>tianrui-work-comm</module>
+    <module>tianrui-work-test</module>
+  </modules>
+</project>
