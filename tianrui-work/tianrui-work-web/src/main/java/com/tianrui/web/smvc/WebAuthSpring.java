@@ -26,7 +26,6 @@ public class WebAuthSpring implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("鎷︽埅鍣ㄥ凡缁忓叆");
 		//鐢ㄦ埛鏉冮檺鎿嶄綔闇�
 		if (!(handler instanceof HandlerMethod)) {
             return true;
