@@ -1,4 +1,4 @@
-package com.tianrui.web.action.weixin.util.entity;
+package com.tianrui.web.util;
 /**
  * 接收到的微信xml实体类
  * @author pamchen-1

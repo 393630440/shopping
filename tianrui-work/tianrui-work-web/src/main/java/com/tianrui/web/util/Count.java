@@ -1,4 +1,4 @@
-package com.tianrui.web.action.weixin.util.util;
+package com.tianrui.web.util;
 
 public class Count {
 

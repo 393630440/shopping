@@ -1,4 +1,4 @@
-package com.tianrui.web.action.weixin.util.entity;
+package com.tianrui.web.util;
 
 
 /**

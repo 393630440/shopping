@@ -1,4 +1,4 @@
-package com.tianrui.web.action.weixin.util.util;
+package com.tianrui.web.util;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import javax.net.ssl.X509TrustManager;

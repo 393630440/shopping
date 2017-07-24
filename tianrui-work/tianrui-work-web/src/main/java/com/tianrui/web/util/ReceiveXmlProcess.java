@@ -1,4 +1,4 @@
-package com.tianrui.web.action.weixin.util.util;
+package com.tianrui.web.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -8,8 +8,6 @@ import java.util.Map;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-
-import com.tianrui.web.action.weixin.util.entity.ReceiveXmlEntity;
 
 /**
  * 解析接收到的微信xml，返回消息对象

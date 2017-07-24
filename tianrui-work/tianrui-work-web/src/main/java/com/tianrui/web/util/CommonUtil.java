@@ -1,4 +1,4 @@
-package com.tianrui.web.action.weixin.util.util;
+package com.tianrui.web.util;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.tianrui.web.action.weixin.util.entity.Tokens;
 
 
 

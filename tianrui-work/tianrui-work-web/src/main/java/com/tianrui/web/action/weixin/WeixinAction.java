@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tianrui.web.action.weixin.util.entity.ReceiveXmlEntity;
-import com.tianrui.web.action.weixin.util.util.FormatXmlProcess;
-import com.tianrui.web.action.weixin.util.util.ReceiveXmlProcess;
-import com.tianrui.web.action.weixin.util.util.SignUtilSignature;
+import com.tianrui.web.util.FormatXmlProcess;
+import com.tianrui.web.util.ReceiveXmlEntity;
+import com.tianrui.web.util.ReceiveXmlProcess;
+import com.tianrui.web.util.SignUtilSignature;
 
 import tianrui.work.comm.Constant;
 
