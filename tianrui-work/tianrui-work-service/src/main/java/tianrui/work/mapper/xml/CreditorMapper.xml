@@ -25,12 +25,16 @@
     <result column="creator_time" property="creatorTime" jdbcType="BIGINT" />
     <result column="updatetor" property="updatetor" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    
+    <result column="creditor_type" property="creditorType" jdbcType="VARCHAR" />
+    <result column="creatorImg" property="creatorImg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, creditor_status, creditor_name, creditor_phone, creditor_idcard, creditor_sex, 
     creditor_address, creditor_company, creditor_company_address, debtor_name, debtor_phone, 
     debtor_idcrd, debtor_sex, debtor_address, debtor_company, debtor_company_address, 
-    debt_amount, debt_time, debt_type, creator, creator_time, updatetor, update_time
+    debt_amount, debt_time, debt_type, creator, creator_time, updatetor, 
+    update_time, creditor_type, creatorImg
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -70,7 +74,7 @@
       debtor_sex, debtor_address, debtor_company, 
       debtor_company_address, debt_amount, debt_time, 
       debt_type, creator, creator_time, 
-      updatetor, update_time)
+      updatetor, update_time, creditor_type, creatorImg)
     values (#{id,jdbcType=VARCHAR}, #{creditorStatus,jdbcType=VARCHAR}, #{creditorName,jdbcType=VARCHAR}, 
       #{creditorPhone,jdbcType=VARCHAR}, #{creditorIdcard,jdbcType=VARCHAR}, #{creditorSex,jdbcType=VARCHAR}, 
       #{creditorAddress,jdbcType=VARCHAR}, #{creditorCompany,jdbcType=VARCHAR}, #{creditorCompanyAddress,jdbcType=VARCHAR}, 
@@ -78,7 +82,10 @@
       #{debtorSex,jdbcType=VARCHAR}, #{debtorAddress,jdbcType=VARCHAR}, #{debtorCompany,jdbcType=VARCHAR}, 
       #{debtorCompanyAddress,jdbcType=VARCHAR}, #{debtAmount,jdbcType=DOUBLE}, #{debtTime,jdbcType=BIGINT}, 
       #{debtType,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{creatorTime,jdbcType=BIGINT}, 
-      #{updatetor,jdbcType=VARCHAR}, #{updateTime,jdbcType=BIGINT})
+      #{updatetor,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=BIGINT},
+      #{creditorType,jdbcType=VARCHAR},
+      #{creatorImg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="tianrui.work.bean.Creditor" >
     insert into shop_creditor
@@ -152,6 +159,12 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="creditorType != null">
+      	creditor_type,
+      </if>
+      <if test="creatorImg != null">
+        creatorImg,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -223,11 +236,23 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=BIGINT},
       </if>
+      <if test="creditorType != null">
+      	#{creditorType,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorImg != null">
+        #{creatorImg,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.Creditor" >
     update shop_creditor
     <set >
+      <if test="creatorImg != null">
+        creatorImg = #{creatorImg,jdbcType=VARCHAR},
+      </if>
+    	<if test="creditorType != null">
+      	creditor_type = #{creditorType,jdbcType=VARCHAR},
+      </if>
       <if test="creditorStatus != null" >
         creditor_status = #{creditorStatus,jdbcType=VARCHAR},
       </if>
@@ -300,6 +325,8 @@
   <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.Creditor" >
     update shop_creditor
     set creditor_status = #{creditorStatus,jdbcType=VARCHAR},
+      creatorImg = #{creatorImg,jdbcType=VARCHAR},
+      creditor_type = #{creditorType,jdbcType=VARCHAR},
       creditor_name = #{creditorName,jdbcType=VARCHAR},
       creditor_phone = #{creditorPhone,jdbcType=VARCHAR},
       creditor_idcard = #{creditorIdcard,jdbcType=VARCHAR},

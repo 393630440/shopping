@@ -8,6 +8,8 @@ public class CreditorSaveReq {
     private String id;
 
     private String creditorStatus;
+    
+    private String creditorType;
 
     private String creditorName;
 
@@ -23,22 +25,24 @@ public class CreditorSaveReq {
 
     private String creditorCompanyAddress;
 
-    private String debtorName;
-
-    private String debtorPhone;
-
-    private String debtorIdcrd;
-
-    private String debtorSex;
-
-    private String debtorAddress;
-
-    private String debtorCompany;
-
-    private String debtorCompanyAddress;
+//    private String debtorName;
+//
+//    private String debtorPhone;
+//
+//    private String debtorIdcrd;
+//
+//    private String debtorSex;
+//
+//    private String debtorAddress;
+//
+//    private String debtorCompany;
+//
+//    private String debtorCompanyAddress;
 
     private Double debtAmount;
 
+    private String debtTimeStr;
+    
     private Long debtTime;
 
     private String debtType;
@@ -123,62 +127,6 @@ public class CreditorSaveReq {
         this.creditorCompanyAddress = creditorCompanyAddress == null ? null : creditorCompanyAddress.trim();
     }
 
-    public String getDebtorName() {
-        return debtorName;
-    }
-
-    public void setDebtorName(String debtorName) {
-        this.debtorName = debtorName == null ? null : debtorName.trim();
-    }
-
-    public String getDebtorPhone() {
-        return debtorPhone;
-    }
-
-    public void setDebtorPhone(String debtorPhone) {
-        this.debtorPhone = debtorPhone == null ? null : debtorPhone.trim();
-    }
-
-    public String getDebtorIdcrd() {
-        return debtorIdcrd;
-    }
-
-    public void setDebtorIdcrd(String debtorIdcrd) {
-        this.debtorIdcrd = debtorIdcrd == null ? null : debtorIdcrd.trim();
-    }
-
-    public String getDebtorSex() {
-        return debtorSex;
-    }
-
-    public void setDebtorSex(String debtorSex) {
-        this.debtorSex = debtorSex == null ? null : debtorSex.trim();
-    }
-
-    public String getDebtorAddress() {
-        return debtorAddress;
-    }
-
-    public void setDebtorAddress(String debtorAddress) {
-        this.debtorAddress = debtorAddress == null ? null : debtorAddress.trim();
-    }
-
-    public String getDebtorCompany() {
-        return debtorCompany;
-    }
-
-    public void setDebtorCompany(String debtorCompany) {
-        this.debtorCompany = debtorCompany == null ? null : debtorCompany.trim();
-    }
-
-    public String getDebtorCompanyAddress() {
-        return debtorCompanyAddress;
-    }
-
-    public void setDebtorCompanyAddress(String debtorCompanyAddress) {
-        this.debtorCompanyAddress = debtorCompanyAddress == null ? null : debtorCompanyAddress.trim();
-    }
-
     public Double getDebtAmount() {
         return debtAmount;
     }
@@ -231,7 +179,23 @@ public class CreditorSaveReq {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public String getCreditorType() {
+		return creditorType;
+	}
+
+	public void setCreditorType(String creditorType) {
+		this.creditorType = creditorType;
+	}
+
+	public String getDebtTimeStr() {
+		return debtTimeStr;
+	}
+
+	public void setDebtTimeStr(String debtTimeStr) {
+		this.debtTimeStr = debtTimeStr;
+	}
+
+	public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 }

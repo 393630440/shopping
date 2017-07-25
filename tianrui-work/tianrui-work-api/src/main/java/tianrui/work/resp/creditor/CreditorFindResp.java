@@ -8,6 +8,10 @@ public class CreditorFindResp {
     private String id;
 
     private String creditorStatus;
+    
+    private String creatorImg;
+    
+    private String creditorType;
 
     private String creditorName;
 
@@ -231,7 +235,23 @@ public class CreditorFindResp {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public String getCreatorImg() {
+		return creatorImg;
+	}
+
+	public void setCreatorImg(String creatorImg) {
+		this.creatorImg = creatorImg;
+	}
+
+	public String getCreditorType() {
+		return creditorType;
+	}
+
+	public void setCreditorType(String creditorType) {
+		this.creditorType = creditorType;
+	}
+
+	public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 }

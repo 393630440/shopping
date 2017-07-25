@@ -10,8 +10,12 @@ public class Creditor {
     private Integer pageNo;
     
     private Integer pageSize;
+    
+    private String creatorImg;
 
     private String creditorStatus;
+    
+    private String creditorType;
 
     private String creditorName;
 
@@ -238,6 +242,22 @@ public class Creditor {
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
+
+	public String getCreditorType() {
+		return creditorType;
+	}
+
+	public void setCreditorType(String creditorType) {
+		this.creditorType = creditorType;
+	}
+
+	public String getCreatorImg() {
+		return creatorImg;
+	}
+
+	public void setCreatorImg(String creatorImg) {
+		this.creatorImg = creatorImg;
+	}
 
 	public Integer getPageNo() {
 		return pageNo;

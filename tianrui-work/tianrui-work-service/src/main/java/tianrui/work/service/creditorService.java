@@ -14,8 +14,10 @@ import tianrui.work.req.creditor.CreditorFindReq;
 import tianrui.work.req.creditor.CreditorSaveReq;
 import tianrui.work.req.creditor.CreditorUpdateReq;
 import tianrui.work.resp.creditor.CreditorFindResp;
+import tianrui.work.vo.DateChangeUtil;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
+import tianrui.work.vo.UUIDUtil;
 @Service
 public class creditorService implements ICreditorService{
 
@@ -26,6 +28,10 @@ public class creditorService implements ICreditorService{
 		Result rs = Result.getSuccessful();
 		Creditor record = new Creditor();
 		PropertyUtils.copyProperties(record, req);
+		record.setId(UUIDUtil.getUUID());
+		//1正常 0禁用
+		record.setCreditorStatus("1");
+		record.setDebtTime(DateChangeUtil.changeStr(req.getDebtTimeStr(), "yyyy-MM-dd"));
 		record.setCreatorTime(System.currentTimeMillis());
 		creditorMapper.insertSelective(record);
 		return rs;
