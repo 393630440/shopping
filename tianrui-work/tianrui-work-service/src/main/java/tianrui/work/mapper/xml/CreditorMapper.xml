@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.CreditorMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.Creditor" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="creditor_status" property="creditorStatus" jdbcType="VARCHAR" />
+    <result column="creditor_name" property="creditorName" jdbcType="VARCHAR" />
+    <result column="creditor_phone" property="creditorPhone" jdbcType="VARCHAR" />
+    <result column="creditor_idcard" property="creditorIdcard" jdbcType="VARCHAR" />
+    <result column="creditor_sex" property="creditorSex" jdbcType="VARCHAR" />
+    <result column="creditor_address" property="creditorAddress" jdbcType="VARCHAR" />
+    <result column="creditor_company" property="creditorCompany" jdbcType="VARCHAR" />
+    <result column="creditor_company_address" property="creditorCompanyAddress" jdbcType="VARCHAR" />
+    <result column="debtor_name" property="debtorName" jdbcType="VARCHAR" />
+    <result column="debtor_phone" property="debtorPhone" jdbcType="VARCHAR" />
+    <result column="debtor_idcrd" property="debtorIdcrd" jdbcType="VARCHAR" />
+    <result column="debtor_sex" property="debtorSex" jdbcType="VARCHAR" />
+    <result column="debtor_address" property="debtorAddress" jdbcType="VARCHAR" />
+    <result column="debtor_company" property="debtorCompany" jdbcType="VARCHAR" />
+    <result column="debtor_company_address" property="debtorCompanyAddress" jdbcType="VARCHAR" />
+    <result column="debt_amount" property="debtAmount" jdbcType="DOUBLE" />
+    <result column="debt_time" property="debtTime" jdbcType="BIGINT" />
+    <result column="debt_type" property="debtType" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="creator_time" property="creatorTime" jdbcType="BIGINT" />
+    <result column="updatetor" property="updatetor" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, creditor_status, creditor_name, creditor_phone, creditor_idcard, creditor_sex, 
+    creditor_address, creditor_company, creditor_company_address, debtor_name, debtor_phone, 
+    debtor_idcrd, debtor_sex, debtor_address, debtor_company, debtor_company_address, 
+    debt_amount, debt_time, debt_type, creator, creator_time, updatetor, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_creditor
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="tianrui.work.bean.Creditor" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_creditor
+    <where>	
+    	<if test="pageNo != null">
+    		limit ${pageNo,jdbcType=INTEGER},${pageSize,jdbcType=INTEGER}
+    	</if>
+    </where>
+  </select>
+ 
+ <select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.Creditor" >
+    select 
+    count(0)
+    from shop_creditor
+    <where>	
+
+    </where>
+  </select>
+ 	
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop_creditor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.Creditor" >
+    insert into shop_creditor (id, creditor_status, creditor_name, 
+      creditor_phone, creditor_idcard, creditor_sex, 
+      creditor_address, creditor_company, creditor_company_address, 
+      debtor_name, debtor_phone, debtor_idcrd, 
+      debtor_sex, debtor_address, debtor_company, 
+      debtor_company_address, debt_amount, debt_time, 
+      debt_type, creator, creator_time, 
+      updatetor, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{creditorStatus,jdbcType=VARCHAR}, #{creditorName,jdbcType=VARCHAR}, 
+      #{creditorPhone,jdbcType=VARCHAR}, #{creditorIdcard,jdbcType=VARCHAR}, #{creditorSex,jdbcType=VARCHAR}, 
+      #{creditorAddress,jdbcType=VARCHAR}, #{creditorCompany,jdbcType=VARCHAR}, #{creditorCompanyAddress,jdbcType=VARCHAR}, 
+      #{debtorName,jdbcType=VARCHAR}, #{debtorPhone,jdbcType=VARCHAR}, #{debtorIdcrd,jdbcType=VARCHAR}, 
+      #{debtorSex,jdbcType=VARCHAR}, #{debtorAddress,jdbcType=VARCHAR}, #{debtorCompany,jdbcType=VARCHAR}, 
+      #{debtorCompanyAddress,jdbcType=VARCHAR}, #{debtAmount,jdbcType=DOUBLE}, #{debtTime,jdbcType=BIGINT}, 
+      #{debtType,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{creatorTime,jdbcType=BIGINT}, 
+      #{updatetor,jdbcType=VARCHAR}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.Creditor" >
+    insert into shop_creditor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creditorStatus != null" >
+        creditor_status,
+      </if>
+      <if test="creditorName != null" >
+        creditor_name,
+      </if>
+      <if test="creditorPhone != null" >
+        creditor_phone,
+      </if>
+      <if test="creditorIdcard != null" >
+        creditor_idcard,
+      </if>
+      <if test="creditorSex != null" >
+        creditor_sex,
+      </if>
+      <if test="creditorAddress != null" >
+        creditor_address,
+      </if>
+      <if test="creditorCompany != null" >
+        creditor_company,
+      </if>
+      <if test="creditorCompanyAddress != null" >
+        creditor_company_address,
+      </if>
+      <if test="debtorName != null" >
+        debtor_name,
+      </if>
+      <if test="debtorPhone != null" >
+        debtor_phone,
+      </if>
+      <if test="debtorIdcrd != null" >
+        debtor_idcrd,
+      </if>
+      <if test="debtorSex != null" >
+        debtor_sex,
+      </if>
+      <if test="debtorAddress != null" >
+        debtor_address,
+      </if>
+      <if test="debtorCompany != null" >
+        debtor_company,
+      </if>
+      <if test="debtorCompanyAddress != null" >
+        debtor_company_address,
+      </if>
+      <if test="debtAmount != null" >
+        debt_amount,
+      </if>
+      <if test="debtTime != null" >
+        debt_time,
+      </if>
+      <if test="debtType != null" >
+        debt_type,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="creatorTime != null" >
+        creator_time,
+      </if>
+      <if test="updatetor != null" >
+        updatetor,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorStatus != null" >
+        #{creditorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorName != null" >
+        #{creditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorPhone != null" >
+        #{creditorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorIdcard != null" >
+        #{creditorIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorSex != null" >
+        #{creditorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorAddress != null" >
+        #{creditorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorCompany != null" >
+        #{creditorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorCompanyAddress != null" >
+        #{creditorCompanyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorName != null" >
+        #{debtorName,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorPhone != null" >
+        #{debtorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorIdcrd != null" >
+        #{debtorIdcrd,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorSex != null" >
+        #{debtorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorAddress != null" >
+        #{debtorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorCompany != null" >
+        #{debtorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorCompanyAddress != null" >
+        #{debtorCompanyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="debtAmount != null" >
+        #{debtAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="debtTime != null" >
+        #{debtTime,jdbcType=BIGINT},
+      </if>
+      <if test="debtType != null" >
+        #{debtType,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorTime != null" >
+        #{creatorTime,jdbcType=BIGINT},
+      </if>
+      <if test="updatetor != null" >
+        #{updatetor,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.Creditor" >
+    update shop_creditor
+    <set >
+      <if test="creditorStatus != null" >
+        creditor_status = #{creditorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorName != null" >
+        creditor_name = #{creditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorPhone != null" >
+        creditor_phone = #{creditorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorIdcard != null" >
+        creditor_idcard = #{creditorIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorSex != null" >
+        creditor_sex = #{creditorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorAddress != null" >
+        creditor_address = #{creditorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorCompany != null" >
+        creditor_company = #{creditorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creditorCompanyAddress != null" >
+        creditor_company_address = #{creditorCompanyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorName != null" >
+        debtor_name = #{debtorName,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorPhone != null" >
+        debtor_phone = #{debtorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorIdcrd != null" >
+        debtor_idcrd = #{debtorIdcrd,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorSex != null" >
+        debtor_sex = #{debtorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorAddress != null" >
+        debtor_address = #{debtorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorCompany != null" >
+        debtor_company = #{debtorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="debtorCompanyAddress != null" >
+        debtor_company_address = #{debtorCompanyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="debtAmount != null" >
+        debt_amount = #{debtAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="debtTime != null" >
+        debt_time = #{debtTime,jdbcType=BIGINT},
+      </if>
+      <if test="debtType != null" >
+        debt_type = #{debtType,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorTime != null" >
+        creator_time = #{creatorTime,jdbcType=BIGINT},
+      </if>
+      <if test="updatetor != null" >
+        updatetor = #{updatetor,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.Creditor" >
+    update shop_creditor
+    set creditor_status = #{creditorStatus,jdbcType=VARCHAR},
+      creditor_name = #{creditorName,jdbcType=VARCHAR},
+      creditor_phone = #{creditorPhone,jdbcType=VARCHAR},
+      creditor_idcard = #{creditorIdcard,jdbcType=VARCHAR},
+      creditor_sex = #{creditorSex,jdbcType=VARCHAR},
+      creditor_address = #{creditorAddress,jdbcType=VARCHAR},
+      creditor_company = #{creditorCompany,jdbcType=VARCHAR},
+      creditor_company_address = #{creditorCompanyAddress,jdbcType=VARCHAR},
+      debtor_name = #{debtorName,jdbcType=VARCHAR},
+      debtor_phone = #{debtorPhone,jdbcType=VARCHAR},
+      debtor_idcrd = #{debtorIdcrd,jdbcType=VARCHAR},
+      debtor_sex = #{debtorSex,jdbcType=VARCHAR},
+      debtor_address = #{debtorAddress,jdbcType=VARCHAR},
+      debtor_company = #{debtorCompany,jdbcType=VARCHAR},
+      debtor_company_address = #{debtorCompanyAddress,jdbcType=VARCHAR},
+      debt_amount = #{debtAmount,jdbcType=DOUBLE},
+      debt_time = #{debtTime,jdbcType=BIGINT},
+      debt_type = #{debtType,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      creator_time = #{creatorTime,jdbcType=BIGINT},
+      updatetor = #{updatetor,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
