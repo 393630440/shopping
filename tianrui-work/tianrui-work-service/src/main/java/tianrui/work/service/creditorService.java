@@ -19,7 +19,7 @@ import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 import tianrui.work.vo.UUIDUtil;
 @Service
-public class creditorService implements ICreditorService{
+public class CreditorService implements ICreditorService{
 
 	@Autowired
 	CreditorMapper creditorMapper;
@@ -71,8 +71,8 @@ public class creditorService implements ICreditorService{
 		PageTool<CreditorFindResp> page = new PageTool<CreditorFindResp>();
 		Creditor find = new Creditor();
 		if(req.getPageNo() != null){
-			find.setPageNo(req.getPageNo());
-			find.setPageSize(req.getPageSize()*req.getPageNo());
+			find.setPageNo(req.getPageSize()*req.getPageNo());
+			find.setPageSize(req.getPageSize());
 			page.setPageNo(req.getPageNo());
 			page.setPageSize(req.getPageSize());
 		}

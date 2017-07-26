@@ -35,7 +35,7 @@
 </body>
 <script type="text/javascript">
 $(function(){
-	init();
+	init(0);
 	
 });
 function init(pageNo){
@@ -52,7 +52,6 @@ function init(pageNo){
 	});
 }
 function innerHTML(date){
-	alert("65564");
 	$("#innerHml").empty();
 	for (var a = 0; a < date.length; a++) {
 		var creType = "";

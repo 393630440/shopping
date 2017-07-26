@@ -25,10 +25,6 @@ public class CreditorAction {
 	@Autowired
 	ICreditorService creditorService;
 
-	/**
-	 * 发布信息页面
-	 * @return
-	 */
 	@RequestMapping("savePage")
 	public ModelAndView savePage(){
 		ModelAndView view = new ModelAndView();
@@ -44,10 +40,6 @@ public class CreditorAction {
 		return rs;
 		
 	}
-	/**
-	 * 信息广场页面
-	 * @return
-	 */
 	@RequestMapping("selectPage")
 	public ModelAndView selectPage(){
 		ModelAndView view = new ModelAndView();

@@ -47,10 +47,10 @@
     <include refid="Base_Column_List" />
     from shop_creditor
     <where>	
-    	<if test="pageNo != null">
-    		limit ${pageNo,jdbcType=INTEGER},${pageSize,jdbcType=INTEGER}
-    	</if>
     </where>
+    <if test="pageNo != null">
+   		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+   	</if>
   </select>
  
  <select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.Creditor" >
