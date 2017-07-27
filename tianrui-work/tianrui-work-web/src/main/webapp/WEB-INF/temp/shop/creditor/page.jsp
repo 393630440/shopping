@@ -36,7 +36,6 @@
 <script type="text/javascript">
 $(function(){
 	init(0);
-	
 });
 function init(pageNo){
 	$.ajax({

@@ -50,16 +50,14 @@ public class CreditorService implements ICreditorService{
 		Result rs = Result.getSuccessful();
 		Creditor bean = creditorMapper.selectByPrimaryKey(id);
 		if(bean != null){
+			Creditor upt = new Creditor();
+			upt.setId(bean.getId());
 			if(bean.getCreditorStatus().equals("1")){
-				//正常数据可以作废
-				Creditor upt = new Creditor();
-				upt.setId(bean.getId());
 				upt.setCreditorStatus("0");
-				creditorMapper.updateByPrimaryKeySelective(upt);
-			}else{
-				rs.setCode("1");
-				rs.setError("非正常数据不能作废");
+			}else {
+				upt.setCreditorStatus("1");
 			}
+			creditorMapper.updateByPrimaryKeySelective(upt);
 		}else{
 			rs.setCode("1");
 			rs.setError("数据异常");
@@ -76,6 +74,8 @@ public class CreditorService implements ICreditorService{
 			page.setPageNo(req.getPageNo());
 			page.setPageSize(req.getPageSize());
 		}
+		find.setCreditorIdcard(req.getCreditorIdcard());
+		find.setCreditorStatus(req.getCreditorStatus());
 		List<Creditor> list = creditorMapper.selectByCondition(find);
 		long a = creditorMapper.selectBycount(find);
 		page.setList(copyProperties2(list));
