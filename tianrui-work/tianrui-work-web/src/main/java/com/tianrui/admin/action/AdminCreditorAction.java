@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianrui.web.smvc.AutherWeb;
+
 import tianrui.work.api.ICreditorService;
 import tianrui.work.req.creditor.CreditorFindReq;
 import tianrui.work.resp.creditor.CreditorFindResp;
@@ -21,6 +23,7 @@ public class AdminCreditorAction {
 	
 	/** 页面跳转*/
 	@RequestMapping("index")
+	@AutherWeb(typeString = "admin")
 	public ModelAndView creditorPage(){
 		ModelAndView view = new ModelAndView();	
 		view.setViewName("admin/creditor/index");
@@ -29,6 +32,7 @@ public class AdminCreditorAction {
 	/** 查询数据
 	 * @throws Exception */
 	@RequestMapping("select")
+	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result select(CreditorFindReq req) throws Exception{
 		Result rs = Result.getSuccessful();
@@ -39,6 +43,7 @@ public class AdminCreditorAction {
 	/** 修改
 	 * @throws Exception */
 	@RequestMapping("upt")
+	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result upt(String id) throws Exception{
 		Result rs = Result.getSuccessful();

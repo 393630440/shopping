@@ -24,15 +24,13 @@
 		 <div class="am-u-sm-10 myapp-login-form">
 		 	<form class="am-form">
 			  <fieldset>
-			    <center>
 			    <div class="am-form-group" style="text-align:center">
-			      <input type="text" class="" id="doc-ipt-email-1" value="" placeholder="请输入账号">
+			      <input type="text" class="" id="acount" value="" placeholder="请输入账号">
 			    </div>
-			    </center>
 			    <div class="am-form-group">
-			      <input type="password" class="" id="doc-ipt-pwd-1" value=""  placeholder="请输入密码">
+			      <input type="password" class="" id="passward" value=""  placeholder="请输入密码">
 			    </div>
-			    <p><button type="submit" class="am-btn am-btn-default">Login</button></p>
+			    <p><button type="button" class="am-btn am-btn-default" id="loginIn">Login</button></p>
 			    <div class="login-text">
 			    	Forgot Password?
 			    </div>
@@ -51,5 +49,23 @@
 <![endif]-->
 <script src="/resources/admin/login/js/amazeui.min.js"></script>
 <script src="/resources/admin/login/js/app.js"></script>
+<script type="text/javascript">
+$("#loginIn").on("click",function(){
+	var acount = $("#acount").val();
+	var passward = $("#passward").val();
+	$.ajax({
+		url:"/public/shop/adminLogin/loginin",
+		data:{"acount":acount,"password":passward},
+		type:"POST",
+		success:function(ret){
+			if(ret.code=="000000"){
+				window.location.href="/admin/shop/creditor/index";
+			}else{
+				alert(ret.error);
+			}
+		}
+	});
+});
+</script>
 </body>
 </html>

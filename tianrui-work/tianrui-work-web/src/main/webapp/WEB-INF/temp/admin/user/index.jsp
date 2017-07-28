@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>信息管理</title>
+<title>后台会员管理</title>
 <meta name="description" content="这是一个 index 页面">
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -38,8 +38,8 @@
 		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 信息管理</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">信息管理</a></dl>
+		      <ul class="am-icon-flag on"> 后台会员管理</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">后台会员管理</a></dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>

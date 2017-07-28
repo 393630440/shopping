@@ -1,6 +1,11 @@
 package tianrui.work.bean;
 
 public class AdminUser {
+	
+	private Integer pageNo;
+	
+	private Integer pageSize;
+	
     private String id;
 
     private String acount;
@@ -8,6 +13,8 @@ public class AdminUser {
     private String acountStatus;
 
     private String password;
+
+    private String username;
 
     private String telphone;
 
@@ -18,10 +25,6 @@ public class AdminUser {
     private Long createtime;
 
     private Integer loginNum;
-    
-    private Integer pageNo;
-    
-    private Integer pageSize;
 
     public String getId() {
         return id;
@@ -53,6 +56,14 @@ public class AdminUser {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getTelphone() {

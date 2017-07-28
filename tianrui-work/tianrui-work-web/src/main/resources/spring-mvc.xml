@@ -41,7 +41,7 @@
 	<mvc:interceptors>
 		<!-- 拦截所有Web端需要拦截的路径,做日志以及权限验证-->
 		<mvc:interceptor>
-			<mvc:mapping path="/member/**"/>
+			<mvc:mapping path="/admin/**"/>
 			<bean class="com.tianrui.web.smvc.WebAuthSpring" />
 		</mvc:interceptor>
 	</mvc:interceptors>	

@@ -1,7 +1,6 @@
 package tianrui.work.req.admin.user;
 
 public class UserFindReq {
-    private String id;
 
     private String acount;
 
@@ -10,22 +9,12 @@ public class UserFindReq {
     private String password;
 
     private String telphone;
-
-    private Long logintime;
-
-    private String userRole;
-
-    private Long createtime;
-
-    private Integer loginNum;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String username;
+    
+    private Integer pageNo;
+    
+    private Integer pageSize;
 
     public String getAcount() {
         return acount;
@@ -59,35 +48,27 @@ public class UserFindReq {
         this.telphone = telphone == null ? null : telphone.trim();
     }
 
-    public Long getLogintime() {
-        return logintime;
-    }
+	public Integer getPageNo() {
+		return pageNo;
+	}
 
-    public void setLogintime(Long logintime) {
-        this.logintime = logintime;
-    }
+	public void setPageNo(Integer pageNo) {
+		this.pageNo = pageNo;
+	}
 
-    public String getUserRole() {
-        return userRole;
-    }
+	public Integer getPageSize() {
+		return pageSize;
+	}
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole == null ? null : userRole.trim();
-    }
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 
-    public Long getCreatetime() {
-        return createtime;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setCreatetime(Long createtime) {
-        this.createtime = createtime;
-    }
-
-    public Integer getLoginNum() {
-        return loginNum;
-    }
-
-    public void setLoginNum(Integer loginNum) {
-        this.loginNum = loginNum;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
