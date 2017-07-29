@@ -1,6 +1,6 @@
 package com.tianrui.web.util;
 
-public class Count {
+public class Configure {
 
 	public static String APPID = "wxf22ce076abf3d066";
 	

@@ -83,7 +83,7 @@ public class CommonUtil {
 			inputStream.close();
 			inputStream = null;
 			conn.disconnect();
-//			jsonObject = JSONObject.fromObject(buffer.toString());
+			jsonObject = JSONObject.parseObject(buffer.toString());
 		} catch (ConnectException ce) {
 			log.error("连接超时：{}", ce);
 		} catch (Exception e) {
@@ -92,6 +92,20 @@ public class CommonUtil {
 		return jsonObject;
 	}
 
+	/**网页授权 获取openid*/
+	public static JSONObject getOpenid(String code){
+		String requestUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+Configure.APPID+"&secret="+Configure.APPSECRET+"&code="+code+"&grant_type=authorization_code";
+		JSONObject obj = CommonUtil.httpsRequest(requestUrl, "POST", null);
+		return obj;
+	}
+	
+	/**获取用户信息*/
+	public static JSONObject getWeChatInfo(String openid,String accessToken){
+		String requestUrl = "https://api.weixin.qq.com/sns/userinfo?access_token="+accessToken+"&openid="+openid+"&lang=zh_CN";
+		JSONObject obj = CommonUtil.httpsRequest(requestUrl, "POST", null);
+		return obj;
+	}
+	
 	/**
 	 * 获取接口访问凭证
 	 * 
@@ -101,7 +115,7 @@ public class CommonUtil {
 	 */
 	public static Tokens getToken() {
 		Tokens token = null;
-		String requestUrl = token_url.replace("APPID", Count.APPID).replace("APPSECRET", Count.APPSECRET);
+		String requestUrl = token_url.replace("APPID", Configure.APPID).replace("APPSECRET", Configure.APPSECRET);
 		// 发起GET请求获取凭证
 		JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
 
