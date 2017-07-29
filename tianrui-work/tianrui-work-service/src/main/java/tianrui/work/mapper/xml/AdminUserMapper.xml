@@ -31,8 +31,11 @@
     	<if test="telphone != null and telphone != ''">
     		and telphone like "%" #{telphone,jdbcType=VARCHAR} "%"
     	</if>
+    	<if test="username != null and username != ''">
+    		and username like "%" #{username,jdbcType=VARCHAR} "%"
+    	</if>
     	<if test="acountStatus != null and acountStatus != ''">
-    		and acountStatus = #{acountStatus,jdbcType=VARCHAR}
+    		and acount_status = #{acountStatus,jdbcType=VARCHAR}
     	</if>
     </where>
     <if test="pageNo != null">
@@ -53,8 +56,11 @@
     	<if test="telphone != null and telphone != ''">
     		and telphone like "%" #{telphone,jdbcType=VARCHAR} "%"
     	</if>
+    	<if test="username != null and username != ''">
+    		and username like "%" #{username,jdbcType=VARCHAR} "%"
+    	</if>
     	<if test="acountStatus != null and acountStatus != ''">
-    		and acountStatus = #{acountStatus,jdbcType=VARCHAR}
+    		and acount_status = #{acountStatus,jdbcType=VARCHAR}
     	</if>
     </where>
   </select>

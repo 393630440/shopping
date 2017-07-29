@@ -8,6 +8,8 @@ public class UserSaveReq {
     private String acountStatus;
 
     private String password;
+    
+    private String username;
 
     private String telphone;
 
@@ -87,7 +89,15 @@ public class UserSaveReq {
         return loginNum;
     }
 
-    public void setLoginNum(Integer loginNum) {
+    public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setLoginNum(Integer loginNum) {
         this.loginNum = loginNum;
     }
 }

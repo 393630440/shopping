@@ -16,6 +16,8 @@ public interface IAdminUserService {
 	public Result saveUser(UserSaveReq req)throws Exception;
 	/** 删除用户*/
 	public Result delete(String id)throws Exception;
+	/** 用户禁用*/
+	public Result userDisable(String id)throws Exception;
 	/** 查询用户列表*/
 	public PageTool<UserFindResp> select(UserFindReq req)throws Exception;
 

@@ -59,7 +59,7 @@ $("#loginIn").on("click",function(){
 		type:"POST",
 		success:function(ret){
 			if(ret.code=="000000"){
-				window.location.href="/admin/shop/creditor/index";
+				window.location.href="/admin/shop/user/index";
 			}else{
 				alert(ret.error);
 			}

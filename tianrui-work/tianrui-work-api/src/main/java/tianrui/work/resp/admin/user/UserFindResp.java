@@ -6,6 +6,8 @@ public class UserFindResp {
     private String acount;
 
     private String acountStatus;
+    
+    private String username;
 
     private String password;
 
@@ -90,4 +92,12 @@ public class UserFindResp {
     public void setLoginNum(Integer loginNum) {
         this.loginNum = loginNum;
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

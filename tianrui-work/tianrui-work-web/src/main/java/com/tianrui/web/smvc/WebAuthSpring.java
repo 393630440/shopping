@@ -17,13 +17,11 @@ public class WebAuthSpring implements HandlerInterceptor{
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
-		System.out.println("last");
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView view)
 			throws Exception {
-		System.out.println("first");
 	}
 
 	@Override
@@ -33,7 +31,7 @@ public class WebAuthSpring implements HandlerInterceptor{
         } else{
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			AutherWeb authType = handlerMethod.getMethodAnnotation(AutherWeb.class);
-			if(StringUtils.equals(authType.typeString(), "admin")){
+			if(authType != null && StringUtils.equals(authType.typeString(), "admin")){
 				AdminUser user = SessionAdminManager.getSessionManager(request);
 				if(user == null){
 					response.sendRedirect("/public/shop/adminLogin/loginPage");

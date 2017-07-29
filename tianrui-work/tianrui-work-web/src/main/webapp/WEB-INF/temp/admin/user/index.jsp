@@ -38,42 +38,41 @@
 		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 后台会员管理</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">后台会员管理</a></dl>
+		      <ul class="am-icon-flag on"> 管理员管理</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">管理员管理</a></dl>
+		      <dl>
+		        <button type="button" id="save_adminUSer" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 添加会员</button>
+		      </dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>
 			    <li>
 			      <div class="am-btn-group am-btn-group-xs">
-			        <select id="creditStatus" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-			          <option value="">信息状态</option>
+			        <select id="acountStatus" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+			          <option value="">会员状态</option>
 			          <option value="1">正常</option>
 			          <option value="0">禁用</option>
 			        </select>
 			      </div>
 			    </li>
-			    <li><input type="text" id="creditIdCard" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="身份证号" /></li>
+			    <li><input type="text" id="acount" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="会员账号" /></li>
+			    <li><input type="text" id="telphone" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="联系电话" /></li>
+			   	<li><input type="text" id="username" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="管理员名称" /></li>
 			    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 			  </ul>
 			</div>
-		    <form class="am-form am-g">
+		    <div class="am-form am-g">
 		          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
 		            <thead>
 		              <tr class="am-success">
-		                <th class="table-check"><input type="checkbox" /></th>
-		                <th class="table-title">排序</th>
+		                <th class="table-title">序号</th>
 		                <th class="table-title">类别</th>
-		                <th class="table-author am-hide-sm-only">正常/禁用 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
-		               	<th class="table-title">姓名</th>
-		               	<th class="table-type">性别</th>
-		               	<th class="table-type">电话</th>
-		               	<th class="table-type">身份证号</th>
-		               	<th class="table-type">公司名称</th>
-		               	<th class="table-type">公司地址</th>
-		               	<th class="table-type">债务金额</th>
-		               	<th class="table-type">债务来源</th>
-		                <th class="table-date am-hide-sm-only">产生时间</th>
-		                <th class="table-date am-hide-sm-only">发布时间</th>
+		                <th class="table-title">正常/禁用 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
+		               	<th class="table-title">会员账号</th>
+		               	<th class="table-type">会员姓名</th>
+		               	<th class="table-type">联系电话</th>
+		               	<th class="table-type">最后登录时间</th>
+		               	<th class="table-type">登录次数</th>
 		                <th width="163px" class="table-set">操作</th>
 		              </tr>
 		            </thead>
@@ -85,7 +84,7 @@
 				  <jsp:include page="../common/pageTool.jsp" flush="false"></jsp:include>
 				 <!-- page end -->
 		          <hr />
-		        </form>
+		        </div>
 		</div>
 		<!-- left-head begin-->
 		<jsp:include page="../common/foods.jsp" flush="false"></jsp:include>
@@ -102,6 +101,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="/resources/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/creditor/index.js?0728"></script>
+<script src="/resources/js/admin/user/index.js?0729"></script>
 </body>
 </html>

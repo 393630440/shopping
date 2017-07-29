@@ -1,5 +1,7 @@
 package com.tianrui.web.action;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +24,14 @@ import tianrui.work.vo.Result;
 @RequestMapping("/wechat/shop/creditor")
 public class CreditorAction {
 
+	Logger log = LoggerFactory.getLogger(CreditorAction.class);
+	
 	@Autowired
 	ICreditorService creditorService;
 
 	@RequestMapping("savePage")
 	public ModelAndView savePage(){
+		log.info("123456---------------------abc");
 		ModelAndView view = new ModelAndView();
 		view.setViewName("shop/creditor/save");
 		return view;

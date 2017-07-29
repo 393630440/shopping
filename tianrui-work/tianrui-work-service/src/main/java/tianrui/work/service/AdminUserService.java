@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,17 @@ public class AdminUserService implements IAdminUserService{
 		user.setAcount(req.getAcount());
 		user.setPassword(req.getPassword());
 		List<AdminUser> list = adminUserMapper.selectByCondition(user);
-		if(list.size()==1){
-			//登录成功
-			rs.setData(list.get(0));
-			changeLogin(list.get(0));
-		}else {
+		//登录成功
+		if(list.size() == 1){
+			AdminUser admin = list.get(0);
+			if(StringUtils.equals(admin.getAcountStatus(), "1")){
+				rs.setData(admin);
+				changeLogin(admin);
+			}else{
+				rs.setCode("1");
+				rs.setError("账号已被禁用");
+			}
+		}else{
 			rs.setCode("1");
 			rs.setError("用户名或密码错误");
 		}
@@ -49,12 +56,22 @@ public class AdminUserService implements IAdminUserService{
 
 	@Override
 	public Result saveUser(UserSaveReq req) throws Exception {
-		// TODO Auto-generated method stub
 		Result rs = Result.getSuccessful();
+		AdminUser query = new AdminUser();
+		query.setAcount(req.getAcount());
+		List<AdminUser> list = adminUserMapper.selectByCondition(query);
+		if(list.size()!=0){
+			rs.setCode("1");
+			rs.setError("会员账号已被添加，请重新输入会员账号");
+			return rs;
+		}
 		AdminUser user = new AdminUser();
 		user.setId(UUIDUtil.getUUID());
-		user.setPassword("666666");
-		user.setLogintime(System.currentTimeMillis());
+		user.setAcount(req.getAcount());
+		user.setPassword(req.getPassword());
+		user.setUsername(req.getUsername());
+		user.setTelphone(req.getTelphone());
+		user.setLoginNum(0);
 		user.setCreatetime(System.currentTimeMillis());
 		user.setAcountStatus("1");
 		adminUserMapper.insertSelective(user);
@@ -74,6 +91,7 @@ public class AdminUserService implements IAdminUserService{
 		record.setAcount(req.getAcount());
 		record.setUsername(req.getUsername());
 		record.setTelphone(req.getTelphone());
+		record.setAcountStatus(req.getAcountStatus());
 		if(req.getPageNo()!=null){
 			record.setPageNo(req.getPageNo()*req.getPageSize());
 			record.setPageSize(req.getPageSize());
@@ -95,6 +113,27 @@ public class AdminUserService implements IAdminUserService{
 			resp.add(sp);
 		}
 		return resp;
+	}
+	@Override
+	public Result userDisable(String id) throws Exception {
+		Result rs = Result.getSuccessful();
+		AdminUser user = adminUserMapper.selectByPrimaryKey(id);
+		if(user!=null){
+			if(user.getAcount().equals("admin")){
+				rs.setCode("1");
+				rs.setError("admin账号不能被禁用");
+			}else{
+				AdminUser upt = new AdminUser();
+				upt.setId(id);
+				if(StringUtils.equals(user.getAcountStatus(), "1")){
+					upt.setAcountStatus("0");
+				}else{
+					upt.setAcountStatus("1");
+				}
+				adminUserMapper.updateByPrimaryKeySelective(upt);
+			}
+		}
+		return rs;
 	}
 
 }

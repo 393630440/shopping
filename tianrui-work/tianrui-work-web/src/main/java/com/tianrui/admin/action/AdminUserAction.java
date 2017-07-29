@@ -10,6 +10,7 @@ import com.tianrui.web.smvc.AutherWeb;
 
 import tianrui.work.api.IAdminUserService;
 import tianrui.work.req.admin.user.UserFindReq;
+import tianrui.work.req.admin.user.UserSaveReq;
 import tianrui.work.resp.admin.user.UserFindResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
@@ -28,13 +29,38 @@ public class AdminUserAction {
 		view.setViewName("admin/user/index");
 		return view;
 	}
-	@RequestMapping("find")
+	/** 添加后台会员*/
+	@RequestMapping("saveUsre")
+	@AutherWeb(typeString = "admin")
+	public ModelAndView saveUsrePage(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("admin/user/save_user");
+		return view;
+	}
+	
+	@RequestMapping("select")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
-	public Result find(UserFindReq req) throws Exception{
+	public Result select(UserFindReq req) throws Exception{
 		Result rs = Result.getSuccessful();
 		PageTool<UserFindResp> page = adminUserService.select(req);
 		rs.setData(page);
 		return rs;
+	}
+	/**修改会员状态
+	 * @throws Exception */
+	@RequestMapping("uptUser")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result uptUser(String id) throws Exception{
+		return adminUserService.userDisable(id);
+	}
+	/** 添加会员
+	 * @throws Exception */
+	@RequestMapping("save")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result save(UserSaveReq req) throws Exception{
+		return adminUserService.saveUser(req);
 	}
 }

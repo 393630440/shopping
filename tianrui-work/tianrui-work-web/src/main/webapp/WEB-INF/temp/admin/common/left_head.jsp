@@ -20,7 +20,7 @@
         <li>发货单列表</li>
         <li>换货单列表</li>
       </ul>
-      <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
+      <h3 class="am-icon-users" id="user_class"><em></em> <a href="/admin/shop/user/index">管理员管理</a></h3>
       <ul>
         <li>会员列表 </li>
         <li>未激活会员</li>
@@ -28,7 +28,7 @@
         <li>会员推荐图</li>
         <li>推荐列表</li>
       </ul>
-      <h3 class="am-icon-volume-up on"><em></em> <a href="/admin/shop/creditor/index">消息广场</a></h3>
+      <h3 class="am-icon-volume-up" id="creditor_class"><em></em> <a href="/admin/shop/creditor/index">消息广场</a></h3>
       <ul>
         <li>站内消息 /留言 </li>
         <li>短信</li>
@@ -57,8 +57,8 @@
 		effect:"slideDown", //targetCell下拉效果
 		delayTime:300 , //效果时间
 		triggerTime:150, //鼠标延迟触发时间（默认150）
-		defaultPlay:true,//默认是否执行效果（默认true）
-		returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+		defaultPlay:false,//默认是否执行效果（默认true）
+		returnDefault:false //鼠标从.sideMen移走后返回默认状态（默认false）
 		});
 	//long类型装dataStr-----new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss")
 	Date.prototype.format = function(f){

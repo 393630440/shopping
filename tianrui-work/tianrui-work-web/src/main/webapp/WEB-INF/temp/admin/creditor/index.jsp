@@ -56,7 +56,7 @@
 			    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 			  </ul>
 			</div>
-		    <form class="am-form am-g">
+		    <div class="am-form am-g">
 		          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
 		            <thead>
 		              <tr class="am-success">
@@ -85,7 +85,7 @@
 				  <jsp:include page="../common/pageTool.jsp" flush="false"></jsp:include>
 				 <!-- page end -->
 		          <hr />
-		        </form>
+		        </div>
 		</div>
 		<!-- left-head begin-->
 		<jsp:include page="../common/foods.jsp" flush="false"></jsp:include>
@@ -102,6 +102,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="/resources/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/creditor/index.js?0728"></script>
+<script src="/resources/js/admin/creditor/index.js?0729"></script>
 </body>
 </html>

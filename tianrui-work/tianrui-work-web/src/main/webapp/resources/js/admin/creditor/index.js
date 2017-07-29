@@ -1,4 +1,5 @@
 $(function(){
+	$("#creditor_class").addClass("on")
 	init(0);
 });
 function init(pageNo){
