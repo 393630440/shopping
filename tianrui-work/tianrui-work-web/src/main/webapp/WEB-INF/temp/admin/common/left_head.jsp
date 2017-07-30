@@ -20,6 +20,15 @@
         <li>发货单列表</li>
         <li>换货单列表</li>
       </ul>
+      <h3 class="am-icon-cart-plus" id="member_class"><em></em> <a href="/admin/shop/member/page"> 微信会员管理</a></h3>
+      <ul>
+        <li>订单列表</li>
+        <li>合并订单</li>
+        <li>订单打印</li>
+        <li>添加订单</li>
+        <li>发货单列表</li>
+        <li>换货单列表</li>
+      </ul>
       <h3 class="am-icon-users" id="user_class"><em></em> <a href="/admin/shop/user/index">管理员管理</a></h3>
       <ul>
         <li>会员列表 </li>

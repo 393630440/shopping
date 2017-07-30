@@ -30,7 +30,7 @@
                              targetProject="tianrui-work-service\src\main\java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="admin_user" domainObjectName="AdminUser" enableCountByExample="false"
+        <table tableName="member_info" domainObjectName="MemberInfo" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
     </context>

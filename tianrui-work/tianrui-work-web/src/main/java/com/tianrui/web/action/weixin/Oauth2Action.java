@@ -1,11 +1,15 @@
 package com.tianrui.web.action.weixin;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tianrui.web.util.CommonUtil;
 import com.tianrui.web.util.Configure;
+
+import tianrui.work.api.IMemberInfoService;
+import tianrui.work.req.member.MemberInfoSaveReq;
 
 /**
  * 网页授权处理工具
@@ -16,15 +20,25 @@ import com.tianrui.web.util.Configure;
 @RequestMapping("oauth2")
 public class Oauth2Action {
 
+	@Autowired
+	IMemberInfoService memberInfoService;
+	
 	@RequestMapping("weChat")
-	public void weChat(String code,String state){
+	public void weChat(String code,String state) throws Exception{
 		//http://183-lisijia.imwork.net/oauth2/weChat
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf22ce076abf3d066&redirect_uri=http%3a%2f%2f183-lisijia.imwork.net%2foauth2%2fweChat&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+//		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf22ce076abf3d066&redirect_uri=http%3a%2f%2f183-lisijia.imwork.net%2foauth2%2fweChat&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
 		JSONObject obj = CommonUtil.getOpenid(code);
 		String openid= obj.getString("openid");
 		String access_token = obj.getString("access_token");
 		JSONObject objInfo = CommonUtil.getWeChatInfo(openid, access_token);
 		System.out.println(objInfo);
+		MemberInfoSaveReq req = new MemberInfoSaveReq();
+		req.setMemberId(objInfo.getString("openid"));
+		req.setWechatName(objInfo.getString("nickname"));
+		req.setWechatImg(objInfo.getString("headimgurl"));
+		req.setWechat(objInfo.getString("openid"));
+		req.setCity(objInfo.getString("city"));
+		memberInfoService.saveMember(req);
 //		{"sex":1,
 //		"nickname":"李思佳",
 //		"privilege":[],
