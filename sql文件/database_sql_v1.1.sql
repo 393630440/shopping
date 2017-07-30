@@ -62,8 +62,10 @@ DROP TABLE IF EXISTS `goods_classify`;
 CREATE TABLE `goods_classify` (
   `classify_id` varchar(50) NOT NULL COMMENT '分类ID',
   `classify_name` varchar(30) DEFAULT NULL COMMENT '分类名称',
+  `classify_status` varchar(30) DEFAULT NULL COMMENT '分类状态:1-正常;2-已删除',
   `parent_id` varchar(50) DEFAULT NULL COMMENT '父ID',
   `descr` varchar(256) DEFAULT NULL COMMENT '备注说明',
+  `pubdate` bigint(20) DEFAULT NULL COMMENT '发布时间',
   PRIMARY KEY (`classify_id`),
   KEY `index_1` (`classify_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品分类信息表';

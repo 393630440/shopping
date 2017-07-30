@@ -33,7 +33,7 @@ public class AdminGoodsInfoAction {
 	@RequestMapping("index")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView goodsPage() {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/index] To [AdminGoodsInfoAction.goodsPage]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/index]");
 		ModelAndView view = new ModelAndView();
 		view.setViewName("admin/goods/index");
 		return view;
@@ -44,7 +44,7 @@ public class AdminGoodsInfoAction {
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result queryList(GoodsInfoFindReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/querylist] To [AdminGoodsInfoAction.queryList]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/querylist]");
 		Result rs = Result.getSuccessful();
 		PageTool<GoodsInfoFindResp> page = goodsInfoService.queryGoodsInfoByList(req);
 		rs.setData(page);
@@ -56,7 +56,7 @@ public class AdminGoodsInfoAction {
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result query(GoodsInfoReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/query] To [AdminGoodsInfoAction.query]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/query]");
 		Result rs = Result.getSuccessful();
 		GoodsInfoFindResp data = goodsInfoService.queryGoodsInfo(req);
 		rs.setData(data);
@@ -67,7 +67,7 @@ public class AdminGoodsInfoAction {
 	@RequestMapping("addpage")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView addPage(GoodsInfoReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/addpage] To [AdminGoodsInfoAction.addPage]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/addpage]");
 		ModelAndView view = new ModelAndView();
 		view.setViewName("admin/goods/addpage");
 		return view;
@@ -78,7 +78,7 @@ public class AdminGoodsInfoAction {
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result add(GoodsInfoReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/add] To [AdminGoodsInfoAction.add]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/add]");
 		Result rs = null;
 		if (isFile(req.getGoodsImg()) && isFile(req.getGoodsDetails())) {
 
@@ -87,7 +87,7 @@ public class AdminGoodsInfoAction {
 			req.setGoodsId(goodsId);// 商品ID
 			req.setGoodsStatus("1");// 商品状态:1-已上架;2-已下架
 			req.setPubdate(pubdate);
-			req.setGoodsId(saveImg(req.getGoodsImg(), goodsId, pubdate));
+			req.setGoodsImg(saveImg(req.getGoodsImg(), goodsId, pubdate));
 			req.setGoodsDetails(saveImg(req.getGoodsDetails(), goodsId, pubdate));
 
 			rs = goodsInfoService.addGoodsInfo(req);
@@ -101,7 +101,7 @@ public class AdminGoodsInfoAction {
 	@RequestMapping("editpage")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView editPage(GoodsInfoReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/editpage] To [AdminGoodsInfoAction.editPage]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/editpage]");
 		ModelAndView view = new ModelAndView();
 		view.addObject("goodsInfo", goodsInfoService.queryGoodsInfo(req));
 		view.setViewName("admin/goods/editpage");
@@ -113,7 +113,7 @@ public class AdminGoodsInfoAction {
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result edit(GoodsInfoReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/edit] To [AdminGoodsInfoAction.edit]");
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/edit]");
 		Result rs = Result.getSuccessful();
 		rs = goodsInfoService.editGoodsInfo(req);
 		return rs;
@@ -144,17 +144,18 @@ public class AdminGoodsInfoAction {
 		sysPath = sysPath.substring(6, sysPath.indexOf("WEB-INF"));
 		if (sysPath.indexOf(":") == -1)
 			sysPath = "/" + sysPath;
+		sysPath += "goodsInfo/" + goodsId + "/";
 
 		String[] pathArr = pathArrStr.split("[|]");
 		for (String path : pathArr) {
 			if ("".equals(path) || path == null)
 				break;
 
-			File file = new File(sysPath + goodsId + "/");
+			File file = new File(sysPath);
 			if (!file.isDirectory())
 				file.mkdirs();
 
-			String newPath = goodsId + "/" + pubdate + path.substring(path.indexOf("."), path.length());
+			String newPath = sysPath + pubdate + path.substring(path.indexOf("."), path.length());
 			sb.append(newPath).append("|");
 			newPath = sysPath + newPath;
 			byte[] b = FileUtils.readFileBytes(path);

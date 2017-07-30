@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.GoodsClassifyMapper">
+	<resultMap id="BaseResultMap" type="tianrui.work.bean.GoodsClassify">
+		<id column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+		<result column="classify_name" property="classifyName" jdbcType="VARCHAR" />
+		<result column="classify_status" property="classifyStatus" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+		<result column="descr" property="descr" jdbcType="VARCHAR" />
+		<result column="pubdate" property="pubdate" jdbcType="BIGINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		classify_id, classify_name, classify_status, parent_id, descr, pubdate
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" /> from goods_classify where classify_id = #{classifyId,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from goods_classify where classify_id = #{classifyId,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="selectByGoodsClassify" resultMap="BaseResultMap" parameterType="tianrui.work.bean.GoodsClassify">
+		select
+		<include refid="Base_Column_List" />
+		from goods_classify
+		<where>
+			<if test="classifyName != null and classifyName != ''">and classify_name like "%" #{classifyName,jdbcType=VARCHAR} "%"</if>
+		</where>
+		<if test="pageNo != null">
+			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.GoodsClassify">
+		select count(0) from goods_classify
+		<where>
+			<if test="classifyName != null and classifyName != ''">and classify_name like "%" #{classifyName,jdbcType=VARCHAR} "%"</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="tianrui.work.bean.GoodsClassify">
+		insert into goods_classify (classify_id, classify_name, parent_id,descr)
+		values (#{classifyId,jdbcType=VARCHAR}, #{classifyName,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR},
+		#{descr,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertSelective" parameterType="tianrui.work.bean.GoodsClassify">
+		insert into goods_classify
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="classifyId != null">classify_id,</if>
+			<if test="classifyName != null">classify_name,</if>
+			<if test="parentId != null">parent_id,</if>
+			<if test="descr != null">descr,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="classifyId != null">#{classifyId,jdbcType=VARCHAR},</if>
+			<if test="classifyName != null">#{classifyName,jdbcType=VARCHAR},</if>
+			<if test="parentId != null">#{parentId,jdbcType=VARCHAR},</if>
+			<if test="descr != null">#{descr,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.GoodsClassify">
+		update goods_classify
+		<set>
+			<if test="classifyName != null">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
+			<if test="parentId != null">parent_id = #{parentId,jdbcType=VARCHAR},</if>
+			<if test="descr != null">descr = #{descr,jdbcType=VARCHAR},</if>
+		</set>
+		where classify_id = #{classifyId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.GoodsClassify">
+		update goods_classify
+		set classify_name = #{classifyName,jdbcType=VARCHAR},
+		parent_id = #{parentId,jdbcType=VARCHAR},
+		descr = #{descr,jdbcType=VARCHAR}
+		where classify_id = #{classifyId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>
