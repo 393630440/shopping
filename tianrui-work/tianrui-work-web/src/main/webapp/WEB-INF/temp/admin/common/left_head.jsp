@@ -4,8 +4,8 @@
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
-        <li><a href="">商品列表</a></li>
-        <li><a href="">添加新商品</a></li>
+        <li><a href="/admin/shop/goods/index">商品列表</a></li>
+        <li><a href="/admin/shop/goods/addpage">添加新商品</a></li>
         <li><a href="">商品分类</a></li>
         <li><a href="">用户评论</a></li>
         <li><a href="">商品回收站</a></li>
