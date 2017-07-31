@@ -1,18 +1,19 @@
 package com.tianrui.web.action.session;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import tianrui.work.bean.MemberInfo;
 
 public class SessionManage {
 
-//	public static void setSessionManage(HttpServletRequest request, User user){
-//		request.getSession().setAttribute("USER", user);
-//	}
-//	
-//	public static User getSessionManage(HttpServletRequest request,HttpServletResponse response){
-//		User user = null;
-//		user = (User) request.getSession().getAttribute("USER");
-//		return user;
-//	}
+	public static void setSessionManage(HttpServletRequest request, MemberInfo user){
+		request.getSession().removeAttribute("MemberInfo");
+		request.getSession().setAttribute("MemberInfo", user);
+	}
+	
+	public static MemberInfo getSessionManage(HttpServletRequest request){
+		MemberInfo user = null;
+		user = (MemberInfo) request.getSession().getAttribute("MemberInfo");
+		return user;
+	}
 }

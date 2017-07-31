@@ -1,15 +1,20 @@
 package com.tianrui.web.action.weixin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.CommonUtil;
-import com.tianrui.web.util.Configure;
 
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.member.MemberInfoSaveReq;
+import tianrui.work.vo.Result;
 
 /**
  * 网页授权处理工具
@@ -24,9 +29,10 @@ public class Oauth2Action {
 	IMemberInfoService memberInfoService;
 	
 	@RequestMapping("weChat")
-	public void weChat(String code,String state) throws Exception{
+	public ModelAndView weChat(String code,String state,HttpServletRequest request) throws Exception{
 		//http://183-lisijia.imwork.net/oauth2/weChat
 //		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf22ce076abf3d066&redirect_uri=http%3a%2f%2f183-lisijia.imwork.net%2foauth2%2fweChat&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+		ModelAndView view = new ModelAndView();
 		JSONObject obj = CommonUtil.getOpenid(code);
 		String openid= obj.getString("openid");
 		String access_token = obj.getString("access_token");
@@ -38,17 +44,21 @@ public class Oauth2Action {
 		req.setWechatImg(objInfo.getString("headimgurl"));
 		req.setWechat(objInfo.getString("openid"));
 		req.setCity(objInfo.getString("city"));
-		memberInfoService.saveMember(req);
-//		{"sex":1,
-//		"nickname":"李思佳",
-//		"privilege":[],
-//		"province":"河南",
-//		"openid":"oxN_GwUfDDT47iFOpJz3LQ70z4KI",
-//		"language":"zh_CN",
-//		"headimgurl":"http://wx.qlogo.cn/mmopen/icMVrWV8Nt98yshm81GicqiblYz1BDI5WrsYuaO90iaqYsxOnBxehss9UNn7cQIHxeYL8eGR6iacJsYKGz9ZiazpUgDGyJXcZqDtyia/0",
-//		"country":"中国",
-//		"city":"郑州"}
+		Result rs = memberInfoService.saveMember(req);
+		switch (state) {
+		case "member":
+			view.setViewName("");
+		case "goods":
+			view.setViewName("");
+			break;
 
+		default:
+			view.setViewName("/shop/member/memberInfo");
+			break;
+		}
+		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
+
+		return view;
 	}
 	
 }
