@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.MemberFootprintMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.MemberFootprint" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="ff_type" property="ffType" jdbcType="VARCHAR" />
+    <result column="seethe_time" property="seetheTime" jdbcType="BIGINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="tianrui.work.bean.MemberFootprint" extends="BaseResultMap" >
+    <result column="goods_img" property="goodsImg" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, goods_id, ff_type, seethe_time, goods_name, goods_price, createtime
+  </sql>
+  <sql id="Blob_Column_List" >
+    goods_img
+  </sql>
+  
+  <select id="selectByCondition" resultMap="ResultMapWithBLOBs" parameterType="tianrui.work.bean.MemberFootprint" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_follow_footprint
+    <where>
+    	<if test="memberId != null and memberId != ''">
+    		and member_id = #{memberId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="goodsId != null and goodsId != ''">
+    		and goods_id = #{goodsId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="ffType != null and ffType != ''">
+    		and ff_type = #{ffType,jdbcType=VARCHAR}
+    	</if>
+    </where>
+    order by createtime desc
+    <if test="pageNo != null">
+   		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+   	</if>
+  </select>
+   <select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.MemberFootprint" >
+    select 
+    count(0)
+    from member_follow_footprint
+    <where>
+    	<if test="memberId != null and memberId != ''">
+    		and member_id = #{memberId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="goodsId != null and goodsId != ''">
+    		and goods_id = #{goodsId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="ffType != null and ffType != ''">
+    		and ff_type = #{ffType,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_follow_footprint
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member_follow_footprint
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.MemberFootprint" >
+    insert into member_follow_footprint (id, member_id, goods_id, 
+      ff_type, seethe_time, goods_name, 
+      goods_price, createtime, goods_img
+      )
+    values (#{id,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
+      #{ffType,jdbcType=VARCHAR}, #{seetheTime,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsPrice,jdbcType=DOUBLE}, #{createtime,jdbcType=BIGINT}, #{goodsImg,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.MemberFootprint" >
+    insert into member_follow_footprint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="ffType != null" >
+        ff_type,
+      </if>
+      <if test="seetheTime != null" >
+        seethe_time,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="goodsImg != null" >
+        goods_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="ffType != null" >
+        #{ffType,jdbcType=VARCHAR},
+      </if>
+      <if test="seetheTime != null" >
+        #{seetheTime,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="goodsImg != null" >
+        #{goodsImg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.MemberFootprint" >
+    update member_follow_footprint
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="ffType != null" >
+        ff_type = #{ffType,jdbcType=VARCHAR},
+      </if>
+      <if test="seetheTime != null" >
+        seethe_time = #{seetheTime,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="goodsImg != null" >
+        goods_img = #{goodsImg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="tianrui.work.bean.MemberFootprint" >
+    update member_follow_footprint
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=VARCHAR},
+      ff_type = #{ffType,jdbcType=VARCHAR},
+      seethe_time = #{seetheTime,jdbcType=BIGINT},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      createtime = #{createtime,jdbcType=BIGINT},
+      goods_img = #{goodsImg,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.MemberFootprint" >
+    update member_follow_footprint
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=VARCHAR},
+      ff_type = #{ffType,jdbcType=VARCHAR},
+      seethe_time = #{seetheTime,jdbcType=BIGINT},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      createtime = #{createtime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
