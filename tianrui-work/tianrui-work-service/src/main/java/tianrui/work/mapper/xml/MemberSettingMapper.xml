@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.MemberSettingMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.MemberSetting" >
+    <id column="member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="ddtj" property="ddtj" jdbcType="VARCHAR" />
+    <result column="ddqx" property="ddqx" jdbcType="VARCHAR" />
+    <result column="gmcg" property="gmcg" jdbcType="VARCHAR" />
+    <result column="ddfh" property="ddfh" jdbcType="VARCHAR" />
+    <result column="tksq" property="tksq" jdbcType="VARCHAR" />
+    <result column="tkjg" property="tkjg" jdbcType="VARCHAR" />
+    <result column="czcg" property="czcg" jdbcType="VARCHAR" />
+    <result column="txsq" property="txsq" jdbcType="VARCHAR" />
+    <result column="txcg" property="txcg" jdbcType="VARCHAR" />
+    <result column="txsb" property="txsb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    member_id, ddtj, ddqx, gmcg, ddfh, tksq, tkjg, czcg, txsq, txcg, txsb
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_settings
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member_settings
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.MemberSetting" >
+    insert into member_settings (member_id, ddtj, ddqx, 
+      gmcg, ddfh, tksq, tkjg, 
+      czcg, txsq, txcg, txsb
+      )
+    values (#{memberId,jdbcType=VARCHAR}, #{ddtj,jdbcType=VARCHAR}, #{ddqx,jdbcType=VARCHAR}, 
+      #{gmcg,jdbcType=VARCHAR}, #{ddfh,jdbcType=VARCHAR}, #{tksq,jdbcType=VARCHAR}, #{tkjg,jdbcType=VARCHAR}, 
+      #{czcg,jdbcType=VARCHAR}, #{txsq,jdbcType=VARCHAR}, #{txcg,jdbcType=VARCHAR}, #{txsb,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.MemberSetting" >
+    insert into member_settings
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="ddtj != null" >
+        ddtj,
+      </if>
+      <if test="ddqx != null" >
+        ddqx,
+      </if>
+      <if test="gmcg != null" >
+        gmcg,
+      </if>
+      <if test="ddfh != null" >
+        ddfh,
+      </if>
+      <if test="tksq != null" >
+        tksq,
+      </if>
+      <if test="tkjg != null" >
+        tkjg,
+      </if>
+      <if test="czcg != null" >
+        czcg,
+      </if>
+      <if test="txsq != null" >
+        txsq,
+      </if>
+      <if test="txcg != null" >
+        txcg,
+      </if>
+      <if test="txsb != null" >
+        txsb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtj != null" >
+        #{ddtj,jdbcType=VARCHAR},
+      </if>
+      <if test="ddqx != null" >
+        #{ddqx,jdbcType=VARCHAR},
+      </if>
+      <if test="gmcg != null" >
+        #{gmcg,jdbcType=VARCHAR},
+      </if>
+      <if test="ddfh != null" >
+        #{ddfh,jdbcType=VARCHAR},
+      </if>
+      <if test="tksq != null" >
+        #{tksq,jdbcType=VARCHAR},
+      </if>
+      <if test="tkjg != null" >
+        #{tkjg,jdbcType=VARCHAR},
+      </if>
+      <if test="czcg != null" >
+        #{czcg,jdbcType=VARCHAR},
+      </if>
+      <if test="txsq != null" >
+        #{txsq,jdbcType=VARCHAR},
+      </if>
+      <if test="txcg != null" >
+        #{txcg,jdbcType=VARCHAR},
+      </if>
+      <if test="txsb != null" >
+        #{txsb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.MemberSetting" >
+    update member_settings
+    <set >
+      <if test="ddtj != null" >
+        ddtj = #{ddtj,jdbcType=VARCHAR},
+      </if>
+      <if test="ddqx != null" >
+        ddqx = #{ddqx,jdbcType=VARCHAR},
+      </if>
+      <if test="gmcg != null" >
+        gmcg = #{gmcg,jdbcType=VARCHAR},
+      </if>
+      <if test="ddfh != null" >
+        ddfh = #{ddfh,jdbcType=VARCHAR},
+      </if>
+      <if test="tksq != null" >
+        tksq = #{tksq,jdbcType=VARCHAR},
+      </if>
+      <if test="tkjg != null" >
+        tkjg = #{tkjg,jdbcType=VARCHAR},
+      </if>
+      <if test="czcg != null" >
+        czcg = #{czcg,jdbcType=VARCHAR},
+      </if>
+      <if test="txsq != null" >
+        txsq = #{txsq,jdbcType=VARCHAR},
+      </if>
+      <if test="txcg != null" >
+        txcg = #{txcg,jdbcType=VARCHAR},
+      </if>
+      <if test="txsb != null" >
+        txsb = #{txsb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.MemberSetting" >
+    update member_settings
+    set ddtj = #{ddtj,jdbcType=VARCHAR},
+      ddqx = #{ddqx,jdbcType=VARCHAR},
+      gmcg = #{gmcg,jdbcType=VARCHAR},
+      ddfh = #{ddfh,jdbcType=VARCHAR},
+      tksq = #{tksq,jdbcType=VARCHAR},
+      tkjg = #{tkjg,jdbcType=VARCHAR},
+      czcg = #{czcg,jdbcType=VARCHAR},
+      txsq = #{txsq,jdbcType=VARCHAR},
+      txcg = #{txcg,jdbcType=VARCHAR},
+      txsb = #{txsb,jdbcType=VARCHAR}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+</mapper>

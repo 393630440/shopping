@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
+import tianrui.work.bean.MemberSetting;
 import tianrui.work.mapper.java.MemberInfoMapper;
+import tianrui.work.mapper.java.MemberSettingMapper;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
+import tianrui.work.req.member.MemberSetUptReq;
 import tianrui.work.resp.member.MemberInfoResp;
+import tianrui.work.resp.member.MemberSetResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 
@@ -21,6 +25,8 @@ public class MemberInfoService implements IMemberInfoService{
 
 	@Autowired
 	MemberInfoMapper memberInfoMapper;
+	@Autowired
+	MemberSettingMapper memberSettingMapper;
 	
 	@Override
 	public MemberInfoResp selectByOpenid(String id) throws Exception {
@@ -83,8 +89,28 @@ public class MemberInfoService implements IMemberInfoService{
 			save.setRpListingRatio("*");
 			save.setCreatetime(System.currentTimeMillis());
 			memberInfoMapper.insertSelective(save);
+			MemberSetting set = new MemberSetting();
+			set.setMemberId(req.getMemberId());
+			memberSettingMapper.insertSelective(set);
 			rs.setData(save);
 		}
+		return rs;
+	}
+
+	@Override
+	public MemberSetResp findMemberSet(String id) throws Exception{
+		MemberSetting set = memberSettingMapper.selectByPrimaryKey(id);
+		MemberSetResp resp = new MemberSetResp();
+		PropertyUtils.copyProperties(resp, set);
+		return resp;
+	}
+
+	@Override
+	public Result uptMemberSet(MemberSetUptReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		MemberSetting upt = new MemberSetting();
+		PropertyUtils.copyProperties(upt, req);
+		memberSettingMapper.updateByPrimaryKeySelective(upt);
 		return rs;
 	}
 
