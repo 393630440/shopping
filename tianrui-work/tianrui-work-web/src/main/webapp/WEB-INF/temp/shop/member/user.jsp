@@ -83,11 +83,11 @@
               </a>
             </li>
             <li>
-            	<a href="mail.html">
+            	<a href="/wechat/shop/member/setPage">
                 	<div class="u_nav_icon znx"></div>
-                    <div class="u_nav_name">站内消息</div>
+                    <div class="u_nav_name">消息设置</div>
                     <div class="nt_icon"></div>
-                    <div class="u_money"><i>3条</i></div>
+                    <div class="u_money"></div>
               </a>
             </li>
             <li>

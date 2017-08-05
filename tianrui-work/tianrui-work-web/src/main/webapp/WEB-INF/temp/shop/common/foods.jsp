@@ -6,7 +6,7 @@ a {
     text-decoration: none;
 }
 </style>
-<ul class="quanbu-ul1">
+<ul class="quanbu-ul1" style="z-index:999">
     	<li class="foods_01">
         	<div class="qu-tu1">
             	<a href="#" class="atu1"><img src="/resources/shop/images/sjsc-02.gif"></a>
@@ -30,8 +30,8 @@ a {
         </li>
     	<li class="foods_04">
         	<div class="qu-tu1">
-            	<a href="#" class="atu1"><img src="/resources/shop/images/sjsc-18.png"></a>
-            	<a href="#" class="atu2"><img src="/resources/shop/images/sjsc18-1.png"></a>
+            	<a href="/wechat/shop/member/userPage" class="atu1"><img src="/resources/shop/images/sjsc-18.png"></a>
+            	<a href="/wechat/shop/member/userPage" class="atu2"><img src="/resources/shop/images/sjsc18-1.png"></a>
             </div>
             <a href="/wechat/shop/member/userPage" class="qu-ul1a">我</a>
         </li>
