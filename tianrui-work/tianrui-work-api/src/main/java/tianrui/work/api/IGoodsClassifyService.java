@@ -1,5 +1,7 @@
 package tianrui.work.api;
 
+import java.util.List;
+
 import tianrui.work.req.goods.GoodsClassifyFindReq;
 import tianrui.work.req.goods.GoodsClassifyReq;
 import tianrui.work.resp.goods.GoodsClassifyFindResp;
@@ -25,5 +27,8 @@ public interface IGoodsClassifyService {
 
 	/** 列表查询商品分类信息 */
 	PageTool<GoodsClassifyFindResp> queryGoodsClassifyByList(GoodsClassifyFindReq req) throws Exception;
+
+	/** 查询商品分类集合信息 */
+	List<GoodsClassifyFindResp> getGoodsClassifyList() throws Exception;
 
 }

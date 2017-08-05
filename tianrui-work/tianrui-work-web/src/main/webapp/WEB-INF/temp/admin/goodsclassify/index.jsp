@@ -36,6 +36,7 @@
 				<div class="listbiaoti am-cf">
 					<ul class="am-icon-flag on">分类列表</ul>
 					<dl class="am-icon-home" style="float: right;">当前位置： 首页 > 分类列表</dl>
+					<dl><button type="button" id="skip_add_page" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus">添加分类</button></dl>
 				</div>
 				<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 					<ul>
@@ -44,10 +45,10 @@
 					</ul>
 				</div>
 				<div class="am-form am-g">
-					<table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+					<table style="width: 100%" class="am-table am-table-bordered am-table-radius am-table-striped">
 						<thead>
 							<tr class="am-success">
-								<th class="table-check"><input type="checkbox" /></th>
+								<th class="table-check">序号</th>
 								<th class="table-title">分类名称</th>
 								<th class="table-type">备注说明</th>
 								<th class="table-date am-hide-sm-only">添加时间</th>

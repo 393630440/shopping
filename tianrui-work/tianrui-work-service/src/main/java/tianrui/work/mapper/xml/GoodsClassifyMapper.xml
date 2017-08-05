@@ -15,7 +15,15 @@
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select <include refid="Base_Column_List" /> from goods_classify where classify_id = #{classifyId,jdbcType=VARCHAR}
+		select
+		<include refid="Base_Column_List" />
+		from goods_classify where classify_id = #{classifyId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from goods_classify where classify_status = '1'
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -42,33 +50,42 @@
 	</select>
 
 	<insert id="insert" parameterType="tianrui.work.bean.GoodsClassify">
-		insert into goods_classify (classify_id, classify_name, parent_id,descr)
-		values (#{classifyId,jdbcType=VARCHAR}, #{classifyName,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR},
-		#{descr,jdbcType=VARCHAR})
+		insert into goods_classify (classify_id, classify_name, classify_status, parent_id, descr, pubdate)
+		values (#{classifyId,jdbcType=VARCHAR},
+		#{classifyName,jdbcType=VARCHAR},
+		#{classifyStatus,jdbcType=VARCHAR},
+		#{parentId,jdbcType=VARCHAR},
+		#{descr,jdbcType=VARCHAR},
+		#{pubdate,jdbcType=BIGINT})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.GoodsClassify">
 		insert into goods_classify
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="classifyId != null">classify_id,</if>
-			<if test="classifyName != null">classify_name,</if>
-			<if test="parentId != null">parent_id,</if>
-			<if test="descr != null">descr,</if>
+			<if test="classifyId != null and classifyId != ''">classify_id,</if>
+			<if test="classifyName != null and classifyName != ''">classify_name,</if>
+			<if test="classifyStatus != null and classifyStatus != ''">classify_status,</if>
+			<if test="parentId != null and parentId != ''">parent_id,</if>
+			<if test="descr != null and descr != ''">descr,</if>
+			<if test="pubdate != null and pubdate != ''">pubdate,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="classifyId != null">#{classifyId,jdbcType=VARCHAR},</if>
-			<if test="classifyName != null">#{classifyName,jdbcType=VARCHAR},</if>
-			<if test="parentId != null">#{parentId,jdbcType=VARCHAR},</if>
-			<if test="descr != null">#{descr,jdbcType=VARCHAR},</if>
+			<if test="classifyId != null and classifyId != ''">#{classifyId,jdbcType=VARCHAR},</if>
+			<if test="classifyName != null and classifyName != ''">#{classifyName,jdbcType=VARCHAR},</if>
+			<if test="classifyStatus != null and classifyStatus != ''">#{classifyStatus,jdbcType=VARCHAR},</if>
+			<if test="parentId != null and parentId != ''">#{parentId,jdbcType=VARCHAR},</if>
+			<if test="descr != null and descr != ''">#{descr,jdbcType=VARCHAR},</if>
+			<if test="pubdate != null and pubdate != ''">#{pubdate,jdbcType=BIGINT},</if>
 		</trim>
 	</insert>
 
 	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.GoodsClassify">
 		update goods_classify
 		<set>
-			<if test="classifyName != null">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
-			<if test="parentId != null">parent_id = #{parentId,jdbcType=VARCHAR},</if>
-			<if test="descr != null">descr = #{descr,jdbcType=VARCHAR},</if>
+			<if test="classifyName != null and classifyName != ''">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
+			<if test="classifyStatus != null and classifyStatus != ''">classify_status = #{classifyStatus,jdbcType=VARCHAR},</if>
+			<if test="parentId != null and parentId != ''">parent_id = #{parentId,jdbcType=VARCHAR},</if>
+			<if test="descr != null and descr != ''">descr = #{descr,jdbcType=VARCHAR},</if>
 		</set>
 		where classify_id = #{classifyId,jdbcType=VARCHAR}
 	</update>
@@ -76,6 +93,7 @@
 	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.GoodsClassify">
 		update goods_classify
 		set classify_name = #{classifyName,jdbcType=VARCHAR},
+		classify_status = #{classifyStatus,jdbcType=VARCHAR},
 		parent_id = #{parentId,jdbcType=VARCHAR},
 		descr = #{descr,jdbcType=VARCHAR}
 		where classify_id = #{classifyId,jdbcType=VARCHAR}

@@ -29,16 +29,21 @@
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select <include refid="Base_Column_List" /> from goods_info where goods_id = #{goodsId,jdbcType=VARCHAR}
+		select
+		<include refid="Base_Column_List" />
+		from goods_info where goods_id = #{goodsId,jdbcType=VARCHAR}
 	</select>
 
 	<select id="selectByGoodsInfo" resultMap="BaseResultMap" parameterType="tianrui.work.bean.GoodsInfo">
-		select <include refid="Base_Column_List" /> from goods_info
+		select
+		<include refid="Base_Column_List" />
+		from goods_info
 		<where>
 			<if test="classifyName != null and classifyName != ''">and classify_name like "%" #{classifyName,jdbcType=VARCHAR} "%"</if>
 			<if test="goodsName != null and goodsName != ''">and goods_name like "%" #{goodsName,jdbcType=VARCHAR} "%"</if>
 			<if test="goodsStatus != null and goodsStatus != ''">and goods_status = #{goodsStatus,jdbcType=VARCHAR}</if>
 			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="classifyId != null and classifyId != ''">and classify_id = #{classifyId,jdbcType=VARCHAR}</if>
 		</where>
 		<if test="pageNo != null">
 			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
@@ -63,15 +68,20 @@
 		insert into goods_info (goods_id, goods_name, goods_img, goods_status,
 		goods_type, goods_price, red_packet, goods_details, goods_param, express_fee,
 		inventory, salesvolume, buy_num, browse_num, sifting, classify_id, classify_name, pubdate)
-		values (#{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR},
+		values (#{goodsId,jdbcType=VARCHAR},
+		#{goodsName,jdbcType=VARCHAR},
 		#{goodsImg,jdbcType=VARCHAR},
 		#{goodsStatus,jdbcType=VARCHAR},
-		#{goodsType,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DOUBLE},
-		#{redPacket,jdbcType=INTEGER}, #{goodsDetails,jdbcType=VARCHAR},
+		#{goodsType,jdbcType=VARCHAR},
+		#{goodsPrice,jdbcType=DOUBLE},
+		#{redPacket,jdbcType=INTEGER},
+		#{goodsDetails,jdbcType=VARCHAR},
 		#{goodsParam,jdbcType=VARCHAR},
 		#{expressFee,jdbcType=DOUBLE},
-		#{inventory,jdbcType=INTEGER}, #{salesvolume,jdbcType=INTEGER},
-		#{buyNum,jdbcType=INTEGER}, #{browseNum,jdbcType=INTEGER},
+		#{inventory,jdbcType=INTEGER},
+		#{salesvolume,jdbcType=INTEGER},
+		#{buyNum,jdbcType=INTEGER},
+		#{browseNum,jdbcType=INTEGER},
 		#{sifting,jdbcType=VARCHAR},
 		#{classifyId,jdbcType=VARCHAR},
 		#{classifyName,jdbcType=VARCHAR},
@@ -81,67 +91,67 @@
 	<insert id="insertSelective" parameterType="tianrui.work.bean.GoodsInfo">
 		insert into goods_info
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="goodsId != null">goods_id,</if>
-			<if test="goodsName != null">goods_name,</if>
-			<if test="goodsImg != null">goods_img,</if>
-			<if test="goodsStatus != null">goods_status,</if>
-			<if test="goodsType != null">goods_type,</if>
-			<if test="goodsPrice != null">goods_price,</if>
-			<if test="redPacket != null">red_packet,</if>
-			<if test="goodsDetails != null">goods_details,</if>
-			<if test="goodsParam != null">goods_param,</if>
-			<if test="expressFee != null">express_fee,</if>
-			<if test="inventory != null">inventory,</if>
-			<if test="salesvolume != null">salesvolume,</if>
-			<if test="buyNum != null">buy_num,</if>
-			<if test="browseNum != null">browse_num,</if>
-			<if test="sifting != null">sifting,</if>
-			<if test="classifyId != null">classify_id,</if>
-			<if test="classifyName != null">classify_name,</if>
-			<if test="pubdate != null">pubdate,</if>
+			<if test="goodsId != null and goodsId != ''">goods_id,</if>
+			<if test="goodsName != null and goodsName != ''">goods_name,</if>
+			<if test="goodsImg != null and goodsImg != ''">goods_img,</if>
+			<if test="goodsStatus != null and goodsStatus != ''">goods_status,</if>
+			<if test="goodsType != null and goodsType != ''">goods_type,</if>
+			<if test="goodsPrice != null and goodsPrice != ''">goods_price,</if>
+			<if test="redPacket != null and redPacket != ''">red_packet,</if>
+			<if test="goodsDetails != null and goodsDetails != ''">goods_details,</if>
+			<if test="goodsParam != null and goodsParam != ''">goods_param,</if>
+			<if test="expressFee != null and expressFee != ''">express_fee,</if>
+			<if test="inventory != null and inventory != ''">inventory,</if>
+			<if test="salesvolume != null and salesvolume != ''">salesvolume,</if>
+			<if test="buyNum != null and buyNum != ''">buy_num,</if>
+			<if test="browseNum != null and browseNum != ''">browse_num,</if>
+			<if test="sifting != null and sifting != ''">sifting,</if>
+			<if test="classifyId != null and classifyId != ''">classify_id,</if>
+			<if test="classifyName != null and classifyName != ''">classify_name,</if>
+			<if test="pubdate != null and pubdate != ''">pubdate,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="goodsId != null">#{goodsId,jdbcType=VARCHAR},</if>
-			<if test="goodsName != null">#{goodsName,jdbcType=VARCHAR},</if>
-			<if test="goodsImg != null">#{goodsImg,jdbcType=VARCHAR},</if>
-			<if test="goodsStatus != null">#{goodsStatus,jdbcType=VARCHAR},</if>
-			<if test="goodsType != null">#{goodsType,jdbcType=VARCHAR},</if>
-			<if test="goodsPrice != null">#{goodsPrice,jdbcType=DOUBLE},</if>
-			<if test="redPacket != null">#{redPacket,jdbcType=INTEGER},</if>
-			<if test="goodsDetails != null">#{goodsDetails,jdbcType=VARCHAR},</if>
-			<if test="goodsParam != null">#{goodsParam,jdbcType=VARCHAR},</if>
-			<if test="expressFee != null">#{expressFee,jdbcType=DOUBLE},</if>
-			<if test="inventory != null">#{inventory,jdbcType=INTEGER},</if>
-			<if test="salesvolume != null">#{salesvolume,jdbcType=INTEGER},</if>
-			<if test="buyNum != null">#{buyNum,jdbcType=INTEGER},</if>
-			<if test="browseNum != null">#{browseNum,jdbcType=INTEGER},</if>
-			<if test="sifting != null">#{sifting,jdbcType=VARCHAR},</if>
-			<if test="classifyId != null">#{classifyId,jdbcType=VARCHAR},</if>
-			<if test="classifyName != null">#{classifyName,jdbcType=VARCHAR},</if>
-			<if test="pubdate != null">#{pubdate,jdbcType=BIGINT},</if>
+			<if test="goodsId != null and goodsId != ''">#{goodsId,jdbcType=VARCHAR},</if>
+			<if test="goodsName != null and goodsName != ''">#{goodsName,jdbcType=VARCHAR},</if>
+			<if test="goodsImg != null and goodsImg != ''">#{goodsImg,jdbcType=VARCHAR},</if>
+			<if test="goodsStatus != null and goodsStatus != ''">#{goodsStatus,jdbcType=VARCHAR},</if>
+			<if test="goodsType != null and goodsType != ''">#{goodsType,jdbcType=VARCHAR},</if>
+			<if test="goodsPrice != null and goodsPrice != ''">#{goodsPrice,jdbcType=DOUBLE},</if>
+			<if test="redPacket != null and redPacket != ''">#{redPacket,jdbcType=INTEGER},</if>
+			<if test="goodsDetails != null and goodsDetails != ''">#{goodsDetails,jdbcType=VARCHAR},</if>
+			<if test="goodsParam != null and goodsParam != ''">#{goodsParam,jdbcType=VARCHAR},</if>
+			<if test="expressFee != null and expressFee != ''">#{expressFee,jdbcType=DOUBLE},</if>
+			<if test="inventory != null and inventory != ''">#{inventory,jdbcType=INTEGER},</if>
+			<if test="salesvolume != null and salesvolume != ''">#{salesvolume,jdbcType=INTEGER},</if>
+			<if test="buyNum != null and buyNum != ''">#{buyNum,jdbcType=INTEGER},</if>
+			<if test="browseNum != null and browseNum != ''">#{browseNum,jdbcType=INTEGER},</if>
+			<if test="sifting != null and sifting != ''">#{sifting,jdbcType=VARCHAR},</if>
+			<if test="classifyId != null and classifyId != ''">#{classifyId,jdbcType=VARCHAR},</if>
+			<if test="classifyName != null and classifyName != ''">#{classifyName,jdbcType=VARCHAR},</if>
+			<if test="pubdate != null and pubdate != ''">#{pubdate,jdbcType=BIGINT},</if>
 		</trim>
 	</insert>
 
 	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.GoodsInfo">
 		update goods_info
 		<set>
-			<if test="goodsName != null">goods_name = #{goodsName,jdbcType=VARCHAR},</if>
-			<if test="goodsImg != null">goods_img = #{goodsImg,jdbcType=VARCHAR},</if>
-			<if test="goodsStatus != null">goods_status = #{goodsStatus,jdbcType=VARCHAR},</if>
-			<if test="goodsType != null">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
-			<if test="goodsPrice != null">goods_price = #{goodsPrice,jdbcType=DOUBLE},</if>
-			<if test="redPacket != null">red_packet = #{redPacket,jdbcType=INTEGER},</if>
-			<if test="goodsDetails != null">goods_details = #{goodsDetails,jdbcType=VARCHAR},</if>
-			<if test="goodsParam != null">goods_param = #{goodsParam,jdbcType=VARCHAR},</if>
-			<if test="expressFee != null">express_fee = #{expressFee,jdbcType=DOUBLE},</if>
-			<if test="inventory != null">inventory = #{inventory,jdbcType=INTEGER},</if>
-			<if test="salesvolume != null">salesvolume = #{salesvolume,jdbcType=INTEGER},</if>
-			<if test="buyNum != null">buy_num = #{buyNum,jdbcType=INTEGER},</if>
-			<if test="browseNum != null">browse_num = #{browseNum,jdbcType=INTEGER},</if>
-			<if test="sifting != null">sifting = #{sifting,jdbcType=VARCHAR},</if>
-			<if test="classifyId != null">classify_id = #{classifyId,jdbcType=VARCHAR},</if>
-			<if test="classifyName != null">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
-			<if test="pubdate != null">pubdate = #{pubdate,jdbcType=BIGINT},</if>
+			<if test="goodsName != null and goodsName != ''">goods_name = #{goodsName,jdbcType=VARCHAR},</if>
+			<if test="goodsImg != null and goodsImg != ''">goods_img = #{goodsImg,jdbcType=VARCHAR},</if>
+			<if test="goodsStatus != null and goodsStatus != ''">goods_status = #{goodsStatus,jdbcType=VARCHAR},</if>
+			<if test="goodsType != null and goodsType != ''">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
+			<if test="goodsPrice != null and goodsPrice != ''">goods_price = #{goodsPrice,jdbcType=DOUBLE},</if>
+			<if test="redPacket != null and redPacket != ''">red_packet = #{redPacket,jdbcType=INTEGER},</if>
+			<if test="goodsDetails != null and goodsDetails != ''">goods_details = #{goodsDetails,jdbcType=VARCHAR},</if>
+			<if test="goodsParam != null and goodsParam != ''">goods_param = #{goodsParam,jdbcType=VARCHAR},</if>
+			<if test="expressFee != null and expressFee != ''">express_fee = #{expressFee,jdbcType=DOUBLE},</if>
+			<if test="inventory != null and inventory != ''">inventory = #{inventory,jdbcType=INTEGER},</if>
+			<if test="salesvolume != null and salesvolume != ''">salesvolume = #{salesvolume,jdbcType=INTEGER},</if>
+			<if test="buyNum != null and buyNum != ''">buy_num = #{buyNum,jdbcType=INTEGER},</if>
+			<if test="browseNum != null and browseNum != ''">browse_num = #{browseNum,jdbcType=INTEGER},</if>
+			<if test="sifting != null and sifting != ''">sifting = #{sifting,jdbcType=VARCHAR},</if>
+			<if test="classifyId != null and classifyId != ''">classify_id = #{classifyId,jdbcType=VARCHAR},</if>
+			<if test="classifyName != null and classifyName != ''">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
+			<if test="pubdate != null and pubdate != ''">pubdate = #{pubdate,jdbcType=BIGINT},</if>
 		</set>
 		where goods_id = #{goodsId,jdbcType=VARCHAR}
 	</update>

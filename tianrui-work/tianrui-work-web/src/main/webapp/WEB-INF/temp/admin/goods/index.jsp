@@ -57,16 +57,25 @@
 								</select>
 							</div>
 						</li>
-						<li><input type="text" id="classifyName" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="分类名称" /></li>
+						<li>
+							<div class="am-btn-group am-btn-group-xs">
+								<select id="classifyId" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+									<option value="">所属分类</option>
+									<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+										<option value="${goodsClassify.classifyId}">${goodsClassify.classifyName}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</li>
 						<li><input type="text" id="goodsName" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="商品名称" /></li>
 						<li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 					</ul>
 				</div>
 				<div class="am-form am-g">
-					<table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+					<table style="width: 100%" class="am-table am-table-bordered am-table-radius am-table-striped">
 						<thead>
 							<tr class="am-success">
-								<th class="table-check"><input type="checkbox" /></th>
+								<th class="table-check">序号</th>
 								<th class="table-title">分类名称</th>
 								<th class="table-title">商品名称</th>
 								<th class="table-type">商品状态</th>

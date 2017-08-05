@@ -42,13 +42,16 @@ public class GoodsInfoService implements IGoodsInfoService {
 		Result rs = Result.getSuccessful();
 		GoodsInfo record = new GoodsInfo();
 		PropertyUtils.copyProperties(record, req);
-		goodsInfoMapper.updateByPrimaryKey(record);
+		goodsInfoMapper.updateByPrimaryKeySelective(record);
 		return rs;
 	}
 
 	@Override
-	public GoodsInfoFindResp queryGoodsInfo(GoodsInfoReq req) throws Exception {
-		return null;
+	public GoodsInfoFindResp queryGoodsInfoByOne(String goodsId) throws Exception {
+		GoodsInfo record = goodsInfoMapper.selectByPrimaryKey(goodsId);
+		GoodsInfoFindResp resp = new GoodsInfoFindResp();
+		PropertyUtils.copyProperties(resp, record);
+		return resp;
 	}
 
 	@Override
@@ -62,6 +65,7 @@ public class GoodsInfoService implements IGoodsInfoService {
 			page.setPageSize(req.getPageSize());
 		}
 
+		find.setClassifyId(req.getClassifyId());
 		find.setClassifyName(req.getClassifyName());
 		find.setGoodsName(req.getGoodsName());
 		find.setGoodsStatus(req.getGoodsStatus());

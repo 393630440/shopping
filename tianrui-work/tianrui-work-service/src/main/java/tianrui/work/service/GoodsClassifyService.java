@@ -33,7 +33,7 @@ public class GoodsClassifyService implements IGoodsClassifyService {
 		Result rs = Result.getSuccessful();
 		GoodsClassify record = new GoodsClassify();
 		PropertyUtils.copyProperties(record, req);
-		goodsClassifyMapper.insert(record);
+		goodsClassifyMapper.insertSelective(record);
 		return rs;
 	}
 
@@ -42,13 +42,16 @@ public class GoodsClassifyService implements IGoodsClassifyService {
 		Result rs = Result.getSuccessful();
 		GoodsClassify record = new GoodsClassify();
 		PropertyUtils.copyProperties(record, req);
-		goodsClassifyMapper.updateByPrimaryKey(record);
+		goodsClassifyMapper.updateByPrimaryKeySelective(record);
 		return rs;
 	}
 
 	@Override
 	public GoodsClassifyFindResp queryGoodsClassify(GoodsClassifyReq req) throws Exception {
-		return null;
+		GoodsClassify record = goodsClassifyMapper.selectByPrimaryKey(req.getClassifyId());
+		GoodsClassifyFindResp resp = new GoodsClassifyFindResp();
+		PropertyUtils.copyProperties(resp, record);
+		return resp;
 	}
 
 	@Override
@@ -78,6 +81,19 @@ public class GoodsClassifyService implements IGoodsClassifyService {
 		page.setTotal(a);
 
 		return page;
+	}
+
+	@Override
+	public List<GoodsClassifyFindResp> getGoodsClassifyList() throws Exception {
+		List<GoodsClassifyFindResp> resp = new ArrayList<GoodsClassifyFindResp>();
+		List<GoodsClassify> list = goodsClassifyMapper.selectList();
+		for (GoodsClassify bean : list) {
+			GoodsClassifyFindResp sp = new GoodsClassifyFindResp();
+			PropertyUtils.copyProperties(sp, bean);
+			resp.add(sp);
+		}
+
+		return resp;
 	}
 
 }

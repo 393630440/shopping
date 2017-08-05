@@ -1,7 +1,5 @@
 package com.tianrui.admin.action;
 
-import java.io.File;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tianrui.web.smvc.AutherWeb;
-import com.tianrui.web.util.FileUtils;
 import com.tianrui.web.util.LoggerUtils;
 
+import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.api.IGoodsInfoService;
 import tianrui.work.req.goods.GoodsInfoFindReq;
 import tianrui.work.req.goods.GoodsInfoReq;
@@ -28,13 +26,16 @@ public class AdminGoodsInfoAction {
 
 	@Autowired
 	IGoodsInfoService goodsInfoService;
+	@Autowired
+	IGoodsClassifyService goodsClassifyService;
 
-	/** 页面跳转 */
+	/** 跳转列表页面 */
 	@RequestMapping("index")
 	@AutherWeb(typeString = "admin")
-	public ModelAndView goodsPage() {
+	public ModelAndView goodsPage() throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/index]");
 		ModelAndView view = new ModelAndView();
+		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList());
 		view.setViewName("admin/goods/index");
 		return view;
 	}
@@ -45,21 +46,9 @@ public class AdminGoodsInfoAction {
 	@ResponseBody
 	public Result queryList(GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/querylist]");
-		Result rs = Result.getSuccessful();
 		PageTool<GoodsInfoFindResp> page = goodsInfoService.queryGoodsInfoByList(req);
-		rs.setData(page);
-		return rs;
-	}
-
-	/** 查询列表数据 */
-	@RequestMapping("query")
-	@AutherWeb(typeString = "admin")
-	@ResponseBody
-	public Result query(GoodsInfoReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goods/query]");
 		Result rs = Result.getSuccessful();
-		GoodsInfoFindResp data = goodsInfoService.queryGoodsInfo(req);
-		rs.setData(data);
+		rs.setData(page);
 		return rs;
 	}
 
@@ -69,6 +58,7 @@ public class AdminGoodsInfoAction {
 	public ModelAndView addPage(GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/addpage]");
 		ModelAndView view = new ModelAndView();
+		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList());
 		view.setViewName("admin/goods/addpage");
 		return view;
 	}
@@ -79,21 +69,13 @@ public class AdminGoodsInfoAction {
 	@ResponseBody
 	public Result add(GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/add]");
-		Result rs = null;
-		if (isFile(req.getGoodsImg()) && isFile(req.getGoodsDetails())) {
-
-			String goodsId = UUIDUtil.getUUID();
-			Long pubdate = System.currentTimeMillis();
-			req.setGoodsId(goodsId);// 商品ID
-			req.setGoodsStatus("1");// 商品状态:1-已上架;2-已下架
-			req.setPubdate(pubdate);
-			req.setGoodsImg(saveImg(req.getGoodsImg(), goodsId, pubdate));
-			req.setGoodsDetails(saveImg(req.getGoodsDetails(), goodsId, pubdate));
-
-			rs = goodsInfoService.addGoodsInfo(req);
-		} else {
-			rs = new Result("999999");
-		}
+		String goodsId = UUIDUtil.getUUID();
+		Long pubdate = System.currentTimeMillis();
+		req.setGoodsId(goodsId);// 商品ID
+		req.setGoodsStatus("1");// 商品状态:1-已上架;2-已下架
+		req.setPubdate(pubdate);
+		Result rs = goodsInfoService.addGoodsInfo(req);
+		rs.setData(req);
 		return rs;
 	}
 
@@ -103,7 +85,8 @@ public class AdminGoodsInfoAction {
 	public ModelAndView editPage(GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/editpage]");
 		ModelAndView view = new ModelAndView();
-		view.addObject("goodsInfo", goodsInfoService.queryGoodsInfo(req));
+		view.addObject("goodsInfo", goodsInfoService.queryGoodsInfoByOne(req.getGoodsId()));
+		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList());
 		view.setViewName("admin/goods/editpage");
 		return view;
 	}
@@ -114,56 +97,8 @@ public class AdminGoodsInfoAction {
 	@ResponseBody
 	public Result edit(GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/edit]");
-		Result rs = Result.getSuccessful();
-		rs = goodsInfoService.editGoodsInfo(req);
+		Result rs = goodsInfoService.editGoodsInfo(req);
 		return rs;
-	}
-
-	/**
-	 * 校验文件是否存在
-	 */
-	private static boolean isFile(String pathArrStr) {
-		boolean flag = true;
-		String[] pathArr = pathArrStr.split("[|]");
-		for (String path : pathArr) {
-			if ("".equals(path) || path == null)
-				break;
-			File file = new File(path);
-			if (!file.exists()) {
-				flag = false;
-				break;
-			}
-		}
-		return flag;
-	}
-
-	private String saveImg(String pathArrStr, String goodsId, Long pubdate) {
-		StringBuilder sb = new StringBuilder();
-
-		String sysPath = Thread.currentThread().getContextClassLoader().getResource("").toString();
-		sysPath = sysPath.substring(6, sysPath.indexOf("WEB-INF"));
-		if (sysPath.indexOf(":") == -1)
-			sysPath = "/" + sysPath;
-		sysPath += "goodsInfo/" + goodsId + "/";
-
-		String[] pathArr = pathArrStr.split("[|]");
-		for (String path : pathArr) {
-			if ("".equals(path) || path == null)
-				break;
-
-			File file = new File(sysPath);
-			if (!file.isDirectory())
-				file.mkdirs();
-
-			String newPath = sysPath + pubdate + path.substring(path.indexOf("."), path.length());
-			sb.append(newPath).append("|");
-			newPath = sysPath + newPath;
-			byte[] b = FileUtils.readFileBytes(path);
-			FileUtils.writeFileAll(newPath, b, 0, b.length);
-		}
-		sb.deleteCharAt(sb.length() - 1);
-
-		return sb.toString();
 	}
 
 }

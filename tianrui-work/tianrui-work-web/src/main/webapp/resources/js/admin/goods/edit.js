@@ -1,20 +1,91 @@
 $(function() {
-
+	imgInit(oldGoodsImg, 1);
+	imgInit(oldGoodsDetails, 2);
 });
 
-function goodsType(type) {
-	if (type == 1) { // 1-大众商品,不显示宏包
-		$("#redPacket_div").hide();
-		$("#redPacket").val("");
-	} else if (type == 2) { // 2-宏包商品,显示宏包
-		$("#redPacket_div").show();
+// http://127.0.0.1:8080/getimg?imgPath=goodsInfo/4f91742f79514d7d8d4d71f2969fa490/1501633536800_0.jpg
+// TODO 需要修改成正式的地址
+var url = "http://127.0.0.1:8080/getimg?imgPath=goodsInfo/";
+
+var goodsImgNum = 0;
+var oldGoodsImgMap = {};
+var oldGoodsImgList = [];
+
+var goodsDetailsNum = 0;
+var oldGoodsDetailsMap = {};
+var oldGoodsDetailsList = [];
+
+function imgInit(oldDataStr, flag) {
+	var oldDataArr = oldDataStr.split("|");
+	for (var i = 0; i < oldDataArr.length; i++) {
+		var img_showId = "";
+		var old_img_id = "";
+		if (flag == 1) {
+			img_showId = "goodsImg_img_showId";
+			old_img_id = "oldGoodsImg" + i;
+			oldGoodsImgMap[old_img_id] = oldDataArr[i];
+			oldGoodsImgList[oldGoodsImgList.length] = old_img_id;
+		} else if (flag == 2) {
+			img_showId = "goodsDetails_img_showId";
+			old_img_id = "oldGoodsDetails" + i;
+			oldGoodsDetailsMap[old_img_id] = oldDataArr[i];
+			oldGoodsDetailsList[oldGoodsDetailsList.length] = old_img_id;
+		} else {
+			alert("请检查一下图片标识.");
+			return;
+		}
+
+		var html = "<span id=\"old_img_showId_" + old_img_id;
+		html += "\"><img src=\"" + url + goodsId + "/" + oldDataArr[i];
+		html += "\" style=\"height: 45px; width: 50px;\"/><button type=\"button\" onclick=\"oldImgDelete('";
+		html += old_img_id + "'," + flag;
+		html += ");\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button></span>";
+		$("#" + img_showId).append(html);
+	}
+
+	var input_showId = "";
+	var input_Id = "";
+	if (flag == 1) {
+		goodsImgNum = oldDataArr.length;
+		input_showId = "goodsImg_input_showId";
+		input_Id = "goodsImg" + goodsImgNum;
+	} else if (flag == 2) {
+		goodsDetailsNum = oldDataArr.length;
+		input_showId = "goodsDetails_input_showId";
+		input_Id = "goodsDetails" + goodsDetailsNum;
+	} else {
+		alert("请检查一下图片标识.");
+		return;
+	}
+
+	var html = "";
+	html += "<input type=\"file\" id=\"" + input_Id + "\" name=\"";
+	html += input_Id + "\" onchange=\"imgShow(this," + flag + ");\">";
+	$("#" + input_showId).append(html);
+}
+
+function oldImgDelete(oldImgId, flag) {
+	if (flag == 1) {
+		oldImgDel(oldGoodsImgList, oldImgId);
+	} else if (flag == 2) {
+		oldImgDel(oldGoodsDetailsList, oldImgId);
+	} else {
+		alert("请检查一下图片标识.");
+		return;
 	}
 }
 
-var goodsImgNum = 0;
-var goodsImgFileIds = [];
+function oldImgDel(list, id) {
+	for (var i = 0; i < list.length; i++) {
+		if (list[i] == id) {
+			list.splice(i, 1);
+			$("#old_img_showId_" + id).remove();
+			break;
+		}
+	}
+}
 
-var goodsDetailsNum = 0;
+var goodsImgFileIds = [];
 var goodsDetailsFileIds = [];
 
 function imgShow(ele, flag) {
@@ -54,13 +125,11 @@ function imgShow(ele, flag) {
 
 	var imgId = img_showId + "_" + input_Id_front;
 	var html = "";
-	html += "<span id=\"img_showId_" + input_Id_front + "\">";
-	html += "<img src=\"\" id=\"" + imgId;
-	html += "\" style=\"height: 45px; width: 50px;\"/>";
-	html += "<button type=\"button\" onclick=\"imgDelete('";
+	html += "<span id=\"img_showId_" + input_Id_front;
+	html += "\"><img src=\"\" id=\"" + imgId;
+	html += "\" style=\"height: 45px; width: 50px;\"/><button type=\"button\" onclick=\"imgDelete('";
 	html += input_Id_front + "'," + flag;
-	html += ");\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\">";
-	html += "<span class=\"am-icon-trash-o\"></span></button></span>";
+	html += ");\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button></span>";
 	$("#" + img_showId).append(html);
 	previewPicture(ele, imgId);
 
@@ -104,7 +173,7 @@ function del(list, id) {
 	}
 }
 
-function add(buttonType) {
+function edit() {
 	var msg = "";
 	var goodsName = $("#goodsName").val(); // 商品名称
 	if (goodsName == "")
@@ -116,10 +185,6 @@ function add(buttonType) {
 		msg += "所属分类不能为空\n";
 	else
 		classifyName = $("#classifyId_" + classifyId).val();
-
-	var goodsType = $('input:radio[name="goodsType"]:checked').val(); // 商品类型:1-大众商品;2-宏包商品
-	if (goodsType == "" || goodsType == undefined)
-		msg += "商品类型不能为空\n";
 
 	var goodsPrice = $("#goodsPrice").val(); // 商品价格
 	if (goodsPrice == "")
@@ -133,10 +198,10 @@ function add(buttonType) {
 	if (redPacket == "")
 		msg += "商品宏包不能为空\n";
 
-	if (goodsImgFileIds.length == 0)
+	if (goodsImgFileIds.length == 0 && oldGoodsImgList.length == 0)
 		msg += "商品图片不能为空\n";
 
-	if (goodsDetailsFileIds.length == 0)
+	if (goodsDetailsFileIds.length == 0 && oldGoodsDetailsList.length == 0)
 		msg += "商品详情不能为空\n";
 
 	var goodsParam = $("#goodsParam").val(); // 商品参数
@@ -161,16 +226,13 @@ function add(buttonType) {
 	}
 
 	$.ajax({
-		url : "/admin/shop/goods/add",
+		url : "/admin/shop/goods/edit",
 		type : "POST",
 		data : {
-			"salesvolume" : "0",
-			"buyNum" : "0",
-			"browseNum" : "0",
+			"goodsId" : goodsId,
 			"goodsName" : goodsName,
 			"classifyId" : classifyId,
 			"classifyName" : classifyName,
-			"goodsType" : goodsType,
 			"goodsPrice" : goodsPrice,
 			"redPacket" : redPacket,
 			"goodsParam" : goodsParam,
@@ -180,14 +242,8 @@ function add(buttonType) {
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				var goodsId = ret.data.goodsId;
-				imgUpload(goodsImgFileIds, goodsId, 1);
-				imgUpload(goodsDetailsFileIds, goodsId, 2);
-				if (buttonType == 2) {
-					window.location.href = "/admin/shop/goods/addpage";
-				} else {
-					window.location.href = "/admin/shop/goods/index";
-				}
+				upload();
+				window.location.href = "/admin/shop/goods/index";
 			}
 		},
 		error : function(data, status, e) {
@@ -196,11 +252,65 @@ function add(buttonType) {
 	});
 }
 
-function imgUpload(fileElementId, id, flag) {
-	var mark = "goodsDetails";
-	if (flag == 1)
-		mark = "goodsImg";
+function upload() {
+	var oldData = "";
+	var oldList = [];
+	var oldMap = {};
+	var fileElementId = [];
+	var mark = "";
 
+	for (var i = 0; i < 2; i++) {
+		if (i == 0) {
+			oldData = oldGoodsImg;
+			oldList = oldGoodsImgList;
+			oldMap = oldGoodsImgMap;
+			fileElementId = goodsImgFileIds;
+			mark = "goodsImg";
+		} else if (i == 1) {
+			oldData = oldGoodsDetails;
+			oldList = oldGoodsDetailsList;
+			oldMap = oldGoodsDetailsMap;
+			fileElementId = goodsDetailsFileIds;
+			mark = "goodsDetails";
+		} else {
+			break;
+		}
+
+		var old = oldData;
+		if (!compare(oldData, oldList))
+			old = getOld(oldList, oldMap);
+
+		if (fileElementId.length > 0) {
+			imgUpload(fileElementId, mark, old);
+		} else {
+			if (old != oldData) {
+				imgUpdate(old, mark);
+			}
+		}
+	}
+}
+
+function compare(oldData, oldList) {
+	var val1 = oldData.split("|").length;
+	var val2 = oldList.length;
+	if (val1 == val2)
+		return true;
+	return false;
+}
+
+function getOld(list, map) {
+	var str = "";
+	if (list.length > 0) {
+		for (var i = 0; i < list.length; i++) {
+			str += map[list[i]];
+			if (i < (list.length - 1))
+				str += "|";
+		}
+	}
+	return str;
+}
+
+function imgUpload(fileElementId, mark, old) {
 	var name = "";
 	for (var i = 0; i < fileElementId.length; i++) {
 		name += fileElementId[i];
@@ -214,11 +324,39 @@ function imgUpload(fileElementId, id, flag) {
 		secureuri : false, // 是否需要安全协议，一般设置为false
 		fileElementId : fileElementId, // 文件上传域的ID
 		data : {
-			"type" : "1",
-			"id" : id,
+			"type" : "2",
+			"id" : goodsId,
 			"mark" : mark,
-			"name" : name
+			"name" : name,
+			"old" : old
 		},
+		success : function(ret) {
+
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+function imgUpdate(old, mark) {
+	var data = {};
+	if (mark == "goodsImg") {
+		data = {
+			"goodsId" : goodsId,
+			"goodsImg" : old
+		};
+	} else if (mark == "goodsDetails") {
+		data = {
+			"goodsId" : goodsId,
+			"goodsDetails" : old
+		};
+	}
+
+	$.ajax({
+		url : "/admin/shop/goods/edit",
+		type : "POST",
+		data : data,
 		success : function(ret) {
 
 		},

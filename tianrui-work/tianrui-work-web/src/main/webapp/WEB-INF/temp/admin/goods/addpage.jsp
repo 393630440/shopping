@@ -31,11 +31,13 @@
 		<jsp:include page="../common/left_head.jsp" flush="false"></jsp:include>
 		<!-- left-head end -->
 		<div class=" admin-content">
-			<div class="daohang"><ul></ul></div>
+			<div class="daohang">
+				<ul></ul>
+			</div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on">栏目名称</ul>
-					<dl class="am-icon-home" style="float: right;">当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 添加商品</dl>
+					<ul class="am-icon-flag on">栏目名称 </ul>
+					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 添加商品 </dl>
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
@@ -46,15 +48,23 @@
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
-							<div class="zuo">分类名称：</div>
+							<div class="zuo">分类：</div>
 							<div class="you">
-								<input type="text" class="am-input-sm" id="classifyName" name="classifyName" placeholder="请输入分类名称">
+								<select id="classifyId" name="classifyId" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+									<option value="0">所属分类</option>
+									<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+										<option value="${goodsClassify.classifyId}">${goodsClassify.classifyName}</option>
+									</c:forEach>
+								</select>
+								<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+									<input id="classifyId_${goodsClassify.classifyId}" value="${goodsClassify.classifyName}" hidden="hidden" />
+								</c:forEach>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
-								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="1" onclick="goodsType(1);"> 大众商品 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="1" onclick="goodsType(1);"> 大众商品 </label> 
 								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 宏包商品 </label>
 							</div>
 						</div>
@@ -72,28 +82,28 @@
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品图片：</div>
-							<div class="you">
-								<input type="file" id="goodsImg" onchange="imgShow(this,1);" >
+							<div class="you" id="goodsImg_input_showId">
+								<input type="file" id="goodsImg0" name="goodsImg0" onchange="imgShow(this,1);">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo"></div>
-							<div class="you" id="goodsImg_showId"></div>
+							<div class="you" id="goodsImg_img_showId"></div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品详情：</div>
-							<div class="you">
-								<input type="file" id="goodsDetails" onchange="imgShow(this,2);" >
+							<div class="you" id="goodsDetails_input_showId">
+								<input type="file" id="goodsDetails0" name="goodsDetails0" onchange="imgShow(this,2);">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo"></div>
-							<div class="you" id="goodsDetails_showId"></div>
+							<div class="you" id="goodsDetails_img_showId"></div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品参数：</div>
 							<div class="you">
-								<textarea class="" rows="2" id="goodsParam"></textarea>
+								<textarea class="" rows="2" id="goodsParam" name="goodsDetails"></textarea>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -111,13 +121,13 @@
 						<div class="am-form-group am-cf">
 							<div class="zuo">筛选条件：</div>
 							<div class="you" style="margin-top: 5px;">
-								<input type="radio" name="sifting" value="0" hidden="hidden" checked="checked"/>
-								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="1" /> 推荐商品 </label>
-								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="2" /> 新品上市 </label>
-								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="3" /> 热卖商品 </label>
-								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="4" /> 促销商品 </label>
-								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="5" /> 卖家包邮 </label>
-								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="6" /> 限时抢购 </label>
+								<input type="radio" name="sifting" value="0" hidden="hidden" checked="checked" /> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="1" /> 推荐商品
+								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="2" /> 新品上市
+								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="3" /> 热卖商品
+								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="4" /> 促销商品
+								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="5" /> 卖家包邮
+								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="6" /> 限时抢购
+								</label>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -147,5 +157,6 @@
 	<script src="/resources/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
 	<script src="/resources/js/admin/goods/add.js?0728"></script>
+	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

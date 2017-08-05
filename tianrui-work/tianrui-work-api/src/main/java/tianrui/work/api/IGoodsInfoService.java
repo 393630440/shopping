@@ -21,7 +21,7 @@ public interface IGoodsInfoService {
 	Result editGoodsInfo(GoodsInfoReq req) throws Exception;
 
 	/** 查询商品信息 */
-	GoodsInfoFindResp queryGoodsInfo(GoodsInfoReq req) throws Exception;
+	GoodsInfoFindResp queryGoodsInfoByOne(String goodsId) throws Exception;
 
 	/** 列表查询商品信息 */
 	PageTool<GoodsInfoFindResp> queryGoodsInfoByList(GoodsInfoFindReq req) throws Exception;

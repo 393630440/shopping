@@ -10,7 +10,7 @@
   <ul class="am-dropdown-content">
     <li class="am-dropdown-header">所有消息都在这里</li>
     <li><a href="#">未激活会员 <span class="am-badge am-badge-danger am-round">556</span></a></li>
-    <li><a href="#">未激活代理 <span class="am-badge am-badge-danger am-round">69</span></a></a></li>
+    <li><a href="#">未激活代理 <span class="am-badge am-badge-danger am-round">69</span></a></li>
     <li><a href="#">未处理汇款</a></li>
     <li><a href="#">未发放提现</a></li>
     <li><a href="#">未发货订单</a></li>

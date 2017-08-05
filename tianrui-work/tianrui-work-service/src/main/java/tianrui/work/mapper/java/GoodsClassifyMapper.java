@@ -13,6 +13,8 @@ public interface GoodsClassifyMapper {
 
 	GoodsClassify selectByPrimaryKey(String classifyId);
 
+	List<GoodsClassify> selectList();
+
 	int updateByPrimaryKeySelective(GoodsClassify record);
 
 	int updateByPrimaryKey(GoodsClassify record);

@@ -25,10 +25,10 @@
 		 	<form class="am-form">
 			  <fieldset>
 			    <div class="am-form-group" style="text-align:center">
-			      <input type="text" class="" id="acount" value="" placeholder="请输入账号">
+			      <input type="text" class="" id="acount" value="admin" placeholder="请输入账号">
 			    </div>
 			    <div class="am-form-group">
-			      <input type="password" class="" id="passward" value=""  placeholder="请输入密码">
+			      <input type="password" class="" id="passward" value="666666"  placeholder="请输入密码">
 			    </div>
 			    <p><button type="button" class="am-btn am-btn-default" id="loginIn">Login</button></p>
 			    <div class="login-text">

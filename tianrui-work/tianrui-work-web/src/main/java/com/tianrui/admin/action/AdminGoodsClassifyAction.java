@@ -26,7 +26,7 @@ public class AdminGoodsClassifyAction {
 	@Autowired
 	IGoodsClassifyService goodsClassifyService;
 
-	/** 页面跳转 */
+	/** 跳转列表页面 */
 	@RequestMapping("index")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView goodsClassifyPage() {
@@ -45,18 +45,6 @@ public class AdminGoodsClassifyAction {
 		Result rs = Result.getSuccessful();
 		PageTool<GoodsClassifyFindResp> page = goodsClassifyService.queryGoodsClassifyByList(req);
 		rs.setData(page);
-		return rs;
-	}
-
-	/** 查询列表数据 */
-	@RequestMapping("query")
-	@AutherWeb(typeString = "admin")
-	@ResponseBody
-	public Result query(GoodsClassifyReq req) throws Exception {
-		LoggerUtils.info(log, "---------- [/admin/shop/goodsclassify/query]");
-		Result rs = Result.getSuccessful();
-		GoodsClassifyFindResp data = goodsClassifyService.queryGoodsClassify(req);
-		rs.setData(data);
 		return rs;
 	}
 

@@ -35,71 +35,110 @@
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
 					<ul class="am-icon-flag on">栏目名称</ul>
-					<dl class="am-icon-home" style="float: right;">当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 编辑商品
-					</dl>
+					<dl class="am-icon-home" style="float: right;">当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 编辑商品</dl>
 				</div>
 				<div class="fbneirong">
-					<form class="am-form">
+					<div class="am-form">
 						<div class="am-form-group am-cf">
-							<div class="zuo">标题：</div>
+							<div class="zuo">商品名称：</div>
 							<div class="you">
-								<input type="email" class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入标题">
+								<input type="text" class="am-input-sm" id="goodsName" name="goodsName" value="${goodsInfo.goodsName}" placeholder="请输入商品名称">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
-							<div class="zuo">关键词：</div>
+							<div class="zuo">分类：</div>
 							<div class="you">
-								<input type="password" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+								<select id="classifyId" name="classifyId" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+									<option value="0">所属分类</option>
+									<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+											<option value="${goodsClassify.classifyId}" <c:if test="${goodsClassify.classifyId == goodsInfo.classifyId}"> selected="selected"</c:if>>${goodsClassify.classifyName}</option>
+									</c:forEach>
+								</select>
+								<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+										<input id="classifyId_${goodsClassify.classifyId}" value="${goodsClassify.classifyName}" hidden="hidden" />
+								</c:forEach>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
-							<div class="zuo">描述：</div>
-							<div class="you">
-								<textarea class="" rows="2" id="doc-ta-1"></textarea>
-							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">缩略图：</div>
-							<div class="you">
-								<input type="file" id="doc-ipt-file-1">
-							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">产品图片：</div>
-							<div class="you" style="height: 45px;">
-								<input type="file" id="doc-ipt-file-1">
-								<p class="am-form-help">请选择要上传的文件...</p>
-							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">内容：</div>
-							<div class="you">
-								<textarea class="" rows="2" id="doc-ta-1"></textarea>
-							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">其他信息：</div>
-							<div class="you">
-								<textarea class="" rows="2" id="doc-ta-1"></textarea>
-							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">推荐：</div>
+							<div class="zuo">商品状态：</div>
 							<div class="you" style="margin-top: 5px;">
-								<label class="am-checkbox-inline"> <input type="checkbox" value="option1"> 选我
-								</label> <label class="am-checkbox-inline"> <input type="checkbox" value="option2"> 同时可以选我
-								</label> <label class="am-checkbox-inline"> <input type="checkbox" value="option3"> 还可以选我
-								</label>
+								<c:if test="${goodsInfo.goodsStatus == '1'}">已上架</c:if>
+								<c:if test="${goodsInfo.goodsStatus == '2'}">已下架</c:if>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">商品类型：</div>
+							<div class="you" style="margin-top: 5px;">
+								<c:if test="${goodsInfo.goodsType == '1'}">大众商品</c:if>
+								<c:if test="${goodsInfo.goodsType == '2'}">宏包商品</c:if>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">商品价格：</div>
+							<div class="you">
+								<input type="text" class="am-input-sm" id="goodsPrice" name="goodsPrice" value="${goodsInfo.goodsPrice}" placeholder="请输入商品价格">
+							</div>
+						</div>
+						<c:if test="${goodsInfo.goodsType == '2'}">
+							<div class="am-form-group am-cf" id="redPacket_div">
+								<div class="zuo">宏包：</div>
+								<div class="you">
+									<input type="text" class="am-input-sm" id="redPacket" name="redPacket" value="${goodsInfo.redPacket}" placeholder="请输入宏包数量">
+								</div>
+							</div>
+						</c:if>
+						<div class="am-form-group am-cf">
+							<div class="zuo">商品图片：</div>
+							<div class="you" id="goodsImg_input_showId"></div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo"></div>
+							<div class="you" id="goodsImg_img_showId"></div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">商品详情：</div>
+							<div class="you" id="goodsDetails_input_showId"></div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo"></div>
+							<div class="you" id="goodsDetails_img_showId"></div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">商品参数：</div>
+							<div class="you">
+								<textarea class="" rows="2" id="goodsParam" name="goodsParam">${goodsInfo.goodsParam}</textarea>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">快递费：</div>
+							<div class="you">
+								<input type="text" class="am-input-sm" id="expressFee" name="expressFee" value="${goodsInfo.expressFee}" placeholder="请输入快递费">
+							</div>
+						</div>
+						<div class="am-form-group am-cf" id="redPacket_div">
+							<div class="zuo">库存：</div>
+							<div class="you">
+								<input type="text" class="am-input-sm" id="inventory" name="inventory" value="${goodsInfo.inventory}" placeholder="请输入库存数量">
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">筛选条件：</div>
+							<div class="you" style="margin-top: 5px;">
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="0" <c:if test="${goodsInfo.sifting == '0'}"> checked="checked"</c:if>/> 普通商品 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="1" <c:if test="${goodsInfo.sifting == '1'}"> checked="checked"</c:if>/> 推荐商品 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="2" <c:if test="${goodsInfo.sifting == '2'}"> checked="checked"</c:if>/> 新品上市 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="3" <c:if test="${goodsInfo.sifting == '3'}"> checked="checked"</c:if>/> 热卖商品 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="4" <c:if test="${goodsInfo.sifting == '4'}"> checked="checked"</c:if>/> 促销商品 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="5" <c:if test="${goodsInfo.sifting == '5'}"> checked="checked"</c:if>/> 卖家包邮 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="6" <c:if test="${goodsInfo.sifting == '6'}"> checked="checked"</c:if>/> 限时抢购 </label>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="you" style="margin-left: 11%;">
-								<button type="submit" class="am-btn am-btn-success am-radius">发布并关闭窗口</button>
-								&nbsp; &raquo; &nbsp;
-								<button type="submit" class="am-btn am-btn-secondary am-radius">发布并继续发布</button>
+								<button onclick="edit();" class="am-btn am-btn-success am-radius">编辑并关闭窗口</button>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 			<!-- left-head begin-->
@@ -107,6 +146,12 @@
 			<!-- left-head end -->
 		</div>
 	</div>
+	<script type="text/javascript">
+		var goodsId = "${goodsInfo.goodsId}";
+		var goodsType = "${goodsInfo.goodsType}";
+		var oldGoodsImg = "${goodsInfo.goodsImg}";
+		var oldGoodsDetails = "${goodsInfo.goodsDetails}";
+	</script>
 
 	<!--[if lt IE 9]>
 	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
@@ -119,5 +164,6 @@
 	<script src="/resources/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
 	<script src="/resources/js/admin/goods/edit.js?0728"></script>
+	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>
