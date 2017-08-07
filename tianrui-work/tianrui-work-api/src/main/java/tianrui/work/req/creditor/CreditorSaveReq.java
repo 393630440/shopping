@@ -9,6 +9,8 @@ public class CreditorSaveReq {
 
     private String creditorStatus;
     
+    private String creatorImg;
+    
     private String creditorType;
 
     private String creditorName;
@@ -198,4 +200,12 @@ public class CreditorSaveReq {
 	public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
+
+	public String getCreatorImg() {
+		return creatorImg;
+	}
+
+	public void setCreatorImg(String creatorImg) {
+		this.creatorImg = creatorImg;
+	}
 }

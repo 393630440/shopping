@@ -112,7 +112,7 @@
 <!--<![endif]-->
 <script type="text/javascript">
 $(function(){
-	$("#user_class").addClass("on");
+	$("#member_class").addClass("on");
 	$(".select2").select2(); 
 });
 $(".select2").on("change",function(){

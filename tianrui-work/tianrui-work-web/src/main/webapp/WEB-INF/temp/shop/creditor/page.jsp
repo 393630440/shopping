@@ -8,7 +8,7 @@
 <title>信息广场</title>
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<script type="text/javascript" src="/resources/shop/js/jquery.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
 </head>
 
 <body>
@@ -18,26 +18,22 @@
         <a href="javascript:history.back();" class="sjsc-t2r"><</a>
     </div>
     
-    <ul class="gwc-ul1" >
-    	<span id="innerHml">
-	    	<li>
-	        	<div class="hwc-tu f-l"><img src="/resources/shop/images/sjsc-11-1.jpg"></div>
-	            <div class="gwc-md f-l">
-	            	<h3>The new Macbook 12英寸 标配 256G闪存</h3>
-	                <p class="gwc-p1">募集价：<span>￥2888.00</span></p>
-	                <p class="gwc-p1">剩余：<span>880</span>台</p>
-	                <p class="gwc-p2">活动公告：活动期间赠送商品总额5%的资金。</p>
-	            </div>
-	            <div style="clear:both;"></div>
-	        </li>
-    	</span>
+    <ul class="gwc-ul1" id="innerHml">
+
     </ul>
+    
+     <div class="gwc-ft">
+        <button onclick="window.location.href='/wechat/shop/creditor/savePage'">发布</button>
+    </div>
+    <input type="hidden" id="scrollPage">
 </body>
+<script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
 $(function(){
-	init(0);
+	init(0,0);
 });
-function init(pageNo){
+function init(pageNo,type){
+	$("#scrollPage").val(pageNo);
 	$.ajax({
 		url:"/wechat/shop/creditor/select",
 		data:{"pageNo":pageNo,
@@ -45,13 +41,15 @@ function init(pageNo){
 		type:"POST",
 		success:function(ret){
 			if(ret.code=="000000"){
-				innerHTML(ret.data.list);
+				innerHTML(ret.data.list,type);
 			}
 		}
 	});
 }
-function innerHTML(date){
-	$("#innerHml").empty();
+function innerHTML(date,type){
+	if(type==0){
+		$("#innerHml").empty();
+	}
 	for (var a = 0; a < date.length; a++) {
 		var creType = "";
 		if(date[a].creditorType=="1"){
@@ -62,7 +60,7 @@ function innerHTML(date){
 		var hml = "<li><div class='hwc-tu f-l'><img src='"+date[a].creatorImg+"'></div>"+
 		       "<div class='gwc-md f-l'><h3>"+creType+"</h3>"+
 		       "<p class='gwc-p1'>债务金额：<span>￥"+date[a].debtAmount+"</span></p>"+
-		       "<p class='gwc-p2'>活动公告：活动期间赠送商品总额5%的资金。</p>"+
+		       "<p class='gwc-p2'>发布时间："+(new Date(date[a].creatorTime).format("yyyy-MM-dd hh:mm:ss"))+"</p>"+
 		       "</div><div style='clear:both;'></div></li>";
 		$("#innerHml").append(hml);
 	}

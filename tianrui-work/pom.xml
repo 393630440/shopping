@@ -20,6 +20,5 @@
     <module>tianrui-work-service</module>
     <module>tianrui-work-api</module>
     <module>tianrui-work-comm</module>
-    <module>tianrui-work-test</module>
   </modules>
 </project>
