@@ -79,13 +79,3 @@ function edit(goodsId, goodsStatus) {
 		}
 	});
 }
-
-var sdas = "<td><div class='am-btn-toolbar'><div class='am-btn-group am-btn-group-xs'>"
-		+ "<button class='am-btn am-btn-default am-btn-xs am-text-success am-round'>"
-		+ "<span class='am-icon-search'></span></button>"
-		+ "<button class='am-btn am-btn-default am-btn-xs am-text-secondary am-round'>"
-		+ "<span class='am-icon-pencil-square-o'></span></button>"
-		+ "<button class='am-btn am-btn-default am-btn-xs am-text-warning  am-round'>"
-		+ "<span class='am-icon-copy'></span></button>"
-		+ "<button class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>"
-		+ "<span class='am-icon-trash-o'></span></button></div></div></td>";

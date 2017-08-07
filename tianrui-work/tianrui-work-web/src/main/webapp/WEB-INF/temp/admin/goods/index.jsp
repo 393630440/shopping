@@ -75,7 +75,7 @@
 					<table style="width: 100%" class="am-table am-table-bordered am-table-radius am-table-striped">
 						<thead>
 							<tr class="am-success">
-								<th class="table-check">序号</th>
+								<th class="table-id">序号</th>
 								<th class="table-title">分类名称</th>
 								<th class="table-title">商品名称</th>
 								<th class="table-type">商品状态</th>

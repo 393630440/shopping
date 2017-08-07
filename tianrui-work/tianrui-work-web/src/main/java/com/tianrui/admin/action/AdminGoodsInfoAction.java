@@ -75,7 +75,6 @@ public class AdminGoodsInfoAction {
 		req.setGoodsStatus("1");// 商品状态:1-已上架;2-已下架
 		req.setPubdate(pubdate);
 		Result rs = goodsInfoService.addGoodsInfo(req);
-		rs.setData(req);
 		return rs;
 	}
 

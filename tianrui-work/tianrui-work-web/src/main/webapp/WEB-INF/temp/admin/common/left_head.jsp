@@ -13,7 +13,8 @@
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
-        <li>订单列表</li>
+        <li><a href="/admin/shop/order/index">订单列表</a></li>
+        <li><a href="/admin/shop/order/refundlist">退货订单列表</a></li>
         <li>合并订单</li>
         <li>订单打印</li>
         <li>添加订单</li>

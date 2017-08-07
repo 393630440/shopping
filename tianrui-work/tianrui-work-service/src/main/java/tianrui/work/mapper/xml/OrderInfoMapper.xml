@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.OrderInfoMapper">
+	<resultMap id="BaseResultMap" type="tianrui.work.bean.OrderInfo">
+		<id column="order_id" property="orderId" jdbcType="VARCHAR" />
+		<result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+		<result column="member_id" property="memberId" jdbcType="VARCHAR" />
+		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+		<result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+		<result column="goods_subtotal" property="goodsSubtotal" jdbcType="DOUBLE" />
+		<result column="express_fee" property="expressFee" jdbcType="DOUBLE" />
+		<result column="order_amount" property="orderAmount" jdbcType="DOUBLE" />
+		<result column="order_red_packet" property="orderRedPacket" jdbcType="INTEGER" />
+		<result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+		<result column="buyer_word" property="buyerWord" jdbcType="VARCHAR" />
+		<result column="creation_time" property="creationTime" jdbcType="BIGINT" />
+		<result column="recipients" property="recipients" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+		<result column="refund_apply_time" property="refundApplyTime" jdbcType="BIGINT" />
+		<result column="refund_audit_time" property="refundAuditTime" jdbcType="BIGINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		order_id, order_code, member_id, goods_type, goods_num, goods_subtotal,
+		express_fee, order_amount, order_red_packet, order_status, buyer_word,
+		creation_time, recipients, phone, city, detail_address, refund_apply_time, refund_audit_time
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from order_info where order_id = #{orderId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByOrderInfo" resultMap="BaseResultMap" parameterType="tianrui.work.bean.OrderInfo">
+		select
+		<include refid="Base_Column_List" />
+		from order_info
+		<where>
+			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
+			<if test="true">and order_status not in ('8','9','0')</if>
+		</where>
+		<if test="pageNo != null">
+			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.OrderInfo">
+		select count(0) from order_info
+		<where>
+			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
+			<if test="true">and order_status not in ('8','9','0')</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from order_info where order_id = #{orderId,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insert" parameterType="tianrui.work.bean.OrderInfo">
+		insert into order_info (order_id, order_code, member_id, goods_type, goods_num,
+		goods_subtotal, express_fee, order_amount, order_red_packet, order_status, buyer_word,
+		creation_time, recipients, phone, city, detail_address, refund_apply_time, refund_audit_time)
+		values (#{orderId,jdbcType=VARCHAR},
+		#{orderCode,jdbcType=VARCHAR},
+		#{memberId,jdbcType=VARCHAR},
+		#{goodsType,jdbcType=VARCHAR},
+		#{goodsNum,jdbcType=INTEGER},
+		#{goodsSubtotal,jdbcType=DOUBLE},
+		#{expressFee,jdbcType=DOUBLE},
+		#{orderAmount,jdbcType=DOUBLE},
+		#{orderRedPacket,jdbcType=INTEGER},
+		#{orderStatus,jdbcType=VARCHAR},
+		#{buyerWord,jdbcType=VARCHAR},
+		#{creationTime,jdbcType=BIGINT},
+		#{recipients,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{detailAddress,jdbcType=VARCHAR},
+		#{refundApplyTime,jdbcType=BIGINT},
+		#{refundAuditTime,jdbcType=BIGINT})
+	</insert>
+
+	<insert id="insertSelective" parameterType="tianrui.work.bean.OrderInfo">
+		insert into order_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderId != null and orderId != ''">order_id,</if>
+			<if test="orderCode != null and orderCode != ''">order_code,</if>
+			<if test="memberId != null and memberId != ''">member_id,</if>
+			<if test="goodsType != null and goodsType != ''">goods_type,</if>
+			<if test="goodsNum != null and goodsNum != ''">goods_num,</if>
+			<if test="goodsSubtotal != null and goodsSubtotal != ''">goods_subtotal,</if>
+			<if test="expressFee != null and expressFee != ''">express_fee,</if>
+			<if test="orderAmount != null and orderAmount != ''">order_amount,</if>
+			<if test="orderRedPacket != null and orderRedPacket != ''">order_red_packet,</if>
+			<if test="orderStatus != null and orderStatus != ''">order_status,</if>
+			<if test="buyerWord != null and buyerWord != ''">buyer_word,</if>
+			<if test="creationTime != null and creationTime != ''">creation_time,</if>
+			<if test="recipients != null and recipients != ''">recipients,</if>
+			<if test="phone != null and phone != ''">phone,</if>
+			<if test="city != null and city != ''">city,</if>
+			<if test="detailAddress != null and detailAddress != ''">detail_address,</if>
+			<if test="refundApplyTime != null and refundApplyTime != ''">refund_apply_time,</if>
+			<if test="refundAuditTime != null and refundAuditTime != ''">refund_audit_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderId != null and orderId != ''">#{orderId,jdbcType=VARCHAR},</if>
+			<if test="orderCode != null and orderCode != ''">#{orderCode,jdbcType=VARCHAR},</if>
+			<if test="memberId != null and memberId != ''">#{memberId,jdbcType=VARCHAR},</if>
+			<if test="goodsType != null and goodsType != ''">#{goodsType,jdbcType=VARCHAR},</if>
+			<if test="goodsNum != null and goodsNum != ''">#{goodsNum,jdbcType=INTEGER},</if>
+			<if test="goodsSubtotal != null and goodsSubtotal != ''">#{goodsSubtotal,jdbcType=DOUBLE},</if>
+			<if test="expressFee != null and expressFee != ''">#{expressFee,jdbcType=DOUBLE},</if>
+			<if test="orderAmount != null and orderAmount != ''">#{orderAmount,jdbcType=DOUBLE},</if>
+			<if test="orderRedPacket != null and orderRedPacket != ''">#{orderRedPacket,jdbcType=INTEGER},</if>
+			<if test="orderStatus != null and orderStatus != ''">#{orderStatus,jdbcType=VARCHAR},</if>
+			<if test="buyerWord != null and buyerWord != ''">#{buyerWord,jdbcType=VARCHAR},</if>
+			<if test="creationTime != null and creationTime != ''">#{creationTime,jdbcType=BIGINT},</if>
+			<if test="recipients != null and recipients != ''">#{recipients,jdbcType=VARCHAR},</if>
+			<if test="phone != null and phone != ''">#{phone,jdbcType=VARCHAR},</if>
+			<if test="city != null and city != ''">#{city,jdbcType=VARCHAR},</if>
+			<if test="detailAddress != null and detailAddress != ''">#{detailAddress,jdbcType=VARCHAR},</if>
+			<if test="refundApplyTime != null and refundApplyTime != ''">#{refundApplyTime,jdbcType=BIGINT},</if>
+			<if test="refundAuditTime != null and refundAuditTime != ''">#{refundAuditTime,jdbcType=BIGINT},</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.OrderInfo">
+		update order_info
+		<set>
+			<if test="orderCode != null and orderCode != ''">order_code = #{orderCode,jdbcType=VARCHAR},</if>
+			<if test="memberId != null and memberId != ''">member_id = #{memberId,jdbcType=VARCHAR},</if>
+			<if test="goodsType != null and goodsType != ''">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
+			<if test="goodsNum != null and goodsNum != ''">goods_num = #{goodsNum,jdbcType=INTEGER},</if>
+			<if test="goodsSubtotal != null and goodsSubtotal != ''">goods_subtotal = #{goodsSubtotal,jdbcType=DOUBLE},</if>
+			<if test="expressFee != null and expressFee != ''">express_fee = #{expressFee,jdbcType=DOUBLE},</if>
+			<if test="orderAmount != null and orderAmount != ''">order_amount = #{orderAmount,jdbcType=DOUBLE},</if>
+			<if test="orderRedPacket != null and orderRedPacket != ''">order_red_packet = #{orderRedPacket,jdbcType=INTEGER},</if>
+			<if test="orderStatus != null and orderStatus != ''">order_status = #{orderStatus,jdbcType=VARCHAR},</if>
+			<if test="buyerWord != null and buyerWord != ''">buyer_word = #{buyerWord,jdbcType=VARCHAR},</if>
+			<if test="creationTime != null and creationTime != ''">creation_time = #{creationTime,jdbcType=BIGINT},</if>
+			<if test="recipients != null and recipients != ''">recipients = #{recipients,jdbcType=VARCHAR},</if>
+			<if test="phone != null and phone != ''">phone = #{phone,jdbcType=VARCHAR},</if>
+			<if test="city != null and city != ''">city = #{city,jdbcType=VARCHAR},</if>
+			<if test="detailAddress != null and detailAddress != ''">detail_address = #{detailAddress,jdbcType=VARCHAR},</if>
+			<if test="refundApplyTime != null and refundApplyTime != ''">refund_apply_time = #{refundApplyTime,jdbcType=VARCHAR},</if>
+			<if test="refundAuditTime != null and refundAuditTime != ''">refund_audit_time = #{refundAuditTime,jdbcType=VARCHAR},</if>
+		</set>
+		where order_id = #{orderId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.OrderInfo">
+		update order_info
+		set order_code = #{orderCode,jdbcType=VARCHAR},
+		member_id = #{memberId,jdbcType=VARCHAR},
+		goods_type = #{goodsType,jdbcType=VARCHAR},
+		goods_num = #{goodsNum,jdbcType=INTEGER},
+		goods_subtotal = #{goodsSubtotal,jdbcType=DOUBLE},
+		express_fee = #{expressFee,jdbcType=DOUBLE},
+		order_amount = #{orderAmount,jdbcType=DOUBLE},
+		order_red_packet = #{orderRedPacket,jdbcType=INTEGER},
+		order_status = #{orderStatus,jdbcType=VARCHAR},
+		buyer_word = #{buyerWord,jdbcType=VARCHAR},
+		creation_time = #{creationTime,jdbcType=BIGINT},
+		recipients = #{recipients,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		detail_address = #{detailAddress,jdbcType=VARCHAR},
+		refund_apply_time = #{refundApplyTime,jdbcType=VARCHAR},
+		refund_audit_time = #{refundAuditTime,jdbcType=VARCHAR}
+		where order_id = #{orderId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>
