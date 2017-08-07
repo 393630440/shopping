@@ -1,5 +1,7 @@
 package com.tianrui.web.action;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianrui.web.action.session.SessionManage;
+
 import tianrui.work.api.ICreditorService;
+import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.creditor.CreditorFindReq;
 import tianrui.work.req.creditor.CreditorSaveReq;
 import tianrui.work.resp.creditor.CreditorFindResp;
@@ -31,7 +36,6 @@ public class CreditorAction {
 
 	@RequestMapping("savePage")
 	public ModelAndView savePage(){
-		log.info("123456---------------------abc");
 		ModelAndView view = new ModelAndView();
 		view.setViewName("shop/creditor/save");
 		return view;
@@ -39,8 +43,11 @@ public class CreditorAction {
 	
 	@RequestMapping("save")
 	@ResponseBody
-	public Result save(CreditorSaveReq req) throws Exception{
+	public Result save(CreditorSaveReq req,HttpServletRequest request) throws Exception{
 		Result rs = Result.getSuccessful();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		req.setCreator(info.getMemberId());
+		req.setCreatorImg(info.getWechatImg());
 		rs = creditorService.creditorSave(req);
 		return rs;
 		

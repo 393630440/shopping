@@ -178,7 +178,7 @@
 .gwc-ft{ width:100%; padding:8px 0; background:#E4E4E4; position:fixed; left:0; bottom:0;}
 .gwc-ft p{ float:left; line-height:30px; font-size:12px; color:#4A4A4A; margin-left:10px;}
 .gwc-ft p span{ color:#D12424;}
-.gwc-ft button{ display:block; width:55px; height:30px; background:#D12323; border:0; font-size:12px; color:#fff; float:right; border-radius:5px; margin-right:10px;}
+.gwc-ft button{ display:block; width:55px; height:30px; background:#4eabe8; border:0; font-size:12px; color:#fff; float:right; border-radius:5px; margin-right:10px;}
 
 /*************我想要手机商城收货地址*********************/
 .drdd-info7{ background:#fff; height:55px; padding:0 5px; border-bottom:1px solid #eee;}

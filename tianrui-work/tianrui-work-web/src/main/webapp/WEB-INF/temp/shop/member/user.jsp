@@ -39,15 +39,15 @@
                 	<div class="u_nav_icon money"></div>
                     <div class="u_nav_name">我的现金</div>
                      <div class="nt_icon"></div>
-                    <div class="u_money"><i>0.00元</i></div>
+                    <div class="u_money"><i>${MemberInfo.balance }元</i></div>
               </a>
             </li>
             <li>
             	<a href="huibi.html">
                 	<div class="u_nav_icon huibi"></div>
-                    <div class="u_nav_name">我的惠币</div>
+                    <div class="u_nav_name">我的宏包</div>
                     <div class="nt_icon"></div>
-                    <div class="u_money"><i>0.00个</i></div>
+                    <div class="u_money"><i>${MemberInfo.redPacket }个</i></div>
               </a>
             </li>
             <li>
@@ -56,7 +56,7 @@
                     <div class="u_nav_name">金额提现</div>
                     <div class="nt_icon"></div>
                     <div class="u_money"><i>0.00元</i></div>
-              </a>
+                </a>
             </li>
             <li>
             	<a href="huibi_tixian.html">

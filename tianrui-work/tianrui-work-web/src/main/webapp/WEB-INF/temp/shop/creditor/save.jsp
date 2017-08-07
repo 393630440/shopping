@@ -8,7 +8,7 @@
 <title>发布信息</title>
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<script type="text/javascript" src="/resources/shop/js/jquery.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
 </head>
 
 <body>
