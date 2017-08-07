@@ -28,9 +28,9 @@ public class MemberGainService implements IMemberGainService{
 		Result rs = Result.getSuccessful();
 		MemberGain save = new MemberGain();
 		PropertyUtils.copyProperties(save, req);
-		memberGainMapper.insertSelective(save);
 		save.setId(UUIDUtil.getUUID());
 		save.setCreatetime(System.currentTimeMillis());
+		memberGainMapper.insertSelective(save);
 		return rs;
 	}
 

@@ -7,12 +7,15 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.MemberSetting;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.MemberSettingMapper;
+import tianrui.work.req.gain.MemberGainSaveReq;
 import tianrui.work.req.member.MemberInfoFindReq;
+import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.req.member.MemberSetUptReq;
 import tianrui.work.resp.member.MemberInfoResp;
@@ -27,12 +30,15 @@ public class MemberInfoService implements IMemberInfoService{
 	MemberInfoMapper memberInfoMapper;
 	@Autowired
 	MemberSettingMapper memberSettingMapper;
+	@Autowired
+	IMemberGainService memberGainService;
 	
 	@Override
 	public MemberInfoResp selectByOpenid(String id) throws Exception {
 		MemberInfoResp resp = null;
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(id);
 		if(info!=null){
+			resp = new MemberInfoResp();
 			PropertyUtils.copyProperties(resp, info);
 		}
 		return resp;
@@ -111,6 +117,25 @@ public class MemberInfoService implements IMemberInfoService{
 		MemberSetting upt = new MemberSetting();
 		PropertyUtils.copyProperties(upt, req);
 		memberSettingMapper.updateByPrimaryKeySelective(upt);
+		return rs;
+	}
+
+	@Override
+	public Result saveHbao(MemberInfoHBaoReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
+		MemberInfo upt = new MemberInfo();
+		upt.setMemberId(req.getMemberId());
+		upt.setRedPacket(info.getRedPacket()+req.getRedPacket());
+		memberInfoMapper.updateByPrimaryKeySelective(upt);
+		//宏包记录
+		MemberGainSaveReq save = new MemberGainSaveReq();
+		save.setMemberId(req.getMemberId());
+		save.setRpNum(req.getRedPacket());
+		save.setRpType("2");
+		save.setSourceDescribe("商城派送宏包");
+		save.setSourceId("1");
+		memberGainService.save(save);
 		return rs;
 	}
 

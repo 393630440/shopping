@@ -39,10 +39,10 @@ public class Oauth2Action {
 		JSONObject objInfo = CommonUtil.getWeChatInfo(openid, access_token);
 		System.out.println(objInfo);
 		MemberInfoSaveReq req = new MemberInfoSaveReq();
-		req.setMemberId(objInfo.getString("openid"));
+		req.setMemberId(openid);
 		req.setWechatName(objInfo.getString("nickname"));
 		req.setWechatImg(objInfo.getString("headimgurl"));
-		req.setWechat(objInfo.getString("openid"));
+		req.setWechat(openid);
 		req.setCity(objInfo.getString("city"));
 		Result rs = memberInfoService.saveMember(req);
 		switch (state) {

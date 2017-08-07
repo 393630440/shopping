@@ -10,6 +10,7 @@ import com.tianrui.web.smvc.AutherWeb;
 
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.req.member.MemberInfoFindReq;
+import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
@@ -28,6 +29,17 @@ public class MemberInfoAction {
 		view.setViewName("/admin/member/page");
 		return view;
 	}
+	//派送宏包页面
+	@RequestMapping("saveHbaoPage")
+	@AutherWeb(typeString = "admin")
+	public ModelAndView saveHbaoPage() throws Exception{
+		ModelAndView view = new ModelAndView();
+		MemberInfoFindReq req = new MemberInfoFindReq();
+		PageTool<MemberInfoResp> page = memberInfoService.select(req);
+		view.addObject("mlist", page.getList());
+		view.setViewName("/admin/member/save_hbao");
+		return view;
+	}
 	
 	@RequestMapping("select")
 	@AutherWeb(typeString = "admin")
@@ -36,6 +48,25 @@ public class MemberInfoAction {
 		Result rs = Result.getSuccessful();
 		PageTool<MemberInfoResp> page = memberInfoService.select(req);
 		rs.setData(page);
+		return rs;
+	}
+	
+	@RequestMapping("findMemberID")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result findMemberID(String id) throws Exception{
+		Result rs = Result.getSuccessful();
+		MemberInfoResp resp = memberInfoService.selectByOpenid(id);
+		rs.setData(resp);
+		return rs;
+	}
+	
+	@RequestMapping("saveHbao")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result saveHbao(MemberInfoHBaoReq req) throws Exception{
+		Result rs = Result.getSuccessful();
+		rs = memberInfoService.saveHbao(req);
 		return rs;
 	}
 }

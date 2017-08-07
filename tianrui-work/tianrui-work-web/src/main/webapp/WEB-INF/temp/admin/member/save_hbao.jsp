@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>后台会员管理</title>
+<title>宏包派发</title>
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
@@ -15,7 +15,9 @@
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <link rel="stylesheet" href="/resources/admin/css/amazeui.min.css"/>
 <link rel="stylesheet" href="/resources/admin/css/admin.css">
+<link rel="stylesheet" href="/resources/admin/css/select2.css">
 <script src="/resources/admin/js/jquery.min.js"></script>
+<script src="/resources/admin/js/select2.js"></script>
 <script src="/resources/admin/js/app.js"></script>
 </head>
 <body>
@@ -36,54 +38,61 @@
 		</div>
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 管理员管理</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">管理员管理</a></dl>
+		      <ul class="am-icon-flag on">宏包派发</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">宏包派发</a></dl>
 		    </div>
 			<div class="fbneirong">
-		      <form class="am-form" id="form_user">
+		      <form class="am-form" id="form_member">
 		        <div class="am-form-group am-cf">
-		          <div class="zuo">登录账号：</div>
+		          <div class="zuo">微信名称：</div>
 		          <div class="you">
-		            <input type="text" class="am-input-sm" name="acount" id="acount_req" placeholder="请输入登录账号">
+						<select class="select2">
+							<option value="">选择用户</option>
+							<c:forEach items="${mlist }" var="member">
+								<option value="${member.memberId }">${member.wechatName }</option>
+							</c:forEach>
+						</select>
+					</div>	
+				</div>
+				<div class="am-form-group am-cf">
+		          <div class="zuo">会员头像：</div>
+		          <div class="you">
+		            <img id="member_img" style="width: 60px">
 		          </div>
 		        </div>
 		        <div class="am-form-group am-cf">
-		          <div class="zuo">登录密码：</div>
+		          <div class="zuo">唯一标识：</div>
 		          <div class="you">
-		            <input type="text" class="am-input-sm" name="password" id="password_req" placeholder="请输入登录密码">
+		          	<input type="text" id="member_id" readonly="readonly" class="am-input-sm">
 		          </div>
 		        </div>
 		        <div class="am-form-group am-cf">
-		          <div class="zuo">管理员名称：</div>
+		          <div class="zuo">会员名称：</div>
 		          <div class="you">
-		            <input type="text" class="am-input-sm" name="username" id="username_req" placeholder="请输入管理员名称">
+		            <input type="text" id="member_name" readonly="readonly" class="am-input-sm">
 		          </div>
 		        </div>
 		        <div class="am-form-group am-cf">
 		          <div class="zuo">联系电话：</div>
 		          <div class="you">
-		          	<input type="text" class="am-input-sm" name="telphone" id="telphone_req" placeholder="请输入联系电话">
+		            <input type="text" id="member_tel" readonly="readonly" class="am-input-sm">
 		          </div>
 		        </div>
-		       	<!-- 
 		        <div class="am-form-group am-cf">
-			        <div class="zuo">会员权限：</div>
-			        <div class="you" style="margin-top: 5px;">
-			          <label class="am-checkbox-inline">
-			            <input type="checkbox" value="option1">超级管理员
-			          </label>
-			          <label class="am-checkbox-inline">
-			            <input type="checkbox" value="option2">商品管理员
-			          </label>
-			          <label class="am-checkbox-inline">
-			            <input type="checkbox" value="option3">会员管理员
-			          </label>
-		            </div>
+		          <div class="zuo">宏包：</div>
+		          <div class="you">
+		            <input type="text" id="member_redPacket" readonly="readonly" class="am-input-sm">
+		          </div>
 		        </div>
-		       	 -->
+		        <div class="am-form-group am-cf">
+		          <div class="zuo">派发数量：</div>
+		          <div class="you">
+		            <input type="text" id="redPacket_num" value="0" class="am-input-sm">
+		          </div>
+		        </div>
 		        <div class="am-form-group am-cf">
 		          <div class="you" style="margin-left: 11%;">
-		              <button type="button" id="save_admin_user" class="am-btn am-btn-success am-radius">添加管理员</button>
+		              <button type="button" id="save_member_hbao" class="am-btn am-btn-success am-radius">派发</button>
 		          </div>
 		        </div>
 		      </form>
@@ -104,39 +113,43 @@
 <script type="text/javascript">
 $(function(){
 	$("#user_class").addClass("on");
+	$(".select2").select2(); 
 });
-
-$("#save_admin_user").on("click",function(){
-	if($("#acount_req").val()==""){
-		alert("登录账号不能为空");
-		return;
-	}
-	if($("#password_req").val()==""){
-		alert("登录密码");
-		return;
-	}
-	if($("#username_req").val()==""){
-		alert("管理员名称");
-		return;
-	}
-	if($("#telphone_req").val()==""){
-		alert("联系电话");
+$(".select2").on("change",function(){
+	var openid = $(this).val();
+	$.ajax({
+		url:"/admin/shop/member/findMemberID",
+		data:{"id":openid},
+		type:"POST",
+		success:function(ret){
+			if(ret.code == "000000"){
+				var data = ret.data;
+				$("#member_img").attr("src",data.wechatImg);
+				$("#member_id").val(data.memberId);
+				$("#member_name").val(data.memberName);
+				$("#member_tel").val(data.cellphone);
+				$("#member_redPacket").val(data.redPacket);
+				$("#redPacket_num").val("0")
+			}
+		}
+	});
+});
+$("#save_member_hbao").on("click",function(){
+	if($("#member_id").val()==""){
+		alert("请选择会员");
 		return;
 	}
 	$.ajax({
-		url:"/admin/shop/user/save",
-		data:$('#form_user').serialize(),
+		url:"/admin/shop/member/saveHbao",
+		data:{"memberId":$("#member_id").val(),
+			"redPacket":$("#redPacket_num").val()},
 		type:"POST",
 		success:function(ret){
 			if(ret.code=="000000"){
 				alert("添加成功");
-				window.location.href="/admin/shop/user/index";
-			}else{
-				alert(ret.error);
 			}
 		}
 	});
-	
 });
 
 </script>

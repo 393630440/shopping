@@ -1,6 +1,7 @@
 package tianrui.work.api;
 
 import tianrui.work.req.member.MemberInfoFindReq;
+import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.req.member.MemberSetUptReq;
 import tianrui.work.resp.member.MemberInfoResp;
@@ -22,5 +23,6 @@ public interface IMemberInfoService {
 	public MemberSetResp findMemberSet(String id) throws Exception;
 	/** 修改用户消息推送配置*/
 	public Result uptMemberSet(MemberSetUptReq req)throws Exception;
-	
+	/** 发送宏包*/
+	public Result saveHbao(MemberInfoHBaoReq req)throws Exception;
 }
