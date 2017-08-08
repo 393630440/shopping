@@ -26,6 +26,7 @@
         <button onclick="window.location.href='/wechat/shop/creditor/savePage'">发布</button>
     </div>
     <input type="hidden" id="scrollPage">
+    <input type="hidden" id="scrollTotal">
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
@@ -41,6 +42,7 @@ function init(pageNo,type){
 		type:"POST",
 		success:function(ret){
 			if(ret.code=="000000"){
+				$("#scrollTotal").val(ret.data.total);
 				innerHTML(ret.data.list,type);
 			}
 		}

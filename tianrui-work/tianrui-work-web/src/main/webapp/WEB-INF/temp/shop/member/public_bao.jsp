@@ -11,14 +11,7 @@
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
 <link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
-
 <script src="/resources/web/js/jquery-1.8.3.min.js"></script>
-<script>
-$(window).load(function() {
-	$("#status").fadeOut();
-	$("#preloader").delay(350).fadeOut("slow");
-})
-</script>
 </head>
 <body>
 <div class="mobile">
@@ -38,12 +31,10 @@ $(window).load(function() {
   </header>
   <!--header 结束-->
 	<ul class="ui-tab-nav">
-         <li><a href="/wechat/shop/Hbao/pubPage">宏包广场</a></li>
-         <li class="current"><a href="/wechat/shop/Hbao/page">我的宏包</a></li>
+         <li class="current"><a href="/wechat/shop/Hbao/pubPage">宏包广场</a></li>
+         <li><a href="/wechat/shop/Hbao/page">我的宏包</a></li>
    	</ul>
-   	 <ul class="gwc-ul1" id="innerHml">
-
-    </ul>
+   <span id="innerHml"></span>
   </div>
 <input type="hidden" id="scrollPage">
 <input type="hidden" id="scrollTotal">
@@ -55,8 +46,9 @@ $(function(){
 });
 function init(pageNo,type){
 	$("#scrollPage").val(pageNo);
+	$("#status").fadeOut();
 	$.ajax({
-		url:"/wechat/shop/Hbao/find",
+		url:"/wechat/shop/Hbao/findHbao",
 		data:{"pageNo":pageNo,
 			"pageSize":10},
 		type:"POST",
@@ -64,6 +56,7 @@ function init(pageNo,type){
 			if(ret.code=="000000"){
 				$("#scrollTotal").val(ret.data.total);
 				innerHTML(ret.data.list,type);
+				$("#preloader").fadeOut("slow");
 			}
 		}
 	});
@@ -73,13 +66,13 @@ function innerHTML(data,type){
 		$("#innerHml").empty();
 	}
 	for (var a = 0; a < data.length; a++) {
-		var hml = "<div class='msg w'>"+
-				"<div class='msg_title'>"+
-				"<h1>宏包交易记录</h1>"+
-				"<span>"+(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
-				"</div>"+
-				"<div class='msg_content'>"+
-				data[a].sourceDescribe+"<span>"+data[a].rpNum+"</span></div></div>";
+		var hml = "<a href='#'><div class='baoliao_content'><div class='bl_img'><img src='"+data[a].wechatImg+"' /></div>"+
+        "<div class='bl_right'>"+
+        "<div class='bl_title'>"+data[a].wechatName+"</div>"+
+        "<div class='bl_tag'>"+
+        "<div class='bl_price'>优惠价："+(data[a].redPacket*data[a].rpExchangeRatio)+"</div>"+
+        "<div class='bl_oprice'>原价："+data[a].redPacket+"</div>"+
+        "</div></div></div></a>";
 		$("#innerHml").append(hml);
 	}
 }

@@ -1,15 +1,15 @@
-$(function(){
 	$(window).scroll(function () {
         //$(window).scrollTop()这个方法是当前滚动条滚动的距离
         //$(window).height()获取当前窗体的高度
         //$(document).height()获取当前文档的高度
-        var bot = 0; //bot是底部距离的高度
-        if ((bot + $(window).scrollTop()) >= ($(document).height() - $(window).height())) {
+        if (($(document).scrollTop()) >= ($(document).height() - $(window).height())) {
         	var page = $("#scrollPage").val();
-        	init((parseInt(page)+parseInt(1)),1);
+        	var total = $("#scrollTotal").val();
+        	if(page * 10 < total){
+        		init((parseInt(page)+parseInt(1)),1);
+        	}
         }
     });
-});
 
 Date.prototype.format = function(f){
     var o ={

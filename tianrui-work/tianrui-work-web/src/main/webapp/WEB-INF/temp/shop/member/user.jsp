@@ -43,7 +43,7 @@
               </a>
             </li>
             <li>
-            	<a href="huibi.html">
+            	<a href="/wechat/shop/Hbao/page">
                 	<div class="u_nav_icon huibi"></div>
                     <div class="u_nav_name">我的宏包</div>
                     <div class="nt_icon"></div>

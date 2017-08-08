@@ -487,6 +487,13 @@
 	color: #666666;
 	margin-right: 10px;
 }
+
+.msg_content span {
+	float: right;
+	font-size: 20px;
+	color: #0080c0;
+	margin-right: 15px;
+}
 .msg_content {
 	float: left;
 	width: 96%;
