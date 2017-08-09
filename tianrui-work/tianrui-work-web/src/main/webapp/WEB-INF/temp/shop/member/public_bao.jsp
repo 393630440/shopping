@@ -66,9 +66,9 @@ function innerHTML(data,type){
 		$("#innerHml").empty();
 	}
 	for (var a = 0; a < data.length; a++) {
-		var hml = "<a href='#'><div class='baoliao_content'><div class='bl_img'><img src='"+data[a].wechatImg+"' /></div>"+
+		var hml = "<a href='/wechat/shop/HbaoPay/page?id="+data[a].memberId+"'><div class='baoliao_content'><div class='bl_img'><img src='"+data[a].wechatImg+"' /></div>"+
         "<div class='bl_right'>"+
-        "<div class='bl_title'>"+data[a].wechatName+"</div>"+
+        "<div class='bl_title'>"+data[a].wechatName+"--出售宏包数量"+data[a].redPacket+"个</div>"+
         "<div class='bl_tag'>"+
         "<div class='bl_price'>优惠价："+(data[a].redPacket*data[a].rpExchangeRatio)+"</div>"+
         "<div class='bl_oprice'>原价："+data[a].redPacket+"</div>"+

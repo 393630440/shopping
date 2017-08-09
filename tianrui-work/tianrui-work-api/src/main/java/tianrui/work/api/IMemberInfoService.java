@@ -1,5 +1,6 @@
 package tianrui.work.api;
 
+import tianrui.work.req.HbaoPayReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
@@ -25,4 +26,6 @@ public interface IMemberInfoService {
 	public Result uptMemberSet(MemberSetUptReq req)throws Exception;
 	/** 发送宏包*/
 	public Result saveHbao(MemberInfoHBaoReq req)throws Exception;
+	/** 宏包交易*/
+	public Result changeHbao(HbaoPayReq req)throws Exception;
 }

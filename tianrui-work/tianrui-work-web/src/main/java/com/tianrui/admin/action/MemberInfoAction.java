@@ -60,7 +60,7 @@ public class MemberInfoAction {
 		rs.setData(resp);
 		return rs;
 	}
-	
+	/** 派送宏包*/
 	@RequestMapping("saveHbao")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody

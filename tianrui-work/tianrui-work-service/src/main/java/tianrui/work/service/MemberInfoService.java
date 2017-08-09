@@ -13,6 +13,7 @@ import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.MemberSetting;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.MemberSettingMapper;
+import tianrui.work.req.HbaoPayReq;
 import tianrui.work.req.gain.MemberGainSaveReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
@@ -136,6 +137,49 @@ public class MemberInfoService implements IMemberInfoService{
 		save.setSourceDescribe("商城派送宏包");
 		save.setSourceId("1");
 		memberGainService.save(save);
+		return rs;
+	}
+
+	@Override
+	public Result changeHbao(HbaoPayReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		//支付人-买方
+		MemberInfo goPay = memberInfoMapper.selectByPrimaryKey(req.getGoPayOpenid());
+		//收款放-卖方
+		MemberInfo toPay = memberInfoMapper.selectByPrimaryKey(req.getToPayOpenid());
+		if(req.getPayNum()>toPay.getRedPacket()){
+			rs.setCode("1");
+			rs.setError("宏包数量不够");
+			return rs;
+		}
+		
+		MemberInfo uptgo = new MemberInfo();
+		uptgo.setMemberId(goPay.getMemberId());
+		uptgo.setRedPacket(goPay.getRedPacket()+req.getPayNum());
+		memberInfoMapper.updateByPrimaryKeySelective(uptgo);
+		//宏包记录
+		MemberGainSaveReq save = new MemberGainSaveReq();
+		save.setMemberId(goPay.getMemberId());
+		save.setRpNum(req.getPayNum());
+		save.setRpType("2");
+		save.setSourceDescribe("宏包商城购买宏包");
+		save.setSourceId("1");
+		memberGainService.save(save);
+		
+		MemberInfo uptto = new MemberInfo();
+		uptto.setMemberId(toPay.getMemberId());
+		uptto.setRedPacket(toPay.getRedPacket()-req.getPayNum());
+		uptto.setBalance(toPay.getBalance()+(req.getPayNum()*toPay.getRpExchangeRatio()));
+		memberInfoMapper.updateByPrimaryKeySelective(uptto);
+		
+		//宏包记录
+		MemberGainSaveReq save2 = new MemberGainSaveReq();
+		save2.setMemberId(toPay.getMemberId());
+		save2.setRpNum(req.getPayNum());
+		save2.setRpType("2");
+		save2.setSourceDescribe("宏包商城卖出宏包");
+		save2.setSourceId("1");
+		memberGainService.save(save2);
 		return rs;
 	}
 
