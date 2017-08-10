@@ -28,8 +28,11 @@
           <property name="properties" ref="configProperties" />
      </bean>
     <bean class="tianrui.work.comm.Constant">
-		<property name="WEIXIN_URL" value="${weixin.url}"></property>
+		<property name="WEIXIN_BASE_URL" value="${weixin.url}"></property>
 		<property name="WEIXIN_TOKEN" value="${weixin.token}"></property>
+		<property name="WEIXIN_APPID" value="${weixin.appid}"></property>
+		<property name="WEIXIN_APPSECRET" value="${weixin.appsecret}"></property>
+		<property name="WEIXIN_SHANGPU" value="${weixin.shangpu}"></property>
 	</bean>
      <import resource="applicationContext-db.xml"/>
 </beans>

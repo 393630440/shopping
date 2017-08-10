@@ -80,7 +80,7 @@ public class WeixinAction {
 		ReceiveXmlEntity xmlEntity =new ReceiveXmlEntity();
 		xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);//解析xml数据
 		String respXml = null;
-		String contxml=Constant.WEIXIN_URL+"/public/user/loginPage?openid="+xmlEntity.getFromUserName();//发送文字内容
+		String contxml=Constant.WEIXIN_BASE_URL+"/public/user/loginPage?openid="+xmlEntity.getFromUserName();//发送文字内容
 		respXml = formatxmls.formatXmlAllContent(xmlEntity.getFromUserName(), xmlEntity.getToUserName(), contxml);
 		return respXml;
 	}

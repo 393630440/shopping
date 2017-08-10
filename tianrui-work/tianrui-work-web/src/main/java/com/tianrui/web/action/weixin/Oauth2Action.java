@@ -1,10 +1,12 @@
 package com.tianrui.web.action.weixin;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.RespectBinding;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -28,10 +30,16 @@ public class Oauth2Action {
 	@Autowired
 	IMemberInfoService memberInfoService;
 	
+	@RequestMapping("/MP_verify_T6OvneLFANuYNbvr.txt")
+	@ResponseBody
+	public String conf(){
+		return "T6OvneLFANuYNbvr";
+	}
+	
 	@RequestMapping("weChat")
 	public ModelAndView weChat(String code,String state,HttpServletRequest request) throws Exception{
-		//http://183-lisijia.imwork.net/oauth2/weChat
-//		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf22ce076abf3d066&redirect_uri=http%3a%2f%2f183-lisijia.imwork.net%2foauth2%2fweChat&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+		//http://183-lisijia.imwork.net/oauth2/conf
+//		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8c38f7256d081b10&redirect_uri=http%3a%2f%2f183-lisijia.imwork.net%2foauth2%2fweChat&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
 		ModelAndView view = new ModelAndView();
 		JSONObject obj = CommonUtil.getOpenid(code);
 		String openid= obj.getString("openid");

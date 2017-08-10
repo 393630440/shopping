@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 
+import tianrui.work.comm.Constant;
+
 
 
 /**
@@ -27,7 +29,6 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class CommonUtil {
 	private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
-
 	// 凭证获取（GET）
 	public final static String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
@@ -94,7 +95,7 @@ public class CommonUtil {
 
 	/**网页授权 获取openid*/
 	public static JSONObject getOpenid(String code){
-		String requestUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+Configure.APPID+"&secret="+Configure.APPSECRET+"&code="+code+"&grant_type=authorization_code";
+		String requestUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+Constant.WEIXIN_APPID+"&secret="+Constant.WEIXIN_APPSECRET+"&code="+code+"&grant_type=authorization_code";
 		JSONObject obj = CommonUtil.httpsRequest(requestUrl, "POST", null);
 		return obj;
 	}
@@ -115,7 +116,7 @@ public class CommonUtil {
 	 */
 	public static Tokens getToken() {
 		Tokens token = null;
-		String requestUrl = token_url.replace("APPID", Configure.APPID).replace("APPSECRET", Configure.APPSECRET);
+		String requestUrl = token_url.replace("APPID", Constant.WEIXIN_APPID).replace("APPSECRET", Constant.WEIXIN_APPSECRET);
 		// 发起GET请求获取凭证
 		JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
 

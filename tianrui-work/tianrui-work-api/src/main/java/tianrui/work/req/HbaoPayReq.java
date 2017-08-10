@@ -8,6 +8,8 @@ public class HbaoPayReq {
 	private String toPayOpenid;
 	//数量
 	private Double payNum;
+	
+	private Double payMoney;
 
 	public String getGoPayOpenid() {
 		return goPayOpenid;
@@ -26,5 +28,11 @@ public class HbaoPayReq {
 	}
 	public void setPayNum(Double payNum) {
 		this.payNum = payNum;
+	}
+	public Double getPayMoney() {
+		return payMoney;
+	}
+	public void setPayMoney(Double payMoney) {
+		this.payMoney = payMoney;
 	}
 }

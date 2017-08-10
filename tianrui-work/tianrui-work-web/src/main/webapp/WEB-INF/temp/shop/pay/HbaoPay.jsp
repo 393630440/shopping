@@ -53,6 +53,8 @@ $("#baoNum").on("change",function(){
 	$("#baoPrice").html("¥"+(num*price).toFixed(2));
 });
 $("#goPay").on("click",function(){
+	window.location.href="/wechat/shop/pay/page";
+	return;
 	$.ajax({
 		url:"/wechat/shop/HbaoPay/hBaoPay",
 		data:{"toPayOpenid":$("#memberId").val(),
