@@ -13,4 +13,6 @@ public interface IMemberAddressService {
 	public Result delete(String id)throws Exception;
 	
 	public PageTool<AddressResp> select(AddressFindReq req)throws Exception;
+	//设置默认
+	public Result only(String id,String memberId)throws Exception;
 }

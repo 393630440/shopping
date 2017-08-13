@@ -1,6 +1,11 @@
-package tianrui.work.req.address;
+package tianrui.work.bean;
 
-public class AddressSaveReq {
+public class MemberAddressNew {
+    
+	private Integer pageNo;
+	
+	private Integer pageSize;
+	
 	private String id;
 
     private String memberId;
@@ -20,30 +25,14 @@ public class AddressSaveReq {
     private String isDefault;
 
     public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
 
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public String getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
@@ -83,6 +72,22 @@ public class AddressSaveReq {
         this.detailAddress = detailAddress == null ? null : detailAddress.trim();
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode == null ? null : zipCode.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
     public String getIsDefault() {
         return isDefault;
     }
@@ -90,4 +95,20 @@ public class AddressSaveReq {
     public void setIsDefault(String isDefault) {
         this.isDefault = isDefault == null ? null : isDefault.trim();
     }
+
+	public Integer getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(Integer pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 }
