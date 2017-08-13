@@ -33,19 +33,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <div align="center" style="margin-top: 40px; font-size: 20px">
 	  	<div style="width: 10%"></div>
 	  	<div align="left" style="width: 80%" >
-	  		<div align="center" style="font-size: 25px">发钢网运费结算</div>
+	  		<div align="center" style="font-size: 25px">费用结算</div>
 	  		<div style="margin-top: 20px">
-	  		订单编号：${waybillId }<br>
-	    	支付金额：<span style="color: red">${money }</span>元<br>
+	    	支付金额：<span style="color: red">${payMoney }</span>元<br>
 	  		</div>
 	  	</div>
 	  	<div style="width: 10%"></div>
 	    <input style="border:0; font-size:20px; margin-top:20px; color:#FFFAFA; background-color: #00CD00;width: 80%;height: 40px" type="button" onclick="onBridgeReady();" value="微信支付">
  </div> 
  <div align="center" style="font-size: 13px; margin-top: 80px">
-		郑东新区农业东路（如意西路）建业总部港F栋北10F<br>
-	Tell: 400-679-1881<br>
-	Email: service@fagangwang.com<br>
+
  </div>
  </body>
   
@@ -65,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   wx.config({
       debug: true ,
       appId: '${zhifu.appid}',
-      timestamp: ${zhifu.timestamp},
+      timestamp: '${zhifu.timestamp}',
       nonceStr: '${zhifu.nonceStr}',
       signature: '${zhifu.signature}',
       jsApiList: [

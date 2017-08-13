@@ -34,8 +34,8 @@
 	       	</span>
        	</p>
        	<p class="qrdd-p2">支付价格
-	       	<span id="baoPrice">  
-				¥${info.redPacket * info.rpExchangeRatio }
+	       	¥<span id="baoPrice">  
+				${info.redPacket * info.rpExchangeRatio }
 	       	</span>
        	</p>
        	<input type="hidden" id="memberId" value="${info.memberId }">
@@ -50,10 +50,11 @@
 $("#baoNum").on("change",function(){
 	var num = $("#baoNum").val();
 	var price = $("#rpExchangeRatio").val();
-	$("#baoPrice").html("¥"+(num*price).toFixed(2));
+	$("#baoPrice").html(+(num*price).toFixed(2));
 });
 $("#goPay").on("click",function(){
-	window.location.href="/wechat/shop/pay/page";
+	var money = $("#baoPrice").html();
+	window.location.href="/wechat/shop/pay/page?payMoney="+money;
 	return;
 	$.ajax({
 		url:"/wechat/shop/HbaoPay/hBaoPay",

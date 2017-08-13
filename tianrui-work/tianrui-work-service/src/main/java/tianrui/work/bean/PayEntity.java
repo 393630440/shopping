@@ -1,8 +1,10 @@
 package tianrui.work.bean;
 
+import tianrui.work.comm.Constant;
+
 public class PayEntity {
 
-	private String appid;
+	private String appid = Constant.WEIXIN_APPID;
 	
 	private String timeStamp;
 	

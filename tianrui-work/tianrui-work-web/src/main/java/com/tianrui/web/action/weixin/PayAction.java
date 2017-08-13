@@ -1,10 +1,13 @@
 package com.tianrui.web.action.weixin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,17 +20,21 @@ import com.tianrui.web.util.PaySignUtil;
 import com.tianrui.web.util.Payxiadan;
 import com.tianrui.web.util.Sign;
 
+import tianrui.work.api.IWeChatPayService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.PayEntity;
 import tianrui.work.bean.ZhifuSign;
 import tianrui.work.comm.Constant;
 import tianrui.work.req.HbaoPayReq;
-import tianrui.work.vo.UUIDUtil;
+import tianrui.work.req.WeChatPayReq;
 
 @Controller
 @RequestMapping("/wechat/shop/pay")
 public class PayAction {
 
+	@Autowired
+	IWeChatPayService weChatPayService;
+	
 	@RequestMapping("page")
 	public ModelAndView page(HttpServletRequest request,HbaoPayReq req) throws Exception{
 		ModelAndView view = new ModelAndView();
@@ -43,13 +50,23 @@ public class PayAction {
 		String spbill_create_ip = request.getRemoteAddr();
 		//config签名验证,调用微信jssdk凭证
 		ZhifuSign zhifu = new ZhifuSign();
-		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay",nonce_str,timestamp);//网页验证成功
+		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/page?payMoney="+req.getPayMoney(),nonce_str,timestamp);//网页验证成功
 		zhifu.setAppid(Constant.WEIXIN_APPID);
 		Map<String, String> way = new HashMap<String, String>();
 		PayEntity pay = new PayEntity();
-		//用户未支付
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm"); 
+		String payNo = formatter.format(new Date())+timestamp; 
 		//微信支付下单
-		way = new Payxiadan().getprepay_id(nonce_str,spbill_create_ip,openid,timestamp,"100");
+		way = new Payxiadan().getprepay_id(nonce_str,spbill_create_ip,openid,payNo,req.getPayMoney().toString());
+		
+		WeChatPayReq save = new WeChatPayReq();
+		save.setTransid(way.get("prepay_id").toString());
+		save.setTotalfee(req.getPayMoney());
+		save.setOpenid(info.getMemberId());
+		save.setMemberid(req.getToPayOpenid());
+		save.setOuttradeno(payNo);
+		weChatPayService.save(save);
+		
 		pay.setPackages("prepay_id="+way.get("prepay_id").toString());
 		
 		//微信支付签名
@@ -59,6 +76,7 @@ public class PayAction {
 		
 		view.addObject("zhifu", zhifu);
 		view.addObject("payEntity", payEntity);
+		view.addObject("payMoney", req.getPayMoney());
 		view.setViewName("/shop/pay/weChatPay");
 		return view;
 	}

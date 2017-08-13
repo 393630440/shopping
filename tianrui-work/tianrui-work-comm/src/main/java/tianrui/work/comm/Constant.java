@@ -11,6 +11,12 @@ public class Constant {
 	public static String WEIXIN_APPSECRET;
 	
 	public static String WEIXIN_SHANGPU;
+	
+	public static String WEIXIN_SIGN_KEY;
+	//公众好支付
+	public static String WEIXIN_PAY_JSAPI="JSAPI";
+	//二维码支付
+	public static String WEIXIN_PAY_NATIVE="NATIVE";
 
 	public static String getWEIXIN_TOKEN() {
 		return WEIXIN_TOKEN;
@@ -50,5 +56,13 @@ public class Constant {
 
 	public static void setWEIXIN_SHANGPU(String wEIXIN_SHANGPU) {
 		WEIXIN_SHANGPU = wEIXIN_SHANGPU;
+	}
+
+	public static String getWEIXIN_SIGN_KEY() {
+		return WEIXIN_SIGN_KEY;
+	}
+
+	public static void setWEIXIN_SIGN_KEY(String wEIXIN_SIGN_KEY) {
+		WEIXIN_SIGN_KEY = wEIXIN_SIGN_KEY;
 	}
 }

@@ -32,29 +32,28 @@ import tianrui.work.bean.WeiXinPayXml;
 import tianrui.work.comm.Constant;
 
 /**
- * 下单接口
+ * 涓嬪崟鎺ュ彛
  * @author My
  * @CreateDate 2016-3-25
  * @param
  */
 public class Payxiadan {
-	/**微信下单*/
+	
 	public Map getprepay_id(String nonce_str,String ip,String openid,String waybillid,String money)  throws Exception {
-		//设置请求参数
+
 		WeiXinPay pay = new WeiXinPay();
-		pay.setNonce_str(nonce_str);//随记字符串
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMdd-HHmm"); 
-		String strDate = formatter.format(new Date()); 
-		pay.setOut_trade_no(strDate+"-"+waybillid);//订单号
+		pay.setNonce_str(nonce_str);
+		
+		pay.setOut_trade_no(waybillid);
 		pay.setBody("费用结算");
-		//金额转化为分为单位
+
 		float sessionmoney = Float.parseFloat(money);
 		sessionmoney = sessionmoney * 100;
 		String sd = String.valueOf(sessionmoney);
 		pay.setTotal_fee(sd.substring(0,sd.length()-2));
 		pay.setOpenid(openid);
 		pay.setSpbill_create_ip(ip);
-		pay.setNotify_url(Constant.WEIXIN_BASE_URL+"/notify");
+		pay.setNotify_url(Constant.WEIXIN_BASE_URL+"/weChat/payNotify/main");
 		
 		WeiXinPay signpay = Sign.paysign(pay);
 		String xml = new WeiXinPayXml().payXml(signpay);
@@ -80,7 +79,7 @@ public class Payxiadan {
         KeyStore keyStore  = KeyStore.getInstance("PKCS12");
         FileInputStream instream = new FileInputStream(new File(xmlFile));
         try {
-            keyStore.load(instream, Constant.WEIXIN_SHANGPU.toCharArray());//商户密码
+            keyStore.load(instream, Constant.WEIXIN_SHANGPU.toCharArray());//鍟嗘埛瀵嗙爜
         } finally {
             instream.close();
         }
@@ -133,7 +132,7 @@ public class Payxiadan {
                     json.put("appId", way.get("appid"));
                     json.put("tradeType", way.get("trade_type"));
                     json.put("returnCode", way.get("return_code"));
-                    json.put("outTradeNo", strDate+"-"+waybillid);
+                    json.put("outTradeNo", waybillid);
 //                    String js = new ChuliService().commonUrl(json.toString(), "/App/addprePay", null);
             	    System.out.println(json);
                 }
