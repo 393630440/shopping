@@ -13,6 +13,8 @@ public class WeChatPay {
 
     private Double totalfee;
 
+    private Double paynum;
+
     private String outtradeno;
 
     private String paystatus;
@@ -67,6 +69,14 @@ public class WeChatPay {
 
     public void setTotalfee(Double totalfee) {
         this.totalfee = totalfee;
+    }
+
+    public Double getPaynum() {
+        return paynum;
+    }
+
+    public void setPaynum(Double paynum) {
+        this.paynum = paynum;
     }
 
     public String getOuttradeno() {

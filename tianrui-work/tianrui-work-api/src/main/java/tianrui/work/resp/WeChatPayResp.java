@@ -1,6 +1,6 @@
-package tianrui.work.req;
+package tianrui.work.resp;
 
-public class WeChatPayReq {
+public class WeChatPayResp {
     private String id;
 
     private String appid;
@@ -8,12 +8,12 @@ public class WeChatPayReq {
     private String mchid;
 
     private String openid;
+    
+    private Double paynum;
 
     private String transid;
 
     private Double totalfee;
-    
-    private Double payNum;
 
     private String outtradeno;
 
@@ -89,15 +89,15 @@ public class WeChatPayReq {
         return memberid;
     }
 
-    public void setMemberid(String memberid) {
+    public Double getPaynum() {
+		return paynum;
+	}
+
+	public void setPaynum(Double paynum) {
+		this.paynum = paynum;
+	}
+
+	public void setMemberid(String memberid) {
         this.memberid = memberid == null ? null : memberid.trim();
     }
-
-	public Double getPayNum() {
-		return payNum;
-	}
-
-	public void setPayNum(Double payNum) {
-		this.payNum = payNum;
-	}
 }

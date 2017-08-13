@@ -8,13 +8,15 @@
     <result column="openid" property="openid" jdbcType="VARCHAR" />
     <result column="transId" property="transid" jdbcType="VARCHAR" />
     <result column="totalFee" property="totalfee" jdbcType="DOUBLE" />
+    <result column="payNum" property="paynum" jdbcType="DOUBLE" />
     <result column="outTradeNo" property="outtradeno" jdbcType="VARCHAR" />
     <result column="payStatus" property="paystatus" jdbcType="VARCHAR" />
     <result column="memberId" property="memberid" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, appId, mchId, openid, transId, totalFee, outTradeNo, payStatus, memberId, createtime
+    id, appId, mchId, openid, transId, totalFee, payNum, outTradeNo, payStatus, memberId, 
+    createtime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -29,12 +31,12 @@
   <insert id="insert" parameterType="tianrui.work.bean.WeChatPay" >
     insert into weChatPay (id, appId, mchId, 
       openid, transId, totalFee, 
-      outTradeNo, payStatus, memberId, 
-      createtime)
+      payNum, outTradeNo, payStatus, 
+      memberId, createtime)
     values (#{id,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, #{mchid,jdbcType=VARCHAR}, 
       #{openid,jdbcType=VARCHAR}, #{transid,jdbcType=VARCHAR}, #{totalfee,jdbcType=DOUBLE}, 
-      #{outtradeno,jdbcType=VARCHAR}, #{paystatus,jdbcType=VARCHAR}, #{memberid,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=BIGINT})
+      #{paynum,jdbcType=DOUBLE}, #{outtradeno,jdbcType=VARCHAR}, #{paystatus,jdbcType=VARCHAR}, 
+      #{memberid,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="tianrui.work.bean.WeChatPay" >
     insert into weChatPay
@@ -56,6 +58,9 @@
       </if>
       <if test="totalfee != null" >
         totalFee,
+      </if>
+      <if test="paynum != null" >
+        payNum,
       </if>
       <if test="outtradeno != null" >
         outTradeNo,
@@ -89,6 +94,9 @@
       <if test="totalfee != null" >
         #{totalfee,jdbcType=DOUBLE},
       </if>
+      <if test="paynum != null" >
+        #{paynum,jdbcType=DOUBLE},
+      </if>
       <if test="outtradeno != null" >
         #{outtradeno,jdbcType=VARCHAR},
       </if>
@@ -121,6 +129,9 @@
       <if test="totalfee != null" >
         totalFee = #{totalfee,jdbcType=DOUBLE},
       </if>
+      <if test="paynum != null" >
+        payNum = #{paynum,jdbcType=DOUBLE},
+      </if>
       <if test="outtradeno != null" >
         outTradeNo = #{outtradeno,jdbcType=VARCHAR},
       </if>
@@ -143,6 +154,7 @@
       openid = #{openid,jdbcType=VARCHAR},
       transId = #{transid,jdbcType=VARCHAR},
       totalFee = #{totalfee,jdbcType=DOUBLE},
+      payNum = #{paynum,jdbcType=DOUBLE},
       outTradeNo = #{outtradeno,jdbcType=VARCHAR},
       payStatus = #{paystatus,jdbcType=VARCHAR},
       memberId = #{memberid,jdbcType=VARCHAR},

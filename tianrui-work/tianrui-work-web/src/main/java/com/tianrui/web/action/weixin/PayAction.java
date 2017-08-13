@@ -50,7 +50,7 @@ public class PayAction {
 		String spbill_create_ip = request.getRemoteAddr();
 		//config签名验证,调用微信jssdk凭证
 		ZhifuSign zhifu = new ZhifuSign();
-		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/page?payMoney="+req.getPayMoney(),nonce_str,timestamp);//网页验证成功
+		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/page?payMoney="+req.getPayMoney()+"&toPayOpenid="+req.getToPayOpenid()+"&payNum="+req.getPayNum(),nonce_str,timestamp);//网页验证成功
 		zhifu.setAppid(Constant.WEIXIN_APPID);
 		Map<String, String> way = new HashMap<String, String>();
 		PayEntity pay = new PayEntity();
@@ -65,6 +65,7 @@ public class PayAction {
 		save.setOpenid(info.getMemberId());
 		save.setMemberid(req.getToPayOpenid());
 		save.setOuttradeno(payNo);
+		save.setPayNum(req.getPayNum());
 		weChatPayService.save(save);
 		
 		pay.setPackages("prepay_id="+way.get("prepay_id").toString());

@@ -54,7 +54,7 @@ $("#baoNum").on("change",function(){
 });
 $("#goPay").on("click",function(){
 	var money = $("#baoPrice").html();
-	window.location.href="/wechat/shop/pay/page?payMoney="+money;
+	window.location.href="/wechat/shop/pay/page?payMoney="+money+"&toPayOpenid="+$("#memberId").val()+"&payNum="+$("#baoNum").val();
 	return;
 	$.ajax({
 		url:"/wechat/shop/HbaoPay/hBaoPay",
