@@ -18,50 +18,63 @@
         <div style="clear:both;"></div>
     </div>
     
-    <dl class="drdd-info7">
-    	<dt>
-        	<p>
-            	<span class="f-l">张某人</span>
-            	<span class="f-r">15625580000</span>
-                <div style="clear:both;"></div>
-            </p>
-        	<p>
-            	<a href="JavaScript:;" class="a1">[默认]</a>浙江省杭州市某某区某某路00号<span class="sp1">4011200</span>
-            </p>
-        </dt>
-        <dd><a href="#">></a></dd>
-        <div style="clear:both;"></div>
-    </dl>
-    <dl class="drdd-info7">
-    	<dt>
-        	<p>
-            	<span class="f-l">张某人</span>
-            	<span class="f-r">15625580000</span>
-                <div style="clear:both;"></div>
-            </p>
-        	<p>
-            	浙江省杭州市某某区某某路00号<span class="sp1">4011200</span>
-            </p>
-        </dt>
-        <dd><a href="#">></a></dd>
-        <div style="clear:both;"></div>
-    </dl>
-    <dl class="drdd-info7">
-    	<dt>
-        	<p>
-            	<span class="f-l">张某人</span>
-            	<span class="f-r">15625580000</span>
-                <div style="clear:both;"></div>
-            </p>
-        	<p>
-            	浙江省杭州市某某区某某路00号<span class="sp1">4011200</span>
-            </p>
-        </dt>
-        <dd><a href="#">></a></dd>
-        <div style="clear:both;"></div>
-    </dl>
+    <span id="innerHml">
     
-    <button class="drdd-btn">新增收货地址</button>
-    
+    </span>
+    <button class="drdd-btn" onclick="window.location.href='/wechat/shop/address/savePage'">新增收货地址</button>
+<input type="hidden" id="scrollPage">
+<input type="hidden" id="scrollTotal">  
 </body>
+<script src="/resources/js/scroll/scroll.js"></script>
+<script type="text/javascript">
+$(function(){
+	init(0,0);
+});
+function init(pageNo,type){
+	$("#scrollPage").val(pageNo);
+	$("#status").fadeOut();
+	$.ajax({
+		url:"/wechat/shop/address/select",
+		data:{"pageNo":pageNo,
+			"pageSize":10},
+		type:"POST",
+		success:function(ret){
+			if(ret.code=="000000"){
+				$("#scrollTotal").val(ret.data.total);
+				innerHTML(ret.data.list,type);
+				$("#preloader").fadeOut("slow");
+			}
+		}
+	});
+}
+function innerHTML(data,type){
+	if(type==0){
+		$("#innerHml").empty();
+	}
+	for (var a = 0; a < data.length; a++) {
+		var ma = "";
+		if(data[a].isDefault=="1"){
+			ma = "<a class='a1'>[默认]</a>";
+		}
+		var hml = "<dl class='drdd-info7' onclick=\"uptMax('"+data[a].id+"')\"><dt><p><span class='f-l'>"+data[a].recipients+"</span><span class='f-r'>"+data[a].phone+"</span>"+
+		"<div style='clear:both;'></div></p><p>"+ma+data[a].city+","+data[a].detailAddress+"<span class='sp1'>"+data[a].zipCode+"</span>"+
+		"</p></dt><dd><a href='#'>></a></dd><div style='clear:both;'></div></dl>";
+		$("#innerHml").append(hml);
+	}
+}
+
+function uptMax(id){
+	if(confirm("确认设置默认地址吗？")){
+		$.ajax({
+			url:"/wechat/shop/address/only",
+			data:{"id":id},
+			type:"POST",
+			success:function(ret){
+				init(0,0);
+			}
+		});
+	}
+}
+
+</script>
 </html>

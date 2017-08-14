@@ -25,7 +25,6 @@ public class AddressAction {
 	@Autowired
 	IMemberAddressService memberAddressService;
 	
-	/** 页面跳转*/
 	@RequestMapping("page")
 	public ModelAndView page(){
 		ModelAndView view = new ModelAndView();
@@ -33,7 +32,6 @@ public class AddressAction {
 		return view;
 	}
 	
-	/** 添加页面*/
 	@RequestMapping("savePage")
 	public ModelAndView savePage(){
 		ModelAndView view = new ModelAndView();
@@ -50,8 +48,6 @@ public class AddressAction {
 		return rs;
 	}
 	
-	/** 查询数据
-	 * @throws Exception */
 	@RequestMapping("select")
 	@ResponseBody
 	public Result select(AddressFindReq req,HttpServletRequest request) throws Exception{
@@ -62,15 +58,12 @@ public class AddressAction {
 		rs.setData(page);
 		return rs;
 	}
-	/** 设置默认
-	 * @throws Exception */
 	@RequestMapping("only")
+	@ResponseBody
 	public Result only(String id,HttpServletRequest request) throws Exception{
 		MemberInfo info = SessionManage.getSessionManage(request);
 		return memberAddressService.only(id, info.getMemberId());
 	}
-	/** 删除
-	 * @throws Exception */
 	@RequestMapping("delete")
 	@ResponseBody
 	public Result delete(String id) throws Exception{

@@ -25,6 +25,7 @@
     		member_id = #{memberId,jdbcType=VARCHAR}
     	</if>
     </where>
+    order by is_default desc
     <if test="pageNo != null">
    		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
    	</if>

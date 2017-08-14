@@ -27,9 +27,16 @@ public class MemberAddressService implements IMemberAddressService{
 	@Override
 	public Result save(AddressSaveReq req) throws Exception {
 		Result rs = Result.getSuccessful();
+		MemberAddressNew query = new MemberAddressNew();
+		query.setMemberId(req.getMemberId());
+		List<MemberAddressNew> list = memberAddressMapper.selectByCondition(query);
+		
 		MemberAddressNew save = new MemberAddressNew();
 		PropertyUtils.copyProperties(save, req);
 		save.setId(UUIDUtil.getUUID());
+		if(list.size()==0){
+			save.setIsDefault("1");
+		}
 		memberAddressMapper.insertSelective(save);
 		return rs;
 	}
