@@ -1,72 +1,72 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="applicable-device" content="mobile" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>提现申请</title>
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
+<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/login.css" rel="stylesheet" type="text/css">
+<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
 </head>
-
 <body>
-	
-    <div class="sjsc-title1">
-    	<h3 class="sjsc-t1l f-l"><a href="JavaScript:;"><span><</span>提现申请</a></h3>
-        <button class="sjsc-btn1 f-r" id="save_id">保存</button>
-        <div style="clear:both;"></div>
-    </div>
-    <form id="address_id">
-	    <ul class="xzdz-ul1">
-	    	<li>
-	        	<p class="xzdz-p1 f-l">收货人</p>
-	            <input type="text" name="recipients" placeholder="姓名" class="xzdz-ipt1 f-l" />
-	            <div style="clear:both;"></div>            
-	        </li>
-	    	<li>
-	        	<p class="xzdz-p1 f-l">手机号</p>
-	            <input type="text" name="phone" placeholder="11位手机号" maxlength="11" class="xzdz-ipt1 f-l" />
-	            <div style="clear:both;"></div>            
-	        </li>
-	    	<li>
-	        	<p class="xzdz-p1 f-l">地区信息</p>
-	            <div class="xzdz-ipt2box f-l">
-	            	<input type="text" name="city" placeholder="省" class="xzdz-ipt2 f-l" />
-	            	<input type="text" name="city" placeholder="市" class="xzdz-ipt2 f-l" />
-	            	<input type="text" name="city" placeholder="区" class="xzdz-ipt2 f-l" />
-	                <div style="clear:both;"></div>
-	            </div>
-	            <div style="clear:both;"></div>            
-	        </li>
-	    	<li>
-	        	<p class="xzdz-p1 f-l">详细地址</p>
-	            <input type="text" name="detailAddress" placeholder="街道门牌信息" class="xzdz-ipt1 f-l" />
-	            <div style="clear:both;"></div>            
-	        </li>
-	    	<li>
-	        	<p class="xzdz-p1 f-l">邮政编码</p>
-	            <input type="text" name="zipCode" placeholder="邮政编码" class="xzdz-ipt1 f-l" />
-	            <div style="clear:both;"></div>            
-	        </li>
-	    </ul>
-    </form>
+<div class="mobile">
+  <!--页面加载 开始-->
+  <jsp:include page="../common/heads.jsp"></jsp:include>
+  <!--页面加载 结束--> 
+  <!--header 开始-->
+  <header>
+    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+      <h2>提现申请</h2>
+      </div>
+  </header>
+  <!--header 结束-->
+  <div class="w main">
+     <div class="item item-password">
+       <input type="text" class="txt-input txt-username" 
+       readonly="readonly" value="用户名称：${info.wechatName }">
+     </div>
+     
+     <div class="item item-password">
+       <input type="text" class="txt-input txt-username" 
+       readonly="readonly" value="账户余额：${info.balance }">
+     </div>
+     
+     <div class="item item-password">
+       <input type="text" id="price" class="txt-input txt-username" 
+        placeholder="提现金额">
+     </div>
+     
+     <div class="ui-btn-wrap"> 
+     <a class="ui-btn-lg ui-btn-primary" id="save" href="#">确定</a> 
+     </div>
+        
+     
+     <div style="height: 30px">
+     </div>
+  </div>
+	<!-- foods -->
+    <jsp:include page="../common/foods.jsp"></jsp:include>
+     <!-- foods -->
+</div>
 </body>
-
 <script type="text/javascript">
-$("#save_id").on("click",function(){
+$("#save").on("click",function(){
+	var price = $("#price").val();
 	$.ajax({
-		url:"/wechat/shop/address/save",
-		data:$('#address_id').serialize(),
+		url:"/wechat/shop/deposit/save",
 		type:"POST",
+		data:{withdrawalAmount:price},
 		success:function(ret){
 			if(ret.code=="000000"){
-				window.location.href="/wechat/shop/address/page";
+				window.location.href="/wechat/shop/deposit/page";
+			}else{
+				alert(ret.error);
 			}
 		}
 	});
 });
 </script>
-
 </html>

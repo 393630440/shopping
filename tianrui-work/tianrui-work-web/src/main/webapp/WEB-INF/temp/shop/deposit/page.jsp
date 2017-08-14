@@ -3,27 +3,46 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>提现记录</title>
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="m.178hui.com" />
+<meta name="applicable-device" content="mobile" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>我的现金</title>
+<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
 
+<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
+<script>
+$(window).load(function() {
+	$("#status").fadeOut();
+	$("#preloader").delay(350).fadeOut("slow");
+})
+</script>
+</head>
 <body>
-	
-    <div class="sjsc-title1">
-    	<h3 class="sjsc-t1l f-l"><a href="JavaScript:;"><span><</span>收货地址</a></h3>
-        <div style="clear:both;"></div>
+<div class="mobile">
+	<!--页面加载 开始-->
+  <div id="preloader">
+    <div id="status">
+      <p class="center-text"><span>拼命加载中···</span></p>
     </div>
-    
-    <span id="innerHml">
-    
-    </span>
-    <button class="drdd-btn" onclick="window.location.href='/wechat/shop/address/savePage'">新增收货地址</button>
+  </div>
+  <!--页面加载 结束--> 
+  <!--header 开始-->
+  <header>
+    <div class="header"> <a class="new-a-back" href="index.html"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+      <h2>消费记录</h2>
+      <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
+    </div>
+  </header>
+  <!--header 结束-->
+   	 <ul class="gwc-ul1" id="innerHml">
+
+     </ul>
+  </div>
 <input type="hidden" id="scrollPage">
-<input type="hidden" id="scrollTotal">  
+<input type="hidden" id="scrollTotal">
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
@@ -32,9 +51,8 @@ $(function(){
 });
 function init(pageNo,type){
 	$("#scrollPage").val(pageNo);
-	$("#status").fadeOut();
 	$.ajax({
-		url:"/wechat/shop/address/select",
+		url:"/wechat/shop/deposit/select",
 		data:{"pageNo":pageNo,
 			"pageSize":10},
 		type:"POST",
@@ -42,7 +60,6 @@ function init(pageNo,type){
 			if(ret.code=="000000"){
 				$("#scrollTotal").val(ret.data.total);
 				innerHTML(ret.data.list,type);
-				$("#preloader").fadeOut("slow");
 			}
 		}
 	});
@@ -52,29 +69,23 @@ function innerHTML(data,type){
 		$("#innerHml").empty();
 	}
 	for (var a = 0; a < data.length; a++) {
-		var ma = "";
-		if(data[a].isDefault=="1"){
-			ma = "<a class='a1'>[默认]</a>";
+		var sta = data[a].withdrawalStatus
+		if(data[a].withdrawalStatus == "0"){
+			sta = "提现中";
+		}else if(data[a].withdrawalStatus == "1"){
+			sta = "提现成功";
+		}else if(data[a].withdrawalStatus == "2"){
+			sta = "提现失败";
 		}
-		var hml = "<dl class='drdd-info7' onclick=\"uptMax('"+data[a].id+"')\"><dt><p><span class='f-l'>"+data[a].recipients+"</span><span class='f-r'>"+data[a].phone+"</span>"+
-		"<div style='clear:both;'></div></p><p>"+ma+data[a].city+","+data[a].detailAddress+"<span class='sp1'>"+data[a].zipCode+"</span>"+
-		"</p></dt><dd><a href='#'>></a></dd><div style='clear:both;'></div></dl>";
+		var hml = "<div class='msg w'>"+
+				"<div class='msg_title'>"+
+				"<h1>余额提现记录</h1>"+
+				"<span>"+(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
+				"</div>"+
+				"<div class='msg_content'>"+
+				sta+"<span>"+data[a].withdrawalAmount+"</span></div></div>";
 		$("#innerHml").append(hml);
 	}
 }
-
-function uptMax(id){
-	if(confirm("确认设置默认地址吗？")){
-		$.ajax({
-			url:"/wechat/shop/address/only",
-			data:{"id":id},
-			type:"POST",
-			success:function(ret){
-				init(0,0);
-			}
-		});
-	}
-}
-
 </script>
 </html>

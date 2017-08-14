@@ -51,11 +51,11 @@
               </a>
             </li>
             <li>
-            	<a href="money_tixian.html">
+            	<a href="/wechat/shop/deposit/savePage">
                 	<div class="u_nav_icon tixian"></div>
                     <div class="u_nav_name">金额提现</div>
                     <div class="nt_icon"></div>
-                    <div class="u_money"><i>0.00元</i></div>
+                    <div class="u_money"><i></i></div>
                 </a>
             </li>
             <li>

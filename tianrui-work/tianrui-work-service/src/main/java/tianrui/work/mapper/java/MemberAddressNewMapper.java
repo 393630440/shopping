@@ -2,7 +2,6 @@ package tianrui.work.mapper.java;
 
 import java.util.List;
 
-import tianrui.work.bean.MemberAddress;
 import tianrui.work.bean.MemberAddressNew;
 
 public interface MemberAddressNewMapper {
