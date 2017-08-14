@@ -35,7 +35,7 @@
     <div class="user_nav_list w">
     	<ul>
             <li>
-            	<a href="money.html">
+            	<a href="/wechat/shop/deposit/page">
                 	<div class="u_nav_icon money"></div>
                     <div class="u_nav_name">我的现金</div>
                      <div class="nt_icon"></div>
