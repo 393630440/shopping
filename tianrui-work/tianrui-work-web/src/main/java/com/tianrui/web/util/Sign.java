@@ -47,7 +47,8 @@ public class Sign {
      * @CreateData : 2016-3-21
      */
     public static BusinesPay BusinesPaySign(BusinesPay bus) throws Exception{
-    	String appid ="mch_appid="+Constant.WEIXIN_APPID;//公众号id
+//    	String appid ="mch_appid="+Constant.WEIXIN_APPID;//公众号id
+    	String appid ="mch_appid=wx8c38f7256d081b10";//公众号id
 		String amount ="amount=" + bus.getAmount();//付款金额(分)
 		String check_name ="check_name=" + bus.getCheck_name();//校验姓名，NO_CHECK：不校验真实姓名；FORCE_CHECK：强校验真实姓名OPTION_CHECK：针对已实名认证的用户才校验真实姓名
 		String desc ="desc=" + bus.getDesc();//描述
@@ -56,7 +57,8 @@ public class Sign {
 		String openid = "openid=" + bus.getOpenid();//用户唯一标识
 		String partner_trade_no = "partner_trade_no=" + bus.getPartner_trade_no();//商户订单号，需保持唯一性
 		String ip = "spbill_create_ip=" + bus.getSpbill_create_ip();//调用接口的机器Ip地址
-		String key="key="+Constant.WEIXIN_SIGN_KEY;
+//		String key="key="+Constant.WEIXIN_SIGN_KEY;
+		String key="key=6480e17b1b7a2ca96772d9a01c7be122";
 		
 		String[] arr = new String[]{appid,amount,check_name,desc,mchid,nonce_str,openid,partner_trade_no,ip};
 		Arrays.sort(arr);

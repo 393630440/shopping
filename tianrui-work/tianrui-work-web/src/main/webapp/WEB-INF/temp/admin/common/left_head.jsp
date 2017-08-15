@@ -25,7 +25,7 @@
       <ul>
         <li><a href="/admin/shop/member/page">会员列表</a></li>
         <li><a href="/admin/shop/member/saveHbaoPage">宏包派发</a></li>
-        <li><a>订单打印</a></li>
+        <li><a href="/admin/shop/deposit/page">提现管理</a></li>
         <li>添加订单</li>
         <li>发货单列表</li>
         <li>换货单列表</li>

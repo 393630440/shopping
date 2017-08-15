@@ -30,13 +30,13 @@ import tianrui.work.bean.WeiXinPayXml;
 public class PayTest {
 
 	public static void main(String[] args) throws Exception {
-		getprepay_id("200","og3vKwnK20cgqE8GEWDrRpCnly7A");
+		getprepay_id("2","o-OJTv_ftDalms42QPVn38jZ30L8");
 	}
 	 
 	public static  Map getprepay_id(String money,String openid)  throws Exception {
 		//设置请求参数
 		BusinesPay bus = new BusinesPay();
-		bus.setMch_appid("wx9841030479d77c4c");//公众号id
+		bus.setMch_appid("wx8c38f7256d081b10");//公众号id
 		float mon = Float.parseFloat(money);
 		mon = mon*100;
 		String ss = String.valueOf(mon);
@@ -44,7 +44,7 @@ public class PayTest {
 //		bus.setAmount("200");//付款金额(分)
 		bus.setCheck_name("NO_CHECK");//校验姓名，NO_CHECK：不校验真实姓名；FORCE_CHECK：强校验真实姓名OPTION_CHECK：针对已实名认证的用户才校验真实姓名
 		bus.setDesc("ceshi");//描述
-		bus.setMchid("1295011501");//商户id
+		bus.setMchid("1487100762");//商户id
 		bus.setNonce_str(Sign.nonce_str().substring(0,30));//随记字符串
 		bus.setOpenid(openid);//用户唯一标识
 //		bus.setOpenid("og3vKwnK20cgqE8GEWDrRpCnly7A");//用户唯一标识
@@ -73,20 +73,21 @@ public class PayTest {
     	File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
     	String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/";  
         
-        String  xmlFile = SERVLET_CONTEXT_PATH + "/cert/apiclient_cert.p12";
-        System.out.println(xmlFile);
+//        String  xmlFile = SERVLET_CONTEXT_PATH + "/cert/apiclient_cert.p12";
+    	 String  xmlFile = "F:/shopgit/shopping/tianrui-work/tianrui-work-web/src/main/webapp/cert/apiclient_cert.p12";
+    	System.out.println(xmlFile);
 		
         KeyStore keyStore  = KeyStore.getInstance("PKCS12");
         FileInputStream instream = new FileInputStream(new File(xmlFile));
         try {
-            keyStore.load(instream, "1295011501".toCharArray());//商户密码
+            keyStore.load(instream, "1487100762".toCharArray());//商户密码
         } finally {
             instream.close();
         }
 
         // Trust own CA and all self-signed certs
         SSLContext sslcontext = SSLContexts.custom()
-                .loadKeyMaterial(keyStore, "1295011501".toCharArray())
+                .loadKeyMaterial(keyStore, "1487100762".toCharArray())
                 .build();
         // Allow TLSv1 protocol only
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(

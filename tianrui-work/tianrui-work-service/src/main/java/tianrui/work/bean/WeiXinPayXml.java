@@ -10,13 +10,13 @@ public class WeiXinPayXml {
 		StringBuffer str = new StringBuffer();
 		str.append("<xml><mch_appid>");
 		str.append("<![CDATA[");
-		str.append(pay.getMch_appid());
+		str.append("wx8c38f7256d081b10");
 		str.append("]]>");
 		str.append("</mch_appid>");
 		
 		str.append("<mchid>");
 		str.append("<![CDATA[");
-		str.append(pay.getMchid());
+		str.append("1487100762");
 		str.append("]]>");
 		str.append("</mchid>");
 		
