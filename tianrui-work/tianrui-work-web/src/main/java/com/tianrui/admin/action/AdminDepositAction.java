@@ -13,6 +13,7 @@ import com.tianrui.web.action.session.SessionManage;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.api.IWithdrawalService;
 import tianrui.work.bean.MemberInfo;
+import tianrui.work.bean.Withdrawal;
 import tianrui.work.req.WithdrawalFindReq;
 import tianrui.work.req.WithdrawalReq;
 import tianrui.work.resp.WithdrawalResp;
@@ -39,6 +40,25 @@ public class AdminDepositAction {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/admin/deposit/page");
 		return view;
+	}
+	@RequestMapping("auditPage")
+	public ModelAndView auditPage(String id) throws Exception{
+		ModelAndView view = new ModelAndView();
+		Result rs = withdrawalService.findId(id);
+		Withdrawal draw = (Withdrawal) rs.getData();
+		MemberInfoResp resp = memberInfoService.selectByOpenid(draw.getMemberId());
+		view.setViewName("/admin/deposit/audit");
+		view.addObject("draw", draw);
+		view.addObject("info", resp);
+		return view;
+	}
+	
+	@RequestMapping("audit")
+	@ResponseBody
+	public Result audit(String id) throws Exception{
+		Result rs = Result.getSuccessful();
+		rs = withdrawalService.audit(id);
+		return rs;
 	}
 	
 	@RequestMapping("select")

@@ -73,8 +73,8 @@ public class PayTest {
     	File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
     	String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/";  
         
-//        String  xmlFile = SERVLET_CONTEXT_PATH + "/cert/apiclient_cert.p12";
-    	 String  xmlFile = "F:/shopgit/shopping/tianrui-work/tianrui-work-web/src/main/webapp/cert/apiclient_cert.p12";
+//       String  xmlFile = SERVLET_CONTEXT_PATH + "/cert/apiclient_cert.p12";
+    	 String  xmlFile = "F:/new/shopping/tianrui-work/tianrui-work-web/src/main/webapp/cert/apiclient_cert.p12";
     	System.out.println(xmlFile);
 		
         KeyStore keyStore  = KeyStore.getInstance("PKCS12");

@@ -34,56 +34,49 @@
 			<ul>
 			</ul>
 		</div>
-		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
 		      <ul class="am-icon-flag on"> 提现管理</ul>
 		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">提现管理</a></dl>
 		    </div>
-			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
-			  <ul>
-			   	<li>
-			      <div class="am-btn-group am-btn-group-xs">
-			        <select id="deposit_status" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-			          <option value="">提现状态</option>
-			          <option value="0">提现中</option>
-			          <option value="1">提现成功</option>
-			        </select>
-			      </div>
-			    </li>
-			   	<li><input type="text" id="wechatName" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="微信名称" /></li>
-			    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
-			  </ul>
-			</div>
-		    <div class="am-form am-g">
-		          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
-		            <thead>
-		              <tr class="am-success">
-		                <th class="table-title">序号</th>
-		               	<th class="table-type">微信唯一标识</th>
-		               	<th class="table-type">微信名称</th>
-		               	<th class="table-type">提现金额</th>
-		               	<th class="table-type">提现状态</th>
-		               	<th class="table-type">申请时间</th>
-		               	<th class="table-type">审批人</th>
-		               	<th class="table-type">审批时间</th>
-		                <th width="163px" class="table-set">操作</th>
-		              </tr>
-		            </thead>
-		            <tbody id="innerHml">
-		            
-		            </tbody>
-		          </table>
-		         <!-- page begin-->
-				  <jsp:include page="../common/pageTool.jsp" flush="false"></jsp:include>
-				 <!-- page end -->
-		          <hr />
+			<div class="fbneirong">
+		      <form class="am-form" id="form_user">
+		         <div class="am-form-group am-cf">
+		          <div class="zuo">会员头像：</div>
+		          <div class="you">
+		            <img id="member_img" src="${info.wechatImg }" style="width: 60px">
+		          </div>
 		        </div>
+		        <div class="am-form-group am-cf">
+		          <div class="zuo">提现人名称：</div>
+		          <div class="you">
+		             <input type="text" value="${info.wechatName }"  readonly="readonly" class="am-input-sm">
+		            
+		              </div>
+		        </div>
+		        <div class="am-form-group am-cf">
+		          <div class="zuo">账户余额：</div>
+		          <div class="you">
+		          <input type="text" value="${info.balance }"  readonly="readonly" class="am-input-sm">
+		           
+		               </div>
+		        </div>
+		        <div class="am-form-group am-cf">
+		          <div class="zuo">提现金额：</div>
+		          <div class="you">
+		          <input type="text" value="${draw.withdrawalAmount }"  readonly="readonly" class="am-input-sm">
+		            <input type="hidden" id="deop_id" value="${draw.id }">
+		             </div>
+		        </div>
+		        <div class="am-form-group am-cf">
+		          <div class="you" style="margin-left: 11%;">
+		              <button type="button" id="audit_deposit" class="am-btn am-btn-success am-radius">确认</button>
+		          </div>
+		        </div>
+		      </form>
+		    </div>
 		</div>
-		<!-- left-head begin-->
-		<jsp:include page="../common/foods.jsp" flush="false"></jsp:include>
-		<!-- left-head end -->
-		</div>
+	</div>
 </div>
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
@@ -95,6 +88,27 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="/resources/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/deposit/page.js?0815"></script>
+<script type="text/javascript">
+$(function(){
+	$("#member_class").addClass("on");
+});
+
+$("#audit_deposit").on("click",function(){
+	$.ajax({
+		url:"/admin/shop/deposit/audit",
+		data:{id:$("#deop_id").val()},
+		type:"POST",
+		success:function(ret){
+			if(ret.code=="000000"){
+				alert("操作成功");
+				window.location.href="/admin/shop/deposit/page";
+			}else{
+				alert(ret.error);
+			}
+		}
+	});
+});
+
+</script>
 </body>
 </html>

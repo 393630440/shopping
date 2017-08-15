@@ -6,6 +6,8 @@ function init(pageNo){
 	$.ajax({
 		url:"/admin/shop/deposit/select",
 		data:{"pageNo":pageNo,
+			"withdrawalStatus":$("#deposit_status").val(),
+			"memberName":$("#wechatName").val(),
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){
@@ -20,8 +22,10 @@ function innerHTML(data,pageNo){
 	$("#innerHml").empty();
 	for (var a = 0; a < data.length; a++) {
 		var wit = "";
+		var str = "";
 		if(data[a].withdrawalStatus == "0"){
 			wit = "提现中";
+			str = "<button onclick=\"auditDeposit('"+data[a].id+"')\" class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>确认</button>";
 		}else if(data[a].withdrawalStatus == "1"){
 			wit = "提现成功";
 		}else if(data[a].withdrawalStatus == "2"){
@@ -37,32 +41,17 @@ function innerHTML(data,pageNo){
 				"<td>"+(data[a].auditTime==undefined?"":(new Date(data[a].auditTime).format("yyyy-MM-dd hh:mm:ss")))+"</td>" +
 				"<td><div class='am-btn-toolbar'>" +
 					"<div class='am-btn-group am-btn-group-xs'>" +
-						"<button class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>确认</button>" +
-						"<button class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>取消</button>" +
+					str+
 					"</div>" +
 				"</div></td>" +
 				"</tr>";
 		$("#innerHml").append(hml);
 	}
 }
-//禁用数据
-function uptUser(id,pageNo){
-	$.ajax({
-		url:"/admin/shop/user/uptUser",
-		data:{"id":id},
-		type:"POST",
-		success:function(ret){
-			if(ret.code == "000000"){
-				init(pageNo);
-			}else{
-				alert(ret.error);
-			}
-		}
-	});
+
+function auditDeposit(id){
+	window.location.href="/admin/shop/deposit/auditPage?id="+id;
 }
-$("#save_adminUSer").on("click",function(){
-	window.location.href="/admin/shop/user/saveUsre";
-});
 
 var sdas = "<td><div class='am-btn-toolbar'>" +
 			"<div class='am-btn-group am-btn-group-xs'>" +

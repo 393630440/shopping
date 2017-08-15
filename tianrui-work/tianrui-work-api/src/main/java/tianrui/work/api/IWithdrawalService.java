@@ -14,5 +14,7 @@ public interface IWithdrawalService {
 	/** 提现查询*/
 	public PageTool<WithdrawalResp> select(WithdrawalFindReq req)throws Exception;
 	/** 提现审核*/
-	public Result audit()throws Exception;
+	public Result audit(String id)throws Exception;
+	/** 查询提现申请*/
+	public Result findId(String id)throws Exception;
 } 
