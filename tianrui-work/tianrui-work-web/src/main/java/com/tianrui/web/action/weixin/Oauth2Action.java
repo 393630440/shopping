@@ -16,6 +16,7 @@ import com.tianrui.web.util.CommonUtil;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.member.MemberInfoSaveReq;
+import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.Result;
 
 /**
@@ -38,21 +39,24 @@ public class Oauth2Action {
 	
 	@RequestMapping("weChat")
 	public ModelAndView weChat(String code,String state,HttpServletRequest request) throws Exception{
-		//http://183-lisijia.imwork.net/oauth2/conf
-//		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8c38f7256d081b10&redirect_uri=http%3a%2f%2f183-lisijia.imwork.net%2foauth2%2fweChat&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+		Result rs = Result.getSuccessful();
 		ModelAndView view = new ModelAndView();
 		JSONObject obj = CommonUtil.getOpenid(code);
 		String openid= obj.getString("openid");
 		String access_token = obj.getString("access_token");
-		JSONObject objInfo = CommonUtil.getWeChatInfo(openid, access_token);
-		System.out.println(objInfo);
-		MemberInfoSaveReq req = new MemberInfoSaveReq();
-		req.setMemberId(openid);
-		req.setWechatName(objInfo.getString("nickname"));
-		req.setWechatImg(objInfo.getString("headimgurl"));
-		req.setWechat(openid);
-		req.setCity(objInfo.getString("city"));
-		Result rs = memberInfoService.saveMember(req);
+		rs = memberInfoService.selectByOpenid(openid);
+		if(!rs.getCode().equals("000000")){
+			JSONObject objInfo = CommonUtil.getWeChatInfo(openid, access_token);
+			System.out.println(objInfo);
+			MemberInfoSaveReq req = new MemberInfoSaveReq();
+			req.setMemberId(openid);
+			req.setWechatName(objInfo.getString("nickname"));
+			req.setWechatImg(objInfo.getString("headimgurl"));
+			req.setWechat(openid);
+			req.setCity(objInfo.getString("city"));
+			rs = memberInfoService.saveMember(req);
+		}
+		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
 		switch (state) {
 		case "member":
 			view.setViewName("");
@@ -64,8 +68,6 @@ public class Oauth2Action {
 			view.setViewName("/shop/member/memberInfo");
 			break;
 		}
-		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
-
 		return view;
 	}
 	

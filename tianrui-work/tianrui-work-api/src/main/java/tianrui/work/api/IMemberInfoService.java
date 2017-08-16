@@ -14,7 +14,7 @@ public interface IMemberInfoService {
 
 	/** openid判断用户是否存在
 	 * @throws Exception */
-	public MemberInfoResp selectByOpenid(String id) throws Exception;
+	public Result selectByOpenid(String id) throws Exception;
 	/** 查询用户*/
 	public PageTool<MemberInfoResp> select(MemberInfoFindReq req)throws Exception;
 	/** 添加用户*/

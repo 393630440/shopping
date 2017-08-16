@@ -14,7 +14,7 @@ import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
-/** 前台会员帐号管理*/
+/** 鍓嶅彴浼氬憳甯愬彿绠＄悊*/
 @Controller
 @RequestMapping("/admin/shop/member")
 public class MemberInfoAction {
@@ -29,7 +29,7 @@ public class MemberInfoAction {
 		view.setViewName("/admin/member/page");
 		return view;
 	}
-	//派送宏包页面
+	//娲鹃�瀹忓寘椤甸潰
 	@RequestMapping("saveHbaoPage")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView saveHbaoPage() throws Exception{
@@ -55,12 +55,10 @@ public class MemberInfoAction {
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result findMemberID(String id) throws Exception{
-		Result rs = Result.getSuccessful();
-		MemberInfoResp resp = memberInfoService.selectByOpenid(id);
-		rs.setData(resp);
+		Result rs = memberInfoService.selectByOpenid(id);
 		return rs;
 	}
-	/** 派送宏包*/
+	/** 娲鹃�瀹忓寘*/
 	@RequestMapping("saveHbao")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody

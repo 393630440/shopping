@@ -27,9 +27,9 @@ public class HbaoPayAction {
 	@RequestMapping("page")
 	public ModelAndView page(String id) throws Exception{
 		ModelAndView view = new ModelAndView();
-		MemberInfoResp info = memberInfoService.selectByOpenid(id);
+		Result  rs = memberInfoService.selectByOpenid(id);
 		view.setViewName("/shop/pay/HbaoPay");
-		view.addObject("info",info);
+		view.addObject("info",rs.getData());
 		view.addObject("time", DateUtils.format(System.currentTimeMillis()));
 		return view;
 	}

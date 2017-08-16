@@ -46,10 +46,10 @@ public class AdminDepositAction {
 		ModelAndView view = new ModelAndView();
 		Result rs = withdrawalService.findId(id);
 		Withdrawal draw = (Withdrawal) rs.getData();
-		MemberInfoResp resp = memberInfoService.selectByOpenid(draw.getMemberId());
+		Result sd = memberInfoService.selectByOpenid(draw.getMemberId());
 		view.setViewName("/admin/deposit/audit");
 		view.addObject("draw", draw);
-		view.addObject("info", resp);
+		view.addObject("info", sd.getData());
 		return view;
 	}
 	

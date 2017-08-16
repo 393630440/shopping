@@ -11,12 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tianrui.web.action.session.SessionManage;
 
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IWithdrawalService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.WithdrawalFindReq;
 import tianrui.work.req.WithdrawalReq;
+import tianrui.work.req.rechange.RechargeFindReq;
 import tianrui.work.resp.WithdrawalResp;
-import tianrui.work.resp.member.MemberInfoResp;
+import tianrui.work.resp.rechange.MemberRechargeResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 
@@ -33,11 +35,25 @@ public class DepositAction {
 	IWithdrawalService withdrawalService;
 	@Autowired
 	IMemberInfoService memberInfoService;
-	
+	@Autowired
+	IMemberRechangeService memberRechangeService;
+	/**
+	 * 提现
+	 * */
 	@RequestMapping("page")
 	public ModelAndView page(){
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/shop/deposit/page");
+		return view;
+	}
+	/***
+	 * 充值
+	 * @return
+	 */
+	@RequestMapping("cPage")
+	public ModelAndView cPage(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/shop/deposit/cpage");
 		return view;
 	}
 	
@@ -45,9 +61,26 @@ public class DepositAction {
 	public ModelAndView savePage(HttpServletRequest request) throws Exception{
 		ModelAndView view = new ModelAndView();
 		MemberInfo info = SessionManage.getSessionManage(request);
-		MemberInfoResp resp = memberInfoService.selectByOpenid(info.getMemberId());
+		Result rs = memberInfoService.selectByOpenid(info.getMemberId());
 		view.setViewName("/shop/deposit/save");
-		view.addObject("info", resp);
+		view.addObject("info", rs.getData());
+		return view;
+	}
+	
+	@RequestMapping("savecPage")
+	public ModelAndView savecPage(HttpServletRequest request) throws Exception{
+		ModelAndView view = new ModelAndView();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		Result rs = memberInfoService.selectByOpenid(info.getMemberId());
+		view.setViewName("/shop/deposit/csave");
+		view.addObject("info", rs.getData());
+		return view;
+	}
+	@RequestMapping("payPage")
+	public ModelAndView payPage(String money){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/shop/pay/chongPay");
+		view.addObject("money", money);
 		return view;
 	}
 	
@@ -69,6 +102,15 @@ public class DepositAction {
 		req.setMemberId(info.getMemberId());
 		req.setMemberName(info.getWechatName());
 		rs = withdrawalService.save(req);
+		return rs;
+	}
+	
+	@RequestMapping("cselect")
+	@ResponseBody
+	public Result cselect(RechargeFindReq req) throws Exception{
+		Result rs = Result.getSuccessful();
+		PageTool<MemberRechargeResp> page = memberRechangeService.select(req);
+		rs.setData(page);
 		return rs;
 	}
 	

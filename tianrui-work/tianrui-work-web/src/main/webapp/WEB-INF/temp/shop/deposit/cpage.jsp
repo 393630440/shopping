@@ -7,7 +7,7 @@
 <meta name="author" content="m.178hui.com" />
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<title>提现记录</title>
+<title>充值记录</title>
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
 <link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
@@ -32,14 +32,14 @@ $(window).load(function() {
   <!--header 开始-->
   <header>
     <div class="header"> <a class="new-a-back" href="index.html"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
-      <h2>提现记录</h2>
+      <h2>充值记录</h2>
       <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
     </div>
   </header>
   <!--header 结束-->
    <ul class="ui-tab-nav">
-         <li class="current"><a href="/wechat/shop/deposit/page">提现记录</a></li>
-         <li><a href="/wechat/shop/deposit/cPage">充值记录</a></li>
+         <li><a href="/wechat/shop/deposit/page">提现记录</a></li>
+         <li class="current"><a href="/wechat/shop/deposit/cPage">充值记录</a></li>
          <li><a href="">消费记录</a></li>
    	</ul>
    	 <ul class="gwc-ul1" id="innerHml">
@@ -57,7 +57,7 @@ $(function(){
 function init(pageNo,type){
 	$("#scrollPage").val(pageNo);
 	$.ajax({
-		url:"/wechat/shop/deposit/select",
+		url:"/wechat/shop/deposit/cselect",
 		data:{"pageNo":pageNo,
 			"pageSize":10},
 		type:"POST",
@@ -74,21 +74,21 @@ function innerHTML(data,type){
 		$("#innerHml").empty();
 	}
 	for (var a = 0; a < data.length; a++) {
-		var sta = data[a].withdrawalStatus
-		if(data[a].withdrawalStatus == "0"){
-			sta = "提现中";
-		}else if(data[a].withdrawalStatus == "1"){
-			sta = "提现成功";
-		}else if(data[a].withdrawalStatus == "2"){
-			sta = "提现失败";
+		var sta = data[a].rechargeStatus
+		if(data[a].rechargeStatus == "0"){
+			sta = "充值中";
+		}else if(data[a].rechargeStatus == "1"){
+			sta = "充值成功";
+		}else if(data[a].rechargeStatus == "2"){
+			sta = "充值失败";
 		}
 		var hml = "<div class='msg w'>"+
 				"<div class='msg_title'>"+
-				"<h1>余额提现记录</h1>"+
+				"<h1>"+data[a].remark+"</h1>"+
 				"<span>"+(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 				"</div>"+
 				"<div class='msg_content'>"+
-				sta+"<span>"+data[a].withdrawalAmount+"</span></div></div>";
+				sta+"<span>"+data[a].rechargeAmount+"</span></div></div>";
 		$("#innerHml").append(hml);
 	}
 }

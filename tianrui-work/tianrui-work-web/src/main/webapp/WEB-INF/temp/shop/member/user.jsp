@@ -59,11 +59,11 @@
                 </a>
             </li>
             <li>
-            	<a href="huibi_tixian.html">
+            	<a href="/wechat/shop/deposit/savecPage">
                 	<div class="u_nav_icon tixian"></div>
-                    <div class="u_nav_name">惠币兑换</div>
+                    <div class="u_nav_name">账户充值</div>
                     <div class="nt_icon"></div>
-                    <div class="u_money"><i>0个</i></div>
+                    <div class="u_money"><i></i></div>
               </a>
             </li>
             <li>

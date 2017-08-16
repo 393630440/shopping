@@ -32,28 +32,28 @@ import tianrui.work.bean.WeiXinPayXml;
 import tianrui.work.comm.Constant;
 
 /**
- * 涓嬪崟鎺ュ彛
+ * 
  * @author My
  * @CreateDate 2016-3-25
  * @param
  */
 public class Payxiadan {
 	
-	public Map getprepay_id(String nonce_str,String ip,String openid,String waybillid,String money)  throws Exception {
+	public Map getprepay_id(PayxiadanReq req)  throws Exception {
 
 		WeiXinPay pay = new WeiXinPay();
-		pay.setNonce_str(nonce_str);
+		pay.setNonce_str(req.getNonce_str());
 		
-		pay.setOut_trade_no(waybillid);
-		pay.setBody("费用结算");
+		pay.setOut_trade_no(req.getWaybillid());
+		pay.setBody(req.getTotal());
 
-		float sessionmoney = Float.parseFloat(money);
+		float sessionmoney = Float.parseFloat(req.getMoney());
 		sessionmoney = sessionmoney * 100;
 		String sd = String.valueOf(sessionmoney);
 		pay.setTotal_fee(sd.substring(0,sd.length()-2));
-		pay.setOpenid(openid);
-		pay.setSpbill_create_ip(ip);
-		pay.setNotify_url(Constant.WEIXIN_BASE_URL+"/weChat/payNotify/main");
+		pay.setOpenid(req.getOpenid());
+		pay.setSpbill_create_ip(req.getIp());
+		pay.setNotify_url(Constant.WEIXIN_BASE_URL+req.getNotify());
 		
 		WeiXinPay signpay = Sign.paysign(pay);
 		String xml = new WeiXinPayXml().payXml(signpay);
@@ -132,7 +132,7 @@ public class Payxiadan {
                     json.put("appId", way.get("appid"));
                     json.put("tradeType", way.get("trade_type"));
                     json.put("returnCode", way.get("return_code"));
-                    json.put("outTradeNo", waybillid);
+                    json.put("outTradeNo", req.getWaybillid());
 //                    String js = new ChuliService().commonUrl(json.toString(), "/App/addprePay", null);
             	    System.out.println(json);
                 }

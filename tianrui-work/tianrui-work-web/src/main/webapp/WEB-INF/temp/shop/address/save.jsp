@@ -8,16 +8,24 @@
 <title>新增收货地址</title>
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
+<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
+
+
 <script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
 </head>
 
 <body>
-	
-    <div class="sjsc-title1">
-    	<h3 class="sjsc-t1l f-l"><a href="JavaScript:;"><span><</span>新增地址</a></h3>
-        <button class="sjsc-btn1 f-r" id="save_id">保存</button>
-        <div style="clear:both;"></div>
+<div class="mobile">
+	<!--header 开始-->
+  <header>
+	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+      <h2>收货地址</h2>
+      <div class="header_right shaixuan"></div>
     </div>
+  </header>
+  <!--header 结束-->  	
     <form id="address_id">
 	    <ul class="xzdz-ul1">
 	    	<li>
@@ -51,7 +59,10 @@
 	            <div style="clear:both;"></div>            
 	        </li>
 	    </ul>
+	     <button class="drdd-btn" id="save_id">保存</button>
+	    
     </form>
+</div>
 </body>
 
 <script type="text/javascript">

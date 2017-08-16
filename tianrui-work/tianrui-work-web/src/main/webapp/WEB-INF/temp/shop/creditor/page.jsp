@@ -8,16 +8,25 @@
 <title>信息广场</title>
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
+
+<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
+
+
 <script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
 </head>
 
 <body>
-	
-    <div class="sjsc-title2">
-    	<h3 class="sjsc-t2l">信息广场</h3>
-        <a href="javascript:history.back();" class="sjsc-t2r"><</a>
+<div class="mobile">
+	<!--header 开始-->
+  <header>
+	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+      <h2>信息广场</h2>
+      <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
     </div>
-    
+  </header>
+  <!--header 结束-->  
     <ul class="gwc-ul1" id="innerHml">
 
     </ul>
@@ -27,6 +36,7 @@
     </div>
     <input type="hidden" id="scrollPage">
     <input type="hidden" id="scrollTotal">
+</div>
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">

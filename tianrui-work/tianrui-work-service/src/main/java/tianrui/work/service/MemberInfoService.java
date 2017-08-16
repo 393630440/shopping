@@ -35,14 +35,11 @@ public class MemberInfoService implements IMemberInfoService{
 	IMemberGainService memberGainService;
 	
 	@Override
-	public MemberInfoResp selectByOpenid(String id) throws Exception {
-		MemberInfoResp resp = null;
+	public Result selectByOpenid(String id) throws Exception {
+		Result rs = Result.getSuccessful();
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(id);
-		if(info!=null){
-			resp = new MemberInfoResp();
-			PropertyUtils.copyProperties(resp, info);
-		}
-		return resp;
+		rs.setData(info);
+		return rs;
 	}
 
 	@Override

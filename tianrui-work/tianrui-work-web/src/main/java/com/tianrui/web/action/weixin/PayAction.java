@@ -18,6 +18,7 @@ import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.CommonUtil;
 import com.tianrui.web.util.PaySignUtil;
 import com.tianrui.web.util.Payxiadan;
+import com.tianrui.web.util.PayxiadanReq;
 import com.tianrui.web.util.Sign;
 
 import tianrui.work.api.IWeChatPayService;
@@ -34,6 +35,59 @@ public class PayAction {
 
 	@Autowired
 	IWeChatPayService weChatPayService;
+	
+	@RequestMapping("cpage")
+	public ModelAndView cpage(HttpServletRequest request,Double payMoney) throws Exception{
+		ModelAndView view = new ModelAndView();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		
+		String openid = info.getMemberId();
+		System.out.println("openid==" + openid);
+		String nonce_str = PaySignUtil.create_nonce_str().substring(0,31);//随记字符创
+	    String timestamp = PaySignUtil.create_timestamp();//时间戳
+	    //获取jsapi_ticket
+	    String jsapi_ticket = jsapi_ticket();
+		//获取发送者IP；
+		String spbill_create_ip = request.getRemoteAddr();
+		//config签名验证,调用微信jssdk凭证
+		ZhifuSign zhifu = new ZhifuSign();
+		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/cpage?payMoney="+payMoney,nonce_str,timestamp);//网页验证成功
+		zhifu.setAppid(Constant.WEIXIN_APPID);
+		Map<String, String> way = new HashMap<String, String>();
+		PayEntity pay = new PayEntity();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm"); 
+		String payNo = formatter.format(new Date())+timestamp; 
+		//微信支付下单
+		PayxiadanReq xd = new PayxiadanReq();
+		xd.setNonce_str(nonce_str);
+		xd.setIp(spbill_create_ip);
+		xd.setOpenid(openid);
+		xd.setWaybillid(payNo);
+		xd.setMoney(payMoney.toString());
+		xd.setTotal("会员充值");
+		xd.setNotify("/weChat/payNotify/chongZ");
+		way = new Payxiadan().getprepay_id(xd);
+		
+		WeChatPayReq save = new WeChatPayReq();
+		save.setTransid(way.get("prepay_id").toString());
+		save.setTotalfee(payMoney);
+		save.setOpenid(info.getMemberId());
+		save.setOuttradeno(payNo);
+		weChatPayService.save(save);
+		
+		pay.setPackages("prepay_id="+way.get("prepay_id").toString());
+		
+		//微信支付签名
+		pay.setNonceStr(nonce_str);
+		pay.setTimeStamp(timestamp);
+		PayEntity payEntity=Sign.llpaysign(pay);
+		
+		view.addObject("zhifu", zhifu);
+		view.addObject("payEntity", payEntity);
+		view.addObject("payMoney", payMoney);
+		view.setViewName("/shop/pay/weChatPay");
+		return view;
+	}
 	
 	@RequestMapping("page")
 	public ModelAndView page(HttpServletRequest request,HbaoPayReq req) throws Exception{
@@ -57,7 +111,15 @@ public class PayAction {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm"); 
 		String payNo = formatter.format(new Date())+timestamp; 
 		//微信支付下单
-		way = new Payxiadan().getprepay_id(nonce_str,spbill_create_ip,openid,payNo,req.getPayMoney().toString());
+		PayxiadanReq xd = new PayxiadanReq();
+		xd.setNonce_str(nonce_str);
+		xd.setIp(spbill_create_ip);
+		xd.setOpenid(openid);
+		xd.setWaybillid(payNo);
+		xd.setMoney(req.getPayMoney().toString());
+		xd.setTotal("宏包交易");
+		xd.setNotify("/weChat/payNotify/main");
+		way = new Payxiadan().getprepay_id(xd);
 		
 		WeChatPayReq save = new WeChatPayReq();
 		save.setTransid(way.get("prepay_id").toString());
@@ -81,6 +143,7 @@ public class PayAction {
 		view.setViewName("/shop/pay/weChatPay");
 		return view;
 	}
+	
 	
 	public String jsapi_ticket(){
 		// TODO Auto-generated method stub
