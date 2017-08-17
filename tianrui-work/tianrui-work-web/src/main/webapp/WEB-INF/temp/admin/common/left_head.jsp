@@ -20,37 +20,16 @@
         <li><a href="/admin/shop/member/page">会员列表</a></li>
         <li><a href="/admin/shop/member/saveHbaoPage">宏包派发</a></li>
         <li><a href="/admin/shop/deposit/page">提现管理</a></li>
-        <li>添加订单</li>
-        <li>发货单列表</li>
-        <li>换货单列表</li>
       </ul>
-      <h3 class="am-icon-users" id="user_class"><em></em> <a href="/admin/shop/user/index">管理员管理</a></h3>
+      <h3 class="am-icon-users" id="user_class"><em></em> 管理员档案</h3>
       <ul>
-        <li>会员列表 </li>
-        <li>未激活会员</li>
-        <li>团队系谱图</li>
-        <li>会员推荐图</li>
-        <li>推荐列表</li>
+        <li><a href="/admin/shop/user/index">管理员列表</a> </li>
+        <li><a href="/admin/shop/user/saveUsre">添加管理员</a> </li>
+        <li><a href="/admin/shop/user/uptPage">个人中心</a></li>
       </ul>
-      <h3 class="am-icon-volume-up" id="creditor_class"><em></em> <a href="/admin/shop/creditor/index">消息广场</a></h3>
+      <h3 class="am-icon-volume-up" id="creditor_class"><em></em> 消息广场</h3>
       <ul>
-        <li>站内消息 /留言 </li>
-        <li>短信</li>
-        <li>邮件</li>
-        <li>微信</li>
-        <li>客服</li>
-      </ul>
-      <h3 class="am-icon-gears"><em></em> <a href="#">系统设置</a></h3>
-      <ul>
-        <li>数据备份</li>
-        <li>邮件/短信管理</li>
-        <li>上传/下载</li>
-        <li>权限</li>
-        <li>网站设置</li>
-        <li>第三方支付</li>
-        <li>提现 /转账 出入账汇率</li>
-        <li>平台设置</li>
-        <li>声音文件</li>
+        <li><a href="/admin/shop/creditor/index">消息管理 </a></li>
       </ul>
     </div>
     <!-- sideMenu End --> 

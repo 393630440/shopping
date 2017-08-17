@@ -20,5 +20,8 @@ public interface IAdminUserService {
 	public Result userDisable(String id)throws Exception;
 	/** 查询用户列表*/
 	public PageTool<UserFindResp> select(UserFindReq req)throws Exception;
-
+	/** 修改用户*/
+	public Result uptUser(UserSaveReq req)throws Exception;
+	/** 查询用户信息*/
+	public Result findByid(String id)throws Exception;
 }

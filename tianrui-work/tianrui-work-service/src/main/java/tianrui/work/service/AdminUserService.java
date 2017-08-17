@@ -135,5 +135,27 @@ public class AdminUserService implements IAdminUserService{
 		}
 		return rs;
 	}
+	@Override
+	public Result uptUser(UserSaveReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		AdminUser upt = new AdminUser();
+		upt.setId(req.getId());
+		if(StringUtils.isNotBlank(req.getPassword())){
+			upt.setPassword(req.getPassword());
+		}
+		upt.setUsername(req.getUsername());
+		upt.setTelphone(req.getTelphone());
+		adminUserMapper.updateByPrimaryKeySelective(upt);
+		AdminUser user = adminUserMapper.selectByPrimaryKey(req.getId());
+		rs.setData(user);
+		return rs;
+	}
+	@Override
+	public Result findByid(String id) throws Exception {
+		Result rs = Result.getSuccessful();
+		AdminUser user = adminUserMapper.selectByPrimaryKey(id);
+		rs.setData(user);
+		return rs;
+	}
 
 }

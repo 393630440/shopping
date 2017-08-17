@@ -29,6 +29,12 @@ public class MemberAction {
 		view.setViewName("/shop/member/member");
 		return view;
 	}
+	@RequestMapping("memberInfo")
+	public ModelAndView memberInfo(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/shop/member/memberInfo");
+		return view;
+	}
 	
 	@RequestMapping("userPage")
 	public ModelAndView userPage(String openid){

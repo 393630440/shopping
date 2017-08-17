@@ -21,16 +21,18 @@
   <!--header 开始-->
   <header>
     <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
-      <h2>消息设置</h2>
+      <h2>个人中心</h2>
       </div>
   </header>
   <!--header 结束-->
 	<div class="user_top w">
+		<a href="/wechat/shop/member/memberInfo">
     	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
         <div class="user_info">
         	<div class="user_name">${MemberInfo.wechatName }</div>
             <div class="user_dengji">会员等级：普通会员</div>
         </div>
+		</a>
     </div>
     <div class="user_nav_list w">
     	<ul>
@@ -72,14 +74,6 @@
                     <div class="u_nav_name">我的订单</div>
                     <div class="nt_icon"></div>
                     <div class="u_money"><i>0笔</i></div>
-              </a>
-            </li>
-            <li>
-            	<a href="qiandao.html">
-                	<div class="u_nav_icon qiandao"></div>
-                    <div class="u_nav_name">我的签到</div>
-                    <div class="nt_icon"></div>
-                    <div class="u_money"><i>今天您未签到</i></div>
               </a>
             </li>
             <li>

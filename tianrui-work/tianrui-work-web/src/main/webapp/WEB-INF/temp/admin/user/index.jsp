@@ -41,7 +41,7 @@
 		      <ul class="am-icon-flag on"> 管理员管理</ul>
 		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">管理员管理</a></dl>
 		      <dl>
-		        <button type="button" id="save_adminUSer" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 添加会员</button>
+		        <button type="button" id="save_adminUSer" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 添加管理员</button>
 		      </dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
