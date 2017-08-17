@@ -42,10 +42,24 @@
 				<div class="fbneirong">
 					<div class="am-form">
 						<div class="am-form-group am-cf">
+							<div class="zuo">商品类型：</div>
+							<div class="you" style="margin-top: 5px;">
+								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="1"> 大众商品 </label> 
+								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="2"> 宏包商品 </label>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
 							<div class="zuo">分类名称：</div>
 							<div class="you">
 								<input type="text" class="am-input-sm" id="classifyName" name="classifyName" placeholder="请输入分类名称">
 							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">分类图标：</div>
+							<div class="you" id="input_div_showId">
+								<input type="file" id="icon" name="icon" onchange="iconShow(this);">
+							</div>
+							<div class="you" id="icon_div_showId"></div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">备注说明：</div>
@@ -80,5 +94,6 @@
 	<script src="/resources/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
 	<script src="/resources/js/admin/goodsclassify/add.js?0728"></script>
+	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

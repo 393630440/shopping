@@ -5,13 +5,15 @@
 		<id column="classify_id" property="classifyId" jdbcType="VARCHAR" />
 		<result column="classify_name" property="classifyName" jdbcType="VARCHAR" />
 		<result column="classify_status" property="classifyStatus" jdbcType="VARCHAR" />
+		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
 		<result column="parent_id" property="parentId" jdbcType="VARCHAR" />
 		<result column="descr" property="descr" jdbcType="VARCHAR" />
 		<result column="pubdate" property="pubdate" jdbcType="BIGINT" />
+		<result column="icon" property="icon" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		classify_id, classify_name, classify_status, parent_id, descr, pubdate
+		classify_id, classify_name, classify_status, goods_type, parent_id, descr, pubdate, icon
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -20,10 +22,14 @@
 		from goods_classify where classify_id = #{classifyId,jdbcType=VARCHAR}
 	</select>
 
-	<select id="selectList" resultMap="BaseResultMap">
+	<select id="selectList" resultMap="BaseResultMap" parameterType="tianrui.work.bean.GoodsClassify">
 		select
 		<include refid="Base_Column_List" />
-		from goods_classify where classify_status = '1'
+		from goods_classify
+		<where>
+			<if test="classifyStatus != null and classifyStatus != ''">and classify_status = #{classifyStatus,jdbcType=VARCHAR}</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+		</where>
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -36,6 +42,7 @@
 		from goods_classify
 		<where>
 			<if test="classifyName != null and classifyName != ''">and classify_name like "%" #{classifyName,jdbcType=VARCHAR} "%"</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
 		</where>
 		<if test="pageNo != null">
 			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
@@ -46,17 +53,20 @@
 		select count(0) from goods_classify
 		<where>
 			<if test="classifyName != null and classifyName != ''">and classify_name like "%" #{classifyName,jdbcType=VARCHAR} "%"</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
 		</where>
 	</select>
 
 	<insert id="insert" parameterType="tianrui.work.bean.GoodsClassify">
-		insert into goods_classify (classify_id, classify_name, classify_status, parent_id, descr, pubdate)
+		insert into goods_classify (classify_id, classify_name, classify_status, goods_type, parent_id, descr, pubdate, icon)
 		values (#{classifyId,jdbcType=VARCHAR},
 		#{classifyName,jdbcType=VARCHAR},
 		#{classifyStatus,jdbcType=VARCHAR},
+		#{goodsType,jdbcType=VARCHAR},
 		#{parentId,jdbcType=VARCHAR},
 		#{descr,jdbcType=VARCHAR},
-		#{pubdate,jdbcType=BIGINT})
+		#{pubdate,jdbcType=BIGINT},
+		#{icon,jdbcType=VARCHAR})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.GoodsClassify">
@@ -65,17 +75,21 @@
 			<if test="classifyId != null and classifyId != ''">classify_id,</if>
 			<if test="classifyName != null and classifyName != ''">classify_name,</if>
 			<if test="classifyStatus != null and classifyStatus != ''">classify_status,</if>
+			<if test="goodsType != null and goodsType != ''">goods_type,</if>
 			<if test="parentId != null and parentId != ''">parent_id,</if>
 			<if test="descr != null and descr != ''">descr,</if>
 			<if test="pubdate != null and pubdate != ''">pubdate,</if>
+			<if test="icon != null and icon != ''">icon,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="classifyId != null and classifyId != ''">#{classifyId,jdbcType=VARCHAR},</if>
 			<if test="classifyName != null and classifyName != ''">#{classifyName,jdbcType=VARCHAR},</if>
 			<if test="classifyStatus != null and classifyStatus != ''">#{classifyStatus,jdbcType=VARCHAR},</if>
+			<if test="goodsType != null and goodsType != ''">#{goodsType,jdbcType=VARCHAR},</if>
 			<if test="parentId != null and parentId != ''">#{parentId,jdbcType=VARCHAR},</if>
 			<if test="descr != null and descr != ''">#{descr,jdbcType=VARCHAR},</if>
 			<if test="pubdate != null and pubdate != ''">#{pubdate,jdbcType=BIGINT},</if>
+			<if test="icon != null and icon != ''">#{icon,jdbcType=BIGINT},</if>
 		</trim>
 	</insert>
 
@@ -84,8 +98,11 @@
 		<set>
 			<if test="classifyName != null and classifyName != ''">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
 			<if test="classifyStatus != null and classifyStatus != ''">classify_status = #{classifyStatus,jdbcType=VARCHAR},</if>
+			<if test="goodsType != null and goodsType != ''">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
 			<if test="parentId != null and parentId != ''">parent_id = #{parentId,jdbcType=VARCHAR},</if>
 			<if test="descr != null and descr != ''">descr = #{descr,jdbcType=VARCHAR},</if>
+			<if test="pubdate != null and pubdate != ''">pubdate = #{pubdate,jdbcType=VARCHAR},</if>
+			<if test="icon != null and icon != ''">icon = #{icon,jdbcType=VARCHAR},</if>
 		</set>
 		where classify_id = #{classifyId,jdbcType=VARCHAR}
 	</update>
@@ -94,8 +111,11 @@
 		update goods_classify
 		set classify_name = #{classifyName,jdbcType=VARCHAR},
 		classify_status = #{classifyStatus,jdbcType=VARCHAR},
+		goods_type = #{goodsType,jdbcType=VARCHAR},
 		parent_id = #{parentId,jdbcType=VARCHAR},
 		descr = #{descr,jdbcType=VARCHAR}
+		pubdate = #{pubdate,jdbcType=VARCHAR}
+		icon = #{icon,jdbcType=VARCHAR}
 		where classify_id = #{classifyId,jdbcType=VARCHAR}
 	</update>
 

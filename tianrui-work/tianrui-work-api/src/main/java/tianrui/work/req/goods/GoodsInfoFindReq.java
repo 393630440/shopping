@@ -29,6 +29,7 @@ public class GoodsInfoFindReq {
 
 	private Integer pageNo;
 	private Integer pageSize;
+	private String pageSort;
 
 	public Integer getPageNo() {
 		return pageNo;
@@ -44,6 +45,24 @@ public class GoodsInfoFindReq {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getPageSort() {
+		return pageSort;
+	}
+
+	public void setPageSort(String pageSort) {
+		this.pageSort = pageSort;
+	}
+
+	public void setPageSort(String sordName, String sord) {
+		if (sord == null)
+			sord = "desc";
+
+		if (pageSort == null)
+			pageSort = sordName + " " + sord;
+		else
+			pageSort = ", " + sordName + " " + sord;
 	}
 
 	public String getGoodsId() {

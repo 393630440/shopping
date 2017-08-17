@@ -7,9 +7,11 @@ public class GoodsClassifyFindResp {
 	private String classifyId;
 	private String classifyName;
 	private String classifyStatus;
+	private String goodsType; // 商品类型:1-大众商品;2-宏包商品
 	private String parentId;
 	private String descr;
 	private Long pubdate;
+	private String icon;
 
 	public String getClassifyId() {
 		return classifyId;
@@ -35,6 +37,14 @@ public class GoodsClassifyFindResp {
 		this.classifyStatus = classifyStatus;
 	}
 
+	public String getGoodsType() {
+		return goodsType;
+	}
+
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
+	}
+
 	public String getParentId() {
 		return parentId;
 	}
@@ -58,4 +68,13 @@ public class GoodsClassifyFindResp {
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
 	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 }

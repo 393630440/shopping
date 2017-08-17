@@ -84,9 +84,12 @@ public class GoodsClassifyService implements IGoodsClassifyService {
 	}
 
 	@Override
-	public List<GoodsClassifyFindResp> getGoodsClassifyList() throws Exception {
+	public List<GoodsClassifyFindResp> getGoodsClassifyList(GoodsClassifyReq req) throws Exception {
+		GoodsClassify find = new GoodsClassify();
+		PropertyUtils.copyProperties(find, req);
+
 		List<GoodsClassifyFindResp> resp = new ArrayList<GoodsClassifyFindResp>();
-		List<GoodsClassify> list = goodsClassifyMapper.selectList();
+		List<GoodsClassify> list = goodsClassifyMapper.selectList(find);
 		for (GoodsClassify bean : list) {
 			GoodsClassifyFindResp sp = new GoodsClassifyFindResp();
 			PropertyUtils.copyProperties(sp, bean);

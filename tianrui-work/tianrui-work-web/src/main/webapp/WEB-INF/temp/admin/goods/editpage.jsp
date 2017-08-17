@@ -40,6 +40,13 @@
 				<div class="fbneirong">
 					<div class="am-form">
 						<div class="am-form-group am-cf">
+							<div class="zuo">商品类型：</div>
+							<div class="you" style="margin-top: 5px;">
+								<c:if test="${goodsInfo.goodsType == '1'}">大众商品</c:if>
+								<c:if test="${goodsInfo.goodsType == '2'}">宏包商品</c:if>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
 							<div class="zuo">商品名称：</div>
 							<div class="you">
 								<input type="text" class="am-input-sm" id="goodsName" name="goodsName" value="${goodsInfo.goodsName}" placeholder="请输入商品名称">
@@ -64,13 +71,6 @@
 							<div class="you" style="margin-top: 5px;">
 								<c:if test="${goodsInfo.goodsStatus == '1'}">已上架</c:if>
 								<c:if test="${goodsInfo.goodsStatus == '2'}">已下架</c:if>
-							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">商品类型：</div>
-							<div class="you" style="margin-top: 5px;">
-								<c:if test="${goodsInfo.goodsType == '1'}">大众商品</c:if>
-								<c:if test="${goodsInfo.goodsType == '2'}">宏包商品</c:if>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">

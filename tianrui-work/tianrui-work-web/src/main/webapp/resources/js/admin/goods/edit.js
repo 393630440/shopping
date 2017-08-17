@@ -3,10 +3,6 @@ $(function() {
 	imgInit(oldGoodsDetails, 2);
 });
 
-// http://127.0.0.1:8080/getimg?imgPath=goodsInfo/4f91742f79514d7d8d4d71f2969fa490/1501633536800_0.jpg
-// TODO 需要修改成正式的地址
-var url = "http://127.0.0.1:8080/getimg?imgPath=goodsInfo/";
-
 var goodsImgNum = 0;
 var oldGoodsImgMap = {};
 var oldGoodsImgList = [];
@@ -36,7 +32,7 @@ function imgInit(oldDataStr, flag) {
 		}
 
 		var html = "<span id=\"old_img_showId_" + old_img_id;
-		html += "\"><img src=\"" + url + goodsId + "/" + oldDataArr[i];
+		html += "\"><img src=\"/getimg?imgPath=goodsInfo/" + goodsId + "/" + oldDataArr[i];
 		html += "\" style=\"height: 45px; width: 50px;\"/><button type=\"button\" onclick=\"oldImgDelete('";
 		html += old_img_id + "'," + flag;
 		html += ");\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button></span>";

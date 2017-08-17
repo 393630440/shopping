@@ -33,7 +33,7 @@ public class GoodsInfoService implements IGoodsInfoService {
 		Result rs = Result.getSuccessful();
 		GoodsInfo record = new GoodsInfo();
 		PropertyUtils.copyProperties(record, req);
-		goodsInfoMapper.insert(record);
+		goodsInfoMapper.insertSelective(record);
 		return rs;
 	}
 
@@ -70,6 +70,7 @@ public class GoodsInfoService implements IGoodsInfoService {
 		find.setGoodsName(req.getGoodsName());
 		find.setGoodsStatus(req.getGoodsStatus());
 		find.setGoodsType(req.getGoodsType());
+		find.setSifting(req.getSifting());
 
 		List<GoodsInfo> list = goodsInfoMapper.selectByGoodsInfo(find);
 		long a = goodsInfoMapper.selectBycount(find);
@@ -85,6 +86,30 @@ public class GoodsInfoService implements IGoodsInfoService {
 		page.setTotal(a);
 
 		return page;
+	}
+
+	@Override
+	public List<GoodsInfoFindResp> getGoodsInfoList(GoodsInfoFindReq req) throws Exception {
+		GoodsInfo find = new GoodsInfo();
+		if (req.getPageNo() != null) {
+			find.setPageNo(req.getPageSize() * req.getPageNo());
+			find.setPageSize(req.getPageSize());
+		}
+		find.setClassifyId(req.getClassifyId());
+		find.setGoodsStatus(req.getGoodsStatus());
+		find.setGoodsType(req.getGoodsType());
+		find.setSifting(req.getSifting());
+
+		List<GoodsInfo> list = goodsInfoMapper.selectByGoodsInfo(find);
+
+		List<GoodsInfoFindResp> resp = new ArrayList<GoodsInfoFindResp>();
+		for (GoodsInfo bean : list) {
+			GoodsInfoFindResp sp = new GoodsInfoFindResp();
+			PropertyUtils.copyProperties(sp, bean);
+			resp.add(sp);
+		}
+
+		return resp;
 	}
 
 }

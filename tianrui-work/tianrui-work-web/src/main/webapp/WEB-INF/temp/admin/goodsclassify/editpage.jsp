@@ -40,10 +40,22 @@
 				<div class="fbneirong">
 					<div class="am-form">
 						<div class="am-form-group am-cf">
+							<div class="zuo">商品类型：</div>
+							<div class="you" style="margin-top: 5px;">
+								<c:if test="${goodsClassify.goodsType == '1'}">大众商品</c:if>
+								<c:if test="${goodsClassify.goodsType == '2'}">宏包商品</c:if>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
 							<div class="zuo">分类名称：</div>
 							<div class="you">
 								<input type="text" class="am-input-sm" id="classifyName" name="classifyName" value="${goodsClassify.classifyName}" placeholder="请输入商品名称">
 							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">分类图标：</div>
+							<div class="you" id="input_div_showId"></div>
+							<div class="you" id="icon_div_showId"></div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">备注说明：</div>
@@ -66,6 +78,7 @@
 	</div>
 	<script type="text/javascript">
 		var classifyId = "${goodsClassify.classifyId}";
+		var icon = "${goodsClassify.icon}";
 	</script>
 
 	<!--[if lt IE 9]>
@@ -79,5 +92,6 @@
 	<script src="/resources/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
 	<script src="/resources/js/admin/goodsclassify/edit.js?0728"></script>
+	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

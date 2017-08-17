@@ -68,6 +68,7 @@ public class AdminGoodsClassifyAction {
 		req.setClassifyStatus("1");// 商品分类状态
 		req.setPubdate(System.currentTimeMillis());
 		Result rs = goodsClassifyService.addGoodsClassify(req);
+		rs.setData(req);
 		return rs;
 	}
 

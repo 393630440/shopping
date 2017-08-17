@@ -36,11 +36,22 @@
 			</div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on">栏目名称 </ul>
-					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 添加商品 </dl>
+					<ul class="am-icon-flag on">栏目名称</ul>
+					<dl class="am-icon-home" style="float: right;">当前位置： 首页 ><a href="/admin/shop/goods/index">商品列表</a> > 添加商品</dl>
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
+						<div class="am-form-group am-cf">
+							<div class="zuo">商品类型：</div>
+							<div class="you" style="margin-top: 5px;">
+								<label class="am-checkbox-inline">
+									<input type="radio" name="goodsType" value="1" onclick="goodsType(1);" checked="checked"> 大众商品
+								</label>
+								<label class="am-checkbox-inline">
+									<input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 宏包商品
+								</label>
+							</div>
+						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品名称：</div>
 							<div class="you">
@@ -49,24 +60,29 @@
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">分类：</div>
-							<div class="you">
-								<select id="classifyId" name="classifyId" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+							<div class="you" id="goodsType1">
+								<select id="classifyId1" name="classifyId1" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
 									<option value="0">所属分类</option>
 									<c:forEach var="goodsClassify" items="${goodsClassifyList}">
-										<option value="${goodsClassify.classifyId}">${goodsClassify.classifyName}</option>
+										<c:if test="${goodsClassify.goodsType == '1'}">
+											<option value="${goodsClassify.classifyId}">${goodsClassify.classifyName}</option>
+										</c:if>
 									</c:forEach>
 								</select>
-								<c:forEach var="goodsClassify" items="${goodsClassifyList}">
-									<input id="classifyId_${goodsClassify.classifyId}" value="${goodsClassify.classifyName}" hidden="hidden" />
-								</c:forEach>
 							</div>
-						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">商品类型：</div>
-							<div class="you" style="margin-top: 5px;">
-								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="1" onclick="goodsType(1);"> 大众商品 </label> 
-								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 宏包商品 </label>
+							<div class="you" id="goodsType2" hidden="hidden">
+								<select id="classifyId2" name="classifyId3" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+									<option value="0">所属分类</option>
+									<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+										<c:if test="${goodsClassify.goodsType == '2'}">
+											<option value="${goodsClassify.classifyId}">${goodsClassify.classifyName}</option>
+										</c:if>
+									</c:forEach>
+								</select>
 							</div>
+							<c:forEach var="goodsClassify" items="${goodsClassifyList}">
+								<input id="classifyId_${goodsClassify.classifyId}" value="${goodsClassify.classifyName}" hidden="hidden" />
+							</c:forEach>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品价格：</div>

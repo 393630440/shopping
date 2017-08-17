@@ -4,9 +4,13 @@ $(function() {
 
 function goodsType(type) {
 	if (type == 1) { // 1-大众商品,不显示宏包
+		$("#goodsType1").show();
+		$("#goodsType2").hide();
 		$("#redPacket_div").hide();
 		$("#redPacket").val("");
 	} else if (type == 2) { // 2-宏包商品,显示宏包
+		$("#goodsType1").hide();
+		$("#goodsType2").show();
 		$("#redPacket_div").show();
 	}
 }
@@ -106,20 +110,25 @@ function del(list, id) {
 
 function add(buttonType) {
 	var msg = "";
+	var goodsType = $('input:radio[name="goodsType"]:checked').val(); // 商品类型:1-大众商品;2-宏包商品
+	if (goodsType == "" || goodsType == undefined)
+		msg += "商品类型不能为空\n";
+
 	var goodsName = $("#goodsName").val(); // 商品名称
 	if (goodsName == "")
 		msg += "商品名称不能为空\n";
 
-	var classifyId = $("#classifyId").val(); // 分类ID
+	var classifyId = ""; // 分类ID
+	if (goodsType == "1")
+		classifyId = $("#classifyId1").val();
+	else if (goodsType == "2")
+		classifyId = $("#classifyId2").val();
+
 	var classifyName = ""; // 分类名称
 	if (classifyId == "0")
 		msg += "所属分类不能为空\n";
 	else
 		classifyName = $("#classifyId_" + classifyId).val();
-
-	var goodsType = $('input:radio[name="goodsType"]:checked').val(); // 商品类型:1-大众商品;2-宏包商品
-	if (goodsType == "" || goodsType == undefined)
-		msg += "商品类型不能为空\n";
 
 	var goodsPrice = $("#goodsPrice").val(); // 商品价格
 	if (goodsPrice == "")

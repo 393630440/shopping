@@ -7,19 +7,13 @@
 		<li><a href="/admin/shop/goods/index">商品列表</a></li>
 		<li><a href="/admin/shop/goods/addpage">添加新商品</a></li>
 		<li><a href="/admin/shop/goodsclassify/index">商品分类</a></li>
-        <li><a href="">用户评论</a></li>
-        <li><a href="">商品回收站</a></li>
-        <li><a href="">库存管理 </a></li>
+		<li><a href="/admin/shop/ad/index">广告列表</a></li>
+		<li><a href="/admin/shop/ad/addpage">添加新广告</a></li>
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
         <li><a href="/admin/shop/order/index">订单列表</a></li>
         <li><a href="/admin/shop/order/refundlist">退货订单列表</a></li>
-        <li>合并订单</li>
-        <li>订单打印</li>
-        <li>添加订单</li>
-        <li>发货单列表</li>
-        <li>换货单列表</li>
       </ul>
       <h3 class="am-icon-cart-plus" id="member_class"><em></em> 微信会员管理</h3>
       <ul>

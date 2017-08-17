@@ -1,5 +1,7 @@
 package tianrui.work.api;
 
+import java.util.List;
+
 import tianrui.work.req.goods.GoodsInfoFindReq;
 import tianrui.work.req.goods.GoodsInfoReq;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
@@ -25,5 +27,8 @@ public interface IGoodsInfoService {
 
 	/** 列表查询商品信息 */
 	PageTool<GoodsInfoFindResp> queryGoodsInfoByList(GoodsInfoFindReq req) throws Exception;
+
+	/** 查询商品集合信息 */
+	List<GoodsInfoFindResp> getGoodsInfoList(GoodsInfoFindReq req) throws Exception;
 
 }

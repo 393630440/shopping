@@ -7,14 +7,17 @@ public class GoodsInfoFindResp {
 
 	private String goodsId; // 商品ID
 	private String goodsName; // 商品名称
-	private String goodsImg; // 商品图片 图片地址)
+	private String goodsImg; // 商品图片 图片地址
+	private String firstGoodsImg;// 显示第一张的商品图片
 	private String goodsStatus; // 商品状态:1-已上架;2-已下架
 	private String goodsType; // 商品类型:1-大众商品;2-宏包商品
 	private Double goodsPrice; // 商品价格
 	private Integer redPacket; // 宏包
+	private String price;// 显示的价格
 	private String goodsDetails; // 详情
 	private String goodsParam; // 参数
 	private Double expressFee; // 快递费
+	private String expressFeeStr; // 显示的快递费
 	private Integer inventory; // 库存
 	private Integer salesvolume; // 销量
 	private Integer buyNum; // 购买数量
@@ -46,6 +49,20 @@ public class GoodsInfoFindResp {
 
 	public void setGoodsImg(String goodsImg) {
 		this.goodsImg = goodsImg;
+	}
+
+	public String getFirstGoodsImg() {
+		if (goodsImg == null || goodsImg.equals("")) {
+		} else {
+			String[] arr = goodsImg.split("[|]");
+			if (arr.length > 0)
+				firstGoodsImg = arr[0];
+		}
+		return firstGoodsImg;
+	}
+
+	public void setFirstGoodsImg(String firstGoodsImg) {
+		this.firstGoodsImg = firstGoodsImg;
 	}
 
 	public String getGoodsStatus() {
@@ -80,6 +97,23 @@ public class GoodsInfoFindResp {
 		this.redPacket = redPacket;
 	}
 
+	public String getPrice() {
+		if (goodsType == null || goodsType.equals("")) {
+		} else {
+			if (goodsType.equals("1")) {
+				price = "￥" + goodsPrice;
+			} else if (goodsType.equals("2")) {
+				price = "￥" + goodsPrice + " + " + redPacket + "宏包";
+			} else {
+			}
+		}
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
 	public String getGoodsDetails() {
 		return goodsDetails;
 	}
@@ -102,6 +136,18 @@ public class GoodsInfoFindResp {
 
 	public void setExpressFee(Double expressFee) {
 		this.expressFee = expressFee;
+	}
+
+	public String getExpressFeeStr() {
+		if (expressFee == null || expressFee == 0)
+			expressFeeStr = "包邮";
+		else if (expressFee > 0)
+			expressFeeStr = String.valueOf(expressFee) + "元";
+		return expressFeeStr;
+	}
+
+	public void setExpressFeeStr(String expressFeeStr) {
+		this.expressFeeStr = expressFeeStr;
 	}
 
 	public Integer getInventory() {

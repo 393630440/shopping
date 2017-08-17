@@ -12,7 +12,11 @@ a {
             	<a href="#" class="atu1"><img src="/resources/shop/images/sjsc-02.gif"></a>
             	<a href="#" class="atu2"><img src="/resources/shop/images/sjsc-15-1.gif"></a>
             </div>
+            <!-- 
             <a href="#" class="qu-ul1a">首页</a>
+             -->
+            <a href="/wechat/shop/goods/goodshome?goodsType=1" class="qu-ul1a">大众</a>
+            <a href="/wechat/shop/goods/goodshome?goodsType=2" class="qu-ul1a">宏包</a>
         </li>
     	<li class="foods_02">
         	<div class="qu-tu1">

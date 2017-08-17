@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.AdInfoMapper">
+	<resultMap id="BaseResultMap" type="tianrui.work.bean.AdInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="depict" property="depict" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="pubdate" property="pubdate" jdbcType="BIGINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, img, url, depict, status, type, pubdate
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from ad_info where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectList" resultMap="BaseResultMap" parameterType="tianrui.work.bean.AdInfo">
+		select
+		<include refid="Base_Column_List" />
+		from ad_info
+		<where>
+			<if test="depict != null and depict != ''">and depict like "%" #{depict,jdbcType=VARCHAR} "%"</if>
+			<if test="status != null and status != ''">and status = #{status,jdbcType=VARCHAR}</if>
+			<if test="type != null and type != ''">and type = #{type,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+	<select id="selectByAdInfo" resultMap="BaseResultMap" parameterType="tianrui.work.bean.AdInfo">
+		select
+		<include refid="Base_Column_List" />
+		from ad_info
+		<where>
+			<if test="depict != null and depict != ''">and depict like "%" #{depict,jdbcType=VARCHAR} "%"</if>
+			<if test="status != null and status != ''">and status = #{status,jdbcType=VARCHAR}</if>
+			<if test="type != null and type != ''">and type = #{type,jdbcType=VARCHAR}</if>
+		</where>
+		<if test="pageNo != null">
+			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.AdInfo">
+		select count(0) from ad_info
+		<where>
+			<if test="depict != null and depict != ''">and depict like "%" #{depict,jdbcType=VARCHAR} "%"</if>
+			<if test="status != null and status != ''">and status = #{status,jdbcType=VARCHAR}</if>
+			<if test="type != null and type != ''">and type = #{type,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ad_info where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="tianrui.work.bean.AdInfo">
+		insert into ad_info (id, img, url, depict, status, type)
+		values (#{id,jdbcType=INTEGER},
+		#{img,jdbcType=VARCHAR},
+		#{url,jdbcType=VARCHAR},
+		#{depict,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{pubdate,jdbcType=BIGINT})
+	</insert>
+
+	<insert id="insertSelective" parameterType="tianrui.work.bean.AdInfo">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into ad_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">id,</if>
+			<if test="img != null and img != ''">img,</if>
+			<if test="url != null and url != ''">url,</if>
+			<if test="depict != null and depict != ''">depict,</if>
+			<if test="status != null and status != ''">status,</if>
+			<if test="type != null and type != ''">type,</if>
+			<if test="pubdate != null and pubdate != ''">pubdate,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">#{id,jdbcType=INTEGER},</if>
+			<if test="img != null and img != ''">#{img,jdbcType=VARCHAR},</if>
+			<if test="url != null and url != ''">#{url,jdbcType=VARCHAR},</if>
+			<if test="depict != null and depict != ''">#{depict,jdbcType=VARCHAR},</if>
+			<if test="status != null and status != ''">#{status,jdbcType=VARCHAR},</if>
+			<if test="type != null and type != ''">#{type,jdbcType=VARCHAR},</if>
+			<if test="pubdate != null and pubdate != ''">#{pubdate,jdbcType=BIGINT},</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.AdInfo">
+		update ad_info
+		<set>
+			<if test="img != null and img != ''">img = #{img,jdbcType=VARCHAR},</if>
+			<if test="url != null and url != ''">url = #{url,jdbcType=VARCHAR},</if>
+			<if test="depict != null and depict != ''">depict = #{depict,jdbcType=VARCHAR},</if>
+			<if test="status != null and status != ''">status = #{status,jdbcType=VARCHAR},</if>
+			<if test="type != null and type != ''">type = #{type,jdbcType=VARCHAR},</if>
+			<if test="pubdate != null and pubdate != ''">pubdate = #{pubdate,jdbcType=BIGINT},</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.AdInfo">
+		update ad_info
+		set img = #{img,jdbcType=VARCHAR},
+		url = #{url,jdbcType=VARCHAR},
+		depict = #{depict,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		pubdate = #{pubdate,jdbcType=BIGINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

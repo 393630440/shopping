@@ -29,6 +29,6 @@ public interface IGoodsClassifyService {
 	PageTool<GoodsClassifyFindResp> queryGoodsClassifyByList(GoodsClassifyFindReq req) throws Exception;
 
 	/** 查询商品分类集合信息 */
-	List<GoodsClassifyFindResp> getGoodsClassifyList() throws Exception;
+	List<GoodsClassifyFindResp> getGoodsClassifyList(GoodsClassifyReq req) throws Exception;
 
 }

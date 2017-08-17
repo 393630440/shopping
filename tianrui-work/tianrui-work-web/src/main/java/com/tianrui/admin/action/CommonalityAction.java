@@ -17,7 +17,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tianrui.web.util.FileUtils;
 
+import tianrui.work.api.IAdInfoService;
+import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.api.IGoodsInfoService;
+import tianrui.work.req.ad.AdInfoReq;
+import tianrui.work.req.goods.GoodsClassifyReq;
 import tianrui.work.req.goods.GoodsInfoReq;
 
 @Controller
@@ -26,6 +30,12 @@ public class CommonalityAction {
 	@Autowired
 	IGoodsInfoService goodsInfoService;
 
+	@Autowired
+	IAdInfoService adInfoService;
+
+	@Autowired
+	IGoodsClassifyService goodsClassifyService;
+
 	/** 添加图片 */
 	@RequestMapping("/addimg")
 	@ResponseBody
@@ -33,7 +43,7 @@ public class CommonalityAction {
 		StringBuilder sb = new StringBuilder();
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		String type = multipartRequest.getParameter("type");// 图片类型：1-商品图片(新增),2-商品图片(修改)
+		String type = multipartRequest.getParameter("type");// 图片类型：1-商品图片(新增),2-商品图片(修改),3-广告图片,4-分类图标
 		String id = multipartRequest.getParameter("id");// 图片路径中的ID：(type==1)-商品ID
 		String mark = multipartRequest.getParameter("mark");// 图片名称标志
 
@@ -43,7 +53,11 @@ public class CommonalityAction {
 			path = "/" + path;
 		// String path = "C:/Users/Administrator/Desktop/test/";
 		if (type.equals("1") || type.equals("2"))
-			path += "goodsinfo/" + id + "/";
+			path += "goodsInfo/" + id + "/";
+		else if (type.equals("3"))
+			path += "adInfo/";
+		else if (type.equals("4"))
+			path += "goodsClassify/" + id + "/";
 		else
 			path += "temp/" + id + "/";
 		File f = new File(path);
@@ -100,6 +114,16 @@ public class CommonalityAction {
 			else if (mark.equals("goodsDetails"))
 				req.setGoodsDetails(sb.toString());
 			goodsInfoService.editGoodsInfo(req);
+		} else if (type.equals("3")) {
+			AdInfoReq req = new AdInfoReq();
+			req.setId(Integer.valueOf(id));
+			req.setImg(sb.toString());
+			adInfoService.editAdInfo(req);
+		} else if (type.equals("4")) {
+			GoodsClassifyReq req = new GoodsClassifyReq();
+			req.setClassifyId(id);
+			req.setIcon(sb.toString());
+			goodsClassifyService.editGoodsClassify(req);
 		}
 	}
 

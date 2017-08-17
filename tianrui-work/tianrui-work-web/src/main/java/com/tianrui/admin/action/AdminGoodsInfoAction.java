@@ -1,5 +1,7 @@
 package com.tianrui.admin.action;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,10 @@ import com.tianrui.web.util.LoggerUtils;
 
 import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.api.IGoodsInfoService;
+import tianrui.work.req.goods.GoodsClassifyReq;
 import tianrui.work.req.goods.GoodsInfoFindReq;
 import tianrui.work.req.goods.GoodsInfoReq;
+import tianrui.work.resp.goods.GoodsClassifyFindResp;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
@@ -35,7 +39,7 @@ public class AdminGoodsInfoAction {
 	public ModelAndView goodsPage() throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/index]");
 		ModelAndView view = new ModelAndView();
-		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList());
+		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList(new GoodsClassifyReq()));
 		view.setViewName("admin/goods/index");
 		return view;
 	}
@@ -58,7 +62,7 @@ public class AdminGoodsInfoAction {
 	public ModelAndView addPage(GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/addpage]");
 		ModelAndView view = new ModelAndView();
-		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList());
+		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList(new GoodsClassifyReq()));
 		view.setViewName("admin/goods/addpage");
 		return view;
 	}
@@ -84,8 +88,15 @@ public class AdminGoodsInfoAction {
 	public ModelAndView editPage(GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/editpage]");
 		ModelAndView view = new ModelAndView();
-		view.addObject("goodsInfo", goodsInfoService.queryGoodsInfoByOne(req.getGoodsId()));
-		view.addObject("goodsClassifyList", goodsClassifyService.getGoodsClassifyList());
+
+		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
+
+		String goodsType = goodsInfo.getGoodsType();
+		GoodsClassifyReq goodsClassifyReq = new GoodsClassifyReq(goodsType);
+		List<GoodsClassifyFindResp> goodsClassifyList = goodsClassifyService.getGoodsClassifyList(goodsClassifyReq);
+
+		view.addObject("goodsInfo", goodsInfo);
+		view.addObject("goodsClassifyList", goodsClassifyList);
 		view.setViewName("admin/goods/editpage");
 		return view;
 	}
