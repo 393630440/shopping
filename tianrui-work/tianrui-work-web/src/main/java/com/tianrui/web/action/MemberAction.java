@@ -33,10 +33,7 @@ public class MemberAction {
 	@RequestMapping("memberInfo")
 	public ModelAndView memberInfo(HttpServletRequest request) throws Exception{
 		ModelAndView view = new ModelAndView();
-		MemberInfo info =SessionManage.getSessionManage(request);
-		Result rs = memberInfoService.selectByOpenid(info.getMemberId());
 		view.setViewName("/shop/member/memberInfo");
-		view.addObject("MemberInfo", rs.getData());
 		return view;
 	}
 	
