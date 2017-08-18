@@ -180,4 +180,20 @@ public class MemberInfoService implements IMemberInfoService{
 		return rs;
 	}
 
+	@Override
+	public Result uptMemberInfo(MemberInfoSaveReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		MemberInfo upt = new MemberInfo();
+		upt.setMemberId(req.getMemberId());
+		upt.setMemberName(req.getMemberName());
+		upt.setBirthTime(req.getBirthTime());
+		upt.setCellphone(req.getCellphone());
+		upt.setRpTradeMark(req.getRpTradeMark());
+		upt.setRpExchangeRatio(req.getRpExchangeRatio());
+		memberInfoMapper.updateByPrimaryKeySelective(upt);
+		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
+		rs.setData(info);
+		return rs;
+	}
+
 }

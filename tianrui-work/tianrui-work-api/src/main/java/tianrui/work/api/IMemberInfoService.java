@@ -19,6 +19,8 @@ public interface IMemberInfoService {
 	public PageTool<MemberInfoResp> select(MemberInfoFindReq req)throws Exception;
 	/** 添加用户*/
 	public Result saveMember(MemberInfoSaveReq req)throws Exception;
+	/** 修改用户信息*/
+	public Result uptMemberInfo(MemberInfoSaveReq req)throws Exception;
 	/** 查询用户消息推送配置
 	 * @throws Exception */
 	public MemberSetResp findMemberSet(String id) throws Exception;

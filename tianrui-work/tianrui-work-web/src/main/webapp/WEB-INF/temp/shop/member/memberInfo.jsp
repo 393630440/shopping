@@ -26,38 +26,43 @@
   <div class="w main">
      <div class="item item-password">
        <input type="text" class="txt-input txt-username" readonly="readonly" value="${MemberInfo.wechatName }">
-       
      </div>
      
      <div class="item item-password">
-       <input type="text" class="txt-input txt-username" placeholder="输入你的姓名">
+       <input type="text" class="txt-input txt-username uptInfo" value="${MemberInfo.memberName }" id="memberName_req" placeholder="输入你的姓名">
      </div>
      
      <div class="item item-password">
-       <input type="text" class="txt-input txt-username" placeholder="输入你的手机号">
+       <input type="text" class="txt-input txt-username uptInfo" value="${MemberInfo.cellphone }" id="cellphone_req" placeholder="输入你的手机号">
      </div>
      
      <div class="item item-password">
-       <input type="date" class="txt-input txt-username" placeholder="输入你的出生日期">
+       <input type="date" class="txt-input txt-username uptInfo" value="${MemberInfo.birthTime }"  id="birthTime_req" placeholder="输入你的出生日期">
      </div>
      
      <div class="item item-password">
        <input type="text" class="txt-input txt-username" readonly="readonly" value="${MemberInfo.city }">
      </div>
-     
+     <input type="hidden" id="memberId_req" value="${MemberInfo.memberId }">
      <div class="item item-password">
-       <select class="txt-input txt-username">
-       	<option>宏包比例</option>
-       	<option>0.8</option>
-       	<option>0.8</option>
-       	<option>0.8</option>
-       	<option>0.8</option>
+       <select id="rpExchangeRatio_req" value="${MemberInfo.rpExchangeRatio }" class="txt-input txt-username uptInfo">
+       	<option value="" >交易比例</option>
+       	<option value="1" <c:if test="${MemberInfo.rpExchangeRatio eq 1}">selected = "selected"</c:if>>1.0</option>
+       	<option value="0.9" <c:if test="${MemberInfo.rpExchangeRatio eq 0.9}">selected = "selected"</c:if>>0.9</option>
+       	<option value="0.8" <c:if test="${MemberInfo.rpExchangeRatio eq 0.8}">selected = "selected"</c:if>>0.8</option>
+       	<option value="0.7" <c:if test="${MemberInfo.rpExchangeRatio eq 0.7}">selected = "selected"</c:if>>0.7</option>
+       	<option value="0.6" <c:if test="${MemberInfo.rpExchangeRatio eq 0.6}">selected = "selected"</c:if>>0.6</option>
+       	<option value="0.5" <c:if test="${MemberInfo.rpExchangeRatio eq 0.5}">selected = "selected"</c:if>>0.5</option>
+       	<option value="0.4" <c:if test="${MemberInfo.rpExchangeRatio eq 0.4}">selected = "selected"</c:if>>0.4</option>
+       	<option value="0.3" <c:if test="${MemberInfo.rpExchangeRatio eq 0.3}">selected = "selected"</c:if>>0.3</option>
        </select>
      </div>
      
      <div class="item item-password">
-       <input type="text" class="txt-input txt-username" readonly="readonly" value="是否开启宏包交易">
-       <b class="tp-btn_PwdTwo btn-on_PwdTwo"></b> 
+       <input type="text" id="rpTradeMark_req" class="txt-input txt-username" readonly="readonly" value="是否开启宏包交易">
+       
+       <b class="tp-btn_PwdTwo <c:if test="${MemberInfo.rpTradeMark eq 0}">btn-off_PwdTwo</c:if>
+       <c:if test="${MemberInfo.rpTradeMark eq 1}">btn-on_PwdTwo</c:if>" typeValue=${MemberInfo.rpTradeMark }></b> 
      </div>
      
      <div style="height: 30px">
@@ -71,82 +76,45 @@
 </html>
 <script type="text/javascript" >
 	$(".tp-btn_PwdTwo").on("click",function(){
-		var type = $(this).attr("setType");
 		var value = $(this).attr("typeValue");
-		if(value == "1"){
+		var par;
+		if(value == 1){
 			$(this).removeClass("btn-on_PwdTwo");
 			$(this).addClass("btn-off_PwdTwo");
 			$(this).attr("typeValue","0");
-			$.ajax({
-				url:"/wechat/shop/member/memberSet",
-				data:parment(type,"0"),
-				type:"POST",
-				success:function(ret){
-					if(ret.code=="000000"){
-						
-					}
-				}
-			});
-		}else if(value == "0"){
+			par = 0;
+		}else{
 			$(this).addClass("btn-on_PwdTwo");
 			$(this).removeClass("btn-off_PwdTwo");
 			$(this).attr("typeValue","1");
-			$.ajax({
-				url:"/wechat/shop/member/memberSet",
-				data:parment(type,"1"),
-				type:"POST",
-				success:function(ret){
-					if(ret.code=="000000"){
-						
-					}
-				}
-			});
+			par = 1;
 		}
+		$.ajax({
+			url:"/wechat/shop/member/uptMemberInfo",
+			data:{"memberId":$("#memberId_req").val(),
+				"rpTradeMark":par
+				},
+			type:"POST",
+			success:function(ret){
+				
+			}
+		});
 	});
-	
-	function parment(type,value){
-		switch (type) {
-		case "ddtj":
-			return {ddtj:value}
-			break;
-			
-		case "ddqx":
-			return {ddqx:value}
-			break;
-			
-		case "gmcg":
-			return {gmcg:value}
-			break;
-			
-		case "ddfh":
-			return {ddfh:value}
-			break;
-			
-		case "tksq":
-			return {tksq:value}
-			break;
-			
-		case "tkjg":
-			return {tkjg:value}
-			break;
-			
-		case "czcg":
-			return {czcg:value}
-			break;
-			
-		case "txsq":
-			return {txsq:value}
-			break;
-			
-		case "txcg":
-			return {txcg:value}
-			break;
-			
-		case "txsb":
-			return {txsb:value}
-			break;
-		default:
-			break;
-		}
-	}
+
+	$(".uptInfo").on("change",function(){
+		$.ajax({
+			url:"/wechat/shop/member/uptMemberInfo",
+			data:{"memberId":$("#memberId_req").val(),
+				"memberName":$("#memberName_req").val(),
+				"cellphone":$("#cellphone_req").val(),
+				"birthTime":$("#birthTime_req").val(),
+				//"rpTradeMark":$("#").val(),
+				"rpExchangeRatio":$("#rpExchangeRatio_req").val()
+				},
+			type:"POST",
+			success:function(ret){
+				
+			}
+		});
+	});
 </script> 

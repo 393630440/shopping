@@ -12,6 +12,7 @@ import com.tianrui.web.action.session.SessionManage;
 
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
+import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.req.member.MemberSetUptReq;
 import tianrui.work.resp.member.MemberSetResp;
 import tianrui.work.vo.Result;
@@ -30,9 +31,12 @@ public class MemberAction {
 		return view;
 	}
 	@RequestMapping("memberInfo")
-	public ModelAndView memberInfo(){
+	public ModelAndView memberInfo(HttpServletRequest request) throws Exception{
 		ModelAndView view = new ModelAndView();
+		MemberInfo info =SessionManage.getSessionManage(request);
+		Result rs = memberInfoService.selectByOpenid(info.getMemberId());
 		view.setViewName("/shop/member/memberInfo");
+		view.addObject("MemberInfo", rs.getData());
 		return view;
 	}
 	
@@ -60,6 +64,14 @@ public class MemberAction {
 		MemberInfo info = SessionManage.getSessionManage(request);
 		req.setMemberId(info.getMemberId());
 		rs = memberInfoService.uptMemberSet(req);
+		return rs;
+	}
+	
+	@RequestMapping("uptMemberInfo")
+	@ResponseBody
+	public Result uptMemberInfo(MemberInfoSaveReq req,HttpServletRequest request) throws Exception{
+		Result rs = memberInfoService.uptMemberInfo(req);
+		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
 		return rs;
 	}
 	

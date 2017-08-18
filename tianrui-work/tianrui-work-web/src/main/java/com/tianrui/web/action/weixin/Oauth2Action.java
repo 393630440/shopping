@@ -65,7 +65,7 @@ public class Oauth2Action {
 			break;
 
 		default:
-			view.setViewName("/shop/member/memberInfo");
+			view.setViewName("redirect:/wechat/shop/member/memberInfo");
 			break;
 		}
 		return view;

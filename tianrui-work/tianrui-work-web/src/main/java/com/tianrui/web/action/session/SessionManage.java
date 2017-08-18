@@ -12,7 +12,7 @@ public class SessionManage {
 	}
 	
 	public static MemberInfo getSessionManage(HttpServletRequest request){
-		MemberInfo user = null;
+		MemberInfo user = new MemberInfo();
 		user = (MemberInfo) request.getSession().getAttribute("MemberInfo");
 		return user;
 	}
