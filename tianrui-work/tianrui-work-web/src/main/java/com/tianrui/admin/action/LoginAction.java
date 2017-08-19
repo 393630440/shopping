@@ -1,5 +1,7 @@
 package com.tianrui.admin.action;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,22 @@ public class LoginAction {
 	public ModelAndView loginPage(){
 		ModelAndView view = new ModelAndView();
 		view.setViewName("admin/login/login");
+		
+		ClassLoader classLoader = Thread.currentThread()  
+                .getContextClassLoader();  
+       
+    	if (classLoader == null) {  
+            classLoader = ClassLoader.getSystemClassLoader();  
+        }  
+		java.net.URL urls = classLoader.getResource("");  
+    	String ROOT_CLASS_PATH = urls.getPath() + "/";  
+        File rootFile = new File(ROOT_CLASS_PATH);  
+    	String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+    	File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+    	String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+    	
+    	System.out.println(SERVLET_CONTEXT_PATH+"resources\\file");
+		
 		return view;
 	}
 	/** 后台登录

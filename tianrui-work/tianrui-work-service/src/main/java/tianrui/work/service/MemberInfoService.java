@@ -38,7 +38,11 @@ public class MemberInfoService implements IMemberInfoService{
 	public Result selectByOpenid(String id) throws Exception {
 		Result rs = Result.getSuccessful();
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(id);
-		rs.setData(info);
+		if(info!=null){
+			rs.setData(info);
+		}else{
+			rs.setCode("12");
+		}
 		return rs;
 	}
 
