@@ -36,8 +36,8 @@
 			</div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on">栏目名称</ul>
-					<dl class="am-icon-home" style="float: right;">当前位置： 首页 ><a href="/admin/shop/goods/index">商品列表</a> > 添加商品</dl>
+					<ul class="am-icon-flag on"> 添加商品 </ul>
+					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 添加商品 </dl>
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
@@ -119,7 +119,7 @@
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品参数：</div>
 							<div class="you">
-								<textarea class="" rows="2" id="goodsParam" name="goodsDetails"></textarea>
+								<textarea class="" rows="2" id="goodsParam" name="goodsDetails" placeholder="规格名称1:规格数据1|规格名称2:规格数据2|……"></textarea>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -137,13 +137,13 @@
 						<div class="am-form-group am-cf">
 							<div class="zuo">筛选条件：</div>
 							<div class="you" style="margin-top: 5px;">
-								<input type="radio" name="sifting" value="0" hidden="hidden" checked="checked" /> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="1" /> 推荐商品
-								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="2" /> 新品上市
-								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="3" /> 热卖商品
-								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="4" /> 促销商品
-								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="5" /> 卖家包邮
-								</label> <label class="am-checkbox-inline"> <input type="radio" name="sifting" value="6" /> 限时抢购
-								</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="0" checked="checked" /> 普通商品</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="1" /> 推荐商品</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="2" /> 新品上市</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="3" /> 热卖商品</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="4" /> 促销商品</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="5" /> 卖家包邮</label>
+								<label class="am-checkbox-inline"> <input type="radio" name="sifting" value="6" /> 限时抢购</label>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">

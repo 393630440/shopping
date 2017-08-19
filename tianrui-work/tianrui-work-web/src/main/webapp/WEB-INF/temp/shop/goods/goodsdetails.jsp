@@ -84,7 +84,7 @@
 								</div>
 							</div>
 							<div class="bl_view_time">
-								<a href="javascript:void(0);" onclick="addGoods();" class="if3-aa f-l a_addgoods-zx">
+								<a href="javascript:void(0);" onclick="addGoods();" class="if3-aa f-l a_addgoods-zx" title="加入购物车">
 									<img src="/resources/shop/images/sjsc-17-2.png">
 								</a>
 							</div>
@@ -108,7 +108,6 @@
 							<div class="bl_view_price">${goodsParam.key}</div>
 							<div class="bl_view_oprice-zx">${goodsParam.value}</div>
 						</div>
-						<hr />
 					</c:forEach>
 				</div>
 				<!--参数 结束-->

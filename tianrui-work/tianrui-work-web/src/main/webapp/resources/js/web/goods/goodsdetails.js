@@ -8,7 +8,6 @@ function addGoods() {
 		alert("请选择商品数量");
 		return;
 	}
-	alert(goodsNum);
 	if (goodsNum > inventory) {
 		alert("库存有限，请重新选择商品数量。");
 		return;

@@ -36,8 +36,8 @@
 			</div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on">订单列表</ul>
-					<dl class="am-icon-home" style="float: right;">当前位置： 首页 > 订单列表</dl>
+					<ul class="am-icon-flag on"> 订单列表 </ul>
+					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > 订单列表 </dl>
 				</div>
 				<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 					<ul>

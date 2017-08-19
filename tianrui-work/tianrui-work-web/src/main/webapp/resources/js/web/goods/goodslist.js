@@ -17,6 +17,7 @@ function query() {
 			data : {
 				"pageNo" : pageNo,
 				"pageSize" : pageSize,
+				"pageSort" : pageSort,
 				"goodsName" : goodsName
 			},
 			success : function(ret) {
@@ -42,6 +43,7 @@ function toLoad() {
 			"classifyId" : classifyId,
 			"goodsType" : goodsType,
 			"sifting" : sifting,
+			"pageSort" : pageSort,
 			"goodsName" : goodsName
 		},
 		success : function(ret) {
@@ -66,8 +68,10 @@ function innerHTML(data) {
 			html += "<a href=\"/wechat/shop/goods/goodsdetails?goodsId=" + data[a].goodsId + "\">" + data[a].goodsName + "</a>";
 			html += "</h3>";
 			html += "<dl class=\"ssjg-dl1\">";
-			html += "<dt class=\"ssjg-p1\">";
-			html += "<span>" + data[a].price + "</span>";
+			html += "<dt>";
+			html += "<span style=\"color: #DB3751; margin-left: 0px;\">" + data[a].price + "</span>";
+			html += "<br />";
+			html += "<span style=\"color: #7F7F7F; font-size: 12px; margin-left: 0px;\">销售量：" + data[a].salesvolume + "</span>";
 			html += "</dt>";
 			html += "<dd>";
 			html += "<a href=\"javascript:void(0);\" onclick=\"addGoods('" + data[a].goodsId + "')\">";

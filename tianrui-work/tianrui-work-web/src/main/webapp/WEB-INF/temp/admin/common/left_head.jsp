@@ -7,6 +7,7 @@
 		<li><a href="/admin/shop/goods/index">商品列表</a></li>
 		<li><a href="/admin/shop/goods/addpage">添加新商品</a></li>
 		<li><a href="/admin/shop/goodsclassify/index">商品分类</a></li>
+		<li><a href="/admin/shop/goodsclassify/addpage">添加新分类</a></li>
 		<li><a href="/admin/shop/ad/index">广告列表</a></li>
 		<li><a href="/admin/shop/ad/addpage">添加新广告</a></li>
       </ul>

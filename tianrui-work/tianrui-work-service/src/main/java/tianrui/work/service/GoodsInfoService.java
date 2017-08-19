@@ -95,6 +95,9 @@ public class GoodsInfoService implements IGoodsInfoService {
 			find.setPageNo(req.getPageSize() * req.getPageNo());
 			find.setPageSize(req.getPageSize());
 		}
+		if (req.getPageSort() != null)
+			find.setPageSort(req.getPageSort());
+
 		find.setClassifyId(req.getClassifyId());
 		find.setGoodsStatus(req.getGoodsStatus());
 		find.setGoodsType(req.getGoodsType());

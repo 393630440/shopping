@@ -34,8 +34,8 @@
 			<div class="daohang"><ul></ul></div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on">栏目名称</ul>
-					<dl class="am-icon-home" style="float: right;">当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 编辑商品</dl>
+					<ul class="am-icon-flag on"> 编辑商品 </ul>
+					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="/admin/shop/goods/index">商品列表</a> > 编辑商品 </dl>
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">

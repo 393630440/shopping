@@ -36,8 +36,8 @@
 			</div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on">编辑广告</ul>
-					<dl class="am-icon-home" style="float: right;">当前位置： 首页 ><a href="/admin/shop/ad/index">广告列表</a> > 编辑广告</dl>
+					<ul class="am-icon-flag on"> 编辑广告 </ul>
+					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="/admin/shop/ad/index">广告列表</a> > 编辑广告 </dl>
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">

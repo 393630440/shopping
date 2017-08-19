@@ -36,7 +36,7 @@
 			</div>
 			<div class="admin-biaogelist">
 				<div class="listbiaoti am-cf">
-					<ul class="am-icon-flag on"> 栏目名称 </ul>
+					<ul class="am-icon-flag on"> 添加分类 </ul>
 					<dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="/admin/shop/goodsclassify/index">分类列表</a> > 添加分类 </dl>
 				</div>
 				<div class="fbneirong">

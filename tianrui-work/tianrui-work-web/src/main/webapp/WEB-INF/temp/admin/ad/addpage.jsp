@@ -64,7 +64,7 @@
 						<div class="am-form-group am-cf">
 							<div class="zuo">广告链接：</div>
 							<div class="you">
-								<input type="text" class="am-input-sm" id="url" name="url" placeholder="请输入广告链接">
+								<input type="text" class="am-input-sm" id="url" name="url" value="/wechat/shop/goods/goodsdetails?goodsId=" placeholder="请输入广告链接">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">

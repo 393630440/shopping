@@ -68,6 +68,9 @@ public class GoodsInfo {
 	}
 
 	public void setPageSort(String sordName, String sord) {
+		if (sordName == null)
+			return;
+
 		if (sord == null)
 			sord = "desc";
 

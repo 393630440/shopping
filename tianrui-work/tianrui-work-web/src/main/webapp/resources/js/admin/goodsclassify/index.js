@@ -38,7 +38,7 @@ function innerHTML(date, pageNo) {
 		html += "<td>" + pubdate + "</td>";
 		html += "<td><div class='am-btn-toolbar'><div class='am-btn-group am-btn-group-xs'>";
 		html += "<button onclick=\"editpage('" + date[a].classifyId;
-		html += "')\" class='am-btn am-btn-default am-btn-xs am-text-danger am-round'><span class='am-icon-pencil-square-o'></span></button>";
+		html += "')\" class='am-btn am-btn-default am-btn-xs am-text-danger am-round'><span class='am-icon-pencil-square-o'></span>编辑</button>";
 		html += "</div></div></td>";
 		html += "</tr>";
 		$("#innerHml").append(html);

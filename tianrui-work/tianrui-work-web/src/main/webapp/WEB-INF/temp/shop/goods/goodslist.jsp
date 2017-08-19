@@ -82,9 +82,32 @@
 
 		<div class="w-zx">
 			<ul class="ui-tab-nav">
-				<li id="ui-tab-nav_0" onclick="clickLi(0,0);" class="current"><a href="javascript:void(0);" >综合</a></li>
-				<li id="ui-tab-nav_1" onclick="clickLi(1,0);"><a href="javascript:void(0);" >销量</a></li>
-				<li id="ui-tab-nav_2" onclick="clickLi(2,1);"><a href="javascript:void(0);" >价格</a></li>
+				<li <c:if test="${pageSort == '1'}"> class="current"</c:if>>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&pageSort=1">综合</a>
+				</li>
+				<li <c:if test="${pageSort == '2'}"> class="current"</c:if>>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&pageSort=2">销量</a>
+				</li>
+				<li <c:if test="${pageSort == '3' || pageSort == '4'}"> class="current"</c:if>>
+					<c:if test="${pageSort == '1' || pageSort == '2'}">
+						<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&pageSort=3">
+							价格
+							<i class="icon_sort"></i>
+						</a>
+					</c:if>
+					<c:if test="${pageSort == '3'}">
+						<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&pageSort=4">
+							价格
+							<i class="icon_sort_down"></i>
+						</a>
+					</c:if>
+					<c:if test="${pageSort == '4'}">
+						<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}">
+							价格
+							<i class="icon_sort_up"></i>
+						</a>
+					</c:if>
+				</li>
 			</ul>
 		</div>
 
@@ -102,8 +125,10 @@
 						</a>
 					</h3>
 					<dl class="ssjg-dl1">
-						<dt class="ssjg-p1">
-							<span>${goods.price}</span>
+						<dt>
+							<span style="color: #DB3751; margin-left: 0px;">${goods.price}</span>
+							<br />
+							<span style="color: #7F7F7F; font-size: 12px; margin-left: 0px;">销售量：${goods.salesvolume}</span>
 						</dt>
 						<dd>
 							<a href="javascript:void(0);" onclick="addGoods('${goods.goodsId}');">
@@ -126,14 +151,14 @@
 			<div class="shaixuan_mall">
 				<h1>商城筛选</h1>
 				<div class="shaixun_item-zx">
-					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=1" <c:if test="${sifting != null && sifting == '1'}">class="current"</c:if>>推荐商品</a>
-					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=2" <c:if test="${sifting != null && sifting == '2'}">class="current"</c:if>>新品上市</a>
-					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=3" <c:if test="${sifting != null && sifting == '3'}">class="current"</c:if>>热卖商品</a>
-					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=4" <c:if test="${sifting != null && sifting == '4'}">class="current"</c:if>>促销商品</a>
-					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=5" <c:if test="${sifting != null && sifting == '5'}">class="current"</c:if>>卖家包邮</a>
-					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=6" <c:if test="${sifting != null && sifting == '6'}">class="current"</c:if>>限时抢购</a>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=1&pageSort=${pageSort}" <c:if test="${sifting != null && sifting == '1'}">class="current"</c:if>>推荐商品</a>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=2&pageSort=${pageSort}" <c:if test="${sifting != null && sifting == '2'}">class="current"</c:if>>新品上市</a>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=3&pageSort=${pageSort}" <c:if test="${sifting != null && sifting == '3'}">class="current"</c:if>>热卖商品</a>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=4&pageSort=${pageSort}" <c:if test="${sifting != null && sifting == '4'}">class="current"</c:if>>促销商品</a>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=5&pageSort=${pageSort}" <c:if test="${sifting != null && sifting == '5'}">class="current"</c:if>>卖家包邮</a>
+					<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classifyId}&sifting=6&pageSort=${pageSort}" <c:if test="${sifting != null && sifting == '6'}">class="current"</c:if>>限时抢购</a>
 					<c:forEach var="classify"  items="${classifyList}">
-						<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classify.classifyId}" <c:if test="${classifyId != null && classifyId == classify.classifyId}">class="current"</c:if>>${classify.classifyName}</a>
+						<a href="/wechat/shop/goods/goodslist?goodsType=${goodsType}&classifyId=${classify.classifyId}&pageSort=${pageSort}" <c:if test="${classifyId != null && classifyId == classify.classifyId}">class="current"</c:if>>${classify.classifyName}</a>
 					</c:forEach>
 				</div>
 				<p>
@@ -152,16 +177,7 @@
 	var classifyId = "${classifyId}";
 	var goodsType = "${goodsType}";
 	var sifting = "${sifting}";
-</script>
-<script type="text/javascript">
-	function clickLi(index) {
-		for (var i = 0; i < 3; i++) {
-			if (i == index)
-				$("#ui-tab-nav_" + i).attr("class", "current");
-			else
-				$("#ui-tab-nav_" + i).attr("class", "");
-		}
-	}
+	var pageSort = "${pageSort}";
 </script>
 <script src="/resources/js/web/goods/goodslist.js"></script>
 </html>

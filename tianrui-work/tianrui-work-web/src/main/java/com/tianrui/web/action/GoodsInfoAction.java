@@ -93,6 +93,22 @@ public class GoodsInfoAction {
 		view.addObject("goodsType", req.getGoodsType());
 		view.addObject("sifting", req.getSifting());
 
+		String pageSort = req.getPageSort();
+		if (pageSort == null || "".equals(pageSort)) {
+			req.setPageSort("salesvolume desc, goods_price desc, red_packet desc");
+			view.addObject("pageSort", "1");
+		} else {
+			if (pageSort.equals("1"))
+				req.setPageSort("salesvolume desc, goods_price desc, red_packet desc");
+			else if (pageSort.equals("2"))
+				req.setPageSort("salesvolume desc");
+			else if (pageSort.equals("3"))
+				req.setPageSort("goods_price desc, red_packet desc");
+			else if (pageSort.equals("4"))
+				req.setPageSort("goods_price asc, red_packet asc");
+			view.addObject("pageSort", pageSort);
+		}
+
 		GoodsClassifyReq goodsClassifyReq = new GoodsClassifyReq(req.getGoodsType());
 		List<GoodsClassifyFindResp> classifyList = goodsClassifyService.getGoodsClassifyList(goodsClassifyReq);
 		view.addObject("classifyList", classifyList);
@@ -109,6 +125,18 @@ public class GoodsInfoAction {
 	@ResponseBody
 	public Result toLoadGoodsList(GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/toloadgoodslist]");
+		String pageSort = req.getPageSort();
+		if (pageSort != null || !"".equals(pageSort)) {
+			if (pageSort.equals("1"))
+				req.setPageSort("salesvolume desc, goods_price desc, red_packet desc");
+			else if (pageSort.equals("2"))
+				req.setPageSort("salesvolume desc");
+			else if (pageSort.equals("3"))
+				req.setPageSort("goods_price desc, red_packet desc");
+			else if (pageSort.equals("4"))
+				req.setPageSort("goods_price asc, red_packet asc");
+		}
+
 		List<GoodsInfoFindResp> goodsList = goodsInfoService.getGoodsInfoList(req);
 		Result rs = Result.getSuccessful();
 		rs.setData(goodsList);

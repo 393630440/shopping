@@ -1,5 +1,8 @@
 $(function() {
 	init(0);
+	$("#skip_add_page").on("click", function() {
+		window.location.href = "/admin/shop/ad/addpage";
+	});
 });
 
 function init(pageNo) {
