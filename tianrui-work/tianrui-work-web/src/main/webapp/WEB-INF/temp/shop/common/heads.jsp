@@ -2,9 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 $(window).load(function() {
+	loadPage();
+})
+
+function loadPage(){
 	$("#status").fadeOut();
 	$("#preloader").delay(350).fadeOut("slow");
-})
+}
 </script>
 <div id="preloader">
     <div id="status">

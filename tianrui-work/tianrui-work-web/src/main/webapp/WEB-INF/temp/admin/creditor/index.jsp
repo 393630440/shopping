@@ -56,8 +56,8 @@
 			    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 			  </ul>
 			</div>
-		    <div class="am-form am-g">
-		          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+		    <div class="am-form am-g" style="overflow:scroll;">
+		          <table style="white-space:nowrap;" class="am-table am-table-bordered am-table-radius am-table-striped">
 		            <thead>
 		              <tr class="am-success">
 		                <th class="table-check"><input type="checkbox" /></th>
@@ -102,6 +102,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="/resources/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/creditor/index.js?0729"></script>
+<script src="/resources/js/admin/creditor/index.js?0820"></script>
 </body>
 </html>

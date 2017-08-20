@@ -69,11 +69,19 @@
               </a>
             </li>
             <li>
-            	<a href="order.html">
+            	<a href="/wechat/shop/creditor/selectPage">
+                	<div class="u_nav_icon dingdan"></div>
+                    <div class="u_nav_name">信息广场</div>
+                    <div class="nt_icon"></div>
+                    <div class="u_money"><i></i></div>
+              </a>
+            </li>
+            <li>
+            	<a href="/wechat/shop/order/index">
                 	<div class="u_nav_icon dingdan"></div>
                     <div class="u_nav_name">我的订单</div>
                     <div class="nt_icon"></div>
-                    <div class="u_money"><i>0笔</i></div>
+                    <div class="u_money"><i></i></div>
               </a>
             </li>
             <li>
@@ -100,7 +108,4 @@
      <!-- foods -->
 </div>
 </body>
-<script type="text/javascript">
-	$(".foods_04").addClass("current");
-</script>
 </html>

@@ -9,21 +9,17 @@ a {
 <ul class="quanbu-ul1" style="z-index:999">
     	<li class="foods_01">
         	<div class="qu-tu1">
-            	<a href="#" class="atu1"><img src="/resources/shop/images/sjsc-02.gif"></a>
-            	<a href="#" class="atu2"><img src="/resources/shop/images/sjsc-15-1.gif"></a>
+            	<a href="/wechat/shop/goods/goodshome?goodsType=1" class="atu1"><img src="/resources/shop/images/sjsc-02.gif"></a>
+            	<a href="/wechat/shop/goods/goodshome?goodsType=1" class="atu2"><img src="/resources/shop/images/sjsc-15-1.gif"></a>
             </div>
-            <!-- 
-            <a href="#" class="qu-ul1a">首页</a>
-             -->
-            <a href="/wechat/shop/goods/goodshome?goodsType=1" class="qu-ul1a">大众</a>
-            <a href="/wechat/shop/goods/goodshome?goodsType=2" class="qu-ul1a">宏包</a>
+            <a href="/wechat/shop/goods/goodshome?goodsType=1" class="qu-ul1a">大众商城</a>
         </li>
     	<li class="foods_02">
         	<div class="qu-tu1">
-            	<a href="/wechat/shop/creditor/selectPage" class="atu1"><img src="/resources/shop/images/sjsc-16.png"></a>
-            	<a href="/wechat/shop/creditor/selectPage" class="atu2"><img src="/resources/shop/images/sjsc-16-1.png"></a>
+            	<a href="/wechat/shop/goods/goodshome?goodsType=2" class="atu1"><img src="/resources/shop/images/sjsc-16.png"></a>
+            	<a href="/wechat/shop/goods/goodshome?goodsType=2" class="atu2"><img src="/resources/shop/images/sjsc-16-1.png"></a>
             </div>
-            <a href="/wechat/shop/creditor/selectPage" class="qu-ul1a">消息广场</a>
+            <a href="/wechat/shop/goods/goodshome?goodsType=2" class="qu-ul1a">宏包商城</a>
         </li>
     	<li class="foods_03">
         	<div class="qu-tu1">

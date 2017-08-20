@@ -23,7 +23,6 @@
   <header>
 	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="/resources/web/images/iconfont-fanhui.png"></span> </a>
       <h2>信息广场</h2>
-      <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
     </div>
   </header>
   <!--header 结束-->  
@@ -48,6 +47,7 @@ function init(pageNo,type){
 	$.ajax({
 		url:"/wechat/shop/creditor/select",
 		data:{"pageNo":pageNo,
+			"creditorStatus":1,
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){

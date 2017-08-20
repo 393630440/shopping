@@ -56,11 +56,11 @@ function innerHTML(date,pageNo){
 		var uptsta = "";
 		if(date[a].creditorStatus == "1"){//primary
 			ststus = "<i class='am-icon-check am-text-warning'></i>";
-			uptsta = "<span class='am-icon-trash-o'></span>";
+			uptsta = "<span class='am-icon-trash-o'>禁用</span>";
 		}
 		if(date[a].creditorStatus == "0"){//warning
 			ststus = "<i class='am-icon-close am-text-primary'></i>";
-			uptsta = "<span class='am-icon-copy'></span>";
+			uptsta = "<span class='am-icon-copy'>启用</span>";
 		}
 		var hml = "<tr><td><input type='checkbox' /></td>" +
 				"<td>"+(a+1)+"</td>" +
@@ -70,8 +70,8 @@ function innerHTML(date,pageNo){
 				"<td>"+sex+"</td>" +
 				"<td>"+date[a].creditorPhone+"</td>" +
 				"<td>"+date[a].creditorIdcard+"</td>" +
-				"<td>"+date[a].debtorCompany+"</td>" +
-				"<td>"+date[a].debtorCompanyAddress+"</td>" +
+				"<td>"+date[a].creditorCompany+"</td>" +
+				"<td>"+date[a].creditorAddress+"</td>" +
 				"<td>"+(date[a].debtAmount||"")+"</td>" +
 				"<td>"+debtType+"</td>" +
 				"<td>"+(date[a].debtTime==undefined?"":(new Date(date[a].debtTime).format("yyyy-MM-dd")))+"</td>" +

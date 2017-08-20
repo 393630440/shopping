@@ -8,6 +8,8 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>宏包</title>
+<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
 <link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
@@ -31,7 +33,7 @@ $(window).load(function() {
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="index.html"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
       <h2>宏包</h2>
       <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
     </div>
@@ -45,6 +47,9 @@ $(window).load(function() {
 
     </ul>
   </div>
+   <!-- foods -->
+    <jsp:include page="../common/foods.jsp"></jsp:include>
+     <!-- foods -->
 <input type="hidden" id="scrollPage">
 <input type="hidden" id="scrollTotal">
 </body>

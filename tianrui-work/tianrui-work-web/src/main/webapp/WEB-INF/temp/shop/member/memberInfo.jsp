@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<title>消息设置</title>
+<title>账户信息</title>
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/login.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
       <h2>账户信息</h2>
       </div>
   </header>
@@ -33,7 +33,7 @@
      </div>
      
      <div class="item item-password">
-       <input type="text" class="txt-input txt-username uptInfo" value="${MemberInfo.cellphone }" id="cellphone_req" placeholder="输入你的手机号">
+       <input type="text" maxlength="11" class="txt-input txt-username uptInfo" value="${MemberInfo.cellphone }" id="cellphone_req" placeholder="输入你的手机号">
      </div>
      
      <div class="item item-password">
@@ -41,11 +41,11 @@
      </div>
      
      <div class="item item-password">
-       <input type="text" class="txt-input txt-username" readonly="readonly" value="${MemberInfo.city }">
+       <input type="text" class="txt-input txt-username uptInfo" id="city_req" value="${MemberInfo.city }" placeholder="所在城市">
      </div>
      <input type="hidden" id="memberId_req" value="${MemberInfo.memberId }">
      <div class="item item-password">
-       <select id="rpExchangeRatio_req" value="${MemberInfo.rpExchangeRatio }" class="txt-input txt-username uptInfo">
+       <select id="rpExchangeRatio_req" class="txt-input txt-username uptInfo">
        	<option value="" >交易比例</option>
        	<option value="1" <c:if test="${MemberInfo.rpExchangeRatio eq 1}">selected = "selected"</c:if>>1.0</option>
        	<option value="0.9" <c:if test="${MemberInfo.rpExchangeRatio eq 0.9}">selected = "selected"</c:if>>0.9</option>
@@ -109,6 +109,7 @@
 				"cellphone":$("#cellphone_req").val(),
 				"birthTime":$("#birthTime_req").val(),
 				//"rpTradeMark":$("#").val(),
+				"city":$("#city_req").val(),
 				"rpExchangeRatio":$("#rpExchangeRatio_req").val()
 				},
 			type:"POST",

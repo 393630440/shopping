@@ -1,108 +1,114 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>发布信息</title>
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="applicable-device" content="mobile" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>消息设置</title>
+<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+<link href="/resources/web/css/login.css" rel="stylesheet" type="text/css">
+<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
 </head>
-
 <body>
-    <form id="creditorid">
-	    <div class="sjsc-title1">
-	    	<h3 class="sjsc-t1l f-l"><a href="JavaScript:;"><span><</span>发布信息</a></h3>
-	        <a href="#" class="sjsc-t1r f-r" id="saveCreditor">保存</a>
-	        <div style="clear:both;"></div>
-	    </div>
-	    <ul class="zlbj-ul1">
-	    	<li>
-	        	<p>债权人</p>
-	            <div class="ipt-box f-l">
-	            	<input type="radio" name="creditorType" checked="checked" value="1"/> 
-	            </div>
-	            <div style="clear:both;"></div>
-	        </li>
-	        <li>
-	        	<p>债务人</p>
-	            <div class="ipt-box f-l">
-	            	<input type="radio" name="creditorType" value="2"/> 
-	            </div>
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>姓名</p>
-	            <input type="text" name="creditorName" placeholder="" />
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>电话</p>
-	            <input type="text" name="creditorPhone" placeholder="输入你的qq号" />
-	            <div style="clear:both;"></div>
-	        </li>
-	        <li>
-	        	<p>性别</p>
-	            <input type="radio" name="creditorSex" value="xy"/>男
-	            <input type="radio" name="creditorSex" value="xx"/>女
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>身份证号</p>
-	            <input type="text" name="creditorIdcard" placeholder="输入你的微博" />
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>身份证地址</p>
-	            <input type="text" name="creditorAddress" placeholder="输入新密码" />
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>公司名称</p>
-	            <input type="text" name="creditorCompany" placeholder="输入你的邮箱" />
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>公司地址</p>
-	            <input type="text" name="creditorCompanyAddress" placeholder="输入你的手机号" />
-	            <div style="clear:both;"></div>
-	        </li>
-	    	<li>
-	        	<p>金额</p>
-	            <input type="text" name="debtAmount" placeholder="输入你的推广码" />
-	            <div style="clear:both;"></div>
-	        </li>
-	        <li>
-	        	<p>债务类型</p>
-	            <select name="debtType">
-	             <option value="1">公司债务</option>
-	             <option value="2">借条债务</option>
-	             <option value="3">欠条债务</option>
-	             <option value="4">判决债务</option>
-	             <option value="5">其他债务</option>
-	            </select>
-	            <div style="clear:both;"></div>
-	        </li>
-	        <li>
-	        	<p>债务时间</p>
-	            <input type="date" name="debtTimeStr" />
-	            <div style="clear:both;"></div>
-	        </li>
-	    </ul>
-    </form>
+<div class="mobile">
+  <!--页面加载 开始-->
+  <jsp:include page="../common/heads.jsp"></jsp:include>
+  <!--页面加载 结束--> 
+  <!--header 开始-->
+  <header>
+    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+      <h2>消息设置</h2>
+      </div>
+  </header>
+  <!--header 结束-->
+  <div class="w main">
+     <form id="creditorid">
+     <div class="item item-password">
+       <select name="creditorType" class="txt-input txt-username">
+       	<option value="1">债权人</option>
+       	<option value="2">债务人</option>
+       </select>
+     </div>
+     
+     <div class="item item-password">
+     	<input type="text" value="${MemberInfo.wechatName }" class="txt-input txt-username" name="creditorName" placeholder="姓名" />
+     </div>
+     
+     <div class="item item-password">
+      	<input type="text" value="${MemberInfo.cellphone }" name="creditorPhone" class="txt-input txt-username" placeholder="电话" />
+     </div>
+     
+     <div class="item item-password">
+       <select name="creditorSex" class="txt-input txt-username">
+       	<option value="xy">男</option>
+       	<option value="xx">女</option>
+       </select>
+     </div>
+     
+     <div class="item item-password">
+     	<input type="text" name="creditorIdcard" class="txt-input txt-username" placeholder="身份证号" />
+     </div>
+     
+     <div class="item item-password">
+     	<input type="text" class="txt-input txt-username" name="creditorAddress" placeholder="身份证地址" />
+     </div>
+     
+     <div class="item item-password">
+     	<input type="text" class="txt-input txt-username" name="creditorCompany" placeholder="公司名称" />
+     </div>
+     
+     <div class="item item-password">
+     	<input type="text" class="txt-input txt-username" name="creditorCompanyAddress" placeholder="公司地址" />
+     </div>
+     
+     <div class="item item-password">
+     	<input type="text" class="txt-input txt-username" id="debtAmount_req" name="debtAmount" placeholder="金额" />
+     </div>
+     
+     <div class="item item-password">
+       <select name="debtType" class="txt-input txt-username">
+        <option value="1">公司债务</option>
+        <option value="2">借条债务</option>
+        <option value="3">欠条债务</option>
+        <option value="4">判决债务</option>
+        <option value="5">其他债务</option>
+       </select>
+     </div>
+     
+     <div class="item item-password">
+     	<input type="date" name="debtTimeStr" class="txt-input txt-username"/>
+     </div>
+      </form>
+    <div class="item item-password">
+     	<input type="button" style="background-color: " id="saveCreditor" value="发布信息" class="txt-input txt-username"/>
+     </div>
+    
+     <div style="height: 30px">
+    
+     </div>
+  </div>
+	<!-- foods -->
+    <jsp:include page="../common/foods.jsp"></jsp:include>
+     <!-- foods -->
+</div>
 </body>
-<script type="text/javascript">
-	$("#saveCreditor").on("click",function(){
-		$.ajax({
-			url:"/wechat/shop/creditor/save",
-			data:$('#creditorid').serialize(),
-			type:"POST",
-			success:function(ret){
-				
-			}
-		});
-	});
-</script>
 </html>
+<script type="text/javascript" >
+$("#saveCreditor").on("click",function(){
+	if($("#debtAmount_req").val()==""){
+		alert("请输入金额");
+		return;
+	}
+	$("#status").fadeOut();
+	$.ajax({
+		url:"/wechat/shop/creditor/save",
+		data:$('#creditorid').serialize(),
+		type:"POST",
+		success:function(ret){
+			window.location.href="/wechat/shop/creditor/selectPage";
+		}
+	});
+});
+</script> 

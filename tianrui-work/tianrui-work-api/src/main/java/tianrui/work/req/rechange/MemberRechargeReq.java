@@ -16,7 +16,7 @@ public class MemberRechargeReq {
     private Long createtime;
 
     private String remark;
-
+    //1-充值 2-消费
     private String desc1;
 
     private String desc2;

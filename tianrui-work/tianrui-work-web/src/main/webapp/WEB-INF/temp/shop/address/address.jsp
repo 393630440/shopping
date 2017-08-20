@@ -18,7 +18,7 @@
 <div class="mobile">
 	<!--header 开始-->
   <header>
-	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+	<div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img style="margin-left: 20px" src="/resources/web/images/iconfont-fanhui.png"></span> </a>
       <h2>收货地址</h2>
       <div class="header_right shaixuan"></div>
     </div>
@@ -32,6 +32,9 @@
 <input type="hidden" id="scrollPage">
 <input type="hidden" id="scrollTotal">  
 </div>
+<!-- foods -->
+    <jsp:include page="../common/foods.jsp"></jsp:include>
+     <!-- foods -->
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">

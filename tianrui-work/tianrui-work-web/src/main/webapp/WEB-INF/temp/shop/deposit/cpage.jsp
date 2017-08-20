@@ -31,7 +31,7 @@ $(window).load(function() {
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="index.html"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
       <h2>充值记录</h2>
       <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
     </div>

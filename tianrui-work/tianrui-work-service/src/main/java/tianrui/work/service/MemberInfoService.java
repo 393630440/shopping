@@ -194,6 +194,7 @@ public class MemberInfoService implements IMemberInfoService{
 		upt.setCellphone(req.getCellphone());
 		upt.setRpTradeMark(req.getRpTradeMark());
 		upt.setRpExchangeRatio(req.getRpExchangeRatio());
+		upt.setCity(req.getCity());
 		memberInfoMapper.updateByPrimaryKeySelective(upt);
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
 		rs.setData(info);

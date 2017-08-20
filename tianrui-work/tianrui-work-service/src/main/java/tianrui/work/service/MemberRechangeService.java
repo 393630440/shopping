@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,9 +43,12 @@ public class MemberRechangeService implements IMemberRechangeService {
 			save.setCreatetime(System.currentTimeMillis());
 			save.setRemark(req.getRemark());
 			save.setMemberName(info.getWechatName());
+			save.setDesc1(req.getDesc1());
 			memberRechargeMapper.insertSelective(save);
-			info.setBalance(info.getBalance()+req.getRechargeAmount());
-			memberInfoMapper.updateByPrimaryKeySelective(info);
+			if(StringUtils.equals("1", req.getDesc1())){
+				info.setBalance(info.getBalance()+req.getRechargeAmount());
+				memberInfoMapper.updateByPrimaryKeySelective(info);
+			}
 		}else{
 			rs.setCode("1");
 			rs.setError("未找到用户");

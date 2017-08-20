@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.bean.MemberGain;
 import tianrui.work.mapper.java.MemberGainMapper;
+import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.req.gain.MemberGainFindReq;
 import tianrui.work.req.gain.MemberGainSaveReq;
 import tianrui.work.resp.gain.MemberGainResp;
@@ -22,6 +23,8 @@ public class MemberGainService implements IMemberGainService{
 
 	@Autowired
 	MemberGainMapper memberGainMapper;
+	@Autowired
+	MemberInfoMapper memberInfoMapper;
 	
 	@Override
 	public Result save(MemberGainSaveReq req) throws Exception{

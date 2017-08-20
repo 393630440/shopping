@@ -57,10 +57,9 @@ public class MemberHbaoAction {
 	
 	@RequestMapping("findHbao")
 	@ResponseBody
-	public Result findHbao(HttpServletRequest request) throws Exception{
+	public Result findHbao(HttpServletRequest request,MemberInfoFindReq req) throws Exception{
 		Result rs = Result.getSuccessful();
 		MemberInfo info = SessionManage.getSessionManage(request);
-		MemberInfoFindReq req = new MemberInfoFindReq();
 //		req.setMemberId(info.getMemberId());
 		PageTool<MemberInfoResp> page = memberInfoService.select(req);
 		rs.setData(page);
