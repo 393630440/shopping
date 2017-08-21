@@ -84,6 +84,14 @@
                     <div class="u_money"><i></i></div>
               </a>
             </li>
+             <li>
+            	<a href="/wechat/shop/memberFoot/page">
+                	<div class="u_nav_icon znx"></div>
+                    <div class="u_nav_name">我的关注</div>
+                    <div class="nt_icon"></div>
+                    <div class="u_money"></div>
+              </a>
+            </li>
             <li>
             	<a href="/wechat/shop/member/setPage">
                 	<div class="u_nav_icon znx"></div>
