@@ -6,7 +6,7 @@ var mark = 0;
 
 function iconInit() {
 	var html = "<span id=\"icon_span_showId\">";
-	html += "<img src=\"/getimg?imgPath=goodsClassify/" + classifyId + "/" + icon + "\" style=\"height: 45px; width: 50px;\"/>";
+	html += "<img src=\"/resources/file/goodsClassify/" + icon + "\" style=\"height: 45px; width: 50px;\"/>";
 	html += "<button type=\"button\" onclick=\"iconDelete(1);\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\">";
 	html += "<span class=\"am-icon-trash-o\"></span>";
 	html += "</button>";
@@ -74,9 +74,21 @@ function edit() {
 	if (descr == "")
 		msg += "备注说明不能为空\n";
 
+	var img = $("#icon").val(); // 图标
+	if (img == "" || img == undefined)
+		msg += "图标不能为空\n";
+
 	if (msg != "") {
 		alert(msg);
 		return;
+	}
+
+	var iconStr = "";
+	if (mark == 1) {
+		iconStr = $("#icon_showId")[0].src;
+		var size = iconStr.length;
+		var index = iconStr.indexOf("base64,") + 7;
+		iconStr = iconStr.substring(index, size);
 	}
 
 	$.ajax({
@@ -85,12 +97,13 @@ function edit() {
 		data : {
 			"classifyId" : classifyId,
 			"classifyName" : classifyName,
-			"descr" : descr
+			"descr" : descr,
+			"iconStr" : iconStr
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				if (mark == 1)
-					iconUpload();
+				// if (mark == 1)
+				// iconUpload();
 				window.location.href = "/admin/shop/goodsclassify/index";
 			}
 		},

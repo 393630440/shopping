@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tianrui.web.smvc.AutherWeb;
+import com.tianrui.web.util.FileUtils;
 import com.tianrui.web.util.LoggerUtils;
+import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.req.goods.GoodsClassifyFindReq;
@@ -64,11 +66,19 @@ public class AdminGoodsClassifyAction {
 	@ResponseBody
 	public Result add(GoodsClassifyReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goodsclassify/add]");
+
+		if (StringUtils.isNull(req.getIconStr())) {
+			throw new Exception("没有图片怎么可以");
+		} else {
+			String imgName = FileUtils.saveImgFile("goodsClassify/", "", 0, ".png", req.getIconStr());
+			req.setIcon(imgName);
+		}
+
 		req.setClassifyId(UUIDUtil.getUUID());// 商品分类ID
 		req.setClassifyStatus("1");// 商品分类状态
 		req.setPubdate(System.currentTimeMillis());
 		Result rs = goodsClassifyService.addGoodsClassify(req);
-		rs.setData(req);
+		// rs.setData(req);
 		return rs;
 	}
 
@@ -89,6 +99,12 @@ public class AdminGoodsClassifyAction {
 	@ResponseBody
 	public Result edit(GoodsClassifyReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goodsclassify/edit]");
+
+		if (!StringUtils.isNull(req.getIconStr())) {
+			String imgName = FileUtils.saveImgFile("goodsClassify/", "", 0, ".png", req.getIconStr());
+			req.setIcon(imgName);
+		}
+
 		Result rs = Result.getSuccessful();
 		rs = goodsClassifyService.editGoodsClassify(req);
 		return rs;

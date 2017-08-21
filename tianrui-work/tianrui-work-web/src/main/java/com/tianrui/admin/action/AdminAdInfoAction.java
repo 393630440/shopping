@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tianrui.web.smvc.AutherWeb;
+import com.tianrui.web.util.FileUtils;
 import com.tianrui.web.util.LoggerUtils;
+import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IAdInfoService;
 import tianrui.work.req.ad.AdInfoFindReq;
@@ -63,10 +65,18 @@ public class AdminAdInfoAction {
 	@ResponseBody
 	public Result add(AdInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/ad/add]");
+
+		if (StringUtils.isNull(req.getImgStr())) {
+			throw new Exception("没有图片怎么可以");
+		} else {
+			String imgName = FileUtils.saveImgFile("adInfo/", "", 0, ".png", req.getImgStr());
+			req.setImg(imgName);
+		}
+
 		req.setStatus("1");
 		req.setPubdate(System.currentTimeMillis());
 		Result rs = adInfoService.addAdInfo(req);
-		rs.setData(new AdInfoResp(req.getId()));
+		// rs.setData(req);
 		return rs;
 	}
 
@@ -87,6 +97,12 @@ public class AdminAdInfoAction {
 	@ResponseBody
 	public Result edit(AdInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/ad/edit]");
+
+		if (!StringUtils.isNull(req.getImgStr())) {
+			String imgName = FileUtils.saveImgFile("adInfo/", "", 0, ".png", req.getImgStr());
+			req.setImg(imgName);
+		}
+
 		Result rs = adInfoService.editAdInfo(req);
 		return rs;
 	}

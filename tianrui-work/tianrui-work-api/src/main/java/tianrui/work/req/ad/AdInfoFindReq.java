@@ -2,17 +2,11 @@ package tianrui.work.req.ad;
 
 public class AdInfoFindReq {
 	private Integer id;
-
 	private String img;
-
 	private String url;
-
 	private String depict;
-
 	private String status;
-
 	private String type;
-
 	private Long pubdate;
 
 	private Integer pageNo;

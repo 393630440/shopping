@@ -7,10 +7,9 @@ package tianrui.work.req.goods;
  *
  */
 public class GoodsInfoReq {
-
 	private String goodsId; // 商品ID
 	private String goodsName; // 商品名称
-	private String goodsImg; // 商品图片 图片地址)
+	private String goodsImg; // 商品图片 图片地址
 	private String goodsStatus; // 商品状态:1-已上架;2-已下架
 	private String goodsType; // 商品类型:1-大众商品;2-宏包商品
 	private Double goodsPrice; // 商品价格
@@ -26,6 +25,9 @@ public class GoodsInfoReq {
 	private String classifyId; // 分类ID
 	private String classifyName; // 分类名称
 	private Long pubdate;// 发布时间
+
+	private String goodsImgStr;// 商品图片数据
+	private String goodsDetailsStr;// 商品详情图片数据
 
 	public String getGoodsId() {
 		return goodsId;
@@ -169,6 +171,22 @@ public class GoodsInfoReq {
 
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
+	}
+
+	public String getGoodsImgStr() {
+		return goodsImgStr;
+	}
+
+	public void setGoodsImgStr(String goodsImgStr) {
+		this.goodsImgStr = goodsImgStr;
+	}
+
+	public String getGoodsDetailsStr() {
+		return goodsDetailsStr;
+	}
+
+	public void setGoodsDetailsStr(String goodsDetailsStr) {
+		this.goodsDetailsStr = goodsDetailsStr;
 	}
 
 }

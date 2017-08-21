@@ -2,18 +2,14 @@ package tianrui.work.req.ad;
 
 public class AdInfoReq {
 	private Integer id;
-
 	private String img;
-
 	private String url;
-
 	private String depict;
-
 	private String status;
-
 	private String type;
-
 	private Long pubdate;
+
+	private String imgStr;
 
 	public AdInfoReq() {
 	}
@@ -77,6 +73,14 @@ public class AdInfoReq {
 
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
+	}
+
+	public String getImgStr() {
+		return imgStr;
+	}
+
+	public void setImgStr(String imgStr) {
+		this.imgStr = imgStr;
 	}
 
 }

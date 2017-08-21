@@ -169,9 +169,34 @@ function add(buttonType) {
 		return;
 	}
 
+	// var goodsImgStrArr = [];// 商品图片数据
+	// var img_showId = "goodsImg_img_showId";
+	// for (var i = 0; i < goodsImgFileIds.length; i++) {
+	// var input_Id_front = goodsImgFileIds[i];
+	// var imgId = img_showId + "_" + input_Id_front;
+	// var imgStr = $("#" + imgId)[0].src;
+	// var size = imgStr.length;
+	// var index = imgStr.indexOf("base64,") + 7;
+	// var data = imgStr.substring(index, size);
+	// goodsImgStrArr[goodsImgStrArr.length] = data;
+	// }
+
+	// var goodsDetailsStrArr = [];// 商品详情图片数据
+	// var details_showid = "goodsDetails_img_showId";
+	// for (var i = 0; i < goodsDetailsFileIds.length; i++) {
+	// var input_Id_front = goodsDetailsFileIds[i];
+	// var imgId = details_showid + "_" + input_Id_front;
+	// var imgStr = $("#" + imgId)[0].src;
+	// var size = imgStr.length;
+	// var index = imgStr.indexOf("base64,") + 7;
+	// var data = imgStr.substring(index, size);
+	// goodsDetailsStrArr[goodsDetailsStrArr.length] = data;
+	// }
+
 	$.ajax({
 		url : "/admin/shop/goods/add",
 		type : "POST",
+		// traditional : true,
 		data : {
 			"salesvolume" : "0",
 			"buyNum" : "0",
@@ -185,13 +210,16 @@ function add(buttonType) {
 			"goodsParam" : goodsParam,
 			"expressFee" : expressFee,
 			"inventory" : inventory,
+			// "goodsImgStrArr" : goodsImgStrArr,
+			// "goodsDetailsStrArr" : goodsDetailsStrArr,
 			"sifting" : sifting
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				var goodsId = ret.data.goodsId;
-				imgUpload(goodsImgFileIds, goodsId, 1);
-				imgUpload(goodsDetailsFileIds, goodsId, 2);
+				// var goodsId = ret.data.goodsId;
+				// imgUpload(goodsImgFileIds, goodsId, 1);
+				// imgUpload(goodsDetailsFileIds, goodsId, 2);
+				saveImg(ret.data);
 				if (buttonType == 2) {
 					window.location.href = "/admin/shop/goods/addpage";
 				} else {
@@ -235,4 +263,125 @@ function imgUpload(fileElementId, id, flag) {
 			alert(e);
 		}
 	});
+}
+
+function saveImg(goodsId) {
+	show();
+
+	var goodsImgStrArr = [];// 商品图片数据
+	var img_showId = "goodsImg_img_showId";
+	for (var i = 0; i < goodsImgFileIds.length; i++) {
+		var input_Id_front = goodsImgFileIds[i];
+		var imgId = img_showId + "_" + input_Id_front;
+		var imgStr = $("#" + imgId)[0].src;
+		var size = imgStr.length;
+		var index = imgStr.indexOf("base64,") + 7;
+		var data = imgStr.substring(index, size);
+		goodsImgStrArr[goodsImgStrArr.length] = data;
+	}
+	uploadGoodsImg(goodsImgStrArr, 0, goodsId);
+
+	var goodsDetailsStrArr = [];// 商品详情图片数据
+	var details_showid = "goodsDetails_img_showId";
+	for (var i = 0; i < goodsDetailsFileIds.length; i++) {
+		var input_Id_front = goodsDetailsFileIds[i];
+		var imgId = details_showid + "_" + input_Id_front;
+		var imgStr = $("#" + imgId)[0].src;
+		var size = imgStr.length;
+		var index = imgStr.indexOf("base64,") + 7;
+		var data = imgStr.substring(index, size);
+		goodsDetailsStrArr[goodsDetailsStrArr.length] = data;
+	}
+	uploadGoodsDetails(goodsDetailsStrArr, 0, goodsId);
+
+	exit(goodsId);
+
+	hide();
+}
+
+var goodsImgName = "";
+function uploadGoodsImg(goodsImgStrArr, index, goodsId) {
+	$.ajax({
+		url : "/admin/shop/goods/addimg",
+		type : "POST",
+		async : false,
+		data : {
+			"goodsId" : goodsId,
+			"goodsImgStr" : goodsImgStrArr[index]
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+				goodsImgName += ret.data + "|";
+
+				index = index + 1;
+				if (index < goodsImgStrArr.length) {
+					uploadGoodsImg(goodsImgStrArr, index, goodsId);
+				}
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+var goodsDetailsName = "";
+function uploadGoodsDetails(goodsDetailsStrArr, index, goodsId) {
+	$.ajax({
+		url : "/admin/shop/goods/addimg",
+		type : "POST",
+		async : false,
+		data : {
+			"goodsId" : goodsId,
+			"goodsDetailsStr" : goodsDetailsStrArr[index]
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+				goodsDetailsName += ret.data + "|";
+
+				index = index + 1;
+				if (index < goodsDetailsStrArr.length) {
+					uploadGoodsDetails(goodsDetailsStrArr, index, goodsId);
+				}
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+function exit(goodsId) {
+	$.ajax({
+		url : "/admin/shop/goods/edit",
+		type : "POST",
+		async : false,
+		data : {
+			"goodsId" : goodsId,
+			"goodsImg" : goodsImgName,
+			"goodsDetails" : goodsDetailsName
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+// 显示隐藏层和弹出层
+function show() {
+	var tpscz = document.getElementById("tpscz-zx");
+	tpscz.style.display = "block"; // 显示隐藏层
+	tpscz.style.height = document.documentElement.clientHeight + "px"; // 设置隐藏层的高度为当前页面高度
+	// $("#tpscz-zx").css('display', 'block');
+	// $("#tpscz-zx").css("height", document.documentElement.clientHeight + "px");
+}
+
+// 去除隐藏层和弹出层
+function hide() {
+	document.getElementById("tpscz-zx").style.display = "none";
+	// $("#tpscz-zx").css('display', 'none');
 }

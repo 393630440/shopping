@@ -59,7 +59,7 @@
 							<div class="banner1" id="ban1">
 								<ul class="sy-ul">
 									<c:forEach var="goodsImg" items="${goodsImgList}">
-										<li><a href="javascript:void(0);"> <img src="/getimg?imgPath=goodsInfo/${goodsInfo.goodsId}/${goodsImg}" />
+										<li><a href="javascript:void(0);"> <img src="${goodsInfo.path}${goodsImg}" />
 										</a></li>
 									</c:forEach>
 								</ul>
@@ -96,7 +96,7 @@
 				<!--详情 开始-->
 				<div class="spxq-k spxq-k2" style="display: none;">
 					<c:forEach var="goodsDetails" items="${goodsDetailsList}">
-						<img src="/getimg?imgPath=goodsInfo/${goodsInfo.goodsId}/${goodsDetails}" />
+						<img src="${goodsInfo.path}${goodsDetails}" />
 					</c:forEach>
 				</div>
 				<!--详情 结束-->

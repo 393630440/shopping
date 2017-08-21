@@ -4,7 +4,6 @@ package tianrui.work.resp.goods;
  * 商品信息
  */
 public class GoodsInfoFindResp {
-
 	private String goodsId; // 商品ID
 	private String goodsName; // 商品名称
 	private String goodsImg; // 商品图片 图片地址
@@ -26,6 +25,8 @@ public class GoodsInfoFindResp {
 	private String classifyId; // 分类ID
 	private String classifyName; // 分类名称
 	private Long pubdate;// 发布时间
+
+	private String path;
 
 	public String getGoodsId() {
 		return goodsId;
@@ -212,6 +213,16 @@ public class GoodsInfoFindResp {
 
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
+	}
+
+	public String getPath() {
+		if (path == null)
+			path = "/resources/file/goodsinfo/" + goodsId + "/";
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }

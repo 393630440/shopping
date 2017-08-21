@@ -61,7 +61,7 @@ function innerHTML(data) {
 			html += "<li>";
 			html += "<div class=\"ssjg-tu\">";
 			html += "<a href=\"/wechat/shop/goods/goodsdetails?goodsId=" + data[a].goodsId + "\">";
-			html += "<img src=\"/getimg?imgPath=goodsInfo/" + data[a].goodsId + "/" + data[a].firstGoodsImg + "\">";
+			html += "<img src=\"" + data[a].path + data[a].firstGoodsImg + "\">";
 			html += "</a>";
 			html += "</div>";
 			html += "<h3>";

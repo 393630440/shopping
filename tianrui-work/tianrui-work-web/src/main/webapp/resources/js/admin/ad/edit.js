@@ -6,7 +6,7 @@ var mark = 0;
 
 function imgInit() {
 	var html = "<span id=\"img_span_showId\">";
-	html += "<img src=\"/getimg?imgPath=adInfo/" + img + "\" style=\"height: 45px; width: 50px;\"/>";
+	html += "<img src=\"/resources/file/adInfo/" + img + "\" style=\"height: 45px; width: 50px;\"/>";
 	html += "<button type=\"button\" onclick=\"imgDelete(1);\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\">";
 	html += "<span class=\"am-icon-trash-o\"></span>";
 	html += "</button>";
@@ -74,12 +74,20 @@ function edit() {
 		msg += "广告链接不能为空\n";
 
 	var img = $("#img").val(); // 广告图片
-	if (img == "")
+	if (img == "" || img == undefined)
 		msg += "广告图片不能为空\n";
 
 	if (msg != "") {
 		alert(msg);
 		return;
+	}
+
+	var imgStr = "";
+	if (mark == 1) {
+		imgStr = $("#img_showId")[0].src;
+		var size = imgStr.length;
+		var index = imgStr.indexOf("base64,") + 7;
+		imgStr = imgStr.substring(index, size);
 	}
 
 	$.ajax({
@@ -88,12 +96,13 @@ function edit() {
 		data : {
 			"id" : id,
 			"depict" : depict,
-			"url" : url
+			"url" : url,
+			"imgStr" : imgStr
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				if (mark == 1)
-					imgUpload();
+				// if (mark == 1)
+				// imgUpload();
 				window.location.href = "/admin/shop/ad/index";
 			}
 		},

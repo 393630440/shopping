@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tianrui.web.smvc.AutherWeb;
+import com.tianrui.web.util.FileUtils;
 import com.tianrui.web.util.LoggerUtils;
+import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.api.IGoodsInfoService;
@@ -79,6 +81,35 @@ public class AdminGoodsInfoAction {
 		req.setGoodsStatus("1");// 商品状态:1-已上架;2-已下架
 		req.setPubdate(pubdate);
 		Result rs = goodsInfoService.addGoodsInfo(req);
+		rs.setData(goodsId);
+		return rs;
+	}
+
+	/** 添加图片 */
+	@RequestMapping("addimg")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result addImg(GoodsInfoReq req) throws Exception {
+		LoggerUtils.info(log, "---------- [/admin/shop/goods/addimg]");
+
+		if (StringUtils.isNull(req.getGoodsImgStr()) && StringUtils.isNull(req.getGoodsDetailsStr()))
+			throw new Exception("没有图片怎么可以");
+
+		String folder = "goodsInfo/" + req.getGoodsId() + "/";
+		String imgData = "";
+		String prefix = "";
+		if (!StringUtils.isNull(req.getGoodsImgStr())) {
+			imgData = req.getGoodsImgStr();
+			prefix = "goodsImg_";
+		} else if (!StringUtils.isNull(req.getGoodsDetailsStr())) {
+			imgData = req.getGoodsDetailsStr();
+			prefix = "goodsDetails_";
+		}
+
+		String imgName = FileUtils.saveImgFile(folder, prefix, 0, ".png", imgData);
+
+		Result rs = Result.getSuccessful();
+		rs.setData(imgName);
 		return rs;
 	}
 

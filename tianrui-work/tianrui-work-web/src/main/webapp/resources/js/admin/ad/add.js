@@ -62,7 +62,7 @@ function add(buttonType) {
 		msg += "广告链接不能为空\n";
 
 	var img = $("#img").val(); // 广告图片
-	if (img == "")
+	if (img == "" || img == undefined)
 		msg += "广告图片不能为空\n";
 
 	if (msg != "") {
@@ -70,18 +70,24 @@ function add(buttonType) {
 		return;
 	}
 
+	var imgStr = $("#img_showId")[0].src;
+	var size = imgStr.length;
+	var index = imgStr.indexOf("base64,") + 7;
+	imgStr = imgStr.substring(index, size);
+
 	$.ajax({
 		url : "/admin/shop/ad/add",
 		type : "POST",
 		data : {
 			"depict" : depict,
 			"type" : type,
-			"url" : url
+			"url" : url,
+			"imgStr" : imgStr
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				var id = ret.data.id;
-				imgUpload(id);
+				// var id = ret.data.id;
+				// imgUpload(id);
 				if (buttonType == 2) {
 					window.location.href = "/admin/shop/ad/addpage";
 				} else {

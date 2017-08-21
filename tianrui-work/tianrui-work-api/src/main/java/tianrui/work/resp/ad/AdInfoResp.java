@@ -2,18 +2,14 @@ package tianrui.work.resp.ad;
 
 public class AdInfoResp {
 	private Integer id;
-
 	private String img;
-
 	private String url;
-
 	private String depict;
-
 	private String status;
-
 	private String type;
-
 	private Long pubdate;
+
+	private String path;
 
 	public AdInfoResp() {
 	}
@@ -77,4 +73,15 @@ public class AdInfoResp {
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
 	}
+
+	public String getPath() {
+		if (path == null)
+			path = "/resources/file/adInfo/";
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 }

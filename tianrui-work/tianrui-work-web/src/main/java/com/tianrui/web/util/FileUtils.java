@@ -18,6 +18,115 @@ public abstract class FileUtils {
 	private static Logger log = Logger.getLogger(FileUtils.class);
 
 	/**
+	 * 保存图片
+	 * 
+	 * @param folder
+	 *            图片路径标志：格式=[路径/路径/……]，以"/"结尾
+	 * @param prefix
+	 *            图片名称前缀
+	 * @param index
+	 *            图片名称下标
+	 * @param suffix
+	 *            图片名称后缀：如果为空，默认为[.png]格式的
+	 * @param imgData
+	 *            图片数据
+	 * @return
+	 * @throws Exception
+	 */
+	public static String saveImgFile(String folder, String prefix, Integer index, String suffix, String imgData)
+			throws Exception {
+		StringBuffer imgPath = new StringBuffer();
+		imgPath.append(FileUtils.getSysPath(1));
+		imgPath.append(folder);
+		File f = new File(imgPath.toString());
+		if (!f.isDirectory())
+			f.mkdirs();
+
+		if (StringUtils.isNull(suffix))
+			suffix = ".png";
+
+		Long timestamp = System.currentTimeMillis();
+		imgPath.append(prefix).append(timestamp).append("_").append(index).append(suffix);
+		boolean mark = FileUtils.convertStrByImg(imgPath.toString(), imgData);
+		if (!mark)
+			return "";
+
+		StringBuffer imgName = new StringBuffer();
+		// imgName.append(folder).append(prefix).append(timestamp).append("_").append(index).append(suffix);
+		imgName.append(prefix).append(timestamp).append("_").append(index).append(suffix);
+
+		return imgName.toString();
+	}
+
+	/**
+	 * 转换图片数据为图片文件
+	 * 
+	 * @param imgPath
+	 *            图片路径
+	 * @param imgData
+	 *            图片数据
+	 */
+	public static boolean convertStrByImg(String imgPath, String imgData) {
+		// Integer size = imgData.length();// 图片数据的总长度
+		// Integer index = imgData.indexOf("base64,") + 7;// 图片数据的开始下标
+		// String data = imgData.substring(index, size);// 图片数据：因默认数据头为[]
+		// if (data.equals(""))
+		// return false;
+
+		byte[] b = Base64.decode(imgData);
+		boolean mark = writeFileAll(imgPath, b, 0, b.length);
+
+		return mark;
+	}
+
+	/**
+	 * 获取图片路径
+	 * 
+	 * @param folder
+	 *            图片路径标志：格式=[路径/路径/……]，以"/"结尾
+	 * @param index
+	 *            图片名称下标
+	 * @param suffix
+	 *            图片后缀：如果为"null"，默认为".png"
+	 * @return 系统路径/resources/file/"mark"/时间戳_图片下标.图片后缀
+	 */
+	public static String getImgPath(String folder, Integer index, String suffix) {
+		StringBuffer imgPath = new StringBuffer();
+		imgPath.append(getSysPath(1));
+		imgPath.append(folder);
+		File f = new File(imgPath.toString());
+		if (!f.isDirectory())
+			f.mkdirs();
+
+		if (StringUtils.isNull(suffix))
+			suffix = ".png";
+
+		imgPath.append(System.currentTimeMillis()).append("_").append(index).append(suffix);
+		return imgPath.toString();
+	}
+
+	/**
+	 * 获取系统路径
+	 * 
+	 * @param mark
+	 *            路径标志：1-获取图片存放路径；
+	 * @return
+	 */
+	public static String getSysPath(Integer mark) {
+		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
+		path = path.substring(6, path.indexOf("WEB-INF"));
+		if (path.indexOf(":") == -1)
+			path = "/" + path;
+
+		if (mark != null) {
+			if (mark == 1)
+				path += "resources/file/";
+		}
+
+		return path;
+	}
+
+	/**
 	 * 获取文件夹下文件的绝对路径
 	 *
 	 * @param filePath

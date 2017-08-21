@@ -13,6 +13,8 @@ public class GoodsClassifyFindResp {
 	private Long pubdate;
 	private String icon;
 
+	private String path;
+
 	public String getClassifyId() {
 		return classifyId;
 	}
@@ -75,6 +77,16 @@ public class GoodsClassifyFindResp {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getPath() {
+		if (path == null)
+			path = "/resources/file/goodsClassify/";
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }

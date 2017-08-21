@@ -14,6 +14,9 @@ var oldGoodsDetailsList = [];
 function imgInit(oldDataStr, flag) {
 	var oldDataArr = oldDataStr.split("|");
 	for (var i = 0; i < oldDataArr.length; i++) {
+		if (oldDataArr[i] == null || oldDataArr[i] == "")
+			continue;
+
 		var img_showId = "";
 		var old_img_id = "";
 		if (flag == 1) {
@@ -32,7 +35,7 @@ function imgInit(oldDataStr, flag) {
 		}
 
 		var html = "<span id=\"old_img_showId_" + old_img_id;
-		html += "\"><img src=\"/getimg?imgPath=goodsInfo/" + goodsId + "/" + oldDataArr[i];
+		html += "\"><img src=\"" + path + oldDataArr[i];
 		html += "\" style=\"height: 45px; width: 50px;\"/><button type=\"button\" onclick=\"oldImgDelete('";
 		html += old_img_id + "'," + flag;
 		html += ");\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button></span>";
@@ -249,6 +252,8 @@ function edit() {
 }
 
 function upload() {
+	show();
+
 	var oldData = "";
 	var oldList = [];
 	var oldMap = {};
@@ -277,13 +282,22 @@ function upload() {
 			old = getOld(oldList, oldMap);
 
 		if (fileElementId.length > 0) {
-			imgUpload(fileElementId, mark, old);
+			// imgUpload(fileElementId, mark, old);
+			saveImg(i, old);
 		} else {
 			if (old != oldData) {
-				imgUpdate(old, mark);
+				// imgUpdate(old, mark);
+				if (mark == "goodsImg")
+					goodsImgName = old;
+				else if (mark == "goodsDetails")
+					goodsDetailsName = old;
 			}
 		}
 	}
+
+	exit();
+
+	hide();
 }
 
 function compare(oldData, oldList) {
@@ -299,8 +313,8 @@ function getOld(list, map) {
 	if (list.length > 0) {
 		for (var i = 0; i < list.length; i++) {
 			str += map[list[i]];
-			if (i < (list.length - 1))
-				str += "|";
+			// if (i < (list.length - 1))
+			str += "|";
 		}
 	}
 	return str;
@@ -352,6 +366,7 @@ function imgUpdate(old, mark) {
 	$.ajax({
 		url : "/admin/shop/goods/edit",
 		type : "POST",
+		async : false,
 		data : data,
 		success : function(ret) {
 
@@ -360,4 +375,123 @@ function imgUpdate(old, mark) {
 			alert(e);
 		}
 	});
+}
+
+function saveImg(flag, old) {
+	if (flag == 0) {
+		goodsImgName += old;
+		var goodsImgStrArr = [];// 商品图片数据
+		var img_showId = "goodsImg_img_showId";
+		for (var i = 0; i < goodsImgFileIds.length; i++) {
+			var input_Id_front = goodsImgFileIds[i];
+			var imgId = img_showId + "_" + input_Id_front;
+			var imgStr = $("#" + imgId)[0].src;
+			var size = imgStr.length;
+			var index = imgStr.indexOf("base64,") + 7;
+			var data = imgStr.substring(index, size);
+			goodsImgStrArr[goodsImgStrArr.length] = data;
+		}
+		uploadGoodsImg(goodsImgStrArr, 0);
+	} else if (flag == 1) {
+		goodsDetailsName += old;
+		var goodsDetailsStrArr = [];// 商品详情图片数据
+		var details_showid = "goodsDetails_img_showId";
+		for (var i = 0; i < goodsDetailsFileIds.length; i++) {
+			var input_Id_front = goodsDetailsFileIds[i];
+			var imgId = details_showid + "_" + input_Id_front;
+			var imgStr = $("#" + imgId)[0].src;
+			var size = imgStr.length;
+			var index = imgStr.indexOf("base64,") + 7;
+			var data = imgStr.substring(index, size);
+			goodsDetailsStrArr[goodsDetailsStrArr.length] = data;
+		}
+		uploadGoodsDetails(goodsDetailsStrArr, 0);
+	}
+}
+
+var goodsImgName = "";
+function uploadGoodsImg(goodsImgStrArr, index) {
+	$.ajax({
+		url : "/admin/shop/goods/addimg",
+		type : "POST",
+		async : false,
+		data : {
+			"goodsId" : goodsId,
+			"goodsImgStr" : goodsImgStrArr[index]
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+				goodsImgName += ret.data + "|";
+
+				index = index + 1;
+				if (index < goodsImgStrArr.length) {
+					uploadGoodsImg(goodsImgStrArr, index);
+				}
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+var goodsDetailsName = "";
+function uploadGoodsDetails(goodsDetailsStrArr, index) {
+	$.ajax({
+		url : "/admin/shop/goods/addimg",
+		type : "POST",
+		async : false,
+		data : {
+			"goodsId" : goodsId,
+			"goodsDetailsStr" : goodsDetailsStrArr[index]
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+				goodsDetailsName += ret.data + "|";
+
+				index = index + 1;
+				if (index < goodsDetailsStrArr.length) {
+					uploadGoodsDetails(goodsDetailsStrArr, index);
+				}
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+function exit() {
+	$.ajax({
+		url : "/admin/shop/goods/edit",
+		type : "POST",
+		async : false,
+		data : {
+			"goodsId" : goodsId,
+			"goodsImg" : goodsImgName,
+			"goodsDetails" : goodsDetailsName
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+// 显示隐藏层和弹出层
+function show() {
+	var tpscz = document.getElementById("tpscz-zx");
+	tpscz.style.display = "block"; // 显示隐藏层
+	tpscz.style.height = document.documentElement.clientHeight + "px"; // 设置隐藏层的高度为当前页面高度
+	// $("#tpscz-zx").css('display', 'block');
+	// $("#tpscz-zx").css("height", document.documentElement.clientHeight + "px");
+}
+
+// 去除隐藏层和弹出层
+function hide() {
+	document.getElementById("tpscz-zx").style.display = "none";
+	// $("#tpscz-zx").css('display', 'none');
 }

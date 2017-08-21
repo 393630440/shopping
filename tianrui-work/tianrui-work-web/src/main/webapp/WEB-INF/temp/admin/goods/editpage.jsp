@@ -16,12 +16,14 @@
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <link rel="stylesheet" href="/resources/admin/css/amazeui.min.css" />
 <link rel="stylesheet" href="/resources/admin/css/admin.css">
+<link rel="stylesheet" href="/resources/admin/css/admin.new.css">
 <script src="/resources/admin/js/jquery.min.js"></script>
 <script src="/resources/admin/js/app.js"></script>
 </head>
 <body>
 	<!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
 </head>
+	<img class="tpscz-zx" src="/resources/admin/i/tpscz.gif" id="tpscz-zx" />
 <body>
 	<!-- top-head begin -->
 	<jsp:include page="../common/top_head.jsp" flush="false"></jsp:include>
@@ -151,6 +153,7 @@
 		var goodsType = "${goodsInfo.goodsType}";
 		var oldGoodsImg = "${goodsInfo.goodsImg}";
 		var oldGoodsDetails = "${goodsInfo.goodsDetails}";
+		var path = "${goodsInfo.path}";
 	</script>
 
 	<!--[if lt IE 9]>

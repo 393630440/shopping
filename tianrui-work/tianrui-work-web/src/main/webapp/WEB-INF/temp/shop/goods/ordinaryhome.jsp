@@ -39,14 +39,14 @@
 			<div class="m_banner" id="owl">
 				<c:forEach var="adInfo" items="${adInfoList}">
 					<a href="${adInfo.url}" class="item">
-						<img src="/getimg?imgPath=adInfo/${adInfo.img}" style="height: 260px;">
+						<img src="${adInfo.path}${adInfo.img}" style="height: 260px;">
 					</a>
 				</c:forEach>
 			</div>
 			<div class="m_nav">
 				<c:forEach var="classify" items="${classifyList}">
 					<a href="/wechat/shop/goods/goodslist?goodsType=1&classifyId=${classify.classifyId}" class="item">
-						<img src="/getimg?imgPath=goodsClassify/${classify.classifyId}/${classify.icon}" style="width: 50px; height: 50px;">
+						<img src="${classify.path}${classify.icon}" style="width: 50px; height: 50px;">
 						<span>${classify.classifyName}</span>
 					</a>
 				</c:forEach>

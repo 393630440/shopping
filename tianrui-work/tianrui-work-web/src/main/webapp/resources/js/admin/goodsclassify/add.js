@@ -61,10 +61,19 @@ function add(buttonType) {
 	if (descr == "")
 		msg += "备注说明不能为空\n";
 
+	var img = $("#icon").val(); // 图标
+	if (img == "" || img == undefined)
+		msg += "图标不能为空\n";
+
 	if (msg != "") {
 		alert(msg);
 		return;
 	}
+
+	var iconStr = $("#icon_showId")[0].src;
+	var size = iconStr.length;
+	var index = iconStr.indexOf("base64,") + 7;
+	iconStr = iconStr.substring(index, size);
 
 	$.ajax({
 		url : "/admin/shop/goodsclassify/add",
@@ -72,12 +81,13 @@ function add(buttonType) {
 		data : {
 			"classifyName" : classifyName,
 			"goodsType" : goodsType,
-			"descr" : descr
+			"descr" : descr,
+			"iconStr" : iconStr
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				var id = ret.data.classifyId;
-				iconUpload(id);
+				// var id = ret.data.classifyId;
+				// iconUpload(id);
 				if (buttonType == 2)
 					window.location.href = "/admin/shop/goodsclassify/addpage";
 				else

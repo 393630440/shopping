@@ -116,7 +116,7 @@
 				<li>
 					<div class="ssjg-tu">
 						<a href="/wechat/shop/goods/goodsdetails?goodsId=${goods.goodsId}">
-							<img src="/getimg?imgPath=goodsInfo/${goods.goodsId}/${goods.firstGoodsImg}">
+							<img src="${goods.path}${goods.firstGoodsImg}">
 						</a>
 					</div>
 					<h3>

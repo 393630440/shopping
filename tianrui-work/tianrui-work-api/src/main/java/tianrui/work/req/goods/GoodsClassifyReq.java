@@ -16,6 +16,8 @@ public class GoodsClassifyReq {
 	private Long pubdate;
 	private String icon;
 
+	private String iconStr;
+
 	public GoodsClassifyReq() {
 	}
 
@@ -86,6 +88,14 @@ public class GoodsClassifyReq {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getIconStr() {
+		return iconStr;
+	}
+
+	public void setIconStr(String iconStr) {
+		this.iconStr = iconStr;
 	}
 
 }

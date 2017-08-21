@@ -210,7 +210,9 @@ public class GoodsInfoAction {
 			rspList = new ArrayList<>();
 			String[] arr = reqStr.split("[|]");
 			for (int i = 0; i < arr.length; i++) {
-				rspList.add(arr[i]);
+				String img = arr[i];
+				if (!StringUtils.isNull(img))
+					rspList.add(arr[i]);
 			}
 		}
 		return rspList;
