@@ -1,5 +1,7 @@
 package com.tianrui.web.action;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.LoggerUtils;
 
 import tianrui.work.api.IOrderInfoService;
+import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.order.OrderInfoFindReq;
 import tianrui.work.resp.order.OrderInfoFindResp;
 import tianrui.work.vo.PageTool;
@@ -35,8 +39,10 @@ public class OrderInfoAction {
 	/** 查询列表数据 */
 	@RequestMapping("querylist")
 	@ResponseBody
-	public Result queryList(OrderInfoFindReq req) throws Exception {
+	public Result queryList(OrderInfoFindReq req,HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/order/querylist]");
+		MemberInfo info = SessionManage.getSessionManage(request);
+		req.setMemberId(info.getMemberId());
 		PageTool<OrderInfoFindResp> page = orderInfoService.queryOrderInfoByList(req);
 		Result rs = Result.getSuccessful();
 		rs.setData(page);

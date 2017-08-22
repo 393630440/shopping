@@ -38,10 +38,10 @@ $(window).load(function() {
   </header>
   <!--header 结束-->
    <ul class="ui-tab-nav">
-         <li class="current"><a href="">未支付</a></li>
-         <li><a href="">待发货</a></li>
-         <li><a href="">运输中</a></li>
-         <li><a href="">已完成</a></li>
+         <li class="current payType"><a>未支付</a></li>
+         <li class="payType"><a>待发货</a></li>
+         <li class="payType"><a>运输中</a></li>
+         <li class="payType"><a>已完成</a></li>
    	</ul>
    	 <ul class="gwc-ul1" id="innerHml">
 
@@ -49,9 +49,26 @@ $(window).load(function() {
   </div>
 <input type="hidden" id="scrollPage">
 <input type="hidden" id="scrollTotal">
+<input type="hidden" id="orderStatus_req" value="1">
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
+$(".payType").on("click",function(){
+	$(".payType").removeClass('current');
+	$(this).addClass('current');
+	var hml = $(this).html();
+	if(hml == "<a>未支付</a>"){
+		$("#orderStatus_req").val("1");
+	}else if(hml == "<a>待发货</a>"){
+		$("#orderStatus_req").val("2");
+	}else if(hml == "<a>运输中</a>"){
+		$("#orderStatus_req").val("3");
+	}else if(hml == "<a>已完成</a>"){
+		$("#orderStatus_req").val("4");
+	}
+	init(0,0);
+});
+
 $(function(){
 	init(0,0);
 });
@@ -60,6 +77,7 @@ function init(pageNo,type){
 	$.ajax({
 		url:"/wechat/shop/order/querylist",
 		data:{"pageNo":pageNo,
+			"orderStatus":$("#orderStatus_req").val(),
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){
@@ -75,12 +93,22 @@ function innerHTML(data,type){
 		$("#innerHml").empty();
 	}
 	for (var a = 0; a < data.length; a++) {
+		var orderStatus = "";
+		if(data[a].orderStatus=="1"){
+			orderStatus = "未支付"
+		}else if(data[a].orderStatus=="2"){
+			orderStatus = "待发货"
+		}else if(data[a].orderStatus=="3"){
+			orderStatus = "运输中"
+		}else if(data[a].orderStatus=="4"){
+			orderStatus = "已完成"
+		}
 		var hml = "<a href='/wechat/shop/order/detailPage?id="+data[a].orderId+"'><div class='msg w'>"+
 				"<div class='msg_title'>"+
 				"<h1>订单编号："+data[a].orderCode+"</h1>"+
 				"<span>"+(new Date(data[a].creationTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 				"</div>"+
-				"<div class='msg_content'>未支付<span>订单金额："+data[a].orderAmount+"</span></div></div></a>";
+				"<div class='msg_content'>"+orderStatus+"<span>订单金额："+data[a].orderAmount+"</span></div></div></a>";
 		$("#innerHml").append(hml);
 	}
 }

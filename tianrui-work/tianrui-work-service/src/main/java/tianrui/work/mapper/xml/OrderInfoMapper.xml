@@ -39,6 +39,9 @@
 		<include refid="Base_Column_List" />
 		from order_info
 		<where>
+			<if test="memberId != null and memberId != ''">
+			  and member_id = #{memberId,jdbcType=VARCHAR}
+			</if>
 			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
 			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
 			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
@@ -52,6 +55,9 @@
 	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.OrderInfo">
 		select count(0) from order_info
 		<where>
+			<if test="memberId != null and memberId != ''">
+			  and member_id = #{memberId,jdbcType=VARCHAR}
+			</if>
 			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
 			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
 			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>

@@ -80,7 +80,7 @@ public class OrderInfoService implements IOrderInfoService {
 		find.setOrderCode(req.getOrderCode());
 		find.setGoodsType(req.getGoodsType());
 		find.setOrderStatus(req.getOrderStatus());
-
+		find.setMemberId(req.getMemberId());
 		List<OrderInfo> list = orderInfoMapper.selectByOrderInfo(find);
 		long a = orderInfoMapper.selectBycount(find);
 
