@@ -1,6 +1,7 @@
 package tianrui.work.mapper.java;
 
 import java.util.List;
+import java.util.Map;
 
 import tianrui.work.bean.ShoppingCart;
 
@@ -20,4 +21,6 @@ public interface ShoppingCartMapper {
 	List<ShoppingCart> selectByShoppingCart(ShoppingCart record);
 
 	long selectBycount(ShoppingCart record);
+
+	List<ShoppingCart> getOrderByGoodsInfoList(Map<String, String> queryCondition);
 }

@@ -14,11 +14,12 @@
 		<result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
 		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
 		<result column="shopping_cart_status" property="shoppingCartStatus" jdbcType="VARCHAR" />
+		<result column="express_fee" property="expressFee" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		shopping_cart_id, goods_id, member_id, order_id, creation_time, goods_name, goods_img,
-		goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status
+		goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -54,13 +55,24 @@
 		</where>
 	</select>
 
+	<select id="getOrderByGoodsInfoList" resultMap="BaseResultMap" parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from shopping_cart
+		<where>
+			<if test="goodsIds != null and goodsIds != ''">and goods_id in (#{goodsIds,jdbcType=VARCHAR})</if>
+			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">and shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from shopping_cart where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
 	</delete>
 
 	<insert id="insert" parameterType="tianrui.work.bean.ShoppingCart">
 		insert into shopping_cart (shopping_cart_id, goods_id, member_id, order_id, creation_time, goods_name,
-		goods_img, goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status)
+		goods_img, goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee)
 		values (#{shoppingCartId,jdbcType=INTEGER},
 		#{goodsId,jdbcType=VARCHAR},
 		#{memberId,jdbcType=VARCHAR},
@@ -72,7 +84,8 @@
 		#{goodsRedPacket,jdbcType=INTEGER},
 		#{goodsNum,jdbcType=INTEGER},
 		#{goodsType,jdbcType=VARCHAR},
-		#{shoppingCartStatus,jdbcType=VARCHAR})
+		#{shoppingCartStatus,jdbcType=VARCHAR},
+		#{expressFee,jdbcType=DOUBLE})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.ShoppingCart">
@@ -90,6 +103,7 @@
 			<if test="goodsNum != null and goodsNum != ''">goods_num,</if>
 			<if test="goodsType != null and goodsType != ''">goods_type,</if>
 			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">shopping_cart_status,</if>
+			<if test="expressFee != null and expressFee != ''">express_fee,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="shoppingCartId != null and shoppingCartId != ''">#{shoppingCartId,jdbcType=INTEGER},</if>
@@ -104,6 +118,7 @@
 			<if test="goodsNum != null and goodsNum != ''">#{goodsNum,jdbcType=INTEGER},</if>
 			<if test="goodsType != null and goodsType != ''">#{goodsType,jdbcType=VARCHAR},</if>
 			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">#{shoppingCartStatus,jdbcType=VARCHAR},</if>
+			<if test="expressFee != null and expressFee != ''">#{expressFee,jdbcType=DOUBLE},</if>
 		</trim>
 	</insert>
 
@@ -121,6 +136,7 @@
 			<if test="goodsNum != null and goodsNum != ''">goods_num = #{goodsNum,jdbcType=INTEGER},</if>
 			<if test="goodsType != null and goodsType != ''">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
 			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR},</if>
+			<if test="expressFee != null and expressFee != ''">express_fee = #{expressFee,jdbcType=DOUBLE},</if>
 		</set>
 		where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
 	</update>
@@ -137,7 +153,8 @@
 		goods_red_packet = #{goodsRedPacket,jdbcType=INTEGER},
 		goods_num = #{goodsNum,jdbcType=INTEGER},
 		goods_type =#{goodsType,jdbcType=VARCHAR},
-		shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR}
+		shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR},
+		express_fee = #{expressFee,jdbcType=DOUBLE},
 		where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
 	</update>
 

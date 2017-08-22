@@ -25,6 +25,8 @@ public class ShoppingCart {
 
 	private String shoppingCartStatus;
 
+	private Double expressFee;
+
 	private Integer pageNo;
 	private Integer pageSize;
 
@@ -139,4 +141,13 @@ public class ShoppingCart {
 	public void setShoppingCartStatus(String shoppingCartStatus) {
 		this.shoppingCartStatus = shoppingCartStatus == null ? null : shoppingCartStatus.trim();
 	}
+
+	public Double getExpressFee() {
+		return expressFee;
+	}
+
+	public void setExpressFee(Double expressFee) {
+		this.expressFee = expressFee;
+	}
+
 }

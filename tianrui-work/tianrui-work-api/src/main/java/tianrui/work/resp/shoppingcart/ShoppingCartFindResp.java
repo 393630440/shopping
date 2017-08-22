@@ -1,6 +1,7 @@
 package tianrui.work.resp.shoppingcart;
 
 public class ShoppingCartFindResp {
+	private Integer shoppingCartId;
 	private String goodsId; // 商品ID
 	private String memberId; // 会员ID
 	private String orderId; // 订单ID
@@ -12,6 +13,26 @@ public class ShoppingCartFindResp {
 	private Integer goodsNum; // 商品数量
 	private String goodsType; // 商品类型:1-大众商品;2-宏包商品
 	private String shoppingCartStatus; // 购物车商品状态:1-已添加;2-已购买;3-已删除
+
+	private Double expressFee; // 快递费
+	private String price;// 显示的价格
+
+	private String path;
+
+	public Double getGoodsSubtotal() {
+		Double goodsSubtotal = 0d;
+		if (goodsNum != null && goodsNum > 0 && goodsPrice != null && goodsPrice > 0)
+			goodsSubtotal = goodsNum * goodsPrice;
+		return goodsSubtotal;
+	}
+
+	public Integer getShoppingCartId() {
+		return shoppingCartId;
+	}
+
+	public void setShoppingCartId(Integer shoppingCartId) {
+		this.shoppingCartId = shoppingCartId;
+	}
 
 	public String getGoodsId() {
 		return goodsId;
@@ -62,7 +83,7 @@ public class ShoppingCartFindResp {
 	}
 
 	public Double getGoodsPrice() {
-		return goodsPrice;
+		return goodsPrice = goodsPrice == null ? 0d : goodsPrice;
 	}
 
 	public void setGoodsPrice(Double goodsPrice) {
@@ -70,7 +91,7 @@ public class ShoppingCartFindResp {
 	}
 
 	public Integer getGoodsRedPacket() {
-		return goodsRedPacket;
+		return goodsRedPacket = goodsRedPacket == null ? 0 : goodsRedPacket;
 	}
 
 	public void setGoodsRedPacket(Integer goodsRedPacket) {
@@ -78,7 +99,7 @@ public class ShoppingCartFindResp {
 	}
 
 	public Integer getGoodsNum() {
-		return goodsNum;
+		return goodsNum = goodsNum == null ? 0 : goodsNum;
 	}
 
 	public void setGoodsNum(Integer goodsNum) {
@@ -100,4 +121,40 @@ public class ShoppingCartFindResp {
 	public void setShoppingCartStatus(String shoppingCartStatus) {
 		this.shoppingCartStatus = shoppingCartStatus == null ? null : shoppingCartStatus.trim();
 	}
+
+	public Double getExpressFee() {
+		return expressFee = expressFee == null ? 0d : expressFee;
+	}
+
+	public void setExpressFee(Double expressFee) {
+		this.expressFee = expressFee;
+	}
+
+	public String getPath() {
+		if (path == null)
+			path = "/resources/file/goodsInfo/" + goodsId + "/";
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getPrice() {
+		if (goodsType == null || goodsType.equals("")) {
+		} else {
+			if (goodsType.equals("1")) {
+				price = "￥" + goodsPrice;
+			} else if (goodsType.equals("2")) {
+				price = "￥" + goodsPrice + " + " + goodsRedPacket + "宏包";
+			} else {
+			}
+		}
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
 }

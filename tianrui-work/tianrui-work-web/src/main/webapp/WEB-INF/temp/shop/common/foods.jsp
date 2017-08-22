@@ -26,7 +26,7 @@ a {
             	<a href="#" class="atu1"><img src="/resources/shop/images/sjsc-17.png"></a>
             	<a href="#" class="atu2"><img src="/resources/shop/images/sjsc-17-1.png"></a>
             </div>
-            <a href="#" class="qu-ul1a">购物车</a>
+            <a href="/wechat/shop/shoppingcart/shoppingcartlist" class="qu-ul1a">购物车</a>
         </li>
     	<li class="foods_04">
         	<div class="qu-tu1">

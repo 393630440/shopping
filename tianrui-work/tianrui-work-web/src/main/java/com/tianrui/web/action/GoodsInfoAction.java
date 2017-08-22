@@ -196,6 +196,7 @@ public class GoodsInfoAction {
 		req.setGoodsRedPacket(goodsInfoFindResp.getRedPacket());
 		req.setGoodsType(goodsInfoFindResp.getGoodsType());
 		req.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
+		req.setExpressFee(goodsInfoFindResp.getExpressFee());
 		Result rs = shoppingCartService.addShoppingCart(req);
 
 		// 更新商品库存和销量

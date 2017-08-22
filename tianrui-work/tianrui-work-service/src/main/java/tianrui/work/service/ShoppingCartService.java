@@ -2,6 +2,7 @@ package tianrui.work.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,20 @@ public class ShoppingCartService implements IShoppingCartService {
 		find.setShoppingCartStatus(req.getShoppingCartStatus());
 
 		List<ShoppingCart> list = shoppingCartMapper.selectByShoppingCart(find);
+
+		List<ShoppingCartFindResp> resp = new ArrayList<ShoppingCartFindResp>();
+		for (ShoppingCart bean : list) {
+			ShoppingCartFindResp sp = new ShoppingCartFindResp();
+			PropertyUtils.copyProperties(sp, bean);
+			resp.add(sp);
+		}
+
+		return resp;
+	}
+
+	@Override
+	public List<ShoppingCartFindResp> getOrderByGoodsInfoList(Map<String, String> queryCondition) throws Exception {
+		List<ShoppingCart> list = shoppingCartMapper.getOrderByGoodsInfoList(queryCondition);
 
 		List<ShoppingCartFindResp> resp = new ArrayList<ShoppingCartFindResp>();
 		for (ShoppingCart bean : list) {

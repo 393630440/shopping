@@ -1,6 +1,7 @@
 package tianrui.work.req.shoppingcart;
 
 public class ShoppingCartFindReq {
+	private Integer shoppingCartId;
 	private String goodsId; // 商品ID
 	private String memberId; // 会员ID
 	private String orderId; // 订单ID
@@ -12,6 +13,8 @@ public class ShoppingCartFindReq {
 	private Integer goodsNum; // 商品数量
 	private String goodsType; // 商品类型:1-大众商品;2-宏包商品
 	private String shoppingCartStatus; // 购物车商品状态:1-已添加;2-已购买;3-已删除
+
+	private Double expressFee; // 快递费
 
 	private Integer pageNo;
 	private Integer pageSize;
@@ -30,6 +33,14 @@ public class ShoppingCartFindReq {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public Integer getShoppingCartId() {
+		return shoppingCartId;
+	}
+
+	public void setShoppingCartId(Integer shoppingCartId) {
+		this.shoppingCartId = shoppingCartId;
 	}
 
 	public String getGoodsId() {
@@ -118,5 +129,13 @@ public class ShoppingCartFindReq {
 
 	public void setShoppingCartStatus(String shoppingCartStatus) {
 		this.shoppingCartStatus = shoppingCartStatus == null ? null : shoppingCartStatus.trim();
+	}
+
+	public Double getExpressFee() {
+		return expressFee = expressFee == null ? 0d : expressFee;
+	}
+
+	public void setExpressFee(Double expressFee) {
+		this.expressFee = expressFee;
 	}
 }

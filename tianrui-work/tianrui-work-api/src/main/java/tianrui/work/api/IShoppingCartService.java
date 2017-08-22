@@ -1,6 +1,7 @@
 package tianrui.work.api;
 
 import java.util.List;
+import java.util.Map;
 
 import tianrui.work.req.shoppingcart.ShoppingCartFindReq;
 import tianrui.work.req.shoppingcart.ShoppingCartReq;
@@ -27,5 +28,8 @@ public interface IShoppingCartService {
 
 	/** 查询购物车集合信息 */
 	List<ShoppingCartFindResp> getShoppingCartList(ShoppingCartFindReq req) throws Exception;
+
+	/** 查询要生成订单的商品信息 */
+	List<ShoppingCartFindResp> getOrderByGoodsInfoList(Map<String, String> queryCondition) throws Exception;
 
 }

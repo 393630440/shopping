@@ -168,3 +168,38 @@
 	background-position: -170px -15px;
 	margin-left: 4px;
 }
+
+.gwc-ft-zx {
+	width: 100%;
+	padding: 8px 0;
+	background: #E4E4E4;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	margin-bottom: 3%;
+}
+
+.gwc-ft-zx p {
+	float: left;
+	line-height: 30px;
+	font-size: 12px;
+	color: #4A4A4A;
+	margin-left: 10px;
+}
+
+.gwc-ft-zx p span {
+	color: #D12424;
+}
+
+.gwc-ft-zx button {
+	display: block;
+	width: 55px;
+	height: 30px;
+	background: #4eabe8;
+	border: 0;
+	font-size: 12px;
+	color: #fff;
+	float: right;
+	border-radius: 5px;
+	margin-right: 10px;
+}
