@@ -14,6 +14,7 @@
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
         <li><a href="/admin/shop/order/index">订单列表</a></li>
+        <li><a href="/admin/shop/order/waitsendlist">待发货订单列表</a></li>
         <li><a href="/admin/shop/order/refundlist">退货订单列表</a></li>
       </ul>
       <h3 class="am-icon-cart-plus" id="member_class"><em></em> 微信会员管理</h3>

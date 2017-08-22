@@ -217,7 +217,7 @@ public class GoodsInfoFindResp {
 
 	public String getPath() {
 		if (path == null)
-			path = "/resources/file/goodsinfo/" + goodsId + "/";
+			path = "/resources/file/goodsInfo/" + goodsId + "/";
 		return path;
 	}
 

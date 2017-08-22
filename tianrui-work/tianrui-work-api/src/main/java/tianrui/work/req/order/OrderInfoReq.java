@@ -27,10 +27,12 @@ public class OrderInfoReq {
 	private String detailAddress; // 详细地址
 	private Long refundApplyTime;// 退货申请时间
 	private Long refundAuditTime;// 退货审核时间
+	private Long sendTime;// 发货时间
 
 	private String creationTimeStr; // 创建时间
 	private String refundApplyTimeStr;// 退货申请时间
 	private String refundAuditTimeStr;// 退货审核时间
+	private String sendTimeStr;// 发货时间
 
 	public String getOrderId() {
 		return orderId;
@@ -176,6 +178,30 @@ public class OrderInfoReq {
 		this.refundAuditTime = refundAuditTime;
 	}
 
+	public Long getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(Long sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public void setCreationTimeStr(String creationTimeStr) {
+		this.creationTimeStr = creationTimeStr;
+	}
+
+	public void setRefundApplyTimeStr(String refundApplyTimeStr) {
+		this.refundApplyTimeStr = refundApplyTimeStr;
+	}
+
+	public void setRefundAuditTimeStr(String refundAuditTimeStr) {
+		this.refundAuditTimeStr = refundAuditTimeStr;
+	}
+
+	public void setSendTimeStr(String sendTimeStr) {
+		this.sendTimeStr = sendTimeStr;
+	}
+
 	public String getCreationTimeStr() {
 		try {
 			if (creationTime != null) {
@@ -210,6 +236,18 @@ public class OrderInfoReq {
 			refundAuditTimeStr = "";
 		}
 		return refundAuditTimeStr;
+	}
+
+	public String getSendTimeStr() {
+		try {
+			if (sendTime != null) {
+				Date date = new Date(sendTime);
+				sendTimeStr = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
+			}
+		} catch (Exception e) {
+			sendTimeStr = "";
+		}
+		return sendTimeStr;
 	}
 
 }

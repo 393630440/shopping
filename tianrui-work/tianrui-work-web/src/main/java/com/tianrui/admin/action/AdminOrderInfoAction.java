@@ -81,7 +81,7 @@ public class AdminOrderInfoAction {
 		return rs;
 	}
 
-	/** 跳转退款列表页面 */
+	/** 跳转退款审核页面 */
 	@RequestMapping("auditpage")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView auditPage(OrderInfoReq req) throws Exception {
@@ -92,13 +92,58 @@ public class AdminOrderInfoAction {
 		return view;
 	}
 
-	/** 查询退款数据 */
+	/** 审核 */
 	@RequestMapping("audit")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
 	public Result audit(OrderInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/order/audit]");
 		req.setRefundAuditTime(System.currentTimeMillis());
+		Result rs = orderInfoService.editOrderInfo(req);
+		return rs;
+	}
+
+	/** 跳转待发货列表页面 */
+	@RequestMapping("waitsendlist")
+	@AutherWeb(typeString = "admin")
+	public ModelAndView waitsendList() throws Exception {
+		LoggerUtils.info(log, "---------- [/admin/shop/order/waitsendlist]");
+		ModelAndView view = new ModelAndView();
+		view.setViewName("admin/order/waitsendlist");
+		return view;
+	}
+
+	/** 查询待发货列表数据 */
+	@RequestMapping("querywaitsendlist")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result queryWaitSendList(OrderInfoFindReq req) throws Exception {
+		LoggerUtils.info(log, "---------- [/admin/shop/order/querywaitsendlist]");
+		req.setOrderStatus("2");// 退款申请
+		PageTool<OrderInfoFindResp> page = orderInfoService.queryOrderInfoByList(req);
+		Result rs = Result.getSuccessful();
+		rs.setData(page);
+		return rs;
+	}
+
+	/** 跳转待发货页面 */
+	@RequestMapping("sendpage")
+	@AutherWeb(typeString = "admin")
+	public ModelAndView sendPage(OrderInfoReq req) throws Exception {
+		LoggerUtils.info(log, "---------- [/admin/shop/order/sendpage]");
+		ModelAndView view = new ModelAndView();
+		view.addObject("orderInfo", orderInfoService.queryOrderInfoByOne(req.getOrderId()));
+		view.setViewName("admin/order/sendpage");
+		return view;
+	}
+
+	/** 发货 */
+	@RequestMapping("send")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result send(OrderInfoReq req) throws Exception {
+		LoggerUtils.info(log, "---------- [/admin/shop/order/send]");
+		req.setSendTime(System.currentTimeMillis());
 		Result rs = orderInfoService.editOrderInfo(req);
 		return rs;
 	}

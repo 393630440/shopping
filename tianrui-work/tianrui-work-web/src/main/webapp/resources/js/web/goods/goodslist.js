@@ -3,7 +3,7 @@ $(function() {
 });
 
 var pageNo = 0;
-var pageSize = 2;
+var pageSize = 10;
 
 function query() {
 	var goodsName = $("#goodsName").val();

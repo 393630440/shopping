@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.LoggerUtils;
 import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IAdInfoService;
 import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.api.IGoodsInfoService;
+import tianrui.work.api.IMemberFootprintService;
 import tianrui.work.api.IShoppingCartService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.ad.AdInfoReq;
+import tianrui.work.req.foot.MemberFootprintSaveReq;
 import tianrui.work.req.goods.GoodsClassifyReq;
 import tianrui.work.req.goods.GoodsInfoFindReq;
 import tianrui.work.req.goods.GoodsInfoReq;
@@ -45,6 +48,8 @@ public class GoodsInfoAction {
 	IAdInfoService adInfoService;
 	@Autowired
 	IShoppingCartService shoppingCartService;
+	@Autowired
+	IMemberFootprintService memberFootprintService;
 
 	/** 跳转商品首页页面 */
 	@RequestMapping("goodshome")
@@ -85,7 +90,7 @@ public class GoodsInfoAction {
 
 		if (req.getPageNo() == null) {
 			req.setPageNo(0);
-			req.setPageSize(2);
+			req.setPageSize(10);
 		}
 
 		ModelAndView view = new ModelAndView();
@@ -145,13 +150,25 @@ public class GoodsInfoAction {
 
 	/** 跳转商品详情页面 */
 	@RequestMapping("goodsdetails")
-	public ModelAndView goodsDetails(GoodsInfoReq req) throws Exception {
+	public ModelAndView goodsDetails(HttpServletRequest request, GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodsdetails]");
 		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
 
 		// 更新浏览记录数
 		req.setBrowseNum(goodsInfo.getBrowseNum() + 1);
 		goodsInfoService.editGoodsInfo(req);
+
+		// 会员足迹信息保存
+		MemberInfo member = SessionManage.getSessionManage(request);
+		MemberFootprintSaveReq memberFootprintSaveReq = new MemberFootprintSaveReq();
+		memberFootprintSaveReq.setMemberId(member.getMemberId());// 会员ID
+		memberFootprintSaveReq.setGoodsId(goodsInfo.getGoodsId());// 商品ID
+		memberFootprintSaveReq.setFfType("2");// 1-关注;2-足迹
+		memberFootprintSaveReq.setSeetheTime(System.currentTimeMillis());// 查看时间
+		memberFootprintSaveReq.setGoodsName(goodsInfo.getGoodsName());// 商品名称
+		memberFootprintSaveReq.setGoodsImg(goodsInfo.getGoodsImg());// 商品图片
+		memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
+		memberFootprintService.save(memberFootprintSaveReq);
 
 		ModelAndView view = new ModelAndView();
 		view.addObject("goodsInfo", goodsInfo);
@@ -167,9 +184,7 @@ public class GoodsInfoAction {
 	@ResponseBody
 	public Result addGoods(HttpServletRequest request, ShoppingCartReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/addgoods]");
-		// TODO
-		// MemberInfo member = SessionManage.getSessionManage(request);
-		MemberInfo member = getMemberInfo();
+		MemberInfo member = SessionManage.getSessionManage(request);
 		GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
 
 		// 添加购物车
@@ -184,23 +199,17 @@ public class GoodsInfoAction {
 		Result rs = shoppingCartService.addShoppingCart(req);
 
 		// 更新商品库存和销量
-		Integer inventory = goodsInfoFindResp.getInventory() - req.getGoodsNum();// 库存
-		Integer salesvolume = goodsInfoFindResp.getSalesvolume() + req.getGoodsNum();// 销量
-		Integer buyNum = goodsInfoFindResp.getBuyNum() + req.getGoodsNum(); // 购买数量
-		GoodsInfoReq goodsInfoReq = new GoodsInfoReq();
-		goodsInfoReq.setGoodsId(goodsInfoFindResp.getGoodsId());
-		goodsInfoReq.setInventory(inventory);
-		goodsInfoReq.setSalesvolume(salesvolume);
-		goodsInfoReq.setBuyNum(buyNum);
-		rs = goodsInfoService.editGoodsInfo(goodsInfoReq);
+		// Integer inventory = goodsInfoFindResp.getInventory() - req.getGoodsNum();// 库存
+		// Integer salesvolume = goodsInfoFindResp.getSalesvolume() + req.getGoodsNum();// 销量
+		// Integer buyNum = goodsInfoFindResp.getBuyNum() + req.getGoodsNum(); // 购买数量
+		// GoodsInfoReq goodsInfoReq = new GoodsInfoReq();
+		// goodsInfoReq.setGoodsId(goodsInfoFindResp.getGoodsId());
+		// goodsInfoReq.setInventory(inventory);
+		// goodsInfoReq.setSalesvolume(salesvolume);
+		// goodsInfoReq.setBuyNum(buyNum);
+		// rs = goodsInfoService.editGoodsInfo(goodsInfoReq);
 
 		return rs;
-	}
-
-	public MemberInfo getMemberInfo() {
-		MemberInfo memberInfo = new MemberInfo();
-		memberInfo.setMemberId("123456789");
-		return memberInfo;
 	}
 
 	/** 解析图片字段 */
