@@ -16,7 +16,6 @@ import com.tianrui.web.util.CommonUtil;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.member.MemberInfoSaveReq;
-import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.Result;
 
 /**

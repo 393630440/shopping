@@ -1,4 +1,4 @@
-package com.tianrui.web.util;
+package tianrui.work.util;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.tianrui.web.util.MyX509TrustManager;
-import com.tianrui.web.util.Tokens;
 
 import tianrui.work.comm.Constant;
 
@@ -133,6 +131,26 @@ public class CommonUtil {
 				log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.get("errcode"), jsonObject.getString("errmsg"));
 			}
 		}
+		return token;
+	}
+	
+	public static String getToken(String appid,String APPSECRET){
+		String token = "";
+		String requestUrl = token_url.replace("APPID", appid).replace("APPSECRET", APPSECRET);
+		// 发起GET请求获取凭证
+		JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
+		System.out.println(jsonObject.toString());
+		if (null != jsonObject) {
+			try {
+				token=jsonObject.getString("access_token");
+//				token.setExpiresIn(jsonObject.get("expires_in"));
+			} catch (JSONException e) {
+				token = null;
+				// 获取token失败
+				log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.get("errcode"), jsonObject.getString("errmsg"));
+			}
+		}
+		
 		return token;
 	}
 }

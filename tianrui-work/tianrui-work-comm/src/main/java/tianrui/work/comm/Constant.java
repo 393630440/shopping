@@ -17,6 +17,15 @@ public class Constant {
 	public static String WEIXIN_PAY_JSAPI="JSAPI";
 	//二维码支付
 	public static String WEIXIN_PAY_NATIVE="NATIVE";
+	//宏包交易消息推送
+	public static String MESSAGE_HPAO="O7GpLHKkc22UaQgDr9M6Etb1Ax3qm1am06b_gQe6t6c";
+	//订单交易消息推送
+	public static String MESSAGE_DINGD="Jig2U3VnpkZFzWvUKOsoyK8hwDSNcbKY4QBpDtZBC6Q";
+	//订单创建成功
+	public static String MESSAGE_DSUCCE="aDYL8Y1Sy9AIvU2sm7q3Hf0_bZDXGuw51o4D43T7Kqg";
+	//网购成功
+	public static String MESSAGE_WDING="bNj7THDZI_POkyWBq2aSlADL5tQ89bI7P_eZEjXpXpU";
+
 
 	public static String getWEIXIN_TOKEN() {
 		return WEIXIN_TOKEN;
