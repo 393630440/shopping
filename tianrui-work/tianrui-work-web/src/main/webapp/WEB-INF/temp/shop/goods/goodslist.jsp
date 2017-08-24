@@ -170,8 +170,11 @@
 		<!-- foods -->
 		<jsp:include page="../common/foods.jsp"></jsp:include>
 		<!-- foods -->
+ 	<input type="hidden" id="scrollPage">
+    <input type="hidden" id="scrollTotal">
 	</div>
 </body>
+<script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
 	$(".foods_04").addClass("current");
 	var classifyId = "${classifyId}";

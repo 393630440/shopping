@@ -23,7 +23,7 @@ function query() {
 			success : function(ret) {
 				if (ret.code == "000000") {
 					$("#goodsList_showId").empty();
-					innerHTML(ret.data);
+					innerHTML(ret.data.list);
 				}
 			}
 		});
@@ -48,7 +48,7 @@ function toLoad() {
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				innerHTML(ret.data);
+				innerHTML(ret.data.list);
 			}
 		}
 	});

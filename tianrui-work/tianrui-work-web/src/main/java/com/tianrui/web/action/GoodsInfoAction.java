@@ -89,10 +89,8 @@ public class GoodsInfoAction {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodslist]");
 		req.setGoodsStatus("1");
 
-		if (req.getPageNo() == null) {
-			req.setPageNo(0);
-			req.setPageSize(10);
-		}
+		req.setPageNo(0);
+		req.setPageSize(10);
 
 		ModelAndView view = new ModelAndView();
 		view.addObject("classifyId", req.getClassifyId());
