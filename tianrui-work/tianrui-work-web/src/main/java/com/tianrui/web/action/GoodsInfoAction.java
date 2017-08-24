@@ -33,6 +33,7 @@ import tianrui.work.req.shoppingcart.ShoppingCartReq;
 import tianrui.work.resp.ad.AdInfoResp;
 import tianrui.work.resp.goods.GoodsClassifyFindResp;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
+import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 
 @Controller
@@ -131,7 +132,9 @@ public class GoodsInfoAction {
 	public Result toLoadGoodsList(GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/toloadgoodslist]");
 		String pageSort = req.getPageSort();
-		if (pageSort != null || !"".equals(pageSort)) {
+		
+//		if (pageSort != null || !"".equals(pageSort)) {
+		if (!StringUtils.isNull(pageSort)) {
 			if (pageSort.equals("1"))
 				req.setPageSort("salesvolume desc, goods_price desc, red_packet desc");
 			else if (pageSort.equals("2"))
@@ -142,7 +145,7 @@ public class GoodsInfoAction {
 				req.setPageSort("goods_price asc, red_packet asc");
 		}
 
-		List<GoodsInfoFindResp> goodsList = goodsInfoService.getGoodsInfoList(req);
+		PageTool<GoodsInfoFindResp> goodsList = goodsInfoService.queryGoodsInfoByList(req);
 		Result rs = Result.getSuccessful();
 		rs.setData(goodsList);
 		return rs;
@@ -166,7 +169,7 @@ public class GoodsInfoAction {
 		memberFootprintSaveReq.setFfType("2");// 1-关注;2-足迹
 		memberFootprintSaveReq.setSeetheTime(System.currentTimeMillis());// 查看时间
 		memberFootprintSaveReq.setGoodsName(goodsInfo.getGoodsName());// 商品名称
-		memberFootprintSaveReq.setGoodsImg(goodsInfo.getGoodsImg());// 商品图片
+		memberFootprintSaveReq.setGoodsImg("/resources/file/goodsInfo/"+goodsInfo.getGoodsId()+"/"+goodsInfo.getFirstGoodsImg());// 商品图片
 		memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
 		memberFootprintService.save(memberFootprintSaveReq);
 

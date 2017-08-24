@@ -8,7 +8,6 @@ import tianrui.work.api.IWeChatMassageService;
 import tianrui.work.comm.Constant;
 import tianrui.work.req.massage.MessageReq;
 import tianrui.work.util.CommonUtil;
-import tianrui.work.util.Tokens;
 import tianrui.work.vo.Result;
 
 @Service

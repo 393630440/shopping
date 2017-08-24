@@ -88,11 +88,11 @@ function innerHTML(date,type){
 		}else if(date[a].ffType=="2"){
 			ff = "我的足迹";
 		}
-		var hml = "<li><div class='hwc-tu f-l'><img src='"+date[a].goodsImg+"'></div>"+
+		var hml = "<a href='/wechat/shop/goods/goodsdetails?goodsId="+date[a].goodsId+"'><li><div class='hwc-tu f-l'><img src='"+date[a].goodsImg+"'></div>"+
 		       "<div class='gwc-md f-l'><h3>"+creType+ff+"</h3>"+
 		       "<p class='gwc-p1'>商品单价：<span>￥"+date[a].goodsPrice+"</span></p>"+
 		       "<p class='gwc-p2'>"+(new Date(date[a].createtime).format("yyyy-MM-dd hh:mm:ss"))+"</p>"+
-		       "</div><div style='clear:both;'></div></li>";
+		       "</div><div style='clear:both;'></div></li></a>";
 		$("#innerHml").append(hml);
 	}
 }

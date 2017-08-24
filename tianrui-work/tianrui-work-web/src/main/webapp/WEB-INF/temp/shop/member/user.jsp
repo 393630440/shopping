@@ -69,9 +69,9 @@
               </a>
             </li>
             <li>
-            	<a href="/wechat/shop/creditor/selectPage">
+            	<a href="/wechat/shop/shoppingcart/shoppingcartlist">
                 	<div class="u_nav_icon dingdan"></div>
-                    <div class="u_nav_name">信息广场</div>
+                    <div class="u_nav_name">购物车</div>
                     <div class="nt_icon"></div>
                     <div class="u_money"><i></i></div>
               </a>

@@ -49,11 +49,11 @@ public class ShoppingCartAction {
 	@RequestMapping("shoppingcartlist")
 	public ModelAndView goodsDetails(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/shoppingcartlist]");
-//		MemberInfo member = SessionManage.getSessionManage(request);
+		MemberInfo member = SessionManage.getSessionManage(request);
 
 		ShoppingCartFindReq req = new ShoppingCartFindReq();
-//		req.setMemberId(member.getMemberId());
-		req.setMemberId("123456789");
+		req.setMemberId(member.getMemberId());
+//		req.setMemberId("123456789");
 		req.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
 
 		List<ShoppingCartFindResp> goodsInfoList = shoppingCartService.getShoppingCartList(req);
