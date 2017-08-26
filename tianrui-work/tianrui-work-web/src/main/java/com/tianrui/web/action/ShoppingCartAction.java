@@ -24,6 +24,7 @@ import com.tianrui.web.util.LoggerUtils;
 import tianrui.work.api.IGoodsInfoService;
 import tianrui.work.api.IOrderInfoService;
 import tianrui.work.api.IShoppingCartService;
+import tianrui.work.bean.MemberAddressNew;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.mapper.java.MemberAddressNewMapper;
 import tianrui.work.req.goods.GoodsInfoReq;
@@ -31,6 +32,7 @@ import tianrui.work.req.order.OrderInfoReq;
 import tianrui.work.req.shoppingcart.ShoppingCartFindReq;
 import tianrui.work.req.shoppingcart.ShoppingCartReq;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
+import tianrui.work.resp.order.OrderInfoFindResp;
 import tianrui.work.resp.shoppingcart.ShoppingCartFindResp;
 import tianrui.work.vo.Result;
 import tianrui.work.vo.UUIDUtil;
@@ -54,8 +56,11 @@ public class ShoppingCartAction {
 	public ModelAndView goodsDetails(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/shoppingcartlist]");
 		MemberInfo member = SessionManage.getSessionManage(request);
+<<<<<<< HEAD
 //		MemberInfo member = new MemberInfo();
 //		member.setMemberId("123456789");
+=======
+>>>>>>> 9ce4864f5f65b2771fbd3f67df58aee02f121f16
 
 		ShoppingCartFindReq req = new ShoppingCartFindReq();
 		req.setMemberId(member.getMemberId());
@@ -101,9 +106,13 @@ public class ShoppingCartAction {
 	@ResponseBody
 	public Result placeOrder(HttpServletRequest request, String shoppingCartInfo) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/placeorder]");
+<<<<<<< HEAD
 		 MemberInfo member = SessionManage.getSessionManage(request);
 //		MemberInfo member = new MemberInfo();
 //		member.setMemberId("123456789");
+=======
+		MemberInfo member = SessionManage.getSessionManage(request);
+>>>>>>> 9ce4864f5f65b2771fbd3f67df58aee02f121f16
 
 		String orderId = UUIDUtil.getUUID();
 		String orderCode = DateUtils.format(new Date(), DateUtils.DATE_YYYYMMDDHHMISS);
@@ -188,16 +197,60 @@ public class ShoppingCartAction {
 		return rs;
 	}
 
-	/** 跳转购物车列表页面 */
-	@RequestMapping("orderpage")
-	public ModelAndView orderPage(String orderId) throws Exception {
-		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/orderpage]");
-
-		// TODO
+	/** 跳转到未付款订单详情页面 */
+	@RequestMapping("unpaidorderpage")
+	public ModelAndView unpaidOrderPage(String orderId, String addressId) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/unpaidorderpage]");
+		OrderInfoFindResp orderInfo = orderInfoService.queryOrderInfoByOne(orderId);
+		List<ShoppingCartFindResp> goodsInfoList = shoppingCartService.getListByOrderId(orderInfo.getOrderId());
+		MemberAddressNew addressInfo = null;
+		if (!addressId.equals("0"))
+			addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
 
 		ModelAndView view = new ModelAndView();
 		view.addObject("orderId", orderId);
-		view.setViewName("shop/shoppingcart/orderpage");
+		view.addObject("orderInfo", orderInfo);
+		view.addObject("goodsInfoList", goodsInfoList);
+		view.addObject("addressId", addressId);
+		view.addObject("addressInfo", addressInfo);
+		view.setViewName("shop/shoppingcart/unpaidorderpage");
+		return view;
+	}
+
+	/** 生成订单 */
+	@RequestMapping("edit")
+	@ResponseBody
+	public Result edit(String orderId, String addressId, String buyerWord) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/edit]");
+		MemberAddressNew addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
+
+		OrderInfoReq req = new OrderInfoReq();
+		req.setOrderId(orderId); // 订单ID
+		req.setBuyerWord(buyerWord); // 买家留言
+		req.setRecipients(addressInfo.getRecipients()); // 收件人
+		req.setPhone(addressInfo.getPhone()); // 联系电话
+		req.setCity(addressInfo.getCity()); // 所在地区
+		req.setDetailAddress(addressInfo.getDetailAddress()); // 详细地址
+
+		Result rs = orderInfoService.editOrderInfo(req);
+		return rs;
+	}
+
+	/** 跳转到未付款订单详情页面 */
+	@RequestMapping("selectaddress")
+	public ModelAndView selectAddress(HttpServletRequest request, String orderId, String addressId) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/selectaddress]");
+		MemberInfo member = SessionManage.getSessionManage(request);
+
+		MemberAddressNew memberAddressNew = new MemberAddressNew();
+		memberAddressNew.setMemberId(member.getMemberId());
+		List<MemberAddressNew> addressInfoList = memberAddressMapper.selectByCondition(memberAddressNew);
+
+		ModelAndView view = new ModelAndView();
+		view.addObject("orderId", orderId);
+		view.addObject("addressId", addressId);
+		view.addObject("addressInfoList", addressInfoList);
+		view.setViewName("shop/shoppingcart/selectaddress");
 		return view;
 	}
 

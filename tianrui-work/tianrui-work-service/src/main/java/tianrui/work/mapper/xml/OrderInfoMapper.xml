@@ -20,12 +20,14 @@
 		<result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
 		<result column="refund_apply_time" property="refundApplyTime" jdbcType="BIGINT" />
 		<result column="refund_audit_time" property="refundAuditTime" jdbcType="BIGINT" />
+		<result column="send_time" property="sendTime" jdbcType="BIGINT" />
+		<result column="pay_time" property="payTime" jdbcType="BIGINT" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		order_id, order_code, member_id, goods_type, goods_num, goods_subtotal,
-		express_fee, order_amount, order_red_packet, order_status, buyer_word,
-		creation_time, recipients, phone, city, detail_address, refund_apply_time, refund_audit_time
+		order_id, order_code, member_id, goods_type, goods_num, goods_subtotal, express_fee,
+		order_amount, order_red_packet, order_status, buyer_word, creation_time, recipients,
+		phone, city, detail_address, refund_apply_time, refund_audit_time, send_time, pay_time
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -39,9 +41,7 @@
 		<include refid="Base_Column_List" />
 		from order_info
 		<where>
-			<if test="memberId != null and memberId != ''">
-			  and member_id = #{memberId,jdbcType=VARCHAR}
-			</if>
+			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
 			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
 			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
 			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
@@ -55,9 +55,7 @@
 	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.OrderInfo">
 		select count(0) from order_info
 		<where>
-			<if test="memberId != null and memberId != ''">
-			  and member_id = #{memberId,jdbcType=VARCHAR}
-			</if>
+			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
 			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
 			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
 			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
@@ -70,9 +68,9 @@
 	</delete>
 
 	<insert id="insert" parameterType="tianrui.work.bean.OrderInfo">
-		insert into order_info (order_id, order_code, member_id, goods_type, goods_num,
-		goods_subtotal, express_fee, order_amount, order_red_packet, order_status, buyer_word,
-		creation_time, recipients, phone, city, detail_address, refund_apply_time, refund_audit_time)
+		insert into order_info (order_id, order_code, member_id, goods_type, goods_num, goods_subtotal,
+		express_fee, order_amount, order_red_packet, order_status, buyer_word, creation_time, recipients,
+		phone, city, detail_address, refund_apply_time, refund_audit_time, send_time, pay_time)
 		values (#{orderId,jdbcType=VARCHAR},
 		#{orderCode,jdbcType=VARCHAR},
 		#{memberId,jdbcType=VARCHAR},
@@ -90,7 +88,9 @@
 		#{city,jdbcType=VARCHAR},
 		#{detailAddress,jdbcType=VARCHAR},
 		#{refundApplyTime,jdbcType=BIGINT},
-		#{refundAuditTime,jdbcType=BIGINT})
+		#{refundAuditTime,jdbcType=BIGINT},
+		#{sendTime,jdbcType=BIGINT},
+		#{payTime,jdbcType=BIGINT})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.OrderInfo">
@@ -114,6 +114,8 @@
 			<if test="detailAddress != null and detailAddress != ''">detail_address,</if>
 			<if test="refundApplyTime != null and refundApplyTime != ''">refund_apply_time,</if>
 			<if test="refundAuditTime != null and refundAuditTime != ''">refund_audit_time,</if>
+			<if test="sendTime != null and sendTime != ''">send_time,</if>
+			<if test="payTime != null and payTime != ''">pay_time,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="orderId != null and orderId != ''">#{orderId,jdbcType=VARCHAR},</if>
@@ -134,6 +136,8 @@
 			<if test="detailAddress != null and detailAddress != ''">#{detailAddress,jdbcType=VARCHAR},</if>
 			<if test="refundApplyTime != null and refundApplyTime != ''">#{refundApplyTime,jdbcType=BIGINT},</if>
 			<if test="refundAuditTime != null and refundAuditTime != ''">#{refundAuditTime,jdbcType=BIGINT},</if>
+			<if test="sendTime != null and sendTime != ''">#{sendTime,jdbcType=BIGINT},</if>
+			<if test="payTime != null and payTime != ''">#{payTime,jdbcType=BIGINT},</if>
 		</trim>
 	</insert>
 
@@ -157,6 +161,8 @@
 			<if test="detailAddress != null and detailAddress != ''">detail_address = #{detailAddress,jdbcType=VARCHAR},</if>
 			<if test="refundApplyTime != null and refundApplyTime != ''">refund_apply_time = #{refundApplyTime,jdbcType=VARCHAR},</if>
 			<if test="refundAuditTime != null and refundAuditTime != ''">refund_audit_time = #{refundAuditTime,jdbcType=VARCHAR},</if>
+			<if test="sendTime != null and sendTime != ''">send_time = #{sendTime,jdbcType=VARCHAR},</if>
+			<if test="payTime != null and payTime != ''">pay_time = #{payTime,jdbcType=VARCHAR},</if>
 		</set>
 		where order_id = #{orderId,jdbcType=VARCHAR}
 	</update>
@@ -179,7 +185,9 @@
 		city = #{city,jdbcType=VARCHAR},
 		detail_address = #{detailAddress,jdbcType=VARCHAR},
 		refund_apply_time = #{refundApplyTime,jdbcType=VARCHAR},
-		refund_audit_time = #{refundAuditTime,jdbcType=VARCHAR}
+		refund_audit_time = #{refundAuditTime,jdbcType=VARCHAR},
+		send_time = #{sendTime,jdbcType=VARCHAR},
+		pay_time = #{payTime,jdbcType=VARCHAR}
 		where order_id = #{orderId,jdbcType=VARCHAR}
 	</update>
 

@@ -27,10 +27,17 @@ public class OrderInfoFindResp {
 	private String detailAddress; // 详细地址
 	private Long refundApplyTime;// 退货申请时间
 	private Long refundAuditTime;// 退货审核时间
+	private Long sendTime;// 发货时间
+	private Long payTime;// 支付时间
 
 	private String creationTimeStr; // 创建时间
 	private String refundApplyTimeStr;// 退货申请时间
 	private String refundAuditTimeStr;// 退货审核时间
+	private String sendTimeStr;// 发货时间
+	private String payTimeStr;// 支付时间
+
+	private String price;// 显示的价格
+	private String expressFeeStr; // 显示的快递费
 
 	public String getOrderId() {
 		return orderId;
@@ -176,6 +183,42 @@ public class OrderInfoFindResp {
 		this.refundAuditTime = refundAuditTime;
 	}
 
+	public Long getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(Long sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public Long getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Long payTime) {
+		this.payTime = payTime;
+	}
+
+	public void setCreationTimeStr(String creationTimeStr) {
+		this.creationTimeStr = creationTimeStr;
+	}
+
+	public void setRefundApplyTimeStr(String refundApplyTimeStr) {
+		this.refundApplyTimeStr = refundApplyTimeStr;
+	}
+
+	public void setRefundAuditTimeStr(String refundAuditTimeStr) {
+		this.refundAuditTimeStr = refundAuditTimeStr;
+	}
+
+	public void setSendTimeStr(String sendTimeStr) {
+		this.sendTimeStr = sendTimeStr;
+	}
+
+	public void setPayTimeStr(String payTimeStr) {
+		this.payTimeStr = payTimeStr;
+	}
+
 	public String getCreationTimeStr() {
 		try {
 			if (creationTime != null) {
@@ -210,6 +253,59 @@ public class OrderInfoFindResp {
 			refundAuditTimeStr = "";
 		}
 		return refundAuditTimeStr;
+	}
+
+	public String getSendTimeStr() {
+		try {
+			if (sendTime != null) {
+				Date date = new Date(sendTime);
+				sendTimeStr = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
+			}
+		} catch (Exception e) {
+			sendTimeStr = "";
+		}
+		return sendTimeStr;
+	}
+
+	public String getPayTimeStr() {
+		try {
+			if (payTime != null) {
+				Date date = new Date(payTime);
+				payTimeStr = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
+			}
+		} catch (Exception e) {
+			payTimeStr = "";
+		}
+		return payTimeStr;
+	}
+
+	public String getPrice() {
+		if (goodsType == null || goodsType.equals("")) {
+		} else {
+			if (goodsType.equals("1")) {
+				price = "￥" + orderAmount;
+			} else if (goodsType.equals("2")) {
+				price = "￥" + orderAmount + " + " + orderRedPacket + "宏包";
+			} else {
+			}
+		}
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getExpressFeeStr() {
+		if (expressFee == null || expressFee == 0)
+			expressFeeStr = "包邮";
+		else if (expressFee > 0)
+			expressFeeStr = String.valueOf(expressFee) + "元";
+		return expressFeeStr;
+	}
+
+	public void setExpressFeeStr(String expressFeeStr) {
+		this.expressFeeStr = expressFeeStr;
 	}
 
 }

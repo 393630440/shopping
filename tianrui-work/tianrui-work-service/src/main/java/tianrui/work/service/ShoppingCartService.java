@@ -129,4 +129,17 @@ public class ShoppingCartService implements IShoppingCartService {
 		}
 	}
 
+	@Override
+	public List<ShoppingCartFindResp> getListByOrderId(String orderId) throws Exception {
+		List<ShoppingCart> list = shoppingCartMapper.getShoppingCartListByOrderId(orderId);
+		List<ShoppingCartFindResp> resp = new ArrayList<ShoppingCartFindResp>();
+		for (ShoppingCart bean : list) {
+			ShoppingCartFindResp sp = new ShoppingCartFindResp();
+			PropertyUtils.copyProperties(sp, bean);
+			resp.add(sp);
+		}
+
+		return resp;
+	}
+
 }

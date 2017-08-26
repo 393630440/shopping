@@ -23,4 +23,7 @@ public interface ShoppingCartMapper {
 	long selectBycount(ShoppingCart record);
 
 	List<ShoppingCart> getOrderByGoodsInfoList(Map<String, String> condition);
+
+	List<ShoppingCart> getShoppingCartListByOrderId(String orderId);
+
 }

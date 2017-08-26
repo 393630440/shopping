@@ -37,6 +37,10 @@ public class OrderInfo {
 
 	private Long refundAuditTime;
 
+	private Long sendTime;
+
+	private Long payTime;
+
 	private Integer pageNo;
 	private Integer pageSize;
 
@@ -198,6 +202,22 @@ public class OrderInfo {
 
 	public void setRefundAuditTime(Long refundAuditTime) {
 		this.refundAuditTime = refundAuditTime;
+	}
+
+	public Long getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(Long sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public Long getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Long payTime) {
+		this.payTime = payTime;
 	}
 
 }
