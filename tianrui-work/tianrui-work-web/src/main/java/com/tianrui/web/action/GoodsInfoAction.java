@@ -130,8 +130,7 @@ public class GoodsInfoAction {
 	public Result toLoadGoodsList(GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/toloadgoodslist]");
 		String pageSort = req.getPageSort();
-		
-//		if (pageSort != null || !"".equals(pageSort)) {
+
 		if (!StringUtils.isNull(pageSort)) {
 			if (pageSort.equals("1"))
 				req.setPageSort("salesvolume desc, goods_price desc, red_packet desc");
@@ -154,6 +153,7 @@ public class GoodsInfoAction {
 	public ModelAndView goodsDetails(HttpServletRequest request, GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodsdetails]");
 		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
+		String goodsImg = "/resources/file/goodsInfo/" + goodsInfo.getGoodsId() + "/" + goodsInfo.getFirstGoodsImg();
 
 		// 更新浏览记录数
 		req.setBrowseNum(goodsInfo.getBrowseNum() + 1);
@@ -167,7 +167,7 @@ public class GoodsInfoAction {
 		memberFootprintSaveReq.setFfType("2");// 1-关注;2-足迹
 		memberFootprintSaveReq.setSeetheTime(System.currentTimeMillis());// 查看时间
 		memberFootprintSaveReq.setGoodsName(goodsInfo.getGoodsName());// 商品名称
-		memberFootprintSaveReq.setGoodsImg("/resources/file/goodsInfo/"+goodsInfo.getGoodsId()+"/"+goodsInfo.getFirstGoodsImg());// 商品图片
+		memberFootprintSaveReq.setGoodsImg(goodsImg);// 商品图片
 		memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
 		memberFootprintService.save(memberFootprintSaveReq);
 

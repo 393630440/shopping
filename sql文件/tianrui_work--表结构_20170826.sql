@@ -17,7 +17,7 @@ CREATE TABLE `ad_info` (
   KEY `index_1` (`id`),
   KEY `index_2` (`status`),
   KEY `index_3` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='广告信息';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告信息';
 
 -- ----------------------------
 -- Records of ad_info
@@ -44,7 +44,7 @@ CREATE TABLE `admin_user` (
 -- ----------------------------
 -- Records of admin_user
 -- ----------------------------
-INSERT INTO `admin_user` VALUES ('admin', 'admin', '1', '666666', '超级管理员', '18337129805', '1501591887324', 'admin', null, '25');
+INSERT INTO `admin_user` VALUES ('admin', 'admin', '1', '666666', '超级管理员', '18337129805', null, 'admin', null, null);
 
 -- ----------------------------
 -- Table structure for `configuration_info`
@@ -397,7 +397,7 @@ CREATE TABLE `shopping_cart` (
   PRIMARY KEY (`shopping_cart_id`),
   KEY `index_1` (`member_id`),
   KEY `index_2` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='购物车信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='购物车信息表';
 
 -- ----------------------------
 -- Records of shopping_cart

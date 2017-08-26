@@ -33,7 +33,7 @@ public interface IShoppingCartService {
 	List<ShoppingCartFindResp> getOrderByList(Map<String, String> condition) throws Exception;
 
 	/** 删除购物车中的商品 */
-	void deleteShoppingCartGoods(String shoppingCartIds) throws Exception;
+	Result deleteShoppingCartGoods(String shoppingCartIds) throws Exception;
 
 	/** 查询订单中的商品集合信息 */
 	List<ShoppingCartFindResp> getListByOrderId(String orderId) throws Exception;

@@ -26,6 +26,11 @@ $(function() {
 		$('input:checkbox').each(function() {
 			$(this).show();
 		});
+
+		if (delShoppingCartIds != "") {
+			delGoods();
+			delShoppingCartIds = "";
+		}
 	});
 
 });
@@ -114,11 +119,45 @@ function placeOrder() {
 		url : "/wechat/shop/shoppingcart/placeorder",
 		type : "POST",
 		data : {
-			"shoppingCartInfo" : shoppingCartInfo
+			"shoppingCartInfo" : shoppingCartInfo,
+			"goodsType" : goodsType
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
 				window.location.href = "/wechat/shop/shoppingcart/unpaidorderpage?addressId=0&orderId=" + ret.data;
+			}
+		},
+		error : function(data, status, e) {
+			alert(e);
+		}
+	});
+}
+
+var delShoppingCartIds = "";
+
+function del(shoppingCartId) {
+	$("#goodsInfo_" + shoppingCartId).hide();
+
+	if (delShoppingCartIds != "")
+		delShoppingCartIds += ",";
+	delShoppingCartIds += shoppingCartId;
+}
+
+function delGoods() {
+	$.ajax({
+		url : "/wechat/shop/shoppingcart/delgoods",
+		type : "POST",
+		data : {
+			"shoppingCartIds" : delShoppingCartIds
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+				if (goodsType == "1")
+					window.location.href = "/wechat/shop/shoppingcart/ordinarylist";
+				else if (goodsType == "2")
+					window.location.href = "/wechat/shop/shoppingcart/redpacketlist";
+				else
+					window.location.href = "/wechat/shop/shoppingcart/shoppingcartlist";
 			}
 		},
 		error : function(data, status, e) {

@@ -7,7 +7,7 @@ function goodsType(type) {
 		$("#goodsType1").show();
 		$("#goodsType2").hide();
 		$("#redPacket_div").hide();
-		$("#redPacket").val("");
+		$("#redPacket").val("0");
 	} else if (type == 2) { // 2-宏包商品,显示宏包
 		$("#goodsType1").hide();
 		$("#goodsType2").show();
@@ -135,10 +135,13 @@ function add(buttonType) {
 		msg += "商品价格不能为空\n";
 
 	var redPacket = ""; // 商品宏包
-	if (goodsType == "1")
+	if (goodsType == "1") {
 		redPacket = "0";
-	else if (goodsType == "2")
+	} else if (goodsType == "2") {
 		redPacket = $("#redPacket").val();
+		if (redPacket == "0")
+			msg += "宏包商品的宏包不能为空\n";
+	}
 	if (redPacket == "")
 		msg += "商品宏包不能为空\n";
 

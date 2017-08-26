@@ -42,59 +42,63 @@
 					</span>
 				</a>
 				<h2>购物车</h2>
-				<a href="#" style="color: #fff; position: absolute; right: 10; top: 10;" id="edit">编辑</a>
-				<a href="#" style="color: #fff; position: absolute; right: 10; top: 10;" id="save" hidden="hidden">完成</a>
+				<c:if test="${goodsInfoList.size()  != 0}">
+					<a href="#" style="color: #fff; position: absolute; right: 10; top: 10;" id="edit">编辑</a>
+					<a href="#" style="color: #fff; position: absolute; right: 10; top: 10;" id="save" hidden="hidden">完成</a>
+				</c:if>
 			</div>
 		</header>
 		<!--header 结束-->
 
-		<ul class="gwc-ul1">
-			<c:forEach var="goodsInfo" items="${goodsInfoList}">
-				<li id="goodsInfo_${goodsInfo.shoppingCartId}">
-					<div style="float: left;">
-						<input type="checkbox" name="shoppingCartId" value="${goodsInfo.shoppingCartId}" onclick="check();" class="checkbox-zx"/>
-						<input type="text" hidden="hidden" value="${goodsInfo.goodsPrice}" id="goodsPrice_hide_${goodsInfo.shoppingCartId}" />
-						<input type="text" hidden="hidden" value="${goodsInfo.goodsRedPacket}" id="goodsRedPacket_hide_${goodsInfo.shoppingCartId}" />
-						<input type="text" hidden="hidden" value="${goodsInfo.goodsType}" id="goodsType_hide_${goodsInfo.shoppingCartId}" />
-						<input type="text" hidden="hidden" value="${goodsInfo.goodsNum}" id="goodsNum_hide_${goodsInfo.shoppingCartId}" />
-					</div>
-					<div class="hwc-tu f-l">
-						<a href="/wechat/shop/goods/goodsdetails?goodsId=${goodsInfo.goodsId}">
-							<img src="${goodsInfo.path}${goodsInfo.goodsImg}">
-						</a>
-					</div>
-					<div class="gwc-md f-l">
-						<h3>
+		<c:if test="${goodsInfoList.size()  != 0}">
+			<ul class="gwc-ul1">
+				<c:forEach var="goodsInfo" items="${goodsInfoList}">
+					<li id="goodsInfo_${goodsInfo.shoppingCartId}">
+						<div style="float: left;">
+							<input type="checkbox" name="shoppingCartId" value="${goodsInfo.shoppingCartId}" onclick="check();" class="checkbox-zx"/>
+							<input type="text" hidden="hidden" value="${goodsInfo.goodsPrice}" id="goodsPrice_hide_${goodsInfo.shoppingCartId}" />
+							<input type="text" hidden="hidden" value="${goodsInfo.goodsRedPacket}" id="goodsRedPacket_hide_${goodsInfo.shoppingCartId}" />
+							<input type="text" hidden="hidden" value="${goodsInfo.goodsType}" id="goodsType_hide_${goodsInfo.shoppingCartId}" />
+							<input type="text" hidden="hidden" value="${goodsInfo.goodsNum}" id="goodsNum_hide_${goodsInfo.shoppingCartId}" />
+						</div>
+						<div class="hwc-tu f-l">
 							<a href="/wechat/shop/goods/goodsdetails?goodsId=${goodsInfo.goodsId}">
-								${goodsInfo.goodsName}
+								<img src="${goodsInfo.path}${goodsInfo.goodsImg}">
 							</a>
-						</h3>
-						<p class="gwc-p1">
-							<span>${goodsInfo.price}</span>
-						</p>
-						<p class="gwc-p2">
-							<span id="goodsNum_showId_${goodsInfo.shoppingCartId}">数量：${goodsInfo.goodsNum}</span>
-						</p>
-						<p class="gwc-p2">
-							<span id="subtotal_showId_${goodsInfo.shoppingCartId}">小计：${goodsInfo.subtotal}</span>
-						</p>
-						<div class="bl_view_tag details_con" hidden="hidden">
-							<div class="bl_view_user">
-								<div class="count_div" style="height: 30px; width: 130px;">
-									<a href="javascript:void(0);" class="minus"></a>
-									<input type="text" class="count" value="${goodsInfo.goodsNum}" id="goodsNum_${goodsInfo.shoppingCartId}" readonly="readonly" />
-									<a href="javascript:void(0);" class="add"></a>
+						</div>
+						<div class="gwc-md f-l">
+							<h3>
+								<a href="/wechat/shop/goods/goodsdetails?goodsId=${goodsInfo.goodsId}">
+									${goodsInfo.goodsName}
+								</a>
+							</h3>
+							<p class="gwc-p1">
+								<span>${goodsInfo.price}</span>
+							</p>
+							<p class="gwc-p2">
+								<span id="goodsNum_showId_${goodsInfo.shoppingCartId}">数量：${goodsInfo.goodsNum}</span>
+							</p>
+							<p class="gwc-p2">
+								<span id="subtotal_showId_${goodsInfo.shoppingCartId}">小计：${goodsInfo.subtotal}</span>
+							</p>
+							<div class="bl_view_tag details_con" hidden="hidden">
+								<div class="bl_view_user">
+									<div class="count_div" style="height: 30px; width: 130px;">
+										<a href="javascript:void(0);" class="minus"></a>
+										<input type="text" class="count" value="${goodsInfo.goodsNum}" id="goodsNum_${goodsInfo.shoppingCartId}" readonly="readonly" />
+										<a href="javascript:void(0);" class="add"></a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<a href="/wechat/shop/shoppingcart/delshoppingcartgoods?shoppingCartId=${goodsInfo.shoppingCartId}" class="gwc-del f-r" hidden="hidden">
-						<img src="/resources/shop/images/sjsc-10.gif">
-					</a>
-					<div style="clear: both;"></div>
-				</li>
-			</c:forEach>
-		</ul>
+						<a href="javascript:void(0);" onclick="del(${goodsInfo.shoppingCartId});" class="gwc-del f-r" hidden="hidden">
+							<img src="/resources/shop/images/sjsc-10.gif">
+						</a>
+						<div style="clear: both;"></div>
+					</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 
 		<div class="gwc-ft-zx">
 			<p id="size_total" hidden="hidden">
@@ -109,6 +113,7 @@
 <script type="text/javascript">
 	$(".foods_04").addClass("current");
 	var shoppingCartIdList = ${shoppingCartIdList};
+	var goodsType = "0";
 </script>
 <script src="/resources/js/web/shoppingcart/shoppingcartlist.js"></script>
 </html>

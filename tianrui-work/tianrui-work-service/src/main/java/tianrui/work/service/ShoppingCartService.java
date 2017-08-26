@@ -121,12 +121,14 @@ public class ShoppingCartService implements IShoppingCartService {
 	}
 
 	@Override
-	public void deleteShoppingCartGoods(String shoppingCartIds) throws Exception {
+	public Result deleteShoppingCartGoods(String shoppingCartIds) throws Exception {
+		Result rs = Result.getSuccessful();
 		String[] shoppingCartIdArr = shoppingCartIds.split(",");
 		for (String shoppingCartIdStr : shoppingCartIdArr) {
 			Integer shoppingCartId = Integer.valueOf(shoppingCartIdStr);
 			shoppingCartMapper.deleteByPrimaryKey(shoppingCartId);
 		}
+		return rs;
 	}
 
 	@Override

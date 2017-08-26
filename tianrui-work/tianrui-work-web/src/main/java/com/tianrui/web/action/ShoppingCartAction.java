@@ -53,7 +53,7 @@ public class ShoppingCartAction {
 
 	/** 跳转购物车列表页面 */
 	@RequestMapping("shoppingcartlist")
-	public ModelAndView goodsDetails(HttpServletRequest request) throws Exception {
+	public ModelAndView shoppingCartList(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/shoppingcartlist]");
 		MemberInfo member = SessionManage.getSessionManage(request);
 
@@ -75,7 +75,7 @@ public class ShoppingCartAction {
 				redPacket += goodsInfo.getGoodsRedPacket() * goodsInfo.getGoodsNum();
 				shoppingCartIdList.add(goodsInfo.getShoppingCartId());
 			}
-			size = goodsInfoList.size();
+			// size = goodsInfoList.size();
 			total = formatDoubleToString(price) + " + " + String.valueOf(redPacket) + "宏包";
 		}
 
@@ -88,18 +88,88 @@ public class ShoppingCartAction {
 		return view;
 	}
 
+	/** 跳转大众购物车列表页面 */
+	@RequestMapping("ordinarylist")
+	public ModelAndView ordinaryList(HttpServletRequest request) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/ordinarylist]");
+		MemberInfo member = SessionManage.getSessionManage(request);
+
+		ShoppingCartFindReq req = new ShoppingCartFindReq();
+		req.setMemberId(member.getMemberId());
+		req.setGoodsType("1");// ; // 商品类型:1-大众商品;2-宏包商品
+		req.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
+
+		Integer size = 0;
+		Double price = 0d;
+		String total = "0";
+		List<ShoppingCartFindResp> goodsInfoList = shoppingCartService.getShoppingCartList(req);
+		List<Integer> shoppingCartIdList = new ArrayList<Integer>();
+		if (goodsInfoList != null && goodsInfoList.size() > 0) {
+			for (int i = 0; i < goodsInfoList.size(); i++) {
+				ShoppingCartFindResp goodsInfo = goodsInfoList.get(i);
+				size += goodsInfo.getGoodsNum();
+				price += goodsInfo.getGoodsPrice() * goodsInfo.getGoodsNum();
+				shoppingCartIdList.add(goodsInfo.getShoppingCartId());
+			}
+			total = formatDoubleToString(price);
+		}
+
+		ModelAndView view = new ModelAndView();
+		view.addObject("size", size);
+		view.addObject("total", total);
+		view.addObject("goodsInfoList", goodsInfoList);
+		view.addObject("shoppingCartIdList", shoppingCartIdList);
+		view.setViewName("shop/shoppingcart/ordinarylist");
+		return view;
+	}
+
+	/** 跳转宏包购物车列表页面 */
+	@RequestMapping("redpacketlist")
+	public ModelAndView redPacketList(HttpServletRequest request) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/redpacketlist]");
+		MemberInfo member = SessionManage.getSessionManage(request);
+
+		ShoppingCartFindReq req = new ShoppingCartFindReq();
+		req.setMemberId(member.getMemberId());
+		req.setGoodsType("2");// ; // 商品类型:1-大众商品;2-宏包商品
+		req.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
+
+		Integer size = 0;
+		Double price = 0d;
+		String total = "0";
+		List<ShoppingCartFindResp> goodsInfoList = shoppingCartService.getShoppingCartList(req);
+		List<Integer> shoppingCartIdList = new ArrayList<Integer>();
+		if (goodsInfoList != null && goodsInfoList.size() > 0) {
+			for (int i = 0; i < goodsInfoList.size(); i++) {
+				ShoppingCartFindResp goodsInfo = goodsInfoList.get(i);
+				size += goodsInfo.getGoodsNum();
+				price += goodsInfo.getGoodsPrice() * goodsInfo.getGoodsNum();
+				shoppingCartIdList.add(goodsInfo.getShoppingCartId());
+			}
+			total = formatDoubleToString(price);
+		}
+
+		ModelAndView view = new ModelAndView();
+		view.addObject("size", size);
+		view.addObject("total", total);
+		view.addObject("goodsInfoList", goodsInfoList);
+		view.addObject("shoppingCartIdList", shoppingCartIdList);
+		view.setViewName("shop/shoppingcart/redpacketlist");
+		return view;
+	}
+
 	/** 跳转购物车列表页面 */
 	@RequestMapping("delgoods")
-	public ModelAndView delGoods(HttpServletRequest request, String shoppingCartIds) throws Exception {
+	public Result delGoods(HttpServletRequest request, String shoppingCartIds) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/delgoods]");
-		shoppingCartService.deleteShoppingCartGoods(shoppingCartIds);
-		return goodsDetails(request);
+		Result rs = shoppingCartService.deleteShoppingCartGoods(shoppingCartIds);
+		return rs;
 	}
 
 	/** 生成订单 */
 	@RequestMapping("placeorder")
 	@ResponseBody
-	public Result placeOrder(HttpServletRequest request, String shoppingCartInfo) throws Exception {
+	public Result placeOrder(HttpServletRequest request, String shoppingCartInfo, String goodsType) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/placeorder]");
 		MemberInfo member = SessionManage.getSessionManage(request);
 
@@ -167,7 +237,7 @@ public class ShoppingCartAction {
 		req.setOrderId(orderId); // 订单ID
 		req.setOrderCode(orderCode); // 订单编号
 		req.setMemberId(member.getMemberId()); // 会员ID
-		// req.setGoodsType(null); // 商品类型:1-大众商品;2-宏包商品
+		req.setGoodsType(goodsType); // 商品类型:1-大众商品;2-宏包商品
 		req.setGoodsNum(goodsNum); // 商品数量
 		req.setGoodsSubtotal(formatDouble(goodsSubtotal)); // 商品小计
 		req.setExpressFee(expressFee); // 运费

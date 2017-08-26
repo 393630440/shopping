@@ -95,7 +95,7 @@
 						<div class="am-form-group am-cf" id="redPacket_div" hidden="hidden">
 							<div class="zuo">宏包：</div>
 							<div class="you">
-								<input type="text" class="am-input-sm" id="redPacket" name="redPacket" placeholder="请输入宏包数量">
+								<input type="text" class="am-input-sm" id="redPacket" name="redPacket" placeholder="请输入宏包数量" value="0">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
