@@ -28,11 +28,13 @@ public class OrderInfoReq {
 	private Long refundApplyTime;// 退货申请时间
 	private Long refundAuditTime;// 退货审核时间
 	private Long sendTime;// 发货时间
+	private Long payTime;// 支付时间
 
 	private String creationTimeStr; // 创建时间
 	private String refundApplyTimeStr;// 退货申请时间
 	private String refundAuditTimeStr;// 退货审核时间
 	private String sendTimeStr;// 发货时间
+	private String payTimeStr;// 支付时间
 
 	public String getOrderId() {
 		return orderId;
@@ -186,6 +188,14 @@ public class OrderInfoReq {
 		this.sendTime = sendTime;
 	}
 
+	public Long getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Long payTime) {
+		this.payTime = payTime;
+	}
+
 	public void setCreationTimeStr(String creationTimeStr) {
 		this.creationTimeStr = creationTimeStr;
 	}
@@ -200,6 +210,10 @@ public class OrderInfoReq {
 
 	public void setSendTimeStr(String sendTimeStr) {
 		this.sendTimeStr = sendTimeStr;
+	}
+
+	public void setPayTimeStr(String payTimeStr) {
+		this.payTimeStr = payTimeStr;
 	}
 
 	public String getCreationTimeStr() {
@@ -248,6 +262,18 @@ public class OrderInfoReq {
 			sendTimeStr = "";
 		}
 		return sendTimeStr;
+	}
+
+	public String getPayTimeStr() {
+		try {
+			if (payTime != null) {
+				Date date = new Date(payTime);
+				payTimeStr = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
+			}
+		} catch (Exception e) {
+			payTimeStr = "";
+		}
+		return payTimeStr;
 	}
 
 }

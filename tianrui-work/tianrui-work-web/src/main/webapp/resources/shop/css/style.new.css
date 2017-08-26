@@ -212,3 +212,69 @@
 	border-radius: 5px;
 	margin-right: 10px;
 }
+
+.drdd-info3 .drdd-h31-zx {
+	font-weight: normal;
+	width: 65%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.drdd-h31-zx a {
+	font-size: 12px;
+	color: #333;
+}
+
+.drdd-info3 .drdd-h31-zx1 {
+	font-size: 12px;
+	color: #D12424;
+	font-weight: normal;
+	width: 65%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.checkbox-zx {
+	width: 16px;
+	height: 16px;
+	margin-top: 26px;
+}
+
+.radio-zx {
+	width: 16px;
+	height: 16px;
+	float: left;
+	margin-top: 6px;
+}
+
+.drdd-info6-zx {
+	background: #fff;
+	height: 77px;
+	padding: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+.drdd-info6-zx dt {
+	float: left;
+	width: 90%;
+}
+
+.drdd-info6-zx dt p {
+	font-size: 12px;
+	color: #333;
+	line-height: 27px;
+}
+
+.drdd-info6-zx dd {
+	float: right;
+}
+
+.drdd-info6-zx dd a {
+	line-height: 55px;
+	font-family: "宋体";
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+}

@@ -52,7 +52,7 @@
 			<c:forEach var="goodsInfo" items="${goodsInfoList}">
 				<li id="goodsInfo_${goodsInfo.shoppingCartId}">
 					<div style="float: left;">
-						<input type="checkbox" name="shoppingCartId" value="${goodsInfo.shoppingCartId}" style="width: 16px; height: 16px;" onclick="check();" />
+						<input type="checkbox" name="shoppingCartId" value="${goodsInfo.shoppingCartId}" onclick="check();" class="checkbox-zx"/>
 						<input type="text" hidden="hidden" value="${goodsInfo.goodsPrice}" id="goodsPrice_hide_${goodsInfo.shoppingCartId}" />
 						<input type="text" hidden="hidden" value="${goodsInfo.goodsRedPacket}" id="goodsRedPacket_hide_${goodsInfo.shoppingCartId}" />
 						<input type="text" hidden="hidden" value="${goodsInfo.goodsType}" id="goodsType_hide_${goodsInfo.shoppingCartId}" />
