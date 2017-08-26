@@ -56,11 +56,6 @@ public class ShoppingCartAction {
 	public ModelAndView goodsDetails(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/shoppingcartlist]");
 		MemberInfo member = SessionManage.getSessionManage(request);
-//<<<<<<< HEAD
-////		MemberInfo member = new MemberInfo();
-////		member.setMemberId("123456789");
-//=======
-//>>>>>>> 9ce4864f5f65b2771fbd3f67df58aee02f121f16
 
 		ShoppingCartFindReq req = new ShoppingCartFindReq();
 		req.setMemberId(member.getMemberId());
@@ -106,12 +101,6 @@ public class ShoppingCartAction {
 	@ResponseBody
 	public Result placeOrder(HttpServletRequest request, String shoppingCartInfo) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/placeorder]");
-//<<<<<<< HEAD
-//		 MemberInfo member = SessionManage.getSessionManage(request);
-////		MemberInfo member = new MemberInfo();
-////		member.setMemberId("123456789");
-//=======
-//>>>>>>> 9ce4864f5f65b2771fbd3f67df58aee02f121f16
 		MemberInfo member = SessionManage.getSessionManage(request);
 
 		String orderId = UUIDUtil.getUUID();
