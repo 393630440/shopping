@@ -63,6 +63,7 @@ CREATE TABLE `configuration_info` (
 -- ----------------------------
 -- Records of configuration_info
 -- ----------------------------
+INSERT INTO `configuration_info` VALUES ('RED_PACKET_AWARD_RATE', '0.1', '宏包奖励比率', '1');
 
 -- ----------------------------
 -- Table structure for `goods_classify`
