@@ -60,7 +60,7 @@
 		<include refid="Base_Column_List" />
 		from shopping_cart
 		<where>
-			<if test="goodsIds != null and goodsIds != ''">and goods_id in (#{goodsIds,jdbcType=VARCHAR})</if>
+			<if test="shoppingCartIds != null and shoppingCartIds != ''">and shopping_cart_id in (${shoppingCartIds})</if>
 			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
 			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">and shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR}</if>
 		</where>

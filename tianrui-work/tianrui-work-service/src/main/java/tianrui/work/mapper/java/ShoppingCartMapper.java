@@ -22,5 +22,5 @@ public interface ShoppingCartMapper {
 
 	long selectBycount(ShoppingCart record);
 
-	List<ShoppingCart> getOrderByGoodsInfoList(Map<String, String> queryCondition);
+	List<ShoppingCart> getOrderByGoodsInfoList(Map<String, String> condition);
 }

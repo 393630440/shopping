@@ -140,7 +140,7 @@
 			</c:forEach>
 		</ul>
 
-		<div class="w-zx">
+		<div class="w-zx-1">
 			<div class="bl_more">
 				<a href="javascript:void(0);" onclick="toLoad();">加载更多</a>
 			</div>

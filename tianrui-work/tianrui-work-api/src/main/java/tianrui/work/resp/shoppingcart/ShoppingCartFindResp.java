@@ -16,6 +16,7 @@ public class ShoppingCartFindResp {
 
 	private Double expressFee; // 快递费
 	private String price;// 显示的价格
+	private String subtotal;// 显示的商品小计
 
 	private String path;
 
@@ -23,6 +24,8 @@ public class ShoppingCartFindResp {
 		Double goodsSubtotal = 0d;
 		if (goodsNum != null && goodsNum > 0 && goodsPrice != null && goodsPrice > 0)
 			goodsSubtotal = goodsNum * goodsPrice;
+
+		goodsSubtotal = (double) Math.round(goodsSubtotal * 100) / 100;
 		return goodsSubtotal;
 	}
 
@@ -155,6 +158,27 @@ public class ShoppingCartFindResp {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public String getSubtotal() {
+		if (goodsType == null || goodsType.equals("")) {
+		} else {
+			if (goodsType.equals("1")) {
+				double d = goodsPrice * goodsNum;
+				d = (double) Math.round(d * 100) / 100;
+				subtotal = "￥" + String.valueOf(d);
+			} else if (goodsType.equals("2")) {
+				double d = goodsPrice * goodsNum;
+				d = (double) Math.round(d * 100) / 100;
+				subtotal = "￥" + String.valueOf(d) + " + " + (goodsRedPacket * goodsNum) + "宏包";
+			} else {
+			}
+		}
+		return subtotal;
+	}
+
+	public void setSubtotal(String subtotal) {
+		this.subtotal = subtotal;
 	}
 
 }

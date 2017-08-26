@@ -30,6 +30,9 @@ public interface IShoppingCartService {
 	List<ShoppingCartFindResp> getShoppingCartList(ShoppingCartFindReq req) throws Exception;
 
 	/** 查询要生成订单的商品信息 */
-	List<ShoppingCartFindResp> getOrderByGoodsInfoList(Map<String, String> queryCondition) throws Exception;
+	List<ShoppingCartFindResp> getOrderByList(Map<String, String> condition) throws Exception;
+
+	/** 删除购物车中的商品 */
+	void deleteShoppingCartGoods(String shoppingCartIds) throws Exception;
 
 }

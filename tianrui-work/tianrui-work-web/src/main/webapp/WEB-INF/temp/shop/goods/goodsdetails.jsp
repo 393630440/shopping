@@ -7,7 +7,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>商品列表</title>
+<title>商品详情</title>
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.new.css">

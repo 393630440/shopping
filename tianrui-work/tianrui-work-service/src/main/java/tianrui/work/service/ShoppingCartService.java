@@ -107,8 +107,8 @@ public class ShoppingCartService implements IShoppingCartService {
 	}
 
 	@Override
-	public List<ShoppingCartFindResp> getOrderByGoodsInfoList(Map<String, String> queryCondition) throws Exception {
-		List<ShoppingCart> list = shoppingCartMapper.getOrderByGoodsInfoList(queryCondition);
+	public List<ShoppingCartFindResp> getOrderByList(Map<String, String> condition) throws Exception {
+		List<ShoppingCart> list = shoppingCartMapper.getOrderByGoodsInfoList(condition);
 
 		List<ShoppingCartFindResp> resp = new ArrayList<ShoppingCartFindResp>();
 		for (ShoppingCart bean : list) {
@@ -118,6 +118,15 @@ public class ShoppingCartService implements IShoppingCartService {
 		}
 
 		return resp;
+	}
+
+	@Override
+	public void deleteShoppingCartGoods(String shoppingCartIds) throws Exception {
+		String[] shoppingCartIdArr = shoppingCartIds.split(",");
+		for (String shoppingCartIdStr : shoppingCartIdArr) {
+			Integer shoppingCartId = Integer.valueOf(shoppingCartIdStr);
+			shoppingCartMapper.deleteByPrimaryKey(shoppingCartId);
+		}
 	}
 
 }
