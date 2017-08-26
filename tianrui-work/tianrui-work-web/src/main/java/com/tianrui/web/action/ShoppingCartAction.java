@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.DateUtils;
 import com.tianrui.web.util.LoggerUtils;
 
@@ -52,9 +53,9 @@ public class ShoppingCartAction {
 	@RequestMapping("shoppingcartlist")
 	public ModelAndView goodsDetails(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/shoppingcartlist]");
-		// MemberInfo member = SessionManage.getSessionManage(request);
-		MemberInfo member = new MemberInfo();
-		member.setMemberId("123456789");
+		MemberInfo member = SessionManage.getSessionManage(request);
+//		MemberInfo member = new MemberInfo();
+//		member.setMemberId("123456789");
 
 		ShoppingCartFindReq req = new ShoppingCartFindReq();
 		req.setMemberId(member.getMemberId());
@@ -100,9 +101,9 @@ public class ShoppingCartAction {
 	@ResponseBody
 	public Result placeOrder(HttpServletRequest request, String shoppingCartInfo) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/placeorder]");
-		// MemberInfo member = SessionManage.getSessionManage(request);
-		MemberInfo member = new MemberInfo();
-		member.setMemberId("123456789");
+		 MemberInfo member = SessionManage.getSessionManage(request);
+//		MemberInfo member = new MemberInfo();
+//		member.setMemberId("123456789");
 
 		String orderId = UUIDUtil.getUUID();
 		String orderCode = DateUtils.format(new Date(), DateUtils.DATE_YYYYMMDDHHMISS);
