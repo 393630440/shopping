@@ -38,4 +38,7 @@ public interface IShoppingCartService {
 	/** 查询订单中的商品集合信息 */
 	List<ShoppingCartFindResp> getListByOrderId(String orderId) throws Exception;
 
+	/** 修改购物车商品的状态为已删除 */
+	Result editShoppingCartStatus(String shoppingCartIds) throws Exception;
+
 }

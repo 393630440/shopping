@@ -47,7 +47,7 @@
 		</header>
 		<!--header 结束-->
 
-		<c:if test="${addressId == '0'}">
+		<c:if test="${addressInfo == null}">
 			<dl class="drdd-info1">
 				<dt>
 					<p>选择添加收货地址</p>
@@ -58,8 +58,8 @@
 				<div style="clear: both;"></div>
 			</dl>
 		</c:if>
-		<c:if test="${addressId != '0'}">
-			<dl class="drdd-info6">
+		<c:if test="${addressInfo != null}">
+			<dl class="drdd-info6-zx">
 				<dt>
 					<p>
 						<span class="f-l">收货人：${addressInfo.recipients}</span>
@@ -105,6 +105,11 @@
 
 		<div class="drdd-info4">
 			<p>配送方式：${orderInfo.expressFeeStr}</p>
+			<div style="clear: both;"></div>
+		</div>
+
+		<div class="fbsd-info4">
+			<textarea placeholder="客户留言" id="buyerWord"></textarea>
 			<div style="clear: both;"></div>
 		</div>
 

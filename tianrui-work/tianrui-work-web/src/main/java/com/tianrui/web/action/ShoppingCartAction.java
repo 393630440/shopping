@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.DateUtils;
 import com.tianrui.web.util.LoggerUtils;
+import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IGoodsInfoService;
 import tianrui.work.api.IOrderInfoService;
@@ -162,7 +163,8 @@ public class ShoppingCartAction {
 	@RequestMapping("delgoods")
 	public Result delGoods(HttpServletRequest request, String shoppingCartIds) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/delgoods]");
-		Result rs = shoppingCartService.deleteShoppingCartGoods(shoppingCartIds);
+		// Result rs = shoppingCartService.deleteShoppingCartGoods(shoppingCartIds);// 删除购物车中的商品
+		Result rs = shoppingCartService.editShoppingCartStatus(shoppingCartIds);// 软删除，更改购物车中商品的状态
 		return rs;
 	}
 
@@ -262,9 +264,26 @@ public class ShoppingCartAction {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/unpaidorderpage]");
 		OrderInfoFindResp orderInfo = orderInfoService.queryOrderInfoByOne(orderId);
 		List<ShoppingCartFindResp> goodsInfoList = shoppingCartService.getListByOrderId(orderInfo.getOrderId());
+
+		if (addressId.equals("0") && !StringUtils.isNull(orderInfo.getRecipients())
+				&& !StringUtils.isNull(orderInfo.getPhone()) && !StringUtils.isNull(orderInfo.getCity())
+				&& !StringUtils.isNull(orderInfo.getDetailAddress())) {
+			addressId = "-1";
+		}
+
 		MemberAddressNew addressInfo = null;
-		if (!addressId.equals("0"))
+		if (addressId.equals("0")) {
+
+		} else if (addressId.equals("-1")) {
+			addressInfo = new MemberAddressNew();
+			addressInfo.setId(addressId);
+			addressInfo.setRecipients(orderInfo.getRecipients());
+			addressInfo.setPhone(orderInfo.getPhone());
+			addressInfo.setCity(orderInfo.getCity());
+			addressInfo.setDetailAddress(orderInfo.getDetailAddress());
+		} else {
 			addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
+		}
 
 		ModelAndView view = new ModelAndView();
 		view.addObject("orderId", orderId);
@@ -276,20 +295,25 @@ public class ShoppingCartAction {
 		return view;
 	}
 
-	/** 生成订单 */
+	/** 修改订单信息 */
 	@RequestMapping("edit")
 	@ResponseBody
 	public Result edit(String orderId, String addressId, String buyerWord) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/edit]");
-		MemberAddressNew addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
+		if (addressId.equals("-1") && StringUtils.isNull(buyerWord))
+			return Result.getSuccessful();
 
 		OrderInfoReq req = new OrderInfoReq();
 		req.setOrderId(orderId); // 订单ID
 		req.setBuyerWord(buyerWord); // 买家留言
-		req.setRecipients(addressInfo.getRecipients()); // 收件人
-		req.setPhone(addressInfo.getPhone()); // 联系电话
-		req.setCity(addressInfo.getCity()); // 所在地区
-		req.setDetailAddress(addressInfo.getDetailAddress()); // 详细地址
+
+		if (!addressId.equals("-1")) {
+			MemberAddressNew addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
+			req.setRecipients(addressInfo.getRecipients()); // 收件人
+			req.setPhone(addressInfo.getPhone()); // 联系电话
+			req.setCity(addressInfo.getCity()); // 所在地区
+			req.setDetailAddress(addressInfo.getDetailAddress()); // 详细地址
+		}
 
 		Result rs = orderInfoService.editOrderInfo(req);
 		return rs;

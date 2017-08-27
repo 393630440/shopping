@@ -52,10 +52,10 @@ function goodsNumShow() {
 
 		var goodsPrice = $("#goodsPrice_hide_" + shoppingCartId).val() * 1;
 		var goodsRedPacket = $("#goodsRedPacket_hide_" + shoppingCartId).val() * 1;
-		var goodsType = $("#goodsType_hide_" + shoppingCartId).val();
-		if (goodsType == "1")
+		var goodsType1 = $("#goodsType_hide_" + shoppingCartId).val();
+		if (goodsType1 == "1")
 			subtotalShowStr += (goodsPrice * newGoodsNum).toFixed(2);
-		else if (goodsType == "2")
+		else if (goodsType1 == "2")
 			subtotalShowStr += (goodsPrice * newGoodsNum).toFixed(2) + " + " + (goodsRedPacket * newGoodsNum) + "宏包";
 		else
 			continue;
@@ -84,12 +84,15 @@ function check() {
 
 		size += newGoodsNum;
 		price += goodsPrice * newGoodsNum;
-		redPacket += goodsRedPacket * newGoodsNum;
+		if (goodsType == "2")
+			redPacket += goodsRedPacket * newGoodsNum;
 	});
 
 	if (size > 0) {
 		$("#size_total").show();
-		var sizeTotalStr = "共选 " + size + " 件商品，总计：<span>￥" + price.toFixed(2) + " + " + redPacket + "宏包</span>";
+		var sizeTotalStr = "共选 " + size + " 件商品，总计：<span>￥" + price.toFixed(2);
+		if (goodsType == "2")
+			sizeTotalStr += " + " + redPacket + "宏包</span>";
 		$("#size_total").empty();
 		$("#size_total").append(sizeTotalStr);
 	} else {

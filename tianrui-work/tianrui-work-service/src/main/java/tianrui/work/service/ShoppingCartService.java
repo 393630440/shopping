@@ -128,6 +128,7 @@ public class ShoppingCartService implements IShoppingCartService {
 			Integer shoppingCartId = Integer.valueOf(shoppingCartIdStr);
 			shoppingCartMapper.deleteByPrimaryKey(shoppingCartId);
 		}
+
 		return rs;
 	}
 
@@ -142,6 +143,23 @@ public class ShoppingCartService implements IShoppingCartService {
 		}
 
 		return resp;
+	}
+
+	@Override
+	public Result editShoppingCartStatus(String shoppingCartIds) throws Exception {
+		Result rs = Result.getSuccessful();
+		String[] shoppingCartIdArr = shoppingCartIds.split(",");
+		for (String shoppingCartIdStr : shoppingCartIdArr) {
+			Integer shoppingCartId = Integer.valueOf(shoppingCartIdStr);
+
+			ShoppingCart shoppingCart = new ShoppingCart();
+			shoppingCart.setShoppingCartId(shoppingCartId);
+			shoppingCart.setShoppingCartStatus("3");// 购物车商品状态:1-已添加;2-已购买;3-已删除
+
+			shoppingCartMapper.updateByPrimaryKeySelective(shoppingCart);
+		}
+
+		return rs;
 	}
 
 }
