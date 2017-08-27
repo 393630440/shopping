@@ -61,6 +61,7 @@ public class MemberRechangeService implements IMemberRechangeService {
 		PageTool<MemberRechargeResp> page = new PageTool<MemberRechargeResp>();
 		MemberRecharge query = new MemberRecharge();
 		query.setMemberId(req.getMemberId());
+		query.setDesc1(req.getDesc1());
 		if(req.getPageNo()!=null){
 			query.setPageNo(req.getPageNo()*req.getPageSize());
 			query.setPageSize(req.getPageSize());

@@ -19,9 +19,11 @@ import com.tianrui.web.util.LoggerUtils;
 import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IAdInfoService;
+import tianrui.work.api.IConfigurationInfoService;
 import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.api.IGoodsInfoService;
 import tianrui.work.api.IMemberFootprintService;
+import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IShoppingCartService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.ad.AdInfoReq;
@@ -29,10 +31,13 @@ import tianrui.work.req.foot.MemberFootprintSaveReq;
 import tianrui.work.req.goods.GoodsClassifyReq;
 import tianrui.work.req.goods.GoodsInfoFindReq;
 import tianrui.work.req.goods.GoodsInfoReq;
+import tianrui.work.req.rechange.RechargeFindReq;
 import tianrui.work.req.shoppingcart.ShoppingCartReq;
 import tianrui.work.resp.ad.AdInfoResp;
+import tianrui.work.resp.configuration.ConfigurationInfoResp;
 import tianrui.work.resp.goods.GoodsClassifyFindResp;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
+import tianrui.work.resp.rechange.MemberRechargeResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 
@@ -51,21 +56,42 @@ public class GoodsInfoAction {
 	IShoppingCartService shoppingCartService;
 	@Autowired
 	IMemberFootprintService memberFootprintService;
+	@Autowired
+	IMemberRechangeService memberRechangeService;
+	@Autowired
+	IConfigurationInfoService configurationInfoService;
 
 	/** 跳转商品首页页面 */
 	@RequestMapping("goodshome")
-	public ModelAndView goodsHome(GoodsInfoReq req) throws Exception {
+	public ModelAndView goodsHome(GoodsInfoReq req,HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodshome]");
 		String goodsType = req.getGoodsType();
 		if (StringUtils.isNull(goodsType))
 			throw new Exception("");
 
+		MemberInfo info = SessionManage.getSessionManage(request);
 		String viewName = "";
 		if (goodsType.equals("1"))
 			viewName = "shop/goods/ordinaryhome";
-		else if (goodsType.equals("2"))
+		else if (goodsType.equals("2")){
 			viewName = "shop/goods/redpackethome";
-		else
+			ConfigurationInfoResp spc = configurationInfoService.queryConfigurationInfoByOne("RED_PACKET_SHOP_RATE");
+			if(spc.getFlag().equals("1")){
+				RechargeFindReq chang = new RechargeFindReq();
+				chang.setMemberId(info.getMemberId());
+				chang.setDesc1("2");
+				PageTool<MemberRechargeResp> tool = memberRechangeService.select(chang);
+				List<MemberRechargeResp> lst = tool.getList();
+				Double payMoney = 0.00;
+				for(MemberRechargeResp sp : lst){
+					payMoney = payMoney + sp.getRechargeAmount();
+				}
+				Double conf = Double.valueOf(spc.getParamvalue());
+				if(payMoney<conf){
+					viewName = "shop/goods/redpacketNO";
+				}
+			}
+		}else
 			throw new Exception("");
 
 		ModelAndView view = new ModelAndView();

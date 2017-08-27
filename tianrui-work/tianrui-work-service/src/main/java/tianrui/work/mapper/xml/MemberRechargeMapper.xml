@@ -27,6 +27,9 @@
     	<if test="memberId != null and memberId != ''">
     		and member_id = #{memberId,jdbcType=VARCHAR}
     	</if>
+    	<if test="desc1 != null and desc1 != ''">
+    		and desc1 = #{desc1,jdbcType=VARCHAR}
+    	</if>
     </where>
     order by createtime desc
     <if test="pageNo != null">
@@ -40,6 +43,9 @@
     <where>
     	<if test="memberId != null and memberId != ''">
     		and member_id = #{memberId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="desc1 != null and desc1 != ''">
+    		and desc1 = #{desc1,jdbcType=VARCHAR}
     	</if>
     </where>
   </select>

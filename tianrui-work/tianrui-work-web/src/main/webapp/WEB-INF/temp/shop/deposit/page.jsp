@@ -40,7 +40,7 @@ $(window).load(function() {
    <ul class="ui-tab-nav">
          <li class="current"><a href="/wechat/shop/deposit/page">提现记录</a></li>
          <li><a href="/wechat/shop/deposit/cPage">充值记录</a></li>
-         <li><a href="">消费记录</a></li>
+         <li><a href="/wechat/shop/deposit/xPage">消费记录</a></li>
    	</ul>
    	 <ul class="gwc-ul1" id="innerHml">
 

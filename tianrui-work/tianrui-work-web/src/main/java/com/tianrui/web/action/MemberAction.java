@@ -38,9 +38,15 @@ public class MemberAction {
 	}
 	
 	@RequestMapping("userPage")
-	public ModelAndView userPage(String openid){
+	public ModelAndView userPage(HttpServletRequest request) throws Exception{
 		ModelAndView view = new ModelAndView();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		
+		Result rs = memberInfoService.selectByOpenid(info.getMemberId());
+		MemberInfo fo = (MemberInfo) rs.getData();
 		view.setViewName("/shop/member/user");
+		view.addObject("redpack", fo.getRedPacket());
+		view.addObject("balance", fo.getBalance());
 		return view;
 	}
 	

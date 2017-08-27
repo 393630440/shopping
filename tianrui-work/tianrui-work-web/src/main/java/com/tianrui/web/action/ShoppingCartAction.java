@@ -24,6 +24,7 @@ import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IConfigurationInfoService;
 import tianrui.work.api.IGoodsInfoService;
+import tianrui.work.api.IMemberInfoService;
 import tianrui.work.api.IOrderInfoService;
 import tianrui.work.api.IShoppingCartService;
 import tianrui.work.bean.MemberAddressNew;
@@ -57,6 +58,8 @@ public class ShoppingCartAction {
 	MemberAddressNewMapper memberAddressMapper;
 	@Autowired
 	IConfigurationInfoService configurationInfoService;
+	@Autowired
+	IMemberInfoService memberInfoService;
 
 	/** 跳转购物车列表页面 */
 	@RequestMapping("shoppingcartlist")
@@ -322,6 +325,9 @@ public class ShoppingCartAction {
 		if(con.size()==1){
 			redPark = con.get(0).getParamvalue();
 		}
+		//查询当前用户宏包
+		Result mem = memberInfoService.selectByOpenid(orderInfo.getMemberId());
+		MemberInfo fo = (MemberInfo) mem.getData();
 		ModelAndView view = new ModelAndView();
 		view.addObject("orderId", orderId);
 		view.addObject("orderInfo", orderInfo);
@@ -329,6 +335,7 @@ public class ShoppingCartAction {
 		view.addObject("addressId", addressId);
 		view.addObject("addressInfo", addressInfo);
 		view.addObject("redPark", redPark);
+		view.addObject("myredPark",fo.getRedPacket());
 		view.setViewName("shop/shoppingcart/unpaidorderpage");
 		return view;
 	}

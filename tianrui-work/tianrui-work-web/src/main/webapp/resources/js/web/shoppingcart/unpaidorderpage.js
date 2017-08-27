@@ -11,7 +11,12 @@ function pay() {
 		alert("请选择发货地址");
 		return;
 	}
-
+	var xfRedPack = $("#xfRedPack").val();
+	var oldRedPack = $("#oldRedPack").val();
+	if(Number(xfRedPack)>Number(oldRedPack)){
+		alert("您的宏包数量不足，赶快去宏包广场购买宏包吧");
+		return;
+	}
 	var buyerWord = $("#buyerWord").val();
 	if (addressId == "-1" && buyerWord == "") {
 		window.location.href = "/wechat/shop/pay/billPay?id=" + orderId;

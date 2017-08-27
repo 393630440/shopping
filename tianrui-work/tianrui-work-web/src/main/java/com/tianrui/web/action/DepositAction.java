@@ -57,6 +57,17 @@ public class DepositAction {
 		return view;
 	}
 	
+	/***
+	 * 消费
+	 * @return
+	 */
+	@RequestMapping("xPage")
+	public ModelAndView xPage(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/shop/deposit/xpage");
+		return view;
+	}
+	
 	@RequestMapping("savePage")
 	public ModelAndView savePage(HttpServletRequest request) throws Exception{
 		ModelAndView view = new ModelAndView();
@@ -107,8 +118,10 @@ public class DepositAction {
 	
 	@RequestMapping("cselect")
 	@ResponseBody
-	public Result cselect(RechargeFindReq req) throws Exception{
+	public Result cselect(RechargeFindReq req,HttpServletRequest request) throws Exception{
 		Result rs = Result.getSuccessful();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		req.setMemberId(info.getMemberId());
 		PageTool<MemberRechargeResp> page = memberRechangeService.select(req);
 		rs.setData(page);
 		return rs;

@@ -135,6 +135,12 @@
 			<p>商品类别：宏包商品</p>
 			<div style="clear: both;"></div>
 		</div>
+		<div class="drdd-info4">
+			<p>我的宏包：<fmt:formatNumber type="number" value="${myredPark}" maxFractionDigits="0"/></p>
+			<input type="text" value="${orderInfo.orderRedPacket}" id="xfRedPack">
+			<input type="text" value="${myredPark}" id="oldRedPack">
+			<div style="clear: both;"></div>
+		</div>
 		</c:if>
 
 		<div class="fbsd-info4">

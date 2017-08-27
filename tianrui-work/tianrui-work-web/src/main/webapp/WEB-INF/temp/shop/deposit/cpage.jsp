@@ -40,7 +40,7 @@ $(window).load(function() {
    <ul class="ui-tab-nav">
          <li><a href="/wechat/shop/deposit/page">提现记录</a></li>
          <li class="current"><a href="/wechat/shop/deposit/cPage">充值记录</a></li>
-         <li><a href="">消费记录</a></li>
+         <li><a href="/wechat/shop/deposit/xPage">消费记录</a></li>
    	</ul>
    	 <ul class="gwc-ul1" id="innerHml">
 
@@ -59,6 +59,7 @@ function init(pageNo,type){
 	$.ajax({
 		url:"/wechat/shop/deposit/cselect",
 		data:{"pageNo":pageNo,
+			"desc1":1,
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){
