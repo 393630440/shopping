@@ -130,7 +130,7 @@
 								<input type="text" class="am-input-sm" id="expressFee" name="expressFee" placeholder="请输入快递费">
 							</div>
 						</div>
-						<div class="am-form-group am-cf" id="redPacket_div">
+						<div class="am-form-group am-cf">
 							<div class="zuo">库存：</div>
 							<div class="you">
 								<input type="text" class="am-input-sm" id="inventory" name="inventory" placeholder="请输入库存数量">

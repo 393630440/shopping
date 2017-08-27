@@ -18,4 +18,8 @@ public interface ConfigurationInfoMapper {
 	int updateByPrimaryKeySelective(ConfigurationInfo record);
 
 	int updateByPrimaryKey(ConfigurationInfo record);
+
+	List<ConfigurationInfo> selectByConfigurationInfo(ConfigurationInfo record);
+
+	long selectBycount(ConfigurationInfo record);
 }

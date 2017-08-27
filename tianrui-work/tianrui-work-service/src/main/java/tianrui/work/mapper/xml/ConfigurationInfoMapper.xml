@@ -28,6 +28,25 @@
 		</where>
 	</select>
 
+	<select id="selectByConfigurationInfo" resultMap="BaseResultMap" parameterType="tianrui.work.bean.ConfigurationInfo">
+		select
+		<include refid="Base_Column_List" />
+		from configuration_info
+		<where>
+			<if test="flag != null and flag != ''">and flag = #{flag,jdbcType=VARCHAR}</if>
+		</where>
+		<if test="pageNo != null">
+			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.AdInfo">
+		select count(0) from configuration_info
+		<where>
+			<if test="flag != null and flag != ''">and flag = #{flag,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
 		delete from configuration_info
 		where paramkey = #{paramkey,jdbcType=VARCHAR}

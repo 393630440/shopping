@@ -139,8 +139,6 @@ function add(buttonType) {
 		redPacket = "0";
 	} else if (goodsType == "2") {
 		redPacket = $("#redPacket").val();
-		if (redPacket == "0")
-			msg += "宏包商品的宏包不能为空\n";
 	}
 	if (redPacket == "")
 		msg += "商品宏包不能为空\n";
