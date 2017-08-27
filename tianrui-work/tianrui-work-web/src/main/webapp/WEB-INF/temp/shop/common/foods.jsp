@@ -21,6 +21,8 @@ a {
             </div>
             <a href="/wechat/shop/goods/goodshome?goodsType=2" class="qu-ul1a">宏包商城</a>
         </li>
+    	
+    	<!-- 
     	<li class="foods_03">
         	<div class="qu-tu1">
             	<a href="/wechat/shop/shoppingcart/shoppingcartlist" class="atu1"><img src="/resources/shop/images/sjsc-17.png"></a>
@@ -28,15 +30,14 @@ a {
             </div>
             <a href="/wechat/shop/shoppingcart/ordinarylist" class="qu-ul1a">购物车</a>
         </li>
-    	<!-- 
-        <li class="foods_03">
+    	 -->
+    	 <li class="foods_03">
         	<div class="qu-tu1">
             	<a href="/wechat/shop/creditor/selectPage" class="atu1"><img src="/resources/shop/images/sjsc-17.png"></a>
             	<a href="/wechat/shop/creditor/selectPage" class="atu2"><img src="/resources/shop/images/sjsc-17-1.png"></a>
             </div>
             <a href="/wechat/shop/creditor/selectPage" class="qu-ul1a">债权发布</a>
         </li>
-    	 -->
     	<li class="foods_04">
         	<div class="qu-tu1">
             	<a href="/wechat/shop/member/userPage" class="atu1"><img src="/resources/shop/images/sjsc-18.png"></a>

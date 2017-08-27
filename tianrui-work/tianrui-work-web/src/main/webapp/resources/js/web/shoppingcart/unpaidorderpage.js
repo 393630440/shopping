@@ -35,3 +35,19 @@ function pay() {
 		});
 	}
 }
+//收货确认
+function signBill(id){
+	$.ajax({
+		url:"/wechat/shop/shoppingcart/signBill",
+		type:"POST",
+		data:{"id":id},
+		success:function(ret){
+			if(ret.code==000000){
+				alert("确认收货成功");
+				$(".sign_bill").hide();
+			}else{
+				alert(ret.error);
+			}
+		}
+	});
+}

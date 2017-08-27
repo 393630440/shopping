@@ -11,6 +11,9 @@ import java.util.Date;
 public class OrderInfoFindResp {
 	private String orderId; // 订单ID
 	private String orderCode; // 订单编号
+	private String wuliuName;//物流名称
+	private String wuliuCode;//公司代码
+	private String wuliuNumb;//物流单号
 	private String memberId; // 会员ID
 	private String goodsType; // 商品类型:1-大众商品;2-宏包商品
 	private Integer goodsNum; // 商品数量
@@ -306,6 +309,30 @@ public class OrderInfoFindResp {
 
 	public void setExpressFeeStr(String expressFeeStr) {
 		this.expressFeeStr = expressFeeStr;
+	}
+
+	public String getWuliuName() {
+		return wuliuName;
+	}
+
+	public void setWuliuName(String wuliuName) {
+		this.wuliuName = wuliuName;
+	}
+
+	public String getWuliuCode() {
+		return wuliuCode;
+	}
+
+	public void setWuliuCode(String wuliuCode) {
+		this.wuliuCode = wuliuCode;
+	}
+
+	public String getWuliuNumb() {
+		return wuliuNumb;
+	}
+
+	public void setWuliuNumb(String wuliuNumb) {
+		this.wuliuNumb = wuliuNumb;
 	}
 
 }

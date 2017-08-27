@@ -102,8 +102,9 @@ function innerHTML(data,type){
 			orderStatus = "运输中"
 		}else if(data[a].orderStatus=="4"){
 			orderStatus = "已完成"
-		}
-		var hml = "<a href='/wechat/shop/order/detailPage?id="+data[a].orderId+"'><div class='msg w'>"+
+		}///wechat/shop/shoppingcart/unpaidorderpage?addressId=0&orderId=
+		///wechat/shop/order/detailPage?id=
+		var hml = "<a href='/wechat/shop/shoppingcart/unpaidorderpage?addressId=0&orderId="+data[a].orderId+"'><div class='msg w'>"+
 				"<div class='msg_title'>"+
 				"<h1>订单编号："+data[a].orderCode+"</h1>"+
 				"<span>"+(new Date(data[a].creationTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+

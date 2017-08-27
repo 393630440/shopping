@@ -4,6 +4,12 @@ public class OrderInfo {
 	private String orderId;
 
 	private String orderCode;
+	
+	private String wuliuName;
+	
+	private String wuliuCode;
+	
+	private String wuliuNumb;
 
 	private String memberId;
 
@@ -210,6 +216,30 @@ public class OrderInfo {
 
 	public void setSendTime(Long sendTime) {
 		this.sendTime = sendTime;
+	}
+
+	public String getWuliuName() {
+		return wuliuName;
+	}
+
+	public void setWuliuName(String wuliuName) {
+		this.wuliuName = wuliuName;
+	}
+
+	public String getWuliuCode() {
+		return wuliuCode;
+	}
+
+	public void setWuliuCode(String wuliuCode) {
+		this.wuliuCode = wuliuCode;
+	}
+
+	public String getWuliuNumb() {
+		return wuliuNumb;
+	}
+
+	public void setWuliuNumb(String wuliuNumb) {
+		this.wuliuNumb = wuliuNumb;
 	}
 
 	public Long getPayTime() {

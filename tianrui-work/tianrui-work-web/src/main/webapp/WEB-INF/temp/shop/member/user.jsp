@@ -69,7 +69,7 @@
               </a>
             </li>
             <li>
-            	<a href="/wechat/shop/shoppingcart/shoppingcartlist">
+            	<a href="/wechat/shop/shoppingcart/ordinarylist">
                 	<div class="u_nav_icon dingdan"></div>
                     <div class="u_nav_name">购物车</div>
                     <div class="nt_icon"></div>

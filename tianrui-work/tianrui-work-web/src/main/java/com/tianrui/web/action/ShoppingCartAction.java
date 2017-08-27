@@ -22,21 +22,25 @@ import com.tianrui.web.util.DateUtils;
 import com.tianrui.web.util.LoggerUtils;
 import com.tianrui.web.util.StringUtils;
 
+import tianrui.work.api.IConfigurationInfoService;
 import tianrui.work.api.IGoodsInfoService;
 import tianrui.work.api.IOrderInfoService;
 import tianrui.work.api.IShoppingCartService;
 import tianrui.work.bean.MemberAddressNew;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.mapper.java.MemberAddressNewMapper;
+import tianrui.work.req.configuration.ConfigurationInfoReq;
 import tianrui.work.req.goods.GoodsInfoReq;
 import tianrui.work.req.order.OrderInfoReq;
 import tianrui.work.req.shoppingcart.ShoppingCartFindReq;
 import tianrui.work.req.shoppingcart.ShoppingCartReq;
+import tianrui.work.resp.configuration.ConfigurationInfoResp;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
 import tianrui.work.resp.order.OrderInfoFindResp;
 import tianrui.work.resp.shoppingcart.ShoppingCartFindResp;
 import tianrui.work.vo.Result;
 import tianrui.work.vo.UUIDUtil;
+
 
 @Controller
 @RequestMapping("/wechat/shop/shoppingcart")
@@ -51,6 +55,8 @@ public class ShoppingCartAction {
 	IOrderInfoService orderInfoService;
 	@Autowired
 	MemberAddressNewMapper memberAddressMapper;
+	@Autowired
+	IConfigurationInfoService configurationInfoService;
 
 	/** 跳转购物车列表页面 */
 	@RequestMapping("shoppingcartlist")
@@ -258,6 +264,30 @@ public class ShoppingCartAction {
 		return rs;
 	}
 
+	/**运单签收
+	 * @throws Exception */
+	@RequestMapping("signBill")
+	@ResponseBody
+	public Result signBill(String id) throws Exception{
+		Result rs = Result.getSuccessful();
+		OrderInfoFindResp resp = orderInfoService.queryOrderInfoByOne(id);
+		if(resp!=null){
+			if(resp.getOrderStatus().equals("3")){
+				OrderInfoReq req = new OrderInfoReq();
+				req.setOrderId(id);
+				req.setOrderStatus("4");
+				orderInfoService.editOrderInfo(req);
+			}else{
+				rs.setCode("1");
+				rs.setError("不合法的签收状态");
+			}
+		}else{
+			rs.setCode("1");
+			rs.setError("未找到订单信息");
+		}
+		return rs;
+	}
+	
 	/** 跳转到未付款订单详情页面 */
 	@RequestMapping("unpaidorderpage")
 	public ModelAndView unpaidOrderPage(String orderId, String addressId) throws Exception {
@@ -284,13 +314,21 @@ public class ShoppingCartAction {
 		} else {
 			addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
 		}
-
+		//TODO
+		ConfigurationInfoReq req = new ConfigurationInfoReq();
+		req.setFlag("1");
+		List<ConfigurationInfoResp> con = configurationInfoService.getConfigurationInfoList(req);
+		String redPark = "0";
+		if(con.size()==1){
+			redPark = con.get(0).getParamvalue();
+		}
 		ModelAndView view = new ModelAndView();
 		view.addObject("orderId", orderId);
 		view.addObject("orderInfo", orderInfo);
 		view.addObject("goodsInfoList", goodsInfoList);
 		view.addObject("addressId", addressId);
 		view.addObject("addressInfo", addressInfo);
+		view.addObject("redPark", redPark);
 		view.setViewName("shop/shoppingcart/unpaidorderpage");
 		return view;
 	}

@@ -27,7 +27,8 @@
 	<sql id="Base_Column_List">
 		order_id, order_code, member_id, goods_type, goods_num, goods_subtotal, express_fee,
 		order_amount, order_red_packet, order_status, buyer_word, creation_time, recipients,
-		phone, city, detail_address, refund_apply_time, refund_audit_time, send_time, pay_time
+		phone, city, detail_address, refund_apply_time, refund_audit_time, send_time, pay_time,
+		wuliuName,wuliuCode,wuliuNumb
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -70,7 +71,8 @@
 	<insert id="insert" parameterType="tianrui.work.bean.OrderInfo">
 		insert into order_info (order_id, order_code, member_id, goods_type, goods_num, goods_subtotal,
 		express_fee, order_amount, order_red_packet, order_status, buyer_word, creation_time, recipients,
-		phone, city, detail_address, refund_apply_time, refund_audit_time, send_time, pay_time)
+		phone, city, detail_address, refund_apply_time, refund_audit_time, send_time, pay_time,
+		wuliuName,wuliuCode,wuliuNumb)
 		values (#{orderId,jdbcType=VARCHAR},
 		#{orderCode,jdbcType=VARCHAR},
 		#{memberId,jdbcType=VARCHAR},
@@ -90,7 +92,11 @@
 		#{refundApplyTime,jdbcType=BIGINT},
 		#{refundAuditTime,jdbcType=BIGINT},
 		#{sendTime,jdbcType=BIGINT},
-		#{payTime,jdbcType=BIGINT})
+		#{payTime,jdbcType=BIGINT},
+		#{wuliuName,jdbcType=VARCHAR},
+		#{wuliuCode,jdbcType=VARCHAR},
+		#{wuliuNumb,jdbcType=VARCHAR}
+		)
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.OrderInfo">
@@ -116,6 +122,11 @@
 			<if test="refundAuditTime != null and refundAuditTime != ''">refund_audit_time,</if>
 			<if test="sendTime != null and sendTime != ''">send_time,</if>
 			<if test="payTime != null and payTime != ''">pay_time,</if>
+			
+			<if test="wuliuName != null and wuliuName != ''">wuliuName,</if>
+			<if test="wuliuCode != null and wuliuCode != ''">wuliuCode,</if>
+			<if test="wuliuNumb != null and wuliuNumb != ''">wuliuNumb,</if>
+			
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="orderId != null and orderId != ''">#{orderId,jdbcType=VARCHAR},</if>
@@ -138,12 +149,20 @@
 			<if test="refundAuditTime != null and refundAuditTime != ''">#{refundAuditTime,jdbcType=BIGINT},</if>
 			<if test="sendTime != null and sendTime != ''">#{sendTime,jdbcType=BIGINT},</if>
 			<if test="payTime != null and payTime != ''">#{payTime,jdbcType=BIGINT},</if>
+		
+			<if test="wuliuName != null and wuliuName != ''">#{wuliuName,jdbcType=VARCHAR},</if>
+			<if test="wuliuCode != null and wuliuCode != ''">#{wuliuCode,jdbcType=VARCHAR},</if>
+			<if test="wuliuNumb != null and wuliuNumb != ''">#{wuliuNumb,jdbcType=VARCHAR},</if>
 		</trim>
 	</insert>
 
 	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.OrderInfo">
 		update order_info
 		<set>
+			<if test="wuliuName != null and wuliuName != ''">wuliuName = #{wuliuName,jdbcType=VARCHAR},</if>
+			<if test="wuliuCode != null and wuliuCode != ''">wuliuCode = #{wuliuCode,jdbcType=VARCHAR},</if>
+			<if test="wuliuNumb != null and wuliuNumb != ''">wuliuNumb = #{wuliuNumb,jdbcType=VARCHAR},</if>
+			
 			<if test="orderCode != null and orderCode != ''">order_code = #{orderCode,jdbcType=VARCHAR},</if>
 			<if test="memberId != null and memberId != ''">member_id = #{memberId,jdbcType=VARCHAR},</if>
 			<if test="goodsType != null and goodsType != ''">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
@@ -169,7 +188,11 @@
 
 	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.OrderInfo">
 		update order_info
-		set order_code = #{orderCode,jdbcType=VARCHAR},
+		set 
+		wuliuName = #{wuliuName,jdbcType=VARCHAR},
+		wuliuCode = #{wuliuCode,jdbcType=VARCHAR},
+		wuliuNumb = #{wuliuNumb,jdbcType=VARCHAR},
+		order_code = #{orderCode,jdbcType=VARCHAR},
 		member_id = #{memberId,jdbcType=VARCHAR},
 		goods_type = #{goodsType,jdbcType=VARCHAR},
 		goods_num = #{goodsNum,jdbcType=INTEGER},

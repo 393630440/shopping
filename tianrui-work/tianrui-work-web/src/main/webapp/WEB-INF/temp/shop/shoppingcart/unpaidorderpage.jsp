@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,7 +8,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>购物车</title>
+<title>确认订单</title>
 <link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/owl.carousel.css" rel="stylesheet">
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
@@ -104,20 +105,57 @@
 		</c:forEach>
 
 		<div class="drdd-info4">
-			<p>配送方式：${orderInfo.expressFeeStr}</p>
+			<p>配送费：${orderInfo.expressFeeStr}</p>
 			<div style="clear: both;"></div>
 		</div>
+		
+		<div class="drdd-info4">
+			<p>配送方式：${orderInfo.wuliuName}</p>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<div class="drdd-info4">
+			<p>快递单号：${orderInfo.wuliuNumb}</p>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<c:if test="${orderInfo.goodsType eq 1}">
+		<div class="drdd-info4">
+			<p>商品类别：大众商品</p>
+			<div style="clear: both;"></div>
+		</div>
+		<div class="drdd-info4">
+			<p>奖励宏包：<fmt:formatNumber type="number" value="${orderInfo.orderAmount * redPark}" maxFractionDigits="0"/></p>
+			<div style="clear: both;"></div>
+		</div>
+		</c:if>
+		
+		<c:if test="${orderInfo.goodsType eq 2}">
+		<div class="drdd-info4">
+			<p>商品类别：宏包商品</p>
+			<div style="clear: both;"></div>
+		</div>
+		</c:if>
 
 		<div class="fbsd-info4">
 			<textarea placeholder="客户留言" id="buyerWord"></textarea>
 			<div style="clear: both;"></div>
 		</div>
-
+		<c:if test="${orderInfo.orderStatus eq 1}">
 		<div class="w main">
 			<div class="ui-btn-wrap">
 				<a class="ui-btn-lg ui-btn-primary" id="save" onclick="pay();">去结算</a>
 			</div>
 		</div>
+		</c:if>
+		
+		<c:if test="${orderInfo.orderStatus eq 3}">
+		<div class="w main sign_bill">
+			<div class="ui-btn-wrap">
+				<a class="ui-btn-lg ui-btn-primary" onclick="signBill('${orderInfo.orderId}');">确认收货</a>
+			</div>
+		</div>
+		</c:if>
 
 	</div>
 </body>

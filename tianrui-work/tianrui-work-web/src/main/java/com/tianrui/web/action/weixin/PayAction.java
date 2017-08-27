@@ -72,14 +72,15 @@ public class PayAction {
 		xd.setIp(spbill_create_ip);
 		xd.setOpenid(openid);
 		xd.setWaybillid(payNo);
-		xd.setMoney(resp.getOrderAmount().toString());
+		Double money = resp.getOrderAmount()+resp.getExpressFee();
+		xd.setMoney(money.toString());
 		xd.setTotal("订单支付");
 		xd.setNotify("/weChat/payNotify/billPay");
 		way = new Payxiadan().getprepay_id(xd);
 		
 		WeChatPayReq save = new WeChatPayReq();
 		save.setTransid(id);
-		save.setTotalfee(resp.getOrderAmount());
+		save.setTotalfee(money);
 		save.setPayNum(Double.valueOf(resp.getOrderRedPacket()));
 		save.setOpenid(info.getMemberId());
 		save.setOuttradeno(payNo);
@@ -94,7 +95,7 @@ public class PayAction {
 		
 		view.addObject("zhifu", zhifu);
 		view.addObject("payEntity", payEntity);
-		view.addObject("payMoney", resp.getOrderAmount());
+		view.addObject("payMoney", money);
 		view.setViewName("/shop/pay/weChatPay");
 		return view;
 	}

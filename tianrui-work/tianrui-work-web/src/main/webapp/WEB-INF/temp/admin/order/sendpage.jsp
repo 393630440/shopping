@@ -66,7 +66,7 @@
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">订单总金额：</div>
-							<div class="you">${orderInfo.orderAmount}</div>
+							<div class="you">${orderInfo.orderAmount+orderInfo.expressFee}</div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">订单总宏包：</div>
@@ -110,6 +110,14 @@
 						<div class="am-form-group am-cf">
 							<div class="zuo">详细地址：</div>
 							<div class="you">${orderInfo.detailAddress}</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">物流类别：</div>
+							<div class="you"><input type="text" id="wuliu_type"></div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">快递编号：</div>
+							<div class="you"><input type="text" id="wuliu_numb"></div>
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="you" style="margin-left: 11%;">

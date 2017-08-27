@@ -112,6 +112,14 @@
 							<div class="you">${orderInfo.detailAddress}</div>
 						</div>
 						<div class="am-form-group am-cf">
+							<div class="zuo">物流类别：</div>
+							<div class="you">${orderInfo.wuliuName}</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">快递编号：</div>
+							<div class="you">${orderInfo.wuliuNumb}</div>
+						</div>
+						<div class="am-form-group am-cf">
 							<div class="you" style="margin-left: 11%;">
 								<button onclick="goback();" class="am-btn am-btn-success am-radius">返回</button>
 							</div>
