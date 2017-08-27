@@ -35,6 +35,7 @@ import tianrui.work.req.rechange.RechargeFindReq;
 import tianrui.work.req.shoppingcart.ShoppingCartReq;
 import tianrui.work.resp.ad.AdInfoResp;
 import tianrui.work.resp.configuration.ConfigurationInfoResp;
+import tianrui.work.resp.foot.MemberFootprintResp;
 import tianrui.work.resp.goods.GoodsClassifyFindResp;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
 import tianrui.work.resp.rechange.MemberRechargeResp;
@@ -178,6 +179,7 @@ public class GoodsInfoAction {
 	@RequestMapping("goodsdetails")
 	public ModelAndView goodsDetails(HttpServletRequest request, GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodsdetails]");
+		MemberInfo member = SessionManage.getSessionManage(request);
 		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
 		String goodsImg = "/resources/file/goodsInfo/" + goodsInfo.getGoodsId() + "/" + goodsInfo.getFirstGoodsImg();
 
@@ -186,7 +188,6 @@ public class GoodsInfoAction {
 		goodsInfoService.editGoodsInfo(req);
 
 		// 会员足迹信息保存
-		MemberInfo member = SessionManage.getSessionManage(request);
 		MemberFootprintSaveReq memberFootprintSaveReq = new MemberFootprintSaveReq();
 		memberFootprintSaveReq.setMemberId(member.getMemberId());// 会员ID
 		memberFootprintSaveReq.setGoodsId(goodsInfo.getGoodsId());// 商品ID
@@ -197,11 +198,21 @@ public class GoodsInfoAction {
 		memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
 		memberFootprintService.save(memberFootprintSaveReq);
 
+		String followFlag = "0";// 关注标志：0-未关注；1-已关注
+		MemberFootprintSaveReq query = new MemberFootprintSaveReq();
+		query.setMemberId(member.getMemberId());
+		query.setGoodsId(goodsInfo.getGoodsId());
+		query.setFfType("1");// 关注足迹类型:1-关注;2-足迹
+		MemberFootprintResp memberFootprintResp = memberFootprintService.queryByOne(query);
+		if (memberFootprintResp != null)
+			followFlag = "1";
+
 		ModelAndView view = new ModelAndView();
 		view.addObject("goodsInfo", goodsInfo);
 		view.addObject("goodsImgList", analysisImg(goodsInfo.getGoodsImg()));
 		view.addObject("goodsDetailsList", analysisImg(goodsInfo.getGoodsDetails()));
 		view.addObject("goodsParamList", analysisParam(goodsInfo.getGoodsParam()));
+		view.addObject("followFlag", followFlag);
 		view.setViewName("shop/goods/goodsdetails");
 		return view;
 	}
@@ -237,6 +248,54 @@ public class GoodsInfoAction {
 		// goodsInfoReq.setBuyNum(buyNum);
 		// rs = goodsInfoService.editGoodsInfo(goodsInfoReq);
 
+		return rs;
+	}
+
+	/** 商品关注 */
+	@RequestMapping("goodsfollow")
+	@ResponseBody
+	public Result goodsFollow(HttpServletRequest request, String goodsId, String FfType) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodsfollow]");
+		MemberInfo member = SessionManage.getSessionManage(request);
+
+		MemberFootprintSaveReq query = new MemberFootprintSaveReq();
+		query.setMemberId(member.getMemberId());
+		query.setGoodsId(goodsId);
+		query.setFfType("1");// 关注足迹类型:1-关注;2-足迹
+		MemberFootprintResp memberFootprintResp = memberFootprintService.queryByOne(query);
+
+		if (FfType.equals("0")) {
+			if (memberFootprintResp == null) {
+				// 如果是取消关注，并且没有查到关注信息，那么则不做任何操作
+			} else {
+				// 如果是取消关注，并且查到关注信息，则删除原关注信息
+				memberFootprintService.deleteByOne(memberFootprintResp.getId());
+			}
+		} else if (FfType.equals("1")) {
+			if (memberFootprintResp == null) {
+				GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(goodsId);
+				String goodsImg = "/resources/file/goodsInfo/" + goodsId + "/" + goodsInfo.getFirstGoodsImg();
+
+				// 如果是关注，并且没有查到关注信息，则保存关注信息
+				MemberFootprintSaveReq memberFootprintSaveReq = new MemberFootprintSaveReq();
+				memberFootprintSaveReq.setMemberId(member.getMemberId());// 会员ID
+				memberFootprintSaveReq.setGoodsId(goodsId);// 商品ID
+				memberFootprintSaveReq.setFfType("1");// 1-关注;2-足迹
+				memberFootprintSaveReq.setSeetheTime(System.currentTimeMillis());// 查看时间
+				memberFootprintSaveReq.setGoodsName(goodsInfo.getGoodsName());// 商品名称
+				memberFootprintSaveReq.setGoodsImg(goodsImg);// 商品图片
+				memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
+				memberFootprintService.save(memberFootprintSaveReq);
+			} else {
+				// 如果是关注，并且查到关注信息，则更新关注时间
+				MemberFootprintSaveReq memberFootprintSaveReq = new MemberFootprintSaveReq();
+				memberFootprintSaveReq.setId(memberFootprintResp.getId());
+				memberFootprintSaveReq.setCreatetime(System.currentTimeMillis());
+				memberFootprintService.edit(memberFootprintSaveReq);
+			}
+		}
+
+		Result rs = Result.getSuccessful();
 		return rs;
 	}
 

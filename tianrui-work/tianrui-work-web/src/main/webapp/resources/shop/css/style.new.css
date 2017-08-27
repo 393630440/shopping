@@ -278,3 +278,23 @@
 	color: #333;
 	font-weight: bold;
 }
+
+.i-fav {
+	display: block;
+	width: 28px;
+	height: 28px;
+	margin: 5px auto;
+	background: url(../images/icon.png) no-repeat;
+	background-size: 310px 100px;
+	background-position: -150px -1px;
+}
+
+.i-fav-active {
+	display: block;
+	width: 28px;
+	height: 28px;
+	margin: 5px auto;
+	background: url(../images/icon.png) no-repeat;
+	background-size: 310px 100px;
+	background-position: -150px -38px !important;
+}
