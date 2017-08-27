@@ -1,83 +1,93 @@
 package tianrui.work.req.foot;
 
 public class MemberFootprintSaveReq {
-    private String memberId;
+	private String id;
 
-    private String goodsId;
+	private String memberId;
 
-    private String ffType;
+	private String goodsId;
 
-    private Long seetheTime;
+	private String ffType;
 
-    private String goodsName;
+	private Long seetheTime;
 
-    private Double goodsPrice;
+	private String goodsName;
 
-    private Long createtime;
+	private Double goodsPrice;
 
-    private String goodsImg;
+	private Long createtime;
 
-    public String getMemberId() {
-        return memberId;
-    }
+	private String goodsImg;
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId == null ? null : memberId.trim();
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getGoodsId() {
-        return goodsId;
-    }
+	public void setId(String id) {
+		this.id = id == null ? null : id.trim();
+	}
 
-    public void setGoodsId(String goodsId) {
-        this.goodsId = goodsId == null ? null : goodsId.trim();
-    }
+	public String getMemberId() {
+		return memberId;
+	}
 
-    public String getFfType() {
-        return ffType;
-    }
+	public void setMemberId(String memberId) {
+		this.memberId = memberId == null ? null : memberId.trim();
+	}
 
-    public void setFfType(String ffType) {
-        this.ffType = ffType == null ? null : ffType.trim();
-    }
+	public String getGoodsId() {
+		return goodsId;
+	}
 
-    public Long getSeetheTime() {
-        return seetheTime;
-    }
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId == null ? null : goodsId.trim();
+	}
 
-    public void setSeetheTime(Long seetheTime) {
-        this.seetheTime = seetheTime;
-    }
+	public String getFfType() {
+		return ffType;
+	}
 
-    public String getGoodsName() {
-        return goodsName;
-    }
+	public void setFfType(String ffType) {
+		this.ffType = ffType == null ? null : ffType.trim();
+	}
 
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
-    }
+	public Long getSeetheTime() {
+		return seetheTime;
+	}
 
-    public Double getGoodsPrice() {
-        return goodsPrice;
-    }
+	public void setSeetheTime(Long seetheTime) {
+		this.seetheTime = seetheTime;
+	}
 
-    public void setGoodsPrice(Double goodsPrice) {
-        this.goodsPrice = goodsPrice;
-    }
+	public String getGoodsName() {
+		return goodsName;
+	}
 
-    public Long getCreatetime() {
-        return createtime;
-    }
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName == null ? null : goodsName.trim();
+	}
 
-    public void setCreatetime(Long createtime) {
-        this.createtime = createtime;
-    }
+	public Double getGoodsPrice() {
+		return goodsPrice;
+	}
 
-    public String getGoodsImg() {
-        return goodsImg;
-    }
+	public void setGoodsPrice(Double goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
 
-    public void setGoodsImg(String goodsImg) {
-        this.goodsImg = goodsImg == null ? null : goodsImg.trim();
-    }
+	public Long getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Long createtime) {
+		this.createtime = createtime;
+	}
+
+	public String getGoodsImg() {
+		return goodsImg;
+	}
+
+	public void setGoodsImg(String goodsImg) {
+		this.goodsImg = goodsImg == null ? null : goodsImg.trim();
+	}
 }

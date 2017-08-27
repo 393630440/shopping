@@ -84,6 +84,14 @@
 								</div>
 							</div>
 							<div class="bl_view_time">
+								<a href="javascript:void(0);" onclick="follow();" class="if3-aa f-l a_addgoods-zx" title="收藏"> 
+									<c:if test="${followFlag == '0'}">
+										<i class="i-fav" id="follow_i"></i>
+									</c:if>
+									<c:if test="${followFlag == '1'}">
+										<i class="i-fav-active" id="follow_i"></i>
+									</c:if>
+								</a>
 								<a href="javascript:void(0);" onclick="addGoods();" class="if3-aa f-l a_addgoods-zx" title="加入购物车">
 									<img src="/resources/shop/images/sjsc-17-2.png">
 								</a>
@@ -124,6 +132,8 @@
 	var goodsId = "${goodsInfo.goodsId}"; // 商品ID
 	var goodsType = "${goodsInfo.goodsType}"; // 商品类型:1-大众商品;2-宏包商品
 	var inventory = ${goodsInfo.inventory}; // 库存
+	var followFlag = "${followFlag}"; // 关注标志：0-未关注；1-已关注
+	var tempFlag = "${followFlag}";
 </script>
 <script src="/resources/js/web/goods/goodsdetails.js"></script>
 </html>

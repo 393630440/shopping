@@ -28,3 +28,27 @@ function addGoods() {
 		}
 	});
 }
+
+function follow() {
+	// 0-未关注；1-已关注
+	if (tempFlag == "0") {
+		$("#follow_i").attr("class", "i-fav-active");
+		tempFlag = "1";
+	} else if (tempFlag == "1") {
+		$("#follow_i").attr("class", "i-fav");
+		tempFlag = "0";
+	}
+
+	$.ajax({
+		url : "/wechat/shop/goods/goodsfollow",
+		type : "POST",
+		data : {
+			"goodsId" : goodsId,
+			"FfType" : tempFlag,
+		},
+		success : function(ret) {
+			if (ret.code == "000000") {
+			}
+		}
+	});
+}
