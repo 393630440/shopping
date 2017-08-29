@@ -128,7 +128,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(".foods_04").addClass("current");
 	var goodsId = "${goodsInfo.goodsId}"; // 商品ID
 	var goodsType = "${goodsInfo.goodsType}"; // 商品类型:1-大众商品;2-宏包商品
 	var inventory = ${goodsInfo.inventory}; // 库存

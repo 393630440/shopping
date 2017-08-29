@@ -137,8 +137,8 @@
 		</div>
 		<div class="drdd-info4">
 			<p>我的宏包：<fmt:formatNumber type="number" value="${myredPark}" maxFractionDigits="0"/></p>
-			<input type="text" value="${orderInfo.orderRedPacket}" id="xfRedPack">
-			<input type="text" value="${myredPark}" id="oldRedPack">
+			<input type="hidden" value="${orderInfo.orderRedPacket}" id="xfRedPack">
+			<input type="hidden" value="${myredPark}" id="oldRedPack">
 			<div style="clear: both;"></div>
 		</div>
 		</c:if>
@@ -166,7 +166,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(".foods_04").addClass("current");
 	var orderId = "${orderId}";
 	var addressId = "${addressId}";
 </script>

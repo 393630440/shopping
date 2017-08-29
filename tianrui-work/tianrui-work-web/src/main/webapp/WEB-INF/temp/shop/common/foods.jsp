@@ -33,8 +33,8 @@ a {
     	 -->
     	 <li class="foods_03">
         	<div class="qu-tu1">
-            	<a href="/wechat/shop/creditor/selectPage" class="atu1"><img src="/resources/shop/images/sjsc-17.png"></a>
-            	<a href="/wechat/shop/creditor/selectPage" class="atu2"><img src="/resources/shop/images/sjsc-17-1.png"></a>
+            	<a href="/wechat/shop/creditor/selectPage" class="atu1"><img src="/resources/shop/images/sjsc23-11.gif"></a>
+            	<a href="/wechat/shop/creditor/selectPage" class="atu2"><img src="/resources/shop/images/sjsc23-11.gif"></a>
             </div>
             <a href="/wechat/shop/creditor/selectPage" class="qu-ul1a">债权发布</a>
         </li>

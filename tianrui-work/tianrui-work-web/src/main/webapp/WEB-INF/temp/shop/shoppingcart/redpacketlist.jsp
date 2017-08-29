@@ -118,7 +118,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(".foods_04").addClass("current");
 	var shoppingCartIdList = ${shoppingCartIdList};
 	var goodsType = "2";
 </script>

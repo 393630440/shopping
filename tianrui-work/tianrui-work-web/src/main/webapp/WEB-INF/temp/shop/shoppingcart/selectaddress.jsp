@@ -65,7 +65,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(".foods_04").addClass("current");
 	var orderId = "${orderId}";
 </script>
 <script src="/resources/js/web/shoppingcart/selectaddress.js"></script>
