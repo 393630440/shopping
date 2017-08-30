@@ -62,7 +62,7 @@ public class PayNotifyAction {
         	String outTradeNo = map.get("out_trade_no").toString();
         	WeChatPayResp resp = weChatPayService.select(outTradeNo);
         	if(resp.getPaystatus().equals("0")){
-        		orderInfoService.orderPaySuccess(resp.getTransid());
+        		orderInfoService.orderPaySuccess(resp.getTransid(),resp.getTotalfee());
         		MemberRechargeReq req = new MemberRechargeReq();
         		req.setMemberId(resp.getOpenid());
         		req.setRechargeAmount(resp.getTotalfee());

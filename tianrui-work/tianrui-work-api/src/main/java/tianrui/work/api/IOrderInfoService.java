@@ -26,6 +26,6 @@ public interface IOrderInfoService {
 	/** 列表查询订单信息 */
 	PageTool<OrderInfoFindResp> queryOrderInfoByList(OrderInfoFindReq req) throws Exception;
 	/** 订单支付成功 */
-	Result orderPaySuccess(String id)throws Exception;
+	Result orderPaySuccess(String id,Double tootal)throws Exception;
 
 }

@@ -1,5 +1,6 @@
 package tianrui.work.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -13,10 +14,23 @@ import tianrui.work.vo.Result;
 @Service
 public class WeChatMassageService implements IWeChatMassageService{
 
+	Logger log = Logger.getLogger(getClass());
+	
 	@Override
-	public Result saveMassage(MessageReq req) {
-		// TODO Auto-generated method stub
-		return null;
+	public void saveMassage(MessageReq req) {
+		try {
+			String token = CommonUtil.getToken("wx8c38f7256d081b10", "6480e17b1b7a2ca96772d9a01c7be122");
+//			req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
+			if(req.getId().equals(Constant.MESSAGE_DSUCCE)){
+				putMessageDsucce(req,token);
+			}else if(req.getId().equals(Constant.MESSAGE_WDING)){
+				putMessageWDing(req,token);
+			}else if(req.getId().equals(Constant.MESSAGE_DINGD)){
+				putMessageDingD(req,token);
+			}
+		} catch (Exception e) {
+			log.info("消息发送失败");
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -24,20 +38,20 @@ public class WeChatMassageService implements IWeChatMassageService{
 		System.out.println(token);
 		
 		MessageReq req = new MessageReq();
-		req.setId(Constant.MESSAGE_HPAO);
-		req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
-		req.setObj1("2015-12-12");//交易时间
-		req.setObj2("宏包交易");//交易类型
-		req.setObj3("15");//交易积分
-		req.setObj4("个人宏包");//交易来源
-		putMessageHbao(req,token);
-		
-//		req.setId(Constant.MESSAGE_DINGD);
+//		req.setId(Constant.MESSAGE_HPAO);
 //		req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
-//		req.setObj1("035697452");//快递单号
-//		req.setObj2("18331236598");//联系电话
-//		putMessageDingD(req,token);
-		
+//		req.setObj1("2015-12-12");//交易时间
+//		req.setObj2("宏包交易");//交易类型
+//		req.setObj3("15");//交易积分
+//		req.setObj4("个人宏包");//交易来源
+//		putMessageHbao(req,token);
+//		
+		req.setId(Constant.MESSAGE_DINGD);
+		req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
+		req.setObj1("035697452");//快递单号
+		req.setObj2("18331236598");//联系电话
+		putMessageDingD(req,token);
+//		
 //		req.setId(Constant.MESSAGE_DSUCCE);
 //		req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
 //		req.setObj1("035697452");//订单号
@@ -46,6 +60,8 @@ public class WeChatMassageService implements IWeChatMassageService{
 //		putMessageDsucce(req,token);
 		
 //		req.setId(Constant.MESSAGE_WDING);
+//		req.setFirst("哎呀，购物成功了，欢迎对本平台的支持\n");
+//		req.setFoots("\n客服人员将以最快的方式为您寄送宝贝");
 //		req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
 //		req.setObj1("035697452");//订单号
 //		req.setObj2("10元");//金额
@@ -65,7 +81,7 @@ public class WeChatMassageService implements IWeChatMassageService{
 		JSONObject dd = new JSONObject();
 		
 		JSONObject dd2 = new JSONObject();
-		dd2.put("value", "本次网购成功，祝您网购愉快...\n");//消息提示
+		dd2.put("value", massages.getFirst());//消息提示
 		dd2.put("color", "#173177");
 		dd.put("first", dd2);
 		
@@ -80,7 +96,7 @@ public class WeChatMassageService implements IWeChatMassageService{
 		dd.put("amount", jf);
 		
 		JSONObject gg2 = new JSONObject();
-		gg2.put("value", "\n感谢对平台的支持...");
+		gg2.put("value", massages.getFoots());
 		gg2.put("color", "#173177");
 //								gg2.put("value", "每天上午八点准时更新，请注意查看"+"\n(回复TD,取消消息提醒)");
 		dd.put("remark", gg2);
@@ -104,30 +120,29 @@ public class WeChatMassageService implements IWeChatMassageService{
 		JSONObject dd = new JSONObject();
 		
 		JSONObject dd2 = new JSONObject();
-		dd2.put("value", "您的订单已创建成功，请尽快支付...\n");//消息提示
+		dd2.put("value", massages.getFirst());//消息提示
 		dd2.put("color", "#173177");
 		dd.put("first", dd2);
 		
 		JSONObject ee2 = new JSONObject();
-		ee2.put("value", massages.getObj1());//交易类型
+		ee2.put("value", massages.getObj1());//订单号
 		ee2.put("color", "#173177");
 		dd.put("orderno", ee2);
 	
 		JSONObject jf = new JSONObject();
-		jf.put("value", massages.getObj2());//交易积分
+		jf.put("value", massages.getObj2());//货物数量
 		jf.put("color", "#173177");
 		dd.put("refundno", jf);
 		
 		JSONObject jfs = new JSONObject();
-		jfs.put("value", massages.getObj3());//交易积分
+		jfs.put("value", massages.getObj3());//订单金额
 		jfs.put("color", "#173177");
 		dd.put("refundproduct", jfs);
 	
 		
 		JSONObject gg2 = new JSONObject();
-		gg2.put("value", "\n感谢对平台的支持...");
+		gg2.put("value", massages.getFoots());
 		gg2.put("color", "#173177");
-//						gg2.put("value", "每天上午八点准时更新，请注意查看"+"\n(回复TD,取消消息提醒)");
 		dd.put("remark", gg2);
 		
 		json.put("data", dd);
@@ -149,7 +164,7 @@ public class WeChatMassageService implements IWeChatMassageService{
 		JSONObject dd = new JSONObject();
 		
 		JSONObject dd2 = new JSONObject();
-		dd2.put("value", "您的商品订单已配送...\n");
+		dd2.put("value", massages.getFirst());
 		dd2.put("color", "#173177");
 		dd.put("first", dd2);
 		
@@ -162,10 +177,20 @@ public class WeChatMassageService implements IWeChatMassageService{
 		jf.put("value", massages.getObj2());
 		jf.put("color", "#173177");
 		dd.put("keyword2", jf);
+		
+		JSONObject jf3 = new JSONObject();
+		jf3.put("value", massages.getObj3());
+		jf3.put("color", "#173177");
+		dd.put("keyword3", jf3);
+		
+		JSONObject jf4 = new JSONObject();
+		jf4.put("value", massages.getObj4());
+		jf4.put("color", "#173177");
+		dd.put("keyword4", jf4);
 	
 		
 		JSONObject gg2 = new JSONObject();
-		gg2.put("value", "\n感谢对平台的支持...");
+		gg2.put("value", massages.getFoots());
 		gg2.put("color", "#173177");
 //				gg2.put("value", "每天上午八点准时更新，请注意查看"+"\n(回复TD,取消消息提醒)");
 		dd.put("remark", gg2);

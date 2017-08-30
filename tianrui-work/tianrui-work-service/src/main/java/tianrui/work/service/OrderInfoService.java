@@ -12,11 +12,14 @@ import tianrui.work.api.IConfigurationInfoService;
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IOrderInfoService;
+import tianrui.work.api.IWeChatMassageService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.OrderInfo;
+import tianrui.work.comm.Constant;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.OrderInfoMapper;
 import tianrui.work.req.gain.MemberGainSaveReq;
+import tianrui.work.req.massage.MessageReq;
 import tianrui.work.req.order.OrderInfoFindReq;
 import tianrui.work.req.order.OrderInfoReq;
 import tianrui.work.resp.configuration.ConfigurationInfoResp;
@@ -42,6 +45,8 @@ public class OrderInfoService implements IOrderInfoService {
 	MemberInfoMapper memberInfoMapper;
 	@Autowired
 	IConfigurationInfoService configurationInfoService;
+	@Autowired
+	IWeChatMassageService weChatMassageService;
 
 	@Override
 	public Result addOrderInfo(OrderInfoReq req) throws Exception {
@@ -49,6 +54,17 @@ public class OrderInfoService implements IOrderInfoService {
 		OrderInfo record = new OrderInfo();
 		PropertyUtils.copyProperties(record, req);
 		orderInfoMapper.insert(record);
+		
+		MessageReq msg = new MessageReq();
+		msg.setOpenid(req.getMemberId());
+		msg.setFirst("亲，您的订单已生产，稍后将通知本店客服...");
+		msg.setId(Constant.MESSAGE_DSUCCE);
+		msg.setObj1(req.getOrderCode());
+		msg.setObj2(req.getGoodsNum().toString());
+		msg.setObj3(req.getOrderAmount().toString());
+		msg.setFoots("\n谢谢亲的支持，宝贝已为您保存，请尽快去支付吧");
+		weChatMassageService.saveMassage(msg);
+		
 		return rs;
 	}
 
@@ -58,6 +74,20 @@ public class OrderInfoService implements IOrderInfoService {
 		OrderInfo record = new OrderInfo();
 		PropertyUtils.copyProperties(record, req);
 		orderInfoMapper.updateByPrimaryKeySelective(record);
+		OrderInfo info = orderInfoMapper.selectByPrimaryKey(req.getOrderId());
+		if(info.getOrderStatus().equals("3")){
+			//已发货
+			MessageReq msg = new MessageReq();
+			msg.setOpenid(req.getMemberId());
+			msg.setFirst("亲，让您久等了，您的订单已经开始发货了...");
+			msg.setId(Constant.MESSAGE_DINGD);
+			msg.setObj1(info.getWuliuName());//快递公司
+			msg.setObj2(info.getWuliuNumb());//快递号
+			msg.setObj3(info.getOrderCode());
+			msg.setObj4(info.getGoodsNum().toString());
+			msg.setFoots("\n您的宝贝已经发货，近期请注意查收...");
+			weChatMassageService.saveMassage(msg);
+		}
 		return rs;
 	}
 
@@ -101,7 +131,7 @@ public class OrderInfoService implements IOrderInfoService {
 	}
 
 	@Override
-	public Result orderPaySuccess(String id) throws Exception {
+	public Result orderPaySuccess(String id,Double tootal) throws Exception {
 		Result rs = Result.getSuccessful();
 		OrderInfo info = orderInfoMapper.selectByPrimaryKey(id);
 		if (StringUtils.equals("1", info.getOrderStatus())) {
@@ -147,7 +177,15 @@ public class OrderInfoService implements IOrderInfoService {
 					memberInfoMapper.updateByPrimaryKeySelective(uptto);
 				}
 			}
-
+			//TODO
+			MessageReq msg = new MessageReq();
+			msg.setId(Constant.MESSAGE_WDING);
+			msg.setOpenid(info.getMemberId());
+			msg.setFirst("哎呀，购物成功了，欢迎对本平台的支持..\n");
+			msg.setObj1(info.getOrderCode());
+			msg.setObj2(tootal.toString());
+			msg.setFoots("\n客服人员将以最快的方式为您寄送宝贝");
+			weChatMassageService.saveMassage(msg);
 			OrderInfo upt = new OrderInfo();
 			upt.setOrderId(info.getOrderId());
 			upt.setOrderStatus("2");// 待发货
