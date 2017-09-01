@@ -57,7 +57,7 @@ public class OrderInfoService implements IOrderInfoService {
 		
 		MessageReq msg = new MessageReq();
 		msg.setOpenid(req.getMemberId());
-		msg.setFirst("亲，您的订单已生产，稍后将通知本店客服...");
+		msg.setFirst("亲，您的订单已产生，稍后将通知本店客服...");
 		msg.setId(Constant.MESSAGE_DSUCCE);
 		msg.setObj1(req.getOrderCode());
 		msg.setObj2(req.getGoodsNum().toString());

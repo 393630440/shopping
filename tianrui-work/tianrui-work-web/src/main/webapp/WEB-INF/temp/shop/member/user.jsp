@@ -20,7 +20,7 @@
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="#"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
       <h2>个人中心</h2>
       </div>
   </header>

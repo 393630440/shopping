@@ -19,7 +19,7 @@ public class WeChatMassageService implements IWeChatMassageService{
 	@Override
 	public void saveMassage(MessageReq req) {
 		try {
-			String token = CommonUtil.getToken("wx8c38f7256d081b10", "6480e17b1b7a2ca96772d9a01c7be122");
+			String token = CommonUtil.getToken(Constant.WEIXIN_APPID, Constant.WEIXIN_APPSECRET);
 //			req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
 			if(req.getId().equals(Constant.MESSAGE_DSUCCE)){
 				putMessageDsucce(req,token);

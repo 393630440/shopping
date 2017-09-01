@@ -26,7 +26,7 @@
 		<!--header 开始-->
 		<header>
 			<div class="header">
-				<a class="new-a-back" href="javascript:history.back();">
+				<a class="new-a-back" href="/wechat/shop/member/userPage">
 					<span>
 						<img src="/resources/web/images/iconfont-fanhui.png">
 					</span>

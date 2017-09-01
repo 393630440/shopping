@@ -58,9 +58,16 @@ public class Oauth2Action {
 		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
 		switch (state) {
 		case "member":
-			view.setViewName("");
-		case "goods":
-			view.setViewName("");
+			view.setViewName("redirect:/wechat/shop/member/userPage");
+			break;
+		case "creditor":
+			view.setViewName("redirect:/wechat/shop/creditor/selectPage");
+			break;
+		case "goodsA":
+			view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=1");
+			break;
+		case "goodsB":
+			view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=2");
 			break;
 
 		default:
