@@ -37,8 +37,10 @@
 		<!--header 开始-->
 		<header>
 			<div class="header">
-				<a class="new-a-back" href="javascript:history.back();"> <span> <img src="/resources/web/images/iconfont-fanhui.png">
-				</span>
+				<a class="new-a-back" href="javascript:history.back();">
+					<span style="margin-left: 8px;">
+						<img src="/resources/web/images/iconfont-fanhui.png">
+					</span>
 				</a>
 				<h2>商品详情</h2>
 			</div>

@@ -39,7 +39,7 @@
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="/wechat/shop/order/index">
-					<span>
+					<span style="margin-left: 8px;">
 						<img src="/resources/web/images/iconfont-fanhui.png">
 					</span>
 				</a>

@@ -37,7 +37,7 @@
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
-					<span>
+					<span style="margin-left: 8px;">
 						<img src="/resources/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
