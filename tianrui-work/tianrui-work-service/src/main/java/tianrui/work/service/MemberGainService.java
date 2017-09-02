@@ -47,6 +47,7 @@ public class MemberGainService implements IMemberGainService{
 			page.setPageNo(req.getPageNo());
 			page.setPageSize(req.getPageSize());
 		}
+		query.setWechatName(req.getWechatName());
 		query.setMemberId(req.getMemberId());
 		query.setRpType(req.getRpType());
 		List<MemberGain> list = memberGainMapper.selectByCondition(query);

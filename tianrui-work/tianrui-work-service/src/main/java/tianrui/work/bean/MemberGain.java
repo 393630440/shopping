@@ -8,6 +8,8 @@ public class MemberGain {
     private Integer pageSize;
 
     private String memberId;
+    
+    private String wechatName;
 
     private String rpType;
 
@@ -89,6 +91,14 @@ public class MemberGain {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getWechatName() {
+		return wechatName;
+	}
+
+	public void setWechatName(String wechatName) {
+		this.wechatName = wechatName;
 	}
     
 }

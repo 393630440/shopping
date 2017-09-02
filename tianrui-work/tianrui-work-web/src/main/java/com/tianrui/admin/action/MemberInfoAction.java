@@ -1,26 +1,34 @@
 package com.tianrui.admin.action;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.smvc.AutherWeb;
 
+import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.bean.MemberInfo;
+import tianrui.work.req.gain.MemberGainFindReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
+import tianrui.work.resp.gain.MemberGainResp;
 import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
-/** 鍓嶅彴浼氬憳甯愬彿绠＄悊*/
 @Controller
 @RequestMapping("/admin/shop/member")
 public class MemberInfoAction {
 
 	@Autowired
 	IMemberInfoService memberInfoService;
+	@Autowired
+	IMemberGainService memberGainService;
 	
 	@RequestMapping("page")
 	@AutherWeb(typeString = "admin")
@@ -29,7 +37,6 @@ public class MemberInfoAction {
 		view.setViewName("/admin/member/page");
 		return view;
 	}
-	//娲鹃�瀹忓寘椤甸潰
 	@RequestMapping("saveHbaoPage")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView saveHbaoPage() throws Exception{
@@ -58,7 +65,6 @@ public class MemberInfoAction {
 		Result rs = memberInfoService.selectByOpenid(id);
 		return rs;
 	}
-	/** 娲鹃�瀹忓寘*/
 	@RequestMapping("saveHbao")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
@@ -66,5 +72,20 @@ public class MemberInfoAction {
 		Result rs = Result.getSuccessful();
 		rs = memberInfoService.saveHbao(req);
 		return rs;
+	}
+	
+	@RequestMapping("find")
+	@ResponseBody
+	public Result find(MemberGainFindReq req,HttpServletRequest request) throws Exception{
+		Result rs = Result.getSuccessful();
+		PageTool<MemberGainResp> page = memberGainService.select(req);
+		rs.setData(page);
+		return rs;
+	}
+	@RequestMapping("gainPage")
+	public ModelAndView gainPage(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/admin/member/hbaoInfo");
+		return view;
 	}
 }

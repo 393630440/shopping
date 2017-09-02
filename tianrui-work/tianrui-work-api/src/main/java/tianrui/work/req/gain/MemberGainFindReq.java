@@ -5,6 +5,8 @@ public class MemberGainFindReq {
     private String memberId;
 
     private String rpType;
+
+    private String wechatName;
     
     private Integer pageNo;
     
@@ -40,6 +42,14 @@ public class MemberGainFindReq {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getWechatName() {
+		return wechatName;
+	}
+
+	public void setWechatName(String wechatName) {
+		this.wechatName = wechatName;
 	}
 
     

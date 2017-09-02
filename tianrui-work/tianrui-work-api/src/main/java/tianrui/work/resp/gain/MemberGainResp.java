@@ -4,6 +4,8 @@ public class MemberGainResp {
     private String id;
 
     private String memberId;
+    
+    private String wechatName;
 
     private String rpType;
 
@@ -70,4 +72,12 @@ public class MemberGainResp {
     public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
+
+	public String getWechatName() {
+		return wechatName;
+	}
+
+	public void setWechatName(String wechatName) {
+		this.wechatName = wechatName;
+	}
 }

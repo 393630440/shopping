@@ -2,7 +2,7 @@ $(function() {
 
 });
 
-function addGoods() {
+function addGoods(type) {
 	var goodsNum = $("#goodsNum").val();// 商品数量
 	if (goodsNum == 0) {
 		alert("请选择商品数量");
@@ -23,7 +23,13 @@ function addGoods() {
 		success : function(ret) {
 			if (ret.code == "000000") {
 				alert("已添加到购物车");
-				location.replace(location.href);
+				if(type == 1){
+					if(goodsType==1){
+						window.location.href="/wechat/shop/shoppingcart/ordinarylist";
+					}else if(goodsType==2){
+						window.location.href="/wechat/shop/shoppingcart/redpacketlist";
+					}
+				}
 			}
 		}
 	});

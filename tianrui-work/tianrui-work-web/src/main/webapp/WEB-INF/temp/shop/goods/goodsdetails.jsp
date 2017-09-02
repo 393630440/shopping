@@ -97,11 +97,11 @@
 									</c:if>
 									<span class="bl_view_user" style="margin-left:8px;">收藏</span>
 								</a>
-								<button class="if3-btnn if3-btn2 f-l" onclick="addGoods();" title="加入购物车">
+								<button class="if3-btnn if3-btn2 f-l" onclick="addGoods(0);" title="加入购物车">
 									<img src="/resources/shop/images/sjsc-17-2.png" style="width: 18px;height: 15px;margin-right: 5px;">
 									加入购物车
 								</button>
-								<button class="if3-btnn if3-btn1 f-l" onclick="buyNow();" title="立即购买">立即购买</button>
+								<button class="if3-btnn if3-btn1 f-l" onclick="addGoods(1);" title="立即购买">立即购买</button>
 							</div>
 						</div>
 					</div>

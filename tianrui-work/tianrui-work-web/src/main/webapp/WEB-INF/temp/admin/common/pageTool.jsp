@@ -16,7 +16,7 @@ function pageTool(total,pageNo,pageSize){
 	var pageB = total%pageSize;
 	//计算数据总页数
 	if(pageB == 0){
-		pageA = pageA + 1;
+	//	pageA = pageA + 1;
 	}
 	var hml = "";
 	if(pageNo == 0){
@@ -31,7 +31,7 @@ function pageTool(total,pageNo,pageSize){
 			hml +="<li><a href='#' onclick=\"init('"+a+"')\">"+(a+1)+"</a></li>";
 		}
 	}
-	if((Number(pageNo)+1) > pageA){
+	if((Number(pageNo)+1) >= pageA){
 		hml +="<li class='am-disabled'><a href='#'>»</a></li>";
 	}else {
 		hml +="<li ><a href='#' onclick=\"init('"+(Number(pageNo)+1)+"')\">»</a></li>";

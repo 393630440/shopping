@@ -9,23 +9,30 @@
     <result column="source_id" property="sourceId" jdbcType="VARCHAR" />
     <result column="source_describe" property="sourceDescribe" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="BIGINT" />
+     <result column="wechat_name" property="wechatName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, member_id, rp_type, rp_num, source_id, source_describe, createtime
   </sql>
   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="tianrui.work.bean.MemberGain" >
     select 
-    <include refid="Base_Column_List" />
-    from member_rp_gain
+    	rg.id, rg.member_id, rg.rp_type, rg.rp_num, 
+    	rg.source_id, rg.source_describe, rg.createtime,
+    	m.wechat_name
+    from member_rp_gain rg 
+    	LEFT JOIN member_info m ON m.member_id = rg.member_id
     <where>
+    	<if test="wechatName != null and wechatName != ''">
+    		and m.wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
+    	</if>
     	<if test="memberId != null and memberId != ''">
-    		and member_id = #{memberId,jdbcType=VARCHAR}
+    		and rg.member_id = #{memberId,jdbcType=VARCHAR}
     	</if>
     	<if test="rpType != null and rpType != ''">
-    		and rp_type = #{rpType,jdbcType=VARCHAR}
+    		and rg.rp_type = #{rpType,jdbcType=VARCHAR}
     	</if>
     </where>
-    order by createtime desc
+    order by rg.createtime desc
     <if test="pageNo != null">
    		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
    	</if>
@@ -33,13 +40,17 @@
   <select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.MemberGain" >
     select 
     count(0)
-    from member_rp_gain
+    from member_rp_gain rg 
+    	LEFT JOIN member_info m ON m.member_id = rg.member_id
     <where>
+    	<if test="wechatName != null and wechatName != ''">
+    		and m.wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
+    	</if>
     	<if test="memberId != null and memberId != ''">
-    		and member_id = #{memberId,jdbcType=VARCHAR}
+    		and rg.member_id = #{memberId,jdbcType=VARCHAR}
     	</if>
     	<if test="rpType != null and rpType != ''">
-    		and rp_type = #{rpType,jdbcType=VARCHAR}
+    		and rg.rp_type = #{rpType,jdbcType=VARCHAR}
     	</if>
     </where>
   </select>

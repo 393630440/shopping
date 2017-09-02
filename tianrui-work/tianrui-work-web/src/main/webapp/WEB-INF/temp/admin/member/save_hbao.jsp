@@ -146,7 +146,7 @@ $("#save_member_hbao").on("click",function(){
 		type:"POST",
 		success:function(ret){
 			if(ret.code=="000000"){
-				alert("添加成功");
+				location=location;
 			}
 		}
 	});
