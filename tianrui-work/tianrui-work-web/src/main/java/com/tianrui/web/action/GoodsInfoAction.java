@@ -32,6 +32,7 @@ import tianrui.work.req.goods.GoodsClassifyReq;
 import tianrui.work.req.goods.GoodsInfoFindReq;
 import tianrui.work.req.goods.GoodsInfoReq;
 import tianrui.work.req.rechange.RechargeFindReq;
+import tianrui.work.req.shoppingcart.ShoppingCartFindReq;
 import tianrui.work.req.shoppingcart.ShoppingCartReq;
 import tianrui.work.resp.ad.AdInfoResp;
 import tianrui.work.resp.configuration.ConfigurationInfoResp;
@@ -39,6 +40,7 @@ import tianrui.work.resp.foot.MemberFootprintResp;
 import tianrui.work.resp.goods.GoodsClassifyFindResp;
 import tianrui.work.resp.goods.GoodsInfoFindResp;
 import tianrui.work.resp.rechange.MemberRechargeResp;
+import tianrui.work.resp.shoppingcart.ShoppingCartFindResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 
@@ -64,7 +66,7 @@ public class GoodsInfoAction {
 
 	/** 跳转商品首页页面 */
 	@RequestMapping("goodshome")
-	public ModelAndView goodsHome(GoodsInfoReq req,HttpServletRequest request) throws Exception {
+	public ModelAndView goodsHome(GoodsInfoReq req, HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodshome]");
 		String goodsType = req.getGoodsType();
 		if (StringUtils.isNull(goodsType))
@@ -74,25 +76,25 @@ public class GoodsInfoAction {
 		String viewName = "";
 		if (goodsType.equals("1"))
 			viewName = "shop/goods/ordinaryhome";
-		else if (goodsType.equals("2")){
+		else if (goodsType.equals("2")) {
 			viewName = "shop/goods/redpackethome";
 			ConfigurationInfoResp spc = configurationInfoService.queryConfigurationInfoByOne("RED_PACKET_SHOP_RATE");
-			if(spc.getFlag().equals("1")){
+			if (spc.getFlag().equals("1")) {
 				RechargeFindReq chang = new RechargeFindReq();
 				chang.setMemberId(info.getMemberId());
 				chang.setDesc1("2");
 				PageTool<MemberRechargeResp> tool = memberRechangeService.select(chang);
 				List<MemberRechargeResp> lst = tool.getList();
 				Double payMoney = 0.00;
-				for(MemberRechargeResp sp : lst){
+				for (MemberRechargeResp sp : lst) {
 					payMoney = payMoney + sp.getRechargeAmount();
 				}
 				Double conf = Double.valueOf(spc.getParamvalue());
-				if(payMoney<conf){
+				if (payMoney < conf) {
 					viewName = "shop/goods/redpacketNO";
 				}
 			}
-		}else
+		} else
 			throw new Exception("");
 
 		ModelAndView view = new ModelAndView();
@@ -299,6 +301,57 @@ public class GoodsInfoAction {
 		return rs;
 	}
 
+	@RequestMapping("buynow")
+	public ModelAndView buyNow(HttpServletRequest request, String goodsId, Integer goodsNum) throws Exception {
+		LoggerUtils.info(log, "---------- [/wechat/shop/goods/buynow]");
+		MemberInfo member = SessionManage.getSessionManage(request);
+		GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(goodsId);
+
+		// 添加购物车
+		ShoppingCartReq shoppingCartReq = new ShoppingCartReq();
+		shoppingCartReq.setGoodsId(goodsId);
+		shoppingCartReq.setGoodsNum(goodsNum);
+		shoppingCartReq.setMemberId(member.getMemberId());
+		shoppingCartReq.setCreationTime(System.currentTimeMillis());
+		shoppingCartReq.setGoodsName(goodsInfoFindResp.getGoodsName());
+		shoppingCartReq.setGoodsImg(goodsInfoFindResp.getFirstGoodsImg());
+		shoppingCartReq.setGoodsPrice(goodsInfoFindResp.getGoodsPrice());
+		shoppingCartReq.setGoodsRedPacket(goodsInfoFindResp.getRedPacket());
+		shoppingCartReq.setGoodsType(goodsInfoFindResp.getGoodsType());
+		shoppingCartReq.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
+		shoppingCartReq.setExpressFee(goodsInfoFindResp.getExpressFee());
+		shoppingCartService.addShoppingCart(shoppingCartReq);
+
+		ShoppingCartFindReq req = new ShoppingCartFindReq();
+		req.setMemberId(member.getMemberId());
+		req.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
+
+		Integer size = 0;
+		Double price = 0d;
+		Integer redPacket = 0;
+		String total = "0";
+		List<ShoppingCartFindResp> goodsInfoList = shoppingCartService.getShoppingCartList(req);
+		List<Integer> shoppingCartIdList = new ArrayList<Integer>();
+		if (goodsInfoList != null && goodsInfoList.size() > 0) {
+			for (int i = 0; i < goodsInfoList.size(); i++) {
+				ShoppingCartFindResp goodsInfo = goodsInfoList.get(i);
+				size += goodsInfo.getGoodsNum();
+				price += goodsInfo.getGoodsPrice() * goodsInfo.getGoodsNum();
+				redPacket += goodsInfo.getGoodsRedPacket() * goodsInfo.getGoodsNum();
+				shoppingCartIdList.add(goodsInfo.getShoppingCartId());
+			}
+			total = formatDoubleToString(price) + " + " + String.valueOf(redPacket) + "宏包";
+		}
+
+		ModelAndView view = new ModelAndView();
+		view.addObject("size", size);
+		view.addObject("total", total);
+		view.addObject("goodsInfoList", goodsInfoList);
+		view.addObject("shoppingCartIdList", shoppingCartIdList);
+		view.setViewName("shop/shoppingcart/shoppingcartlist");
+		return view;
+	}
+
 	/** 解析图片字段 */
 	private List<String> analysisImg(String reqStr) {
 		List<String> rspList = null;
@@ -329,6 +382,11 @@ public class GoodsInfoAction {
 			}
 		}
 		return rspList;
+	}
+
+	private String formatDoubleToString(double d) {
+		d = (double) Math.round(d * 100) / 100;
+		return String.valueOf(d);
 	}
 
 }

@@ -13,6 +13,8 @@
 <link href="/resources/web/css/owl.carousel.css" rel="stylesheet">
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/resources/shop/css/shoujisc.css" rel="stylesheet" type="text/css">
+<link href="/resources/shop/css/style.new.css" rel="stylesheet" type="text/css">
 <script src="/resources/web/js/jquery-1.8.3.min.js"></script>
 <script src="/resources/web/js/owl.carousel.min.js"></script>
 <script src="/resources/web/layer/layer.js"></script>
@@ -27,7 +29,7 @@
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="/wechat/shop/member/userPage">
-					<span>
+					<span style="margin-left: 8px;">
 						<img src="/resources/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
@@ -55,27 +57,12 @@
 		</div>
 		<!-- 商品列表 -->
 		<div class="m_baoliao w">
-		  	<div class="baoliao_title"><span>宏包商城</span><em><span onclick="init(0,0)"><img src="/resources/web/images/iconfont-shuaxin.png"></span></em></div>
-		    <div class="baoliao_list" id="innerHml">
-		        <a href="#">
-		        <div class="baoliao_content">
-		            <div class="bl_img"><img src="http://baoliao.178hui.com/upload/2015/0710/12332059693.jpg" /></div>
-		            <div class="bl_right">
-		                <div class="bl_title">韩国现代（HYUNDAI) BD-YS2003 多功能养生壶 煎药壶2.0L</div>
-		                <div class="bl_note">手机端：99元包邮</div>
-		                <div class="bl_tag">
-		                    <div class="bl_price">￥99.00</div>
-		                    <div class="bl_oprice">￥138.00</div>
-		                    <div class="bl_time">07-10 12:33</div>
-		                    <div class="bl_mall">京东商城</div>
-		                </div>
-		            </div>
-		        </div> 
-		        </a>
-		    </div>
-		  <div class="baoliao_content">
-		  </div>
-		  </div>
+			<div class="baoliao_title">
+				<span>宏包商城</span><em><span onclick="init(0,0)"><img src="/resources/web/images/iconfont-shuaxin.png"></span></em>
+			</div>
+			<ul class="ssjg-ul-zx" id="innerHml"></ul>
+			<div class="baoliao_content" style="margin-top: 0px; margin-bottom: 50px;"></div>
+		</div>
 		<!-- foods -->
 		<jsp:include page="../common/foods.jsp"></jsp:include>
 		<!-- foods -->
@@ -85,53 +72,57 @@
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
-$(function(){
-	init(0,0);
-});
-
-function init(pageNo,type){
-	$("#scrollPage").val(pageNo);
-	$.ajax({
-		url:"/wechat/shop/goods/toloadgoodslist",
-		data:{"pageNo":pageNo,
-			"goodsType":2,
-			"pageSize":10},
-		type:"POST",
-		success:function(ret){
-			if(ret.code=="000000"){
-				$("#scrollTotal").val(ret.data.total);
-				innerHTML(ret.data.list,type);
-			}
-		}
+	$(function() {
+		init(0, 0);
 	});
-}
-function innerHTML(date,type){
-	if(type==0){
-		$("#innerHml").empty();
+
+	function init(pageNo, type) {
+		$("#scrollPage").val(pageNo);
+		$.ajax({
+			url : "/wechat/shop/goods/toloadgoodslist",
+			data : {
+				"pageNo" : pageNo,
+				"goodsType" : 2,
+				"pageSize" : 10
+			},
+			type : "POST",
+			success : function(ret) {
+				if (ret.code == "000000") {
+					$("#scrollTotal").val(ret.data.total);
+					innerHTML(ret.data.list, type);
+				}
+			}
+		});
 	}
-	for (var a = 0; a < date.length; a++) {
-		var goodsType = "";
-		if(date[a].goodsType == 1){
-			goodsType = "大众商品";
-		}else if(date[a].goodsType == 2) {
-			goodsType = "宏包商品";
+	function innerHTML(date, type) {
+		if (type == 0) {
+			$("#innerHml").empty();
 		}
-		
-		var hml = "<a href='/wechat/shop/goods/goodsdetails?goodsId="+date[a].goodsId+"'>"+
-		"<div class='baoliao_content'>"+
-		"<div class='bl_img'>"+
-		"<img src='"+date[a].path+date[a].firstGoodsImg+"' />"+
-		"</div><div class='bl_right'>"+
-            "<div class='bl_title'>"+date[a].goodsName+"</div>"+
-            "<div class='bl_note'>邮费："+date[a].expressFee+"</div>"+
-            "<div class='bl_tag'>"+
-            "<div class='bl_price'>￥"+date[a].goodsPrice+"</div>"+
-            //"<div class='bl_oprice'>￥138.00</div>"+
-            "<div class='bl_time'>"+(new Date(date[a].pubdate).format("yyyy-MM-dd hh:mm:ss"))+"</div>"+
-            "<div class='bl_mall'>"+goodsType+"</div></div>"+
-            "</div></div></a>";
-		$("#innerHml").append(hml);
+		for (var a = 0; a < date.length; a++) {
+			var hml = "<li>";
+			hml += "<div class=\"ssjg-tu\">";
+			hml += "<a href=\"/wechat/shop/goods/goodsdetails?goodsId=" + date[a].goodsId + "\">";
+			hml += "<img src=\""+date[a].path+date[a].firstGoodsImg+"\">";
+			hml += "</a>";
+			hml += "</div>";
+			hml += "<h3 style=\"font-size:12px;margin-top:0px;\">";
+			hml += "<a href=\"/wechat/shop/goods/goodsdetails?goodsId=" + date[a].goodsId + "\"> " + date[a].goodsName + " </a>";
+			hml += "</h3>";
+			hml += "<dl class=\"ssjg-dl1\" style=\"margin-top:-10px;\">";
+			hml += "<dt>";
+			hml += "<span style=\"color: #DB3751; margin-left: 0px; font-size:12px;\">" + date[a].price + "</span>";
+			//hml += "<br />";
+			//hml += "<span style=\"color: #7F7F7F; font-size: 12px; margin-left: 0px;\">销售量：" + date[a].salesvolume + "</span>";
+			hml += "</dt>";
+			//hml += "<dd>";
+			//hml += "<a href=\"javascript:void(0);\" onclick=\"addGoods('" + date[a].goodsId + "');\">";
+			//hml += "<img src=\"/resources/shop/images/sjsc-09.gif\">";
+			//hml += "</a>";
+			//hml += "</dd>";
+			hml += "</dl>";
+			hml += "</li>";
+			$("#innerHml").append(hml);
+		}
 	}
-}
 </script>
 </html>

@@ -298,3 +298,43 @@
 	background-size: 310px 100px;
 	background-position: -150px -38px !important;
 }
+
+.spxq-info3-zx {
+	width: 100%;
+	background-color: rgba(233, 233, 233, 0.8);
+	left: 0;
+	bottom: 0;
+}
+
+.spxq-info3-zx .if3-btnn {
+	width: 38%;
+	height: 30px;
+	margin-left: 2%;
+	font-size: 14px;
+	border-radius: 5px;
+	margin-top: 5px;
+}
+
+.spxq-info3-zx .if3-btn1 {
+	color: #fff;
+	border: 0;
+	background: #D12323;
+}
+
+.spxq-info3-zx .if3-btn2 {
+	border: 1px solid #D12323;
+	background: #FBFBFB;
+	color: #D12323;
+}
+
+.spxq-info3-zx .if3-aa {
+	width: 18%;
+	margin-left: 2%;
+	text-align: center;
+}
+
+.if3-aa img {
+	display: inline-block;
+	height: 25px;
+	margin-top: 8px;
+}

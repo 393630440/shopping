@@ -85,18 +85,23 @@
 									<a href="javascript:void(0);" class="add"></a>
 								</div>
 							</div>
-							<div class="bl_view_time">
+						</div>
+						<div class="bl_view_tag details_con">
+							<div class="spxq-info3-zx">
 								<a href="javascript:void(0);" onclick="follow();" class="if3-aa f-l a_addgoods-zx" title="收藏"> 
 									<c:if test="${followFlag == '0'}">
-										<i class="i-fav" id="follow_i"></i>
+										<i class="i-fav" id="follow_i" style="float: left;"></i>
 									</c:if>
 									<c:if test="${followFlag == '1'}">
-										<i class="i-fav-active" id="follow_i"></i>
+										<i class="i-fav-active" id="follow_i" style="float: left;"></i>
 									</c:if>
+									<span class="bl_view_user" style="margin-left:8px;">收藏</span>
 								</a>
-								<a href="javascript:void(0);" onclick="addGoods();" class="if3-aa f-l a_addgoods-zx" title="加入购物车">
-									<img src="/resources/shop/images/sjsc-17-2.png">
-								</a>
+								<button class="if3-btnn if3-btn2 f-l" onclick="addGoods();" title="加入购物车">
+									<img src="/resources/shop/images/sjsc-17-2.png" style="width: 18px;height: 15px;margin-right: 5px;">
+									加入购物车
+								</button>
+								<button class="if3-btnn if3-btn1 f-l" onclick="buyNow();" title="立即购买">立即购买</button>
 							</div>
 						</div>
 					</div>

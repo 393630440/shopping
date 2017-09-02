@@ -52,3 +52,18 @@ function follow() {
 		}
 	});
 }
+
+function buyNow() {
+	var goodsNum = $("#goodsNum").val();// 商品数量
+	if (goodsNum == 0) {
+		goodsNum = 1;
+		// alert("请选择商品数量");
+		// return;
+	}
+	if (goodsNum > inventory) {
+		alert("库存有限，请重新选择商品数量。");
+		return;
+	}
+
+	window.location.href = "/wechat/shop/goods/buynow?goodsId=" + goodsId + "&goodsNum=" + goodsNum;
+}
