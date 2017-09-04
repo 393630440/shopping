@@ -105,7 +105,7 @@
             <li>
             	<a href="/wechat/shop/address/page">
                 	<div class="u_nav_icon anquan"></div>
-                    <div class="u_nav_name">收获地址</div>
+                    <div class="u_nav_name">收货地址</div>
                     <div class="nt_icon"></div>
               </a>
             </li>

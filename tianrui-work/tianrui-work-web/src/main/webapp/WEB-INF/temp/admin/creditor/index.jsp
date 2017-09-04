@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>信息管理</title>
+<title>债权管理</title>
 <meta name="description" content="这是一个 index 页面">
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -38,8 +38,8 @@
 		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 信息管理</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">信息管理</a></dl>
+		      <ul class="am-icon-flag on"> 债权管理</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">债权管理</a></dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>
@@ -60,7 +60,6 @@
 		          <table style="white-space:nowrap;" class="am-table am-table-bordered am-table-radius am-table-striped">
 		            <thead>
 		              <tr class="am-success">
-		                <th class="table-check"><input type="checkbox" /></th>
 		                <th class="table-title">排序</th>
 		                <th class="table-title">类别</th>
 		                <th class="table-author am-hide-sm-only">正常/禁用 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>

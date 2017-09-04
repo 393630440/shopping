@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<title>消息设置</title>
+<title>债权发布</title>
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="/resources/web/css/login.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
   <!--header 开始-->
   <header>
     <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
-      <h2>消息设置</h2>
+      <h2>债权发布</h2>
       </div>
   </header>
   <!--header 结束-->
@@ -27,8 +27,8 @@
      <form id="creditorid">
      <div class="item item-password">
        <select name="creditorType" class="txt-input txt-username">
-       	<option value="1">债权人</option>
-       	<option value="2">债务人</option>
+       	<option value="1">债权</option>
+       	<option value="2">债务</option>
        </select>
      </div>
      
@@ -64,7 +64,7 @@
      </div>
      
      <div class="item item-password">
-     	<input type="text" class="txt-input txt-username" id="debtAmount_req" name="debtAmount" placeholder="金额" />
+     	<input type="text" class="txt-input txt-username" id="debtAmount_req" name="debtAmount" placeholder="金额/万元" />
      </div>
      
      <div class="item item-password">

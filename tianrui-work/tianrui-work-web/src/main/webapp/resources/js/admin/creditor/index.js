@@ -62,7 +62,7 @@ function innerHTML(date,pageNo){
 			ststus = "<i class='am-icon-close am-text-primary'></i>";
 			uptsta = "<span class='am-icon-copy'>启用</span>";
 		}
-		var hml = "<tr><td><input type='checkbox' /></td>" +
+		var hml = "<tr>" +
 				"<td>"+(a+1)+"</td>" +
 				"<td>"+creType+"</td>" +
 				"<td class='am-hide-sm-only'>"+ststus+"</td>" +
@@ -72,7 +72,7 @@ function innerHTML(date,pageNo){
 				"<td>"+date[a].creditorIdcard+"</td>" +
 				"<td>"+date[a].creditorCompany+"</td>" +
 				"<td>"+date[a].creditorAddress+"</td>" +
-				"<td>"+(date[a].debtAmount||"")+"</td>" +
+				"<td>"+(date[a].debtAmount+"万元"||"")+"</td>" +
 				"<td>"+debtType+"</td>" +
 				"<td>"+(date[a].debtTime==undefined?"":(new Date(date[a].debtTime).format("yyyy-MM-dd")))+"</td>" +
 				"<td>"+(new Date(date[a].creatorTime).format("yyyy-MM-dd hh:mm:ss")||"")+"</td>" +

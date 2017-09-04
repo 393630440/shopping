@@ -65,13 +65,13 @@ function innerHTML(date,type){
 	for (var a = 0; a < date.length; a++) {
 		var creType = "";
 		if(date[a].creditorType=="1"){
-			creType = "债权人-"+date[a].creditorName;
+			creType = "债权-"+date[a].creditorName;
 		}else{
-			creType = "债务人-"+date[a].creditorName;
+			creType = "债务-"+date[a].creditorName;
 		}
 		var hml = "<li><div class='hwc-tu f-l'><img src='"+date[a].creatorImg+"'></div>"+
 		       "<div class='gwc-md f-l'><h3>"+creType+"</h3>"+
-		       "<p class='gwc-p1'>债务金额：<span>￥"+date[a].debtAmount+"</span></p>"+
+		       "<p class='gwc-p1'>债务金额：<span>￥"+date[a].debtAmount+"万元</span></p>"+
 		       "<p class='gwc-p2'>发布时间："+(new Date(date[a].creatorTime).format("yyyy-MM-dd hh:mm:ss"))+"</p>"+
 		       "</div><div style='clear:both;'></div></li>";
 		$("#innerHml").append(hml);

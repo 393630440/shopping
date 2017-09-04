@@ -10,7 +10,7 @@
  	<a href="/admin/shop/order/index">订单管理</a> 
  	<a href="/admin/shop/member/page">微信会员管理</a>   
  	<a href="/admin/shop/user/index">管理员档案</a> 
- 	<a href="/admin/shop/creditor/index">消息广场</a> 
+ 	<a href="/admin/shop/creditor/index">债权中心</a> 
  </li>
       <li class="am-hide-sm-only" style="float: right;"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
     </ul>

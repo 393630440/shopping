@@ -39,10 +39,10 @@
 			<li><a href="/admin/shop/user/uptPage">个人中心</a></li>
 		</ul>
 		<h3 class="am-icon-volume-up" id="creditor_class">
-			<em></em> 消息广场
+			<em></em> 债权中心
 		</h3>
 		<ul>
-			<li><a href="/admin/shop/creditor/index">消息管理 </a></li>
+			<li><a href="/admin/shop/creditor/index">债权管理 </a></li>
 		</ul>
 		<h3 class="am-icon-gears">
 			<em></em> 系统设置
