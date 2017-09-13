@@ -1,5 +1,6 @@
 package com.tianrui.admin.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -126,8 +127,12 @@ public class AdminGoodsInfoAction {
 		GoodsClassifyReq goodsClassifyReq = new GoodsClassifyReq(goodsType);
 		List<GoodsClassifyFindResp> goodsClassifyList = goodsClassifyService.getGoodsClassifyList(goodsClassifyReq);
 
+		List<String> goodsParamList = analysisParam(goodsInfo.getGoodsParam());
+
 		view.addObject("goodsInfo", goodsInfo);
 		view.addObject("goodsClassifyList", goodsClassifyList);
+		view.addObject("goodsParamList", goodsParamList);
+		view.addObject("goodsParamNum", goodsParamList.size());
 		view.setViewName("admin/goods/editpage");
 		return view;
 	}
@@ -140,6 +145,18 @@ public class AdminGoodsInfoAction {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/edit]");
 		Result rs = goodsInfoService.editGoodsInfo(req);
 		return rs;
+	}
+
+	private List<String> analysisParam(String reqStr) {
+		List<String> rspList = null;
+		if (!StringUtils.isNull(reqStr)) {
+			rspList = new ArrayList<String>();
+			String[] arr = reqStr.split("[|]");
+			for (String str : arr) {
+				rspList.add(str);
+			}
+		}
+		return rspList;
 	}
 
 }

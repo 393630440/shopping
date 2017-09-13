@@ -203,7 +203,8 @@ function edit() {
 	if (goodsDetailsFileIds.length == 0 && oldGoodsDetailsList.length == 0)
 		msg += "商品详情不能为空\n";
 
-	var goodsParam = $("#goodsParam").val(); // 商品参数
+	// var goodsParam = $("#goodsParam").val(); // 商品参数
+	var goodsParam = getGoodsParam(); // 商品参数
 	if (goodsParam == "")
 		msg += "商品参数不能为空\n";
 
@@ -295,7 +296,11 @@ function upload() {
 		}
 	}
 
-	exit();
+	if (goodsImgName == "" && goodsDetailsName == "") {
+		// 没有做任何修改则不更新图片名称
+	} else {
+		exit();
+	}
 
 	hide();
 }
@@ -494,4 +499,60 @@ function show() {
 function hide() {
 	document.getElementById("tpscz-zx").style.display = "none";
 	// $("#tpscz-zx").css('display', 'none');
+}
+
+function goodsParamSub() {
+	var key = $("#goodsParam_key").val();
+	var value = $("#goodsParam_value").val();
+	if (key == "" || key == undefined) {
+		return;
+	} else {
+		var index = key.indexOf(":");
+		if (index > -1) {
+			alert("请按照规格名称的规范填写");
+			$("#goodsParam_key").focus();
+			return;
+		}
+	}
+	if (value == "" || value == undefined) {
+		return;
+	} else {
+		var index = value.indexOf(":");
+		if (index > -1) {
+			alert("请按照规格数据的规范填写");
+			$("#goodsParam_key").focus();
+			$("#goodsParam_value").focus();
+			return;
+		}
+	}
+
+	var html = "";
+	html += "<span id=\"goodsParam_showId_" + goodsParamNum + "\">";
+	html += "<input type=\"text\" class=\"am-input-sm\" style=\"width: 60%; display: inline;\" id=\"goodsParam" + goodsParamNum + "\" name=\"goodsParam" + goodsParamNum + "\" value=\"" + key + ":" + value + "\" disabled=\"disabled\" />";
+	html += "<button type=\"button\" onclick=\"goodsParamDelete(" + goodsParamNum + ");\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\">";
+	html += "<span class=\"am-icon-trash-o\"></span>";
+	html += "</button>";
+	html += "</span>";
+	$("#goodsParam_input_showId").append(html);
+
+	goodsParamNum++;
+	$("#goodsParam_key").val("");
+	$("#goodsParam_value").val("");
+}
+
+function goodsParamDelete(num) {
+	$("#goodsParam_showId_" + num).remove();
+}
+
+function getGoodsParam() {
+	var goodsParamStr = "";
+	for (var a = 0; a < goodsParamNum; a++) {
+		var gp = $("#goodsParam" + a).val();
+		if (gp != null && gp != "" && gp != undefined) {
+			if (goodsParamStr != "")
+				goodsParamStr += "|";
+			goodsParamStr += gp;
+		}
+	}
+	return goodsParamStr;
 }

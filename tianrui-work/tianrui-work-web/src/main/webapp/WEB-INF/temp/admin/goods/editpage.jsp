@@ -107,8 +107,23 @@
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品参数：</div>
+							<div class="you" id="goodsParam_input_showId">
+								<c:forEach var="goodsParam" items="${goodsParamList}" varStatus="status">
+									<span id="goodsParam_showId_${status.index}">
+										<input type="text" class="am-input-sm" style="width: 60%; display: inline;" id="goodsParam${status.index}" name="goodsParam${status.index}" value="${goodsParam}" disabled="disabled" />
+										<button type="button" onclick="goodsParamDelete(${status.index});" class="am-btn am-btn-default am-btn-xs am-text-danger am-round">
+											<span class="am-icon-trash-o"></span>
+										</button>
+									</span>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo"></div>
 							<div class="you">
-								<textarea class="" rows="2" id="goodsParam" name="goodsParam">${goodsInfo.goodsParam}</textarea>
+								<input type="text" class="am-input-sm" style="width: 30%; display: inline;" id="goodsParam_key" name="goodsParam_key" placeholder="请输入规格名称，请不要输入英文冒号" />
+								<input type="text" class="am-input-sm" style="width: 30%; display: inline;" id="goodsParam_value" name="goodsParam_value" placeholder="请输入规格数据，请不要输入英文冒号" />
+								<button type="button" onclick="goodsParamSub();" class="am-btn am-btn-default am-btn-xs am-text-danger am-round">添加</button>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -154,6 +169,7 @@
 		var oldGoodsImg = "${goodsInfo.goodsImg}";
 		var oldGoodsDetails = "${goodsInfo.goodsDetails}";
 		var path = "${goodsInfo.path}";
+		var goodsParamNum = ${goodsParamNum};
 	</script>
 
 	<!--[if lt IE 9]>

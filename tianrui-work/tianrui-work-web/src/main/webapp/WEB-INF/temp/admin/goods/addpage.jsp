@@ -120,8 +120,14 @@
 						</div>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品参数：</div>
+							<div class="you" id="goodsParam_input_showId"></div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo"></div>
 							<div class="you">
-								<textarea class="" rows="2" id="goodsParam" name="goodsDetails" placeholder="规格名称1:规格数据1|规格名称2:规格数据2|……"></textarea>
+								<input type="text" class="am-input-sm" style="width: 30%; display: inline;" id="goodsParam_key" name="goodsParam_key" placeholder="请输入规格名称，请不要输入英文冒号" />
+								<input type="text" class="am-input-sm" style="width: 30%; display: inline;" id="goodsParam_value" name="goodsParam_value" placeholder="请输入规格数据，请不要输入英文冒号" />
+								<button type="button" onclick="goodsParamSub();" class="am-btn am-btn-default am-btn-xs am-text-danger am-round">添加</button>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">

@@ -140,6 +140,7 @@
 	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.GoodsInfo">
 		update goods_info
 		<set>
+			<if test="goodsId != null and goodsId != ''">goods_id = #{goodsId,jdbcType=VARCHAR},</if>
 			<if test="goodsName != null and goodsName != ''">goods_name = #{goodsName,jdbcType=VARCHAR},</if>
 			<if test="goodsImg != null and goodsImg != ''">goods_img = #{goodsImg,jdbcType=VARCHAR},</if>
 			<if test="goodsStatus != null and goodsStatus != ''">goods_status = #{goodsStatus,jdbcType=VARCHAR},</if>
