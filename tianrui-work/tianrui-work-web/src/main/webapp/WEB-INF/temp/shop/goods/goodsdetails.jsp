@@ -87,6 +87,9 @@
 							</div>
 						</div>
 						<div class="bl_view_tag details_con">
+						
+						</div>
+						<div class="bl_view_tag details_con">
 							<div class="spxq-info3-zx">
 								<a href="javascript:void(0);" onclick="follow();" class="if3-aa f-l a_addgoods-zx" title="收藏"> 
 									<c:if test="${followFlag == '0'}">

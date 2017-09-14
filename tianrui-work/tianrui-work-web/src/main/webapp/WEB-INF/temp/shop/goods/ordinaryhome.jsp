@@ -83,6 +83,7 @@
 			data : {
 				"pageNo" : pageNo,
 				"goodsType" : 1,
+				"goodsStatus":1,
 				"pageSize" : 10
 			},
 			type : "POST",

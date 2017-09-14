@@ -75,14 +75,13 @@ function edit() {
 		msg += "备注说明不能为空\n";
 
 	var img = $("#icon").val(); // 图标
-	if (img == "" || img == undefined)
-		msg += "图标不能为空\n";
+//	if (img == "" || img == undefined)
+//		msg += "图标不能为空\n";
 
 	if (msg != "") {
 		alert(msg);
 		return;
 	}
-
 	var iconStr = "";
 	if (mark == 1) {
 		iconStr = $("#icon_showId")[0].src;

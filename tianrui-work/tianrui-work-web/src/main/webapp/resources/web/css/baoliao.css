@@ -210,9 +210,10 @@
 .bl_view_img {
 	text-align: center;
 	padding: 10px;
+	height:250px;
 }
 .bl_view_img img {
-	max-height: 150px;
+	max-height: 250px;
 }
 .bl_view_title {
 	padding: 10px;

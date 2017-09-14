@@ -82,6 +82,7 @@
 			url : "/wechat/shop/goods/toloadgoodslist",
 			data : {
 				"pageNo" : pageNo,
+				"goodsStatus":1,
 				"goodsType" : 2,
 				"pageSize" : 10
 			},

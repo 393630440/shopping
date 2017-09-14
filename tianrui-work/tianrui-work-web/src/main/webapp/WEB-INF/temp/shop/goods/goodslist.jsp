@@ -176,7 +176,7 @@
 </body>
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
-	$(".foods_04").addClass("current");
+	//$(".foods_04").addClass("current");
 	var classifyId = "${classifyId}";
 	var goodsType = "${goodsType}";
 	var sifting = "${sifting}";

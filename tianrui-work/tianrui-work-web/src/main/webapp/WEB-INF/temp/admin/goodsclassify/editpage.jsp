@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>信息管理</title>
+<title>编辑分类 </title>
 <meta name="description" content="这是一个 index 页面">
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -91,7 +91,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="/resources/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goodsclassify/edit.js?0728"></script>
+	<script src="/resources/js/admin/goodsclassify/edit.js?09130"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>
