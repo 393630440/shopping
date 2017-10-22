@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>点餐系统</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/Font-Awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 clearPadding clearfix tabnav" id="header" style="position:relative;z-index:1;background:#fff;">
+			<div class="col-xs-4 col-xs-offset-2  mlr10 text-center ptb10 borderb2"><span>商品</span></div>
+			<div class="col-xs-4 mlr10 text-center ptb10 borderb2-white"><span>商家</span></div>
+		</div>
+		<div class="tabwrap clearfix" id="tabwrap">
+			<div class="tabcontent clearfix">
+				<div class="col-xs-12 clearPadding" id="allproduct">
+					<div class="col-xs-3 clearPadding" id='cate' style='position:fixed'>
+						<ul class="sortlist">
+							<li class="active"><h4>全部菜</h4></li>
+							<li><h4>销量排行</h4></li>				
+							<li><h4>特色套餐</h4></li>				
+							<li>
+								<h4>菜品</h4>
+								<div class="slchild text-muted">
+									<div><h5>家常菜</h5></div>
+									<div><h5>特色菜</h5></div>
+									<div><h5>麻辣</h5></div>
+									<div><h5>酸辣</h5></div>
+								</div>
+							</li>
+							<li><h4>主食</h4></li>
+							<li><h4>饮料</h4></li>	
+							<li><h4>白酒</h4></li>
+							<li><h4>葡萄酒</h4></li>
+							<li><h4>主食</h4></li>
+							<li><h4>饮料</h4></li>																								
+						</ul>
+					</div>
+					<div class="col-xs-9 clearPadding bg-white pull-right" id="product">
+						<div class="bgf1 ptb5 pl10">优质烩面</div>
+						<!--good start-->		
+						<div class="clearfix ptb10 borderbf2 ogood">
+							<div class="col-xs-4 plr10">
+								<img src="images/img3.jpg" alt="" class="pull-left img-responsive">
+							</div>
+							<div class="col-xs-8 clearPadding" style="position:relative;">
+								<div>
+									<h4 class="font14 mt0">黄焖鸡黄焖鸡</h4>
+									<div class="text-muted font10">月售1000</div>
+									<p class="text-dining font14 clearMargin">￥<span class="unitprice" unitprice>10</span><span class="text-muted">&nbsp;/份</span></p>	
+								</div>				
+								<div class="opmbox clearfix">
+									<div class="oplusbox pull-left ominu" onclick="min(this,1,'黄焖鸡黄焖鸡',10,100)">
+										<i class="icon iconfont text-dining" style="font-size:24px;position:relative;top:-2px;">&#xe608;</i>
+									</div>
+									<input type="text" class="onum pull-left font12" value="0" readonly="readonly" name="onum" pid='{$product.id}'>				
+									<div class="oplusbox pull-left oplus" onclick="plus(this,1,'黄焖鸡黄焖鸡',10,100)">
+										<i class="icon iconfont text-dining" style="font-size:24px;">&#xe605;</i>
+									</div>
+								</div>	
+							</div>
+						</div>
+						<!--good end-->			
+						<!--good start-->		
+						<div class="clearfix ptb10 borderbf2 ogood">
+							<div class="col-xs-4 plr10">
+								<img src="images/img3.jpg" alt="" class="pull-left img-responsive">
+							</div>
+							<div class="col-xs-8 clearPadding" style="position:relative;">
+								<div>
+									<h4 class="font14 mt0">飘香拌面</h4>
+									<div class="text-muted font10">月售1000</div>
+									<p class="text-dining font14 clearMargin">￥<span class="unitprice" unitprice>10</span><span class="text-muted">&nbsp;/份</span></p>	
+								</div>				
+								<div class="opmbox clearfix">
+									<div class="oplusbox pull-left ominu" onclick="min(this,2,'飘香拌面',10,100)">
+										<i class="icon iconfont text-dining" style="font-size:24px;position:relative;top:-2px;">&#xe608;</i>
+									</div>
+									<input type="text" class="onum pull-left font12" value="0" readonly="readonly" name="onum" pid='{$product.id}'>				
+									<div class="oplusbox pull-left oplus" onclick="plus(this,2,'飘香拌面',10,100)">
+										<i class="icon iconfont text-dining" style="font-size:24px;">&#xe605;</i>
+									</div>
+								</div>	
+							</div>
+						</div>
+						<!--good end-->																										
+					</div>
+				</div>
+				<!--底部滑出 订单详情-->
+				<div class="col-xs-12 bg-white clearPadding bordertop orderdetail" id="orderdetail" style="position:absolute;bottom:55px;z-index:101;">
+				 	<div class="text-right pt5 text-muted plr15"><i class="iconfont">&#xe60d;</i><span class="font10">清空购物车</span></div>
+				</div>
+				<div class="bottoms obto bordertop clearfix" id="footer">
+					<div class="col-xs-3">
+						<div class="ocartbox" style="position:relative;">
+							<div class="ocart"><i class="icon iconfont text-white" style="vertical-align:middle;font-size:2em;">&#xe607;</i></div>
+							<div class="allnum" id="allnum">0</div>
+						</div>
+					</div>
+					<div class="col-xs-5">
+						<p class="pt15"><span class="text-dining">￥</span>
+						<span class="text-dining font16" id="allprice">0</span>
+					</div>
+					<div class="col-xs-4 text-right clearPadding">
+						<button class="bg-yellow bordernone ptb15lr20 font18 btn-block text-white" type="submit">选好了</button>
+					</div>		
+				</div>
+			</div>
+			<!--店铺信息-->
+			<div class="col-xs-12 clearPadding tabcontent" style="display:none;" id="tabwrap">
+				<div class="mt10 plr15 bg-white borderbottom">
+					<div class="media ptb10">
+						<div class="media-left">
+							<img class="media-object border" src="images/img5.jpg" alt="" style="width:50px;height:50px;"/>
+						</div>
+						<div class="media-body">
+							<p class="font16 texthidden">76人老烩面</p>
+							<div class="text-muted texthidden">品牌快餐 生煎锅贴</div>
+						</div>
+					</div>
+				</div>
+				<div class="mt10 plr15 bg-white borderbottom">
+					<div class="clearfix ptb10 borderbottom">
+						<div class="pull-left">
+							<i class="icon iconfont">&#xe603;</i>
+							<span class="text-muted">配送时间：</span>
+						</div>
+						<div class="pull-left">
+							<span>10：00-11：00</span>
+						</div>
+					</div>
+					<div class="clearfix ptb10 borderbottom">
+						<div class="pull-left">
+							<i class="icon iconfont">&#xe600;</i>
+							<span class="text-muted">商家电话：</span>
+						</div>
+						<div class="pull-left">
+							<span>13678929889</span>
+						</div>
+					</div>
+					<div class="clearfix ptb10 borderbottom">
+						<div class="pull-left" style="width:27%;">
+							<i class="icon iconfont">&#xe601;</i>
+							<span class="text-muted">配送地址：</span>
+						</div>
+						<div class="pull-left" style="width:63%;">金水区经八路与纬一路交叉口向北30米路(纬一路口)</div>
+						<div class="text-right"><i class="icon iconfont icon-2x" style="font-size:20px;">&#xe606;</i></div>
+					</div>
+					<div class="clearfix ptb10">
+						<div class="pull-left">
+							<i class="icon iconfont">&#xe602;</i>			
+							<span class="text-muted">配送服务：</span>
+						</div>
+						<div class="pull-left">
+							<span>由76人老烩面提供配送服务</span>
+						</div>
+					</div>												
+				</div>
+				<div class="mt10 plr15 bg-white borderbottom">
+					<div class="clearfix ptb10 borderbottom">
+						<div class="pull-left">
+							<i class="icon iconfont">&#xe603;</i>
+							<span class="text-muted">配送时间：</span>
+						</div>
+						<div class="pull-left">
+							<span>&nbsp;10：00-11：00</span>
+						</div>
+					</div>					
+				</div>			
+			</div>
+		</div>						
+	</div>
+</div>
+<div class="maskbox"></div>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script>
+	$('.tabnav div.col-xs-4').click(function(){
+		var index=$(this).index();
+		console.log(index);
+		$(this).addClass("borderb2").siblings().removeClass('borderb2');
+		$('#tabwrap .tabcontent').eq(index).show();
+		$('#tabwrap .tabcontent').eq(index).siblings().hide();
+	});
+function setTotal(){
+	var allprice=0;
+	var allnum=0;
+	$("#product .ogood").each(function(){
+		var num=parseInt($(this).find('input[name=onum]').val());
+		var price=$(this).find('[unitprice]').text();
+		allprice+=num*price;
+		allnum+=num;
+	});
+	$("#allprice").html(allprice.toFixed(2));
+	$("#allnum").html(allnum);
+}
+function cartProduct(id,name,sellprice,onum){
+	var one_price=onum*parseFloat(sellprice);
+	one_price=one_price.toFixed(2);
+	if($('[productid='+id+']').length>0){
+    	$('[productid='+id+'] .numbox').html(onum);
+   		$('[productid='+id+'] .pricebox span').html(one_price);
+  	}else{
+    $('.orderdetail').append('<div class="clearfix borderbottom ptb10 plr15 cartgoods" productid="'+id+'" >\
+      <div class="col-xs-7 clearPadding">'+name+'</div>\
+      <div class="col-xs-5 clearPadding text-right">\
+        <div class="pmbox plus pull-right" onclick="plus(this,'+sellprice+')"><i class="icon iconfont text-dining" style="font-size:24px;">&#xe605;</i></div>\
+        <div class="numbox Padding5 pull-right">'+onum+'</div>\
+        <div class="pmbox minu pull-right"><i class="icon iconfont text-dining" style="font-size:24px;position:relative;top:-2px;">&#xe608;</i></div>\
+        <div class="pricebox pull-right mr15 lh24 text-dining">￥<span>'+one_price+'</span></div>\
+      </div>\
+    </div>');
+  } 
+} 
+function plus(tag,id,name,sellprice,stock){
+	var _this=$(tag);
+	var input=$(tag).prev();
+	var onum=parseInt(input.val());
+	onum++;
+	if(onum>stock){
+		return alert('购买数量不能大于库存');
+	}else{
+		input.val(onum);
+		setTotal();
+		cartProduct(id,name,sellprice,onum);
+	}	
+}
+function min(tag,id,name,sellprice,stock){
+	var input=$(tag).next();
+	var onum=parseInt(input.val());
+	onum--;
+	if(onum<1){
+		input.val(0);
+		setTotal();
+		cartProduct(id,name,sellprice,onum);
+	}else{
+		input.val(onum);
+		setTotal();
+		cartProduct(id,name,sellprice,onum);
+	}
+}
+//点击购物车订单详情出现和隐藏
+$('.maskbox').height($(document).height());
+$(".orderdetail").hide();
+$(".ocartbox,.maskbox").click(function(){
+	$(".maskbox").fadeToggle(300);
+	$(".orderdetail").slideToggle(300);
+});
+</script>
+<script src="js/zepto.js"></script>
+<script>
+	$('.sortlist li').on('tap',function(){
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+	});
+    var cate=document.getElementById('cate');
+    var cateH=cate.offsetHeight;
+    var headerH=document.getElementById("header").offsetHeight;//头的高
+    var footerH=document.getElementById('footer').offsetHeight;//尾的高
+    var showH=$(window).height()-headerH-footerH; 
+    var startX_cate,startY_cate,x_cate,y_cate,aboveY_cate=0;
+    //触摸
+    function touchSatrt_cate(e){
+        e.preventDefault();
+        var touch=e.touches[0];
+        startY_cate = touch.pageY;   //刚触摸时的坐标 
+    }
+    //滑动
+    function touchMove_cate(e){
+        e.preventDefault();        
+        var  touch = e.touches[0];               
+        y_cate = touch.pageY - startY_cate;//滑动的距离
+        //cate.style.webkitTransform = 'translate(' + 0+ 'px, ' + y + 'px)';  //也可以用css3的方式     
+        cate.style.top=aboveY_cate+y_cate+"px"; //这一句中的                          
+    }  
+    //手指离开屏幕
+    function touchEnd_cate(e){
+        e.preventDefault();            
+        aboveY_cate=parseInt(cate.style.top);//touch结束后记录内部滑块滑动的位置 在全局变量中体现 一定要用parseInt()将其转化为整数字;
+        if(aboveY_cate>0){        //滑动的距离大于0，即向下滑动
+          aboveY_cate=0;
+          cate.style.top=headerH+'px';
+        }else if(Math.abs(aboveY_cate)+showH>cateH){      //滑动距离太大,向上滑动
+          
+          if( cateH<=showH ){   //分类的高度小于屏幕
+             cate.style.top=headerH+'px';
+             aboveY_cate=0;
+          }else{
+             cate.style.top=-cateH+showH+'px';
+             aboveY_cate=parseInt(cate.style.top);
+          } 
+        }
+    }
+    //分类滑动
+    cate.addEventListener('touchstart',touchSatrt_cate);
+    cate.addEventListener('touchmove',touchMove_cate);
+    cate.addEventListener('touchend',touchEnd_cate);	
+</script> 
+</body>
+</html>

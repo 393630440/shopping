@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.ShoppingCartMapper">
+	<resultMap id="BaseResultMap" type="tianrui.work.bean.ShoppingCart">
+		<id column="shopping_cart_id" property="shoppingCartId" jdbcType="INTEGER" />
+		<result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+		<result column="member_id" property="memberId" jdbcType="VARCHAR" />
+		<result column="order_id" property="orderId" jdbcType="VARCHAR" />
+		<result column="creation_time" property="creationTime" jdbcType="BIGINT" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+		<result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+		<result column="goods_red_packet" property="goodsRedPacket" jdbcType="INTEGER" />
+		<result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+		<result column="shopping_cart_status" property="shoppingCartStatus" jdbcType="VARCHAR" />
+		<result column="express_fee" property="expressFee" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		shopping_cart_id, goods_id, member_id, order_id, creation_time, goods_name, goods_img,
+		goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from shopping_cart where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByShoppingCart" resultMap="BaseResultMap" parameterType="tianrui.work.bean.ShoppingCart">
+		select
+		<include refid="Base_Column_List" />
+		from shopping_cart
+		<where>
+			<if test="goodsId != null and goodsId != ''">and goods_id = #{goodsId,jdbcType=VARCHAR}</if>
+			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
+			<if test="orderId != null and orderId != ''">and order_id = #{orderId,jdbcType=VARCHAR}</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">and shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR}</if>
+		</where>
+		<if test="pageNo != null">
+			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.ShoppingCart">
+		select count(0) from shopping_cart
+		<where>
+			<if test="goodsId != null and goodsId != ''">and goods_id = #{goodsId,jdbcType=VARCHAR}</if>
+			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
+			<if test="orderId != null and orderId != ''">and order_id = #{orderId,jdbcType=VARCHAR}</if>
+			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">and shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+	<select id="getOrderByGoodsInfoList" resultMap="BaseResultMap" parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from shopping_cart
+		<where>
+			<if test="shoppingCartIds != null and shoppingCartIds != ''">and shopping_cart_id in (${shoppingCartIds})</if>
+			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">and shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+	<select id="getShoppingCartListByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from shopping_cart where order_id = #{orderId,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from shopping_cart where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="tianrui.work.bean.ShoppingCart">
+		insert into shopping_cart (shopping_cart_id, goods_id, member_id, order_id, creation_time, goods_name,
+		goods_img, goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee)
+		values (#{shoppingCartId,jdbcType=INTEGER},
+		#{goodsId,jdbcType=VARCHAR},
+		#{memberId,jdbcType=VARCHAR},
+		#{orderId,jdbcType=VARCHAR},
+		#{creationTime,jdbcType=BIGINT},
+		#{goodsName,jdbcType=VARCHAR},
+		#{goodsImg,jdbcType=VARCHAR},
+		#{goodsPrice,jdbcType=DOUBLE},
+		#{goodsRedPacket,jdbcType=INTEGER},
+		#{goodsNum,jdbcType=INTEGER},
+		#{goodsType,jdbcType=VARCHAR},
+		#{shoppingCartStatus,jdbcType=VARCHAR},
+		#{expressFee,jdbcType=DOUBLE})
+	</insert>
+
+	<insert id="insertSelective" parameterType="tianrui.work.bean.ShoppingCart">
+		insert into shopping_cart
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="shoppingCartId != null and shoppingCartId != ''">shopping_cart_id,</if>
+			<if test="goodsId != null and goodsId != ''">goods_id,</if>
+			<if test="memberId != null and memberId != ''">member_id,</if>
+			<if test="orderId != null and orderId != ''">order_id,</if>
+			<if test="creationTime != null and creationTime != ''">creation_time,</if>
+			<if test="goodsName != null and goodsName != ''">goods_name,</if>
+			<if test="goodsImg != null and goodsImg != ''">goods_img,</if>
+			<if test="goodsPrice != null and goodsPrice != ''">goods_price,</if>
+			<if test="goodsRedPacket != null and goodsRedPacket != ''">goods_red_packet,</if>
+			<if test="goodsNum != null and goodsNum != ''">goods_num,</if>
+			<if test="goodsType != null and goodsType != ''">goods_type,</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">shopping_cart_status,</if>
+			<if test="expressFee != null and expressFee != ''">express_fee,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="shoppingCartId != null and shoppingCartId != ''">#{shoppingCartId,jdbcType=INTEGER},</if>
+			<if test="goodsId != null and goodsId != ''">#{goodsId,jdbcType=VARCHAR},</if>
+			<if test="memberId != null and memberId != ''">#{memberId,jdbcType=VARCHAR},</if>
+			<if test="orderId != null and orderId != ''">#{orderId,jdbcType=VARCHAR},</if>
+			<if test="creationTime != null and creationTime != ''">#{creationTime,jdbcType=BIGINT},</if>
+			<if test="goodsName != null and goodsName != ''">#{goodsName,jdbcType=VARCHAR},</if>
+			<if test="goodsImg != null and goodsImg != ''">#{goodsImg,jdbcType=VARCHAR},</if>
+			<if test="goodsPrice != null and goodsPrice != ''">#{goodsPrice,jdbcType=DOUBLE},</if>
+			<if test="goodsRedPacket != null and goodsRedPacket != ''">#{goodsRedPacket,jdbcType=INTEGER},</if>
+			<if test="goodsNum != null and goodsNum != ''">#{goodsNum,jdbcType=INTEGER},</if>
+			<if test="goodsType != null and goodsType != ''">#{goodsType,jdbcType=VARCHAR},</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">#{shoppingCartStatus,jdbcType=VARCHAR},</if>
+			<if test="expressFee != null and expressFee != ''">#{expressFee,jdbcType=DOUBLE},</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.ShoppingCart">
+		update shopping_cart
+		<set>
+			<if test="goodsId != null and goodsId != ''">goods_id = #{goodsId,jdbcType=VARCHAR},</if>
+			<if test="memberId != null and memberId != ''">member_id = #{memberId,jdbcType=VARCHAR},</if>
+			<if test="orderId != null and orderId != ''">order_id = #{orderId,jdbcType=VARCHAR},</if>
+			<if test="creationTime != null and creationTime != ''">creation_time = #{creationTime,jdbcType=BIGINT},</if>
+			<if test="goodsName != null and goodsName != ''">goods_name = #{goodsName,jdbcType=VARCHAR},</if>
+			<if test="goodsImg != null and goodsImg != ''">goods_img = #{goodsImg,jdbcType=VARCHAR},</if>
+			<if test="goodsPrice != null and goodsPrice != ''">goods_price = #{goodsPrice,jdbcType=DOUBLE},</if>
+			<if test="goodsRedPacket != null and goodsRedPacket != ''">goods_red_packet = #{goodsRedPacket,jdbcType=INTEGER},</if>
+			<if test="goodsNum != null and goodsNum != ''">goods_num = #{goodsNum,jdbcType=INTEGER},</if>
+			<if test="goodsType != null and goodsType != ''">goods_type = #{goodsType,jdbcType=VARCHAR},</if>
+			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR},</if>
+			<if test="expressFee != null and expressFee != ''">express_fee = #{expressFee,jdbcType=DOUBLE},</if>
+		</set>
+		where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.ShoppingCart">
+		update shopping_cart
+		set goods_id = #{goodsId,jdbcType=VARCHAR},
+		member_id = #{memberId,jdbcType=VARCHAR},
+		order_id = #{orderId,jdbcType=VARCHAR},
+		creation_time = #{creationTime,jdbcType=BIGINT},
+		goods_name = #{goodsName,jdbcType=VARCHAR},
+		goods_img = #{goodsImg,jdbcType=VARCHAR},
+		goods_price = #{goodsPrice,jdbcType=DOUBLE},
+		goods_red_packet = #{goodsRedPacket,jdbcType=INTEGER},
+		goods_num = #{goodsNum,jdbcType=INTEGER},
+		goods_type =#{goodsType,jdbcType=VARCHAR},
+		shopping_cart_status = #{shoppingCartStatus,jdbcType=VARCHAR},
+		express_fee = #{expressFee,jdbcType=DOUBLE},
+		where shopping_cart_id = #{shoppingCartId,jdbcType=INTEGER}
+	</update>
+
+</mapper>

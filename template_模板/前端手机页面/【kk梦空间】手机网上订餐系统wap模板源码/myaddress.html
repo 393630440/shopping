@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>我的收货地址</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+</head>
+<body class='bgf7'>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 clearPadding">
+			<div class="mt15 bg-white ptb10 plr15 clearfix borderbottom">
+				<div class="col-xs-12 clearPadding clearfix">
+					<div class="col-xs-2 clearPadding">联系人</div>
+					<div class="col-xs-10 clearPadding borderbottom pb5">
+						<input type="text" value="" placeholder="你的姓名" class='bordernone w100'>
+					</div>
+				</div>
+				<div class="col-xs-offset-2 clearfix sexbox">
+					<div class="col-xs-3 clearPadding ptb5">
+						<i class="iconfont text-dining">&#xe609;</i>&nbsp;先生
+					</div>
+					<div class="col-xs-3 clearPadding ptb5">
+						<i class="iconfont text-grey">&#xe609;</i>&nbsp;女士
+					</div>
+				</div>
+			</div>
+			<div class="bg-white ptb10 plr15 clearfix borderbottom">
+				<div class="col-xs-2 clearPadding">联系电话</div>
+				<div class="col-xs-10 pr0 pb5">
+					<input type="tel" value="" placeholder="联系电话" class='bordernone w100'>
+				</div>
+			</div>
+			<div class="bg-white ptb10 plr15 clearfix">
+				<div class="col-xs-2 clearPadding">收货地址</div>
+				<div class="col-xs-10 pr0 pb5">
+					<input type="text" value="" placeholder="详细地址" class='bordernone w100'>
+				</div>
+			</div>
+			<div class="plr15 mt20">
+				<button class="btn btn-block bg-dining text-white">确定</button>
+			</div>			
+		</div>
+	</div>
+</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+$('.sexbox div').click(function(){
+	$(this).find('i').addClass('text-dining').removeClass('text-grey');
+	$(this).siblings().find('i').removeClass('text-dining').addClass('text-grey');
+});
+</script>    
+</body>
+</html>

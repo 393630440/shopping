@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.MemberInfoMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.MemberInfo" >
+    <id column="member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="wechat_img" property="wechatImg" jdbcType="VARCHAR" />
+    <result column="wechat_name" property="wechatName" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="red_packet" property="redPacket" jdbcType="DOUBLE" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="birth_time" property="birthTime" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="rp_exchange_ratio" property="rpExchangeRatio" jdbcType="DOUBLE" />
+    <result column="rp_trade_mark" property="rpTradeMark" jdbcType="VARCHAR" />
+    <result column="rp_listing_ratio" property="rpListingRatio" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    member_id, member_name, wechat, wechat_img, wechat_name, balance, red_packet, cellphone, 
+    birth_time, city, rp_exchange_ratio, rp_trade_mark, rp_listing_ratio, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_info
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="tianrui.work.bean.MemberInfo" >
+    select 
+   	 <include refid="Base_Column_List" />
+    from member_info
+    	<where>
+    		<if test="wechatName != null and wechatName != ''">
+    			and wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
+    		</if>
+    		<if test="cellphone != null and cellphone != ''">
+    			and cellphone like "%" #{cellphone,jdbcType=VARCHAR} "%"
+    		</if>
+    		<if test="rpTradeMark != null and rpTradeMark != ''">
+    			and rp_trade_mark like "%" #{rpTradeMark,jdbcType=VARCHAR} "%"
+    		</if>
+    	</where>
+    	<if test="pageNo != null">
+	   		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	   	</if>
+  </select>
+  
+  <select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.MemberInfo" >
+    select 
+   	 count(0)
+    from member_info
+   		<where>
+    		<if test="wechatName != null and wechatName != ''">
+    			and wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
+    		</if>
+    		<if test="cellphone != null and cellphone != ''">
+    			and cellphone like "%" #{cellphone,jdbcType=VARCHAR} "%"
+    		</if>
+    		<if test="rpTradeMark != null and rpTradeMark != ''">
+    			and rp_trade_mark like "%" #{rpTradeMark,jdbcType=VARCHAR} "%"
+    		</if>
+    	</where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member_info
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.MemberInfo" >
+    insert into member_info (member_id, member_name, wechat, 
+      wechat_img, wechat_name, balance, 
+      red_packet, cellphone, birth_time, 
+      city, rp_exchange_ratio, rp_trade_mark, 
+      rp_listing_ratio, createtime)
+    values (#{memberId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{wechatImg,jdbcType=VARCHAR}, #{wechatName,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, 
+      #{redPacket,jdbcType=DOUBLE}, #{cellphone,jdbcType=VARCHAR}, #{birthTime,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{rpExchangeRatio,jdbcType=DOUBLE}, #{rpTradeMark,jdbcType=VARCHAR}, 
+      #{rpListingRatio,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.MemberInfo" >
+    insert into member_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="wechat != null" >
+        wechat,
+      </if>
+      <if test="wechatImg != null" >
+        wechat_img,
+      </if>
+      <if test="wechatName != null" >
+        wechat_name,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="redPacket != null" >
+        red_packet,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="birthTime != null" >
+        birth_time,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="rpExchangeRatio != null" >
+        rp_exchange_ratio,
+      </if>
+      <if test="rpTradeMark != null" >
+        rp_trade_mark,
+      </if>
+      <if test="rpListingRatio != null" >
+        rp_listing_ratio,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatImg != null" >
+        #{wechatImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatName != null" >
+        #{wechatName,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="redPacket != null" >
+        #{redPacket,jdbcType=DOUBLE},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthTime != null" >
+        #{birthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="rpExchangeRatio != null" >
+        #{rpExchangeRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="rpTradeMark != null" >
+        #{rpTradeMark,jdbcType=VARCHAR},
+      </if>
+      <if test="rpListingRatio != null" >
+        #{rpListingRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.MemberInfo" >
+    update member_info
+    <set >
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatImg != null" >
+        wechat_img = #{wechatImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatName != null" >
+        wechat_name = #{wechatName,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="redPacket != null" >
+        red_packet = #{redPacket,jdbcType=DOUBLE},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthTime != null" >
+        birth_time = #{birthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="rpExchangeRatio != null" >
+        rp_exchange_ratio = #{rpExchangeRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="rpTradeMark != null" >
+        rp_trade_mark = #{rpTradeMark,jdbcType=VARCHAR},
+      </if>
+      <if test="rpListingRatio != null" >
+        rp_listing_ratio = #{rpListingRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.MemberInfo" >
+    update member_info
+    set member_name = #{memberName,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      wechat_img = #{wechatImg,jdbcType=VARCHAR},
+      wechat_name = #{wechatName,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DOUBLE},
+      red_packet = #{redPacket,jdbcType=DOUBLE},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      birth_time = #{birthTime,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      rp_exchange_ratio = #{rpExchangeRatio,jdbcType=DOUBLE},
+      rp_trade_mark = #{rpTradeMark,jdbcType=VARCHAR},
+      rp_listing_ratio = #{rpListingRatio,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=BIGINT}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+</mapper>

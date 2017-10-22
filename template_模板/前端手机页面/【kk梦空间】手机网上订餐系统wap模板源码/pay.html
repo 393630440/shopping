@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>支付</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+</head>
+<body class="bgf7">
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 clearPadding">
+			<div class="ptb10 plr15 bg-white mt10 clearfix">
+				<div class="col-xs-1 clearPadding"><i class="iconfont text-dining">&#xe601;</i></div>
+				<div class="col-xs-10 clearPadding">选择收货地址</div>
+				<div class="col-xs-1 clearPadding"><i class="iconfont pull-right">&#xe606;</i></div>
+			</div>
+			<div class="mt10 bg-white">
+				<div id="paystyle">
+					<div class="ptb10 plr15 borderbottom">
+						<span>线下支付</span><i class="iconfont pull-right text-dining">&#xe609;</i>
+					</div>
+					<div class="ptb10 plr15 borderbottom">
+						<span>月结转账</span><i class="iconfont pull-right text-grey">&#xe609;</i>
+					</div>
+					<div class="ptb10 plr15 borderbottom">
+						<span>在线支付</span><i class="iconfont pull-right text-grey">&#xe609;</i>
+					</div>
+				</div>					
+					<div class="ptb10 plr15 borderbottom">
+						<div class="pb10">订单备注</div>
+						<textarea name="" id="" cols="10" rows="3" class="form-control font12" placeholder="请输入您要交待给我们的事情"></textarea>
+					</div>										
+				
+			</div>
+			<div class="mt15 bg-white">
+				<div class="plr15 ptb10 clearfix borderbottom">
+					<div class="col-xs-8 clearPadding">76人优质烩面</div>
+					<div class="col-xs-2 clearPadding text-center">×2</div>
+					<div class="col-xs-2 clearPadding text-right">￥25</div>
+				</div>
+				<div class="plr15 ptb10 clearfix bg-white borderbottom">
+					<div class="col-xs-8 clearPadding">76人优质烩面</div>
+					<div class="col-xs-2 clearPadding text-center">×2</div>
+					<div class="col-xs-2 clearPadding text-right">￥25</div>
+				</div>
+				<div class="plr15 ptb10 text-dining">
+					<span class="text-dining">配送费</span><span class="pull-right">￥5</span>
+				</div>								
+			</div>
+			<div class="plr15 ptb10 bg-white mt10 clearfix">
+				<div class="pull-left pt5">可用200积分抵￥20</div><div class="pull-right"><input class="mui-switch mui-switch-animbg" type="checkbox" id='integral_offset'></div>
+			</div>			
+			<div class="pl15 clearfix bg-white bordertop mt10 bottoms">
+				<div class="col-xs-8 clearPadding text-dining pt18">总价：￥50</div>
+				<div class="col-xs-4 clearPadding">
+					<button class="bg-dining bordernone ptb15lr20 font18 btn-block text-white" type="submit">确认下单</button>
+				</div>
+			</div>
+		</div>				
+	</div>
+</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+$('#paystyle div').click(function(){
+	$(this).find('i').addClass('text-dining').removeClass('text-grey');
+	$(this).siblings().find('i').removeClass('text-dining').addClass('text-grey');
+});
+</script>		    
+</body>
+</html>
