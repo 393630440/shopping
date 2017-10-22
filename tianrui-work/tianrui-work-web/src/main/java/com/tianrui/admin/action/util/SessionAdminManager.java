@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import tianrui.work.api.IAdminUserService;
 import tianrui.work.bean.AdminUser;
-import tianrui.work.vo.Result;
 
 /** session管理*/
 public class SessionAdminManager {

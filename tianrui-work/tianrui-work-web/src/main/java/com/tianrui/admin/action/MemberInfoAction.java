@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.smvc.AutherWeb;
 
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
-import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.gain.MemberGainFindReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;

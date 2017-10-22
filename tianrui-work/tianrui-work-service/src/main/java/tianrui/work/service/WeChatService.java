@@ -12,7 +12,6 @@ import tianrui.work.mapper.java.WeChatPayMapper;
 import tianrui.work.req.WeChatPayReq;
 import tianrui.work.resp.WeChatPayResp;
 import tianrui.work.vo.Result;
-import tianrui.work.vo.UUIDUtil;
 
 @Service
 public class WeChatService implements IWeChatPayService{

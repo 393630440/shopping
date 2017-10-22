@@ -1,7 +1,5 @@
 package tianrui.work.bean;
 
-import java.io.UnsupportedEncodingException;
-
 public class LieBianHongbao {
 
 	private String nonce_str;

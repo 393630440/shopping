@@ -114,6 +114,7 @@ public class CommonUtil {
 	 * @param appsecret 密钥
 	 * @return
 	 */
+	@SuppressWarnings("static-access")
 	public static Tokens getToken() {
 		Tokens token = null;
 		String requestUrl = token_url.replace("APPID", Constant.WEIXIN_APPID).replace("APPSECRET", Constant.WEIXIN_APPSECRET);

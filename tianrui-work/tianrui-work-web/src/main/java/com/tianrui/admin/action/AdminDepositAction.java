@@ -8,16 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tianrui.web.action.session.SessionManage;
-
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.api.IWithdrawalService;
-import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.Withdrawal;
 import tianrui.work.req.WithdrawalFindReq;
-import tianrui.work.req.WithdrawalReq;
 import tianrui.work.resp.WithdrawalResp;
-import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 

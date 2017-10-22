@@ -14,7 +14,6 @@ import com.tianrui.web.util.DateUtils;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.HbaoPayReq;
-import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.Result;
 
 @Controller

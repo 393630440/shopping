@@ -1,7 +1,6 @@
 package com.tianrui.web.action.weixin;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.RespectBinding;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

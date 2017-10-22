@@ -1,6 +1,6 @@
 package com.tianrui.web.util;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.Formatter;
 import java.util.UUID;
 
 import tianrui.work.bean.BusinesPay;
@@ -9,16 +9,6 @@ import tianrui.work.bean.LieBianHongbao;
 import tianrui.work.bean.PayEntity;
 import tianrui.work.bean.WeiXinPay;
 import tianrui.work.comm.Constant;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Formatter;
-import java.net.InetAddress;
-import java.net.URLEncoder;
-import java.net.UnknownHostException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.io.UnsupportedEncodingException;  
 
 public class Sign {
 	
