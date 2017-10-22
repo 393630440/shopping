@@ -1,6 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-
 .ssjg-ul-zx {
 	background: #F7F7F7;
 	padding: 0px 2%;
@@ -337,4 +336,53 @@
 	display: inline-block;
 	height: 25px;
 	margin-top: 8px;
+}
+
+.my-k1 .my-p2-zx {
+	margin-top: 5px;
+	padding: 0 5px;
+	border-top: 1px solid #d6d6d6;
+	height: 30px;
+}
+
+.my-p2-zx .my-sp3 {
+	font-size: 12px;
+	color: #979797;
+	height: 30px;
+	line-height: 30px;
+}
+
+.my-p2-zx .my-sp3-zx {
+	font-size: 12px;
+	color: #979797;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 20%;
+}
+
+.quanbu-title2-zx {
+	background: #fff;
+	height: 30px;
+	border-bottom: 1px solid #EDEDED;
+}
+
+.quanbu-title2-zx li {
+	float: left;
+	width: 33.33%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.quanbu-title2-zx li a {
+	font-size: 14px;
+	color: #3D3D3D;
+}
+
+.quanbu-title2-zx .current {
+	border-bottom: 1px solid #E74E5D;
+}
+
+.quanbu-title2-zx .current a {
+	color: #E74E5D;
 }
