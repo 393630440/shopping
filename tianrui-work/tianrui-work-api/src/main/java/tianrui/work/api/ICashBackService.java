@@ -16,6 +16,6 @@ public interface ICashBackService {
 	/** 列表返现 */
 	PageTool<CashBackResp> queryCashBack(CashBackReq req) throws Exception;
 	/** 列表明细*/
-	PageTool<CashBackInfoResp> queryCashBack(CashBackInfoReq req) throws Exception;
+	PageTool<CashBackInfoResp> queryCashBackInfo(CashBackInfoReq req) throws Exception;
 
 }

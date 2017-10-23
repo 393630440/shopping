@@ -81,7 +81,7 @@ public class CashBackService implements ICashBackService{
 	}
 
 	@Override
-	public PageTool<CashBackInfoResp> queryCashBack(CashBackInfoReq req) throws Exception {
+	public PageTool<CashBackInfoResp> queryCashBackInfo(CashBackInfoReq req) throws Exception {
 		PageTool<CashBackInfoResp> page = new PageTool<CashBackInfoResp>();
 		CashBackInfo query = new CashBackInfo();
 		if(req.getPageNo()!= null){
