@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.CashBackMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.CashBack" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="cash_type" property="cashType" jdbcType="VARCHAR" />
+    <result column="cash_member" property="cashMember" jdbcType="VARCHAR" />
+    <result column="cash_member_name" property="cashMemberName" jdbcType="VARCHAR" />
+    <result column="cash_amount" property="cashAmount" jdbcType="DOUBLE" />
+    <result column="cash_alre" property="cashAlre" jdbcType="DOUBLE" />
+    <result column="cash_ratio" property="cashRatio" jdbcType="DOUBLE" />
+    <result column="cash_remark" property="cashRemark" jdbcType="VARCHAR" />
+    <result column="pays_id" property="paysId" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="modify" property="modify" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+    <result column="desc1" property="desc1" jdbcType="VARCHAR" />
+    <result column="desc2" property="desc2" jdbcType="VARCHAR" />
+    <result column="desc3" property="desc3" jdbcType="VARCHAR" />
+    <result column="desc4" property="desc4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cash_type, cash_member, cash_member_name, cash_amount, cash_alre, cash_ratio, 
+    cash_remark, pays_id, creater, create_time, modify, modify_time, desc1, desc2, desc3, 
+    desc4
+  </sql>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="tianrui.work.bean.CashBack" >
+    select 
+    <include refid="Base_Column_List" />
+    from cash_back
+    <where>
+    	<if test="cashType != null and cashType != ''">
+    		and cash_type = #{cashType,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cashMember != null and cashMember != ''">
+    		and cash_member = #{cashMember,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cashMemberName != null and cashMemberName != ''">
+    		and cash_member_name like "%" #{cashMemberName,jdbcType=VARCHAR} "%"
+    	</if>
+    </where>
+    <if test="pageNo != null">
+   		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+   	</if>
+  </select>
+  <select id="selectByCount" resultType="long" parameterType="tianrui.work.bean.CashBack" >
+    select 
+    count(0)
+    from cash_back
+    <where>
+    	<if test="cashType != null and cashType != ''">
+    		and cash_type = #{cashType,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cashMember != null and cashMember != ''">
+    		and cash_member = #{cashMember,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cashMemberName != null and cashMemberName != ''">
+    		and cash_member_name like "%" #{cashMemberName,jdbcType=VARCHAR} "%"
+    	</if>
+    </where>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cash_back
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cash_back
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.CashBack" >
+    insert into cash_back (id, cash_type, cash_member, 
+      cash_member_name, cash_amount, cash_alre, 
+      cash_ratio, cash_remark, pays_id, 
+      creater, create_time, modify, 
+      modify_time, desc1, desc2, 
+      desc3, desc4)
+    values (#{id,jdbcType=VARCHAR}, #{cashType,jdbcType=VARCHAR}, #{cashMember,jdbcType=VARCHAR}, 
+      #{cashMemberName,jdbcType=VARCHAR}, #{cashAmount,jdbcType=DOUBLE}, #{cashAlre,jdbcType=DOUBLE}, 
+      #{cashRatio,jdbcType=DOUBLE}, #{cashRemark,jdbcType=VARCHAR}, #{paysId,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{modify,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=BIGINT}, #{desc1,jdbcType=VARCHAR}, #{desc2,jdbcType=VARCHAR}, 
+      #{desc3,jdbcType=VARCHAR}, #{desc4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.CashBack" >
+    insert into cash_back
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cashType != null" >
+        cash_type,
+      </if>
+      <if test="cashMember != null" >
+        cash_member,
+      </if>
+      <if test="cashMemberName != null" >
+        cash_member_name,
+      </if>
+      <if test="cashAmount != null" >
+        cash_amount,
+      </if>
+      <if test="cashAlre != null" >
+        cash_alre,
+      </if>
+      <if test="cashRatio != null" >
+        cash_ratio,
+      </if>
+      <if test="cashRemark != null" >
+        cash_remark,
+      </if>
+      <if test="paysId != null" >
+        pays_id,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modify != null" >
+        modify,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="desc1 != null" >
+        desc1,
+      </if>
+      <if test="desc2 != null" >
+        desc2,
+      </if>
+      <if test="desc3 != null" >
+        desc3,
+      </if>
+      <if test="desc4 != null" >
+        desc4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cashType != null" >
+        #{cashType,jdbcType=VARCHAR},
+      </if>
+      <if test="cashMember != null" >
+        #{cashMember,jdbcType=VARCHAR},
+      </if>
+      <if test="cashMemberName != null" >
+        #{cashMemberName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashAmount != null" >
+        #{cashAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="cashAlre != null" >
+        #{cashAlre,jdbcType=DOUBLE},
+      </if>
+      <if test="cashRatio != null" >
+        #{cashRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="cashRemark != null" >
+        #{cashRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="paysId != null" >
+        #{paysId,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="modify != null" >
+        #{modify,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="desc1 != null" >
+        #{desc1,jdbcType=VARCHAR},
+      </if>
+      <if test="desc2 != null" >
+        #{desc2,jdbcType=VARCHAR},
+      </if>
+      <if test="desc3 != null" >
+        #{desc3,jdbcType=VARCHAR},
+      </if>
+      <if test="desc4 != null" >
+        #{desc4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.CashBack" >
+    update cash_back
+    <set >
+      <if test="cashType != null" >
+        cash_type = #{cashType,jdbcType=VARCHAR},
+      </if>
+      <if test="cashMember != null" >
+        cash_member = #{cashMember,jdbcType=VARCHAR},
+      </if>
+      <if test="cashMemberName != null" >
+        cash_member_name = #{cashMemberName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashAmount != null" >
+        cash_amount = #{cashAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="cashAlre != null" >
+        cash_alre = #{cashAlre,jdbcType=DOUBLE},
+      </if>
+      <if test="cashRatio != null" >
+        cash_ratio = #{cashRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="cashRemark != null" >
+        cash_remark = #{cashRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="paysId != null" >
+        pays_id = #{paysId,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="modify != null" >
+        modify = #{modify,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="desc1 != null" >
+        desc1 = #{desc1,jdbcType=VARCHAR},
+      </if>
+      <if test="desc2 != null" >
+        desc2 = #{desc2,jdbcType=VARCHAR},
+      </if>
+      <if test="desc3 != null" >
+        desc3 = #{desc3,jdbcType=VARCHAR},
+      </if>
+      <if test="desc4 != null" >
+        desc4 = #{desc4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.CashBack" >
+    update cash_back
+    set cash_type = #{cashType,jdbcType=VARCHAR},
+      cash_member = #{cashMember,jdbcType=VARCHAR},
+      cash_member_name = #{cashMemberName,jdbcType=VARCHAR},
+      cash_amount = #{cashAmount,jdbcType=DOUBLE},
+      cash_alre = #{cashAlre,jdbcType=DOUBLE},
+      cash_ratio = #{cashRatio,jdbcType=DOUBLE},
+      cash_remark = #{cashRemark,jdbcType=VARCHAR},
+      pays_id = #{paysId,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      modify = #{modify,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=BIGINT},
+      desc1 = #{desc1,jdbcType=VARCHAR},
+      desc2 = #{desc2,jdbcType=VARCHAR},
+      desc3 = #{desc3,jdbcType=VARCHAR},
+      desc4 = #{desc4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
