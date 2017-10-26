@@ -31,6 +31,9 @@
     <include refid="Base_Column_List" />
     from cash_back
     <where>
+    	<if test="cashRemark != null and cashRemark != ''">
+    		and cash_remark like "%" #{cashRemark,jdbcType=VARCHAR} "%"
+    	</if>
     	<if test="cashType != null and cashType != ''">
     		and cash_type = #{cashType,jdbcType=VARCHAR}
     	</if>
@@ -41,6 +44,7 @@
     		and cash_member_name like "%" #{cashMemberName,jdbcType=VARCHAR} "%"
     	</if>
     </where>
+    order by create_time desc
     <if test="pageNo != null">
    		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
    	</if>
@@ -50,6 +54,9 @@
     count(0)
     from cash_back
     <where>
+    	<if test="cashRemark != null and cashRemark != ''">
+    		and cash_remark like "%" #{cashRemark,jdbcType=VARCHAR} "%"
+    	</if>
     	<if test="cashType != null and cashType != ''">
     		and cash_type = #{cashType,jdbcType=VARCHAR}
     	</if>

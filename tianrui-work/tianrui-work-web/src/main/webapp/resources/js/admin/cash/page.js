@@ -6,9 +6,9 @@ function init(pageNo){
 	$.ajax({
 		url:"/admin/shop/cash/find",
 		data:{"pageNo":pageNo,
-			"cellphone":$("#telphone").val(),
-			"wechatName":$("#wechatName").val(),
-			"rpTradeMark":$("#rpTradeMark").val(),
+			"cashType":$("#cashTypeReq").val(),
+			"cashMemberName":$("#cashMemberNameReq").val(),
+			"cashRemark":$("#cashRemarkReq").val(),
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){
@@ -22,12 +22,19 @@ function init(pageNo){
 function innerHTML(data,pageNo){
 	$("#innerHml").empty();
 	for (var a = 0; a < data.length; a++) {
+		var cashType = "";
+		if(data[a].cashType == "1"){
+			cashType = "后台";
+		}else if(data[a].cashType == "2"){
+			cashType = "前台";
+		}
 		var hml = "<tr><td>"+(a+1)+"</td>" +
 				"<td>"+(data[a].cashMemberName||"")+"</td>" +
-				"<td "+(data[a].cashType||"")+"</td>" +
+				"<td>"+(data[a].cashRemark||"")+"</td>" +
+				"<td>"+cashType+"</td>" +
 				"<td>"+(data[a].cashAmount||"")+"</td>" +
-				"<td>"+(data[a].cashAlre||"")+"</td>" +
-				"<td>"+(data[a].createTime||"")+"</td>" +
+				"<td>"+data[a].cashAlre+"</td>" +
+				"<td>"+(data[a].createTime==undefined?"":(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss")))+"</td>" +
 				"<td>"+(data[a].modifyTime==undefined?"":(new Date(data[a].modifyTime).format("yyyy-MM-dd hh:mm:ss")))+"</td>" +
 				"</tr>";
 		$("#innerHml").append(hml);

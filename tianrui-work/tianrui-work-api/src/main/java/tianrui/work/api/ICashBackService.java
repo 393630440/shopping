@@ -11,11 +11,12 @@ public interface ICashBackService {
 
 	/** 添加返现 */
 	Result addCashBack(CashBackReq req) throws Exception;
-	/** 添加返现明细*/
-	Result addBankInfo(CashBackInfoReq req)throws Exception;
 	/** 列表返现 */
 	PageTool<CashBackResp> queryCashBack(CashBackReq req) throws Exception;
 	/** 列表明细*/
 	PageTool<CashBackInfoResp> queryCashBackInfo(CashBackInfoReq req) throws Exception;
-
+	/** 返现每日定时任务
+	 * @throws Exception */
+	void cashQuart() throws Exception;
+	
 }

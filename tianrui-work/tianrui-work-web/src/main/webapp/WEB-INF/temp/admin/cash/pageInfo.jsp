@@ -42,17 +42,7 @@
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>
-			   	<li>
-			      <div class="am-btn-group am-btn-group-xs">
-			        <select id="rpTradeMark" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-			          <option value="">宏包状态</option>
-			          <option value="1">开启</option>
-			          <option value="0">关闭</option>
-			        </select>
-			      </div>
-			    </li>
-			   	<li><input type="text" id="wechatName" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="微信名称" /></li>
-			    <li><input type="text" id="telphone" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="联系电话" /></li>
+			   	<li><input type="text" id="wechatName" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="用户名称" /></li>
 			    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 			  </ul>
 			</div>
@@ -87,6 +77,6 @@
 		</div>
 </div>
 <script src="/resources/admin/js/amazeui.min.js"></script>
-<script src="/resources/js/admin/cash/pageInfo.js?0730"></script>
+<script src="/resources/js/admin/cash/pageInfo.js?01026"></script>
 </body>
 </html>

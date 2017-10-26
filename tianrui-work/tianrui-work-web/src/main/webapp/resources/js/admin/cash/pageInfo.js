@@ -6,9 +6,7 @@ function init(pageNo){
 	$.ajax({
 		url:"/admin/shop/cash/findInfo",
 		data:{"pageNo":pageNo,
-			"cellphone":$("#telphone").val(),
-			"wechatName":$("#wechatName").val(),
-			"rpTradeMark":$("#rpTradeMark").val(),
+			"memberName":$("#wechatName").val(),
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){

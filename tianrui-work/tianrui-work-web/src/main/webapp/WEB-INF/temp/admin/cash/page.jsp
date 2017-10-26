@@ -44,15 +44,19 @@
 			  <ul>
 			   	<li>
 			      <div class="am-btn-group am-btn-group-xs">
-			        <select id="rpTradeMark" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-			          <option value="">宏包状态</option>
-			          <option value="1">开启</option>
-			          <option value="0">关闭</option>
+			        <select id="cashTypeReq" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+			          <option value="">返现类型</option>
+			          <option value="1">后台</option>
+			          <option value="2">前台</option>
 			        </select>
 			      </div>
 			    </li>
-			   	<li><input type="text" id="wechatName" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="微信名称" /></li>
-			    <li><input type="text" id="telphone" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="联系电话" /></li>
+			   	<li>
+			   	<input type="text" id="cashMemberNameReq" style="width: 160px"
+			   	 class="am-form-field am-input-sm am-input-xm" placeholder="返现用户" /></li>
+			    <li>
+			    <input type="text" id="cashRemarkReq" style="width: 160px" 
+			    class="am-form-field am-input-sm am-input-xm" placeholder="备注信息" /></li>
 			    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 			  </ul>
 			</div>
@@ -62,7 +66,8 @@
 		              <tr class="am-success">
 		                <th class="table-title">序号</th>
 		               	<th class="table-type">返现用户</th>
-		               	<th class="table-title">返现类别 </th>
+		               	<th class="table-type">备注信息</th>
+		               	<th class="table-type">返现类别 </th>
 		               	<th class="table-type">返现金额</th>
 		               	<th class="table-type">已返金额</th>
 		               	<th class="table-type">创建时间</th>
@@ -85,6 +90,6 @@
 		</div>
 </div>
 <script src="/resources/admin/js/amazeui.min.js"></script>
-<script src="/resources/js/admin/cash/page.js?10232"></script>
+<script src="/resources/js/admin/cash/page.js?10262"></script>
 </body>
 </html>

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import tianrui.work.api.ICashBackService;
 import tianrui.work.bean.CashBack;
 import tianrui.work.bean.CashBackInfo;
+import tianrui.work.bean.ConfigurationInfo;
 import tianrui.work.mapper.java.CashBackInfoMapper;
 import tianrui.work.mapper.java.CashBackMapper;
+import tianrui.work.mapper.java.ConfigurationInfoMapper;
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
@@ -27,6 +29,47 @@ public class CashBackService implements ICashBackService{
 	CashBackMapper cashBackMapper;
 	@Autowired
 	CashBackInfoMapper cashBackInfoMapper;
+	@Autowired
+	ConfigurationInfoMapper configurationInfoMapper;
+	
+	@Override
+	public void cashQuart() {
+		// TODO Auto-generated method stub
+		//获取系统设置返现比例
+		ConfigurationInfo rate = configurationInfoMapper.selectByPrimaryKey("SYSTEM_CASH_BACK_RATE");
+		//获取系统返现比例
+		Double rateVal = Double.valueOf(rate.getParamvalue());
+		if(rate.getFlag().equals("1")){
+			//返现功能后台已开启
+			CashBack query = new CashBack();
+			query.setDesc1("1");//1-返现中  2-返现成功
+			List<CashBack> list = cashBackMapper.selectByCondition(query);
+			for(CashBack back : list){
+				CashBack upt = new CashBack();
+				upt.setId(back.getId());
+				upt.setCashAlre(back.getCashAlre()+(back.getCashAmount()*rateVal));
+				upt.setModifyTime(System.currentTimeMillis());
+				if(upt.getCashAlre() >= back.getCashAmount()){
+					//已反金额 大于返现金额 返现完成
+					upt.setCashAlre(back.getCashAmount() - back.getCashAlre());
+					upt.setDesc1("2");
+				}
+				CashBackInfo save = new CashBackInfo();
+				save.setId(UUIDUtil.getUUID());
+				save.setCashBackId(back.getId());
+				save.setBackAmount(back.getCashAmount());
+				save.setBackMoney(upt.getCashAlre()-back.getCashAlre());//本次返现金额
+				save.setBackRatio(rateVal);
+				save.setBackRemark("系统定时返现");
+				save.setMemberId(back.getCashMember());
+				save.setMemberName(back.getCashMemberName());
+				save.setDesc1(back.getCashType());
+				save.setCreateTime(System.currentTimeMillis());
+				cashBackInfoMapper.insertSelective(save);
+				cashBackMapper.updateByPrimaryKeySelective(upt);
+			}
+		}
+	}
 	
 	@Override
 	public Result addCashBack(CashBackReq req) throws Exception {
@@ -34,6 +77,8 @@ public class CashBackService implements ICashBackService{
 		CashBack save = new CashBack();
 		PropertyUtils.copyProperties(save, req);
 		save.setId(UUIDUtil.getUUID());
+		save.setCashAlre(0.00);//已反金额
+		save.setCashRatio(0.0001);//配置
 		save.setCreateTime(System.currentTimeMillis());
 		cashBackMapper.insertSelective(save);
 		return rs;
@@ -52,6 +97,7 @@ public class CashBackService implements ICashBackService{
 		query.setCashMember(req.getCashMember());
 		query.setCashMemberName(req.getCashMemberName());
 		query.setCashType(req.getCashType());
+		query.setCashRemark(req.getCashRemark());
 		List<CashBack> list = cashBackMapper.selectByCondition(query);
 		long a = cashBackMapper.selectByCount(query);
 		page.setList(copyProperties2(list));
@@ -69,16 +115,6 @@ public class CashBackService implements ICashBackService{
 		return resp;
 	}
 
-	@Override
-	public Result addBankInfo(CashBackInfoReq req) throws Exception {
-		Result rs = Result.getSuccessful();
-		CashBackInfo save = new CashBackInfo();
-		PropertyUtils.copyProperties(save, req);
-		save.setId(UUIDUtil.getUUID());
-		save.setCreateTime(System.currentTimeMillis());
-		cashBackInfoMapper.insertSelective(save);
-		return rs;
-	}
 
 	@Override
 	public PageTool<CashBackInfoResp> queryCashBackInfo(CashBackInfoReq req) throws Exception {
@@ -109,5 +145,4 @@ public class CashBackService implements ICashBackService{
 		}
 		return resp;
 	}
-
 }
