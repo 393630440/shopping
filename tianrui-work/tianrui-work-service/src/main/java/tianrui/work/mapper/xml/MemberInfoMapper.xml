@@ -4,10 +4,12 @@
   <resultMap id="BaseResultMap" type="tianrui.work.bean.MemberInfo" >
     <id column="member_id" property="memberId" jdbcType="VARCHAR" />
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_rank" property="memberRank" jdbcType="VARCHAR" />
     <result column="wechat" property="wechat" jdbcType="VARCHAR" />
     <result column="wechat_img" property="wechatImg" jdbcType="VARCHAR" />
     <result column="wechat_name" property="wechatName" jdbcType="VARCHAR" />
     <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="cash_money" property="cashMoney" jdbcType="DOUBLE" />
     <result column="red_packet" property="redPacket" jdbcType="DOUBLE" />
     <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
     <result column="birth_time" property="birthTime" jdbcType="VARCHAR" />
@@ -19,7 +21,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, member_name, wechat, wechat_img, wechat_name, balance, red_packet, cellphone, 
-    birth_time, city, rp_exchange_ratio, rp_trade_mark, rp_listing_ratio, createtime
+    birth_time, city, rp_exchange_ratio, rp_trade_mark, rp_listing_ratio, 
+    createtime, member_rank,cash_money
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -32,6 +35,9 @@
    	 <include refid="Base_Column_List" />
     from member_info
     	<where>
+    		<if test="memberRank != null and memberRank != ''">
+    			and member_rank = #{memberRank,jdbcType=VARCHAR}
+    		</if>
     		<if test="wechatName != null and wechatName != ''">
     			and wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
     		</if>
@@ -52,6 +58,9 @@
    	 count(0)
     from member_info
    		<where>
+   			<if test="memberRank != null and memberRank != ''">
+    			and member_rank = #{memberRank,jdbcType=VARCHAR}
+    		</if>
     		<if test="wechatName != null and wechatName != ''">
     			and wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
     		</if>
@@ -73,16 +82,23 @@
       wechat_img, wechat_name, balance, 
       red_packet, cellphone, birth_time, 
       city, rp_exchange_ratio, rp_trade_mark, 
-      rp_listing_ratio, createtime)
+      rp_listing_ratio, createtime,member_rank,cash_money)
     values (#{memberId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
       #{wechatImg,jdbcType=VARCHAR}, #{wechatName,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, 
       #{redPacket,jdbcType=DOUBLE}, #{cellphone,jdbcType=VARCHAR}, #{birthTime,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{rpExchangeRatio,jdbcType=DOUBLE}, #{rpTradeMark,jdbcType=VARCHAR}, 
-      #{rpListingRatio,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT})
+      #{rpListingRatio,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT},
+      #{memberRank,jdbcType=VARCHAR},
+      #{cashMoney,jdbcType=DOUBLE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="tianrui.work.bean.MemberInfo" >
     insert into member_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cashMoney != null">
+       cash_money,
+      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -125,8 +141,14 @@
       <if test="createtime != null" >
         createtime,
       </if>
+      <if test="memberRank != null">
+      	member_rank,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cashMoney != null">
+       #{cashMoney,jdbcType=DOUBLE},
+      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=VARCHAR},
       </if>
@@ -169,11 +191,20 @@
       <if test="createtime != null" >
         #{createtime,jdbcType=BIGINT},
       </if>
+      <if test="memberRank != null">
+      	#{memberRank,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.MemberInfo" >
     update member_info
     <set >
+      <if test="cashMoney != null">
+        cash_money = #{cashMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="memberRank != null">
+      	member_rank = #{memberRank,jdbcType=VARCHAR},
+      </if>
       <if test="memberName != null" >
         member_name = #{memberName,jdbcType=VARCHAR},
       </if>
@@ -219,6 +250,8 @@
   <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.MemberInfo" >
     update member_info
     set member_name = #{memberName,jdbcType=VARCHAR},
+    	member_rank = #{memberRank,jdbcType=VARCHAR},
+    	cash_money = #{cashMoney,jdbcType=DOUBLE},
       wechat = #{wechat,jdbcType=VARCHAR},
       wechat_img = #{wechatImg,jdbcType=VARCHAR},
       wechat_name = #{wechatName,jdbcType=VARCHAR},

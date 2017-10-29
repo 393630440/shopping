@@ -14,6 +14,8 @@ public class MemberInfoHBaoReq {
     private Double balance;
 
     private Double redPacket;
+    //返现金额
+    private Double cashMoney;
 
 
     public String getMemberId() {
@@ -71,5 +73,13 @@ public class MemberInfoHBaoReq {
     public void setRedPacket(Double redPacket) {
         this.redPacket = redPacket;
     }
+
+	public Double getCashMoney() {
+		return cashMoney;
+	}
+
+	public void setCashMoney(Double cashMoney) {
+		this.cashMoney = cashMoney;
+	}
 
 }

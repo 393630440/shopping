@@ -44,10 +44,10 @@
 			  <ul>
 			   	<li>
 			      <div class="am-btn-group am-btn-group-xs">
-			        <select id="rpTradeMark" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-			          <option value="">宏包状态</option>
-			          <option value="1">开启</option>
-			          <option value="0">关闭</option>
+			        <select id="memberRankReq" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
+			          <option value="">会员等级</option>
+			          <option value="1">普通会员</option>
+			          <option value="2">加盟商</option>
 			        </select>
 			      </div>
 			    </li>
@@ -61,19 +61,22 @@
 		            <thead>
 		              <tr class="am-success">
 		                <th class="table-title">序号</th>
+		               	<!-- 
 		               	<th class="table-type">微信唯一标识</th>
+		               	 -->
+		               	<th class="table-type">会员等级</th>
+		               	<!-- 
 		               	<th class="table-title">开启/关闭 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
+		               	 -->
 		               	<th class="table-type">微信名称</th>
 		               	<th class="table-type">会员名称</th>
 		               	<th class="table-type">联系电话</th>
 		               	<th class="table-type">出生日期</th>
 		               	<th class="table-type">所在城市</th>
 		               	<th class="table-type">余额</th>
-		               	<th class="table-type">宏包</th>
+		               	<th class="table-type">返现金额</th>
 		               	<th class="table-type">关注时间</th>
-		                <!-- 
 		                <th width="163px" class="table-set">操作</th>
-		                 -->
 		              </tr>
 		            </thead>
 		            <tbody id="innerHml">
@@ -101,6 +104,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="/resources/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/member/page.js?0730"></script>
+<script src="/resources/js/admin/member/page.js?1029"></script>
 </body>
 </html>

@@ -9,6 +9,10 @@ public class MemberInfo {
     private String memberId;
 
     private String memberName;
+    
+    private String memberRank;
+    
+    private Double cashMoney;
 
     private String wechat;
 
@@ -160,5 +164,21 @@ public class MemberInfo {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getMemberRank() {
+		return memberRank;
+	}
+
+	public void setMemberRank(String memberRank) {
+		this.memberRank = memberRank;
+	}
+
+	public Double getCashMoney() {
+		return cashMoney;
+	}
+
+	public void setCashMoney(Double cashMoney) {
+		this.cashMoney = cashMoney;
 	}
 }

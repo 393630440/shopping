@@ -15,6 +15,7 @@ import tianrui.work.api.IMemberInfoService;
 import tianrui.work.req.gain.MemberGainFindReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
+import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.resp.gain.MemberGainResp;
 import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.vo.PageTool;
@@ -44,6 +45,18 @@ public class MemberInfoAction {
 		view.addObject("mlist", page.getList());
 		view.setViewName("/admin/member/save_hbao");
 		return view;
+	}
+	
+	@RequestMapping("uptMemberRank")
+	@AutherWeb(typeString = "admin")
+	@ResponseBody
+	public Result uptMemberRank(String id) throws Exception{
+		Result rs = Result.getSuccessful();
+		MemberInfoSaveReq req = new MemberInfoSaveReq();
+		req.setMemberId(id);
+		req.setMemberRank("2");
+		memberInfoService.uptMemberInfo(req);
+		return rs;
 	}
 	
 	@RequestMapping("select")

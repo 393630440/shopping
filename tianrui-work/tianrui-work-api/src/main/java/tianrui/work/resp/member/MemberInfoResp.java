@@ -8,6 +8,10 @@ public class MemberInfoResp {
 	    private String wechat;
 
 	    private String wechatImg;
+	    
+	    private String memberRank;
+	    
+	    private Double cashMoney;
 
 	    private String wechatName;
 
@@ -140,6 +144,19 @@ public class MemberInfoResp {
 		public void setCreatetime(Long createtime) {
 			this.createtime = createtime;
 		}
-	    
-   
+
+		public String getMemberRank() {
+			return memberRank;
+		}
+
+		public void setMemberRank(String memberRank) {
+			this.memberRank = memberRank;
+		}
+
+		public Double getCashMoney() {
+			return cashMoney;
+		}
+		public void setCashMoney(Double cashMoney) {
+			this.cashMoney = cashMoney;
+		}
 }

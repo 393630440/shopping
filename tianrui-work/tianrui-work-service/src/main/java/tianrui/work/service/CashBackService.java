@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tianrui.work.api.ICashBackService;
+import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.CashBack;
 import tianrui.work.bean.CashBackInfo;
 import tianrui.work.bean.ConfigurationInfo;
@@ -17,6 +18,7 @@ import tianrui.work.mapper.java.CashBackMapper;
 import tianrui.work.mapper.java.ConfigurationInfoMapper;
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
+import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
 import tianrui.work.resp.cash.CashBackResp;
 import tianrui.work.vo.PageTool;
@@ -32,7 +34,9 @@ public class CashBackService implements ICashBackService {
 	CashBackInfoMapper cashBackInfoMapper;
 	@Autowired
 	ConfigurationInfoMapper configurationInfoMapper;
-
+	@Autowired
+	IMemberInfoService memberInfoService;
+	
 	@Override
 	public Result addCashBack(CashBackReq req) throws Exception {
 		Result rs = Result.getSuccessful();
@@ -183,7 +187,7 @@ public class CashBackService implements ICashBackService {
 	}
 
 	@Override
-	public void cashQuart() {
+	public void cashQuart() throws Exception {
 		// 获取系统设置返现比例
 		ConfigurationInfo rate = configurationInfoMapper.selectByPrimaryKey("SYSTEM_CASH_BACK_RATE");
 		// 获取系统返现比例
@@ -216,6 +220,10 @@ public class CashBackService implements ICashBackService {
 				save.setCreateTime(System.currentTimeMillis());
 				cashBackInfoMapper.insertSelective(save);
 				cashBackMapper.updateByPrimaryKeySelective(upt);
+				MemberInfoHBaoReq cback = new MemberInfoHBaoReq();
+				cback.setMemberId(back.getCashMember());
+				cback.setCashMoney(upt.getCashAlre() - back.getCashAlre());
+				memberInfoService.cashBackUptMember(cback);
 			}
 		}
 	}

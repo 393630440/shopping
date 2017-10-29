@@ -23,6 +23,11 @@
 		<property name="prefix" value="/WEB-INF/temp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="resourcePathExposer" class="com.tianrui.util.ResourcePathExposer"
+		init-method="init" >
+		<property name="staticRoot" value="http://47.91.240.215/webStatic" />
+	</bean>
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />

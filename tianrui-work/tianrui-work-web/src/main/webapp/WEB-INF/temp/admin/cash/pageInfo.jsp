@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="/resources/admin/i/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="/resources/admin/i/app-icon72x72@2x.png">
+<link rel="icon" type="image/png" href="${staticRoot}/admin/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="${staticRoot}/admin/i/app-icon72x72@2x.png">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="/resources/admin/css/amazeui.min.css"/>
-<link rel="stylesheet" href="/resources/admin/css/admin.css">
-<script src="/resources/admin/js/jquery.min.js"></script>
-<script src="/resources/admin/js/app.js"></script>
+<link rel="stylesheet" href="${staticRoot}/admin/css/amazeui.min.css"/>
+<link rel="stylesheet" href="${staticRoot}/admin/css/admin.css">
+<script src="${staticRoot}/admin/js/jquery.min.js"></script>
+<script src="${staticRoot}/admin/js/app.js"></script>
 </head>
 <body>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -76,7 +76,7 @@
 		<!-- left-head end -->
 		</div>
 </div>
-<script src="/resources/admin/js/amazeui.min.js"></script>
+<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 <script src="/resources/js/admin/cash/pageInfo.js?01026"></script>
 </body>
 </html>

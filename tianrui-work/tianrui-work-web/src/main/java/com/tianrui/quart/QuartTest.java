@@ -23,7 +23,7 @@ public class QuartTest {
 	 */
 	@Scheduled(cron = "0/5 * * * * ? ") // 没隔5秒执行
 	public void quartTest() {
-		System.out.println("定时任务开始啦啦啦");
+//		System.out.println("定时任务开始啦啦啦");
 	}
 
 }

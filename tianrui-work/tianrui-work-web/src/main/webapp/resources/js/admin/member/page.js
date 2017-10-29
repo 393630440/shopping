@@ -9,6 +9,7 @@ function init(pageNo){
 			"cellphone":$("#telphone").val(),
 			"wechatName":$("#wechatName").val(),
 			"rpTradeMark":$("#rpTradeMark").val(),
+			"memberRank":$("#memberRankReq").val(),
 			"pageSize":10},
 		type:"POST",
 		success:function(ret){
@@ -24,40 +25,50 @@ function innerHTML(data,pageNo){
 	for (var a = 0; a < data.length; a++) {
 		var ststus = "";
 		var upt = "";
-		if(data[a].rpTradeMark == "1"){//primary
-			ststus = "<i class='am-icon-check am-text-warning'></i>";
-			upt = "<span class='am-icon-trash-o'>关闭</span>";
-		}
-		if(data[a].rpTradeMark == "0"){//warning
+//		if(data[a].rpTradeMark == "1"){//primary
+//			ststus = "<i class='am-icon-check am-text-warning'></i>";
+//			upt = "<span class='am-icon-trash-o'>关闭</span>";
+//		}
+//		if(data[a].rpTradeMark == "0"){//warning
+//			ststus = "<i class='am-icon-close am-text-primary'></i>";
+//			upt = "<span class='am-icon-copy'>开启</span>";
+//		}
+		var rank = "";
+		if(data[a].memberRank == "1"){
+			rank = "普通会员";
 			ststus = "<i class='am-icon-close am-text-primary'></i>";
-			upt = "<span class='am-icon-copy'>开启</span>";
+			upt = "<span class='am-icon-copy'>会员升级</span>";
+		}else if(data[a].memberRank == "2"){
+			rank = "加盟商";
 		}
 		var hml = "<tr><td>"+(a+1)+"</td>" +
-				"<td>"+data[a].wechat+"</td>" +
-				"<td class='am-hide-sm-only'>"+ststus+"</td>" +
+//				"<td>"+data[a].wechat+"</td>" +
+				"<td>"+rank+"</td>" +
+//				"<td class='am-hide-sm-only'>"+ststus+"</td>" +
 				"<td>"+data[a].wechatName+"</td>" +
 				"<td>"+data[a].memberName+"</td>" +
 				"<td>"+data[a].cellphone+"</td>" +
 				"<td>"+data[a].birthTime+"</td>" +
 				"<td>"+data[a].city+"</td>" +
 				"<td>"+data[a].balance+"</td>" +
-				"<td>"+data[a].redPacket+"</td>" +
+//				"<td>"+data[a].redPacket+"</td>" +
+				"<td>"+data[a].cashMoney+"</td>" +
 				"<td>"+(data[a].createtime==undefined?"":(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss")))+"</td>" +
-//				"<td><div class='am-btn-toolbar'>" +
-//					"<div class='am-btn-group am-btn-group-xs'>" +
-//						"<button onclick=\"uptUser('"+data[a].id+"','"+pageNo+"')\" class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>"+
-//						upt+
-//						"</button>" +
-//					"</div>" +
-//				"</div></td>" +
+				"<td><div class='am-btn-toolbar'>" +
+					"<div class='am-btn-group am-btn-group-xs'>" +
+						"<button onclick=\"uptUser('"+data[a].memberId+"','"+pageNo+"')\" class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>"+
+						upt+
+						"</button>" +
+					"</div>" +
+				"</div></td>" +
 				"</tr>";
 		$("#innerHml").append(hml);
 	}
 }
-//禁用数据
+//修改用户等级
 function uptUser(id,pageNo){
 	$.ajax({
-		url:"/admin/shop/user/uptUser",
+		url:"/admin/shop/member/uptMemberRank",
 		data:{"id":id},
 		type:"POST",
 		success:function(ret){

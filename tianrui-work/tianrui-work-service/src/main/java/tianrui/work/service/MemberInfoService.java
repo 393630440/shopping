@@ -53,6 +53,7 @@ public class MemberInfoService implements IMemberInfoService{
 		query.setWechatName(req.getWechatName());
 		query.setCellphone(req.getCellphone());
 		query.setRpTradeMark(req.getRpTradeMark());
+		query.setMemberRank(req.getMemberRank());
 		if(req.getPageNo()!=null){
 			query.setPageNo(req.getPageNo()*req.getPageSize());
 			query.setPageSize(req.getPageSize());
@@ -195,9 +196,27 @@ public class MemberInfoService implements IMemberInfoService{
 		upt.setRpTradeMark(req.getRpTradeMark());
 		upt.setRpExchangeRatio(req.getRpExchangeRatio());
 		upt.setCity(req.getCity());
+		upt.setMemberRank(req.getMemberRank());
 		memberInfoMapper.updateByPrimaryKeySelective(upt);
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
 		rs.setData(info);
+		return rs;
+	}
+
+	@Override
+	public Result cashBackUptMember(MemberInfoHBaoReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
+		if(info != null){
+			MemberInfo upt = new MemberInfo();
+			upt.setMemberId(req.getMemberId());
+			upt.setBalance(info.getBalance()+req.getCashMoney());
+			upt.setCashMoney(info.getCashMoney()+req.getCashMoney());
+			memberInfoMapper.updateByPrimaryKeySelective(upt);
+		}else{
+			rs.setCode("1");
+			rs.setError("用户id有误");
+		}
 		return rs;
 	}
 

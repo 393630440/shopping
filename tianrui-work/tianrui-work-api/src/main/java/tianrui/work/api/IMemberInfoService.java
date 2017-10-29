@@ -30,4 +30,6 @@ public interface IMemberInfoService {
 	public Result saveHbao(MemberInfoHBaoReq req)throws Exception;
 	/** 宏包交易*/
 	public Result changeHbao(HbaoPayReq req)throws Exception;
+	/**定时返现修改用户余额*/
+	public Result cashBackUptMember(MemberInfoHBaoReq req)throws Exception;
 }

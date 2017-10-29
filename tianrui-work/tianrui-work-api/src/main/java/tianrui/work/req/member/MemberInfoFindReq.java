@@ -11,6 +11,8 @@ public class MemberInfoFindReq {
     private String cellphone;
     //1-开启 0-关闭
     private String rpTradeMark;
+    //会员等级
+    private String memberRank;
 
 	public String getWechatName() {
 		return wechatName;
@@ -18,6 +20,14 @@ public class MemberInfoFindReq {
 
 	public void setWechatName(String wechatName) {
 		this.wechatName = wechatName;
+	}
+
+	public String getMemberRank() {
+		return memberRank;
+	}
+
+	public void setMemberRank(String memberRank) {
+		this.memberRank = memberRank;
 	}
 
 	public String getCellphone() {

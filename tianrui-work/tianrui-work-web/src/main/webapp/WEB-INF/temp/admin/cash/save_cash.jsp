@@ -10,15 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="/resources/admin/i/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="/resources/admin/i/app-icon72x72@2x.png">
+<link rel="icon" type="image/png" href="${staticRoot}/admin/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="${staticRoot}/admin/i/app-icon72x72@2x.png">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="/resources/admin/css/amazeui.min.css"/>
-<link rel="stylesheet" href="/resources/admin/css/admin.css">
-<link rel="stylesheet" href="/resources/admin/css/select2.css">
-<script src="/resources/admin/js/jquery.min.js"></script>
-<script src="/resources/admin/js/select2.js"></script>
-<script src="/resources/admin/js/app.js"></script>
+<link rel="stylesheet" href="${staticRoot}/admin/css/amazeui.min.css"/>
+<link rel="stylesheet" href="${staticRoot}/admin/css/admin.css">
+<link rel="stylesheet" href="${staticRoot}/admin/css/select2.css">
+<script src="${staticRoot}/admin/js/jquery.min.js"></script>
+<script src="${staticRoot}/admin/js/select2.js"></script>
+<script src="${staticRoot}/admin/js/app.js"></script>
 </head>
 <body>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -106,15 +106,16 @@
 		</div>
 	</div>
 </div>
+<input type="hidden" id="wechatName">
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/resources/admin/js/polyfill/rem.min.js"></script>
-<script src="/resources/admin/js/polyfill/respond.min.js"></script>
-<script src="/resources/admin/js/amazeui.legacy.js"></script>
+<script src="${staticRoot}/admin/js/polyfill/rem.min.js"></script>
+<script src="${staticRoot}/admin/js/polyfill/respond.min.js"></script>
+<script src="${staticRoot}/admin/js/amazeui.legacy.js"></script>
 <![endif]--> 
 <!--[if (gte IE 9)|!(IE)]><!--> 
-<script src="/resources/admin/js/amazeui.min.js"></script>
+<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript">
 $(function(){
@@ -123,6 +124,7 @@ $(function(){
 });
 $(".select2").on("change",function(){
 	var openid = $(this).val();
+	$("#wechatName").val("");
 	$.ajax({
 		url:"/admin/shop/member/findMemberID",
 		data:{"id":openid},
@@ -135,7 +137,8 @@ $(".select2").on("change",function(){
 				$("#member_name").val(data.memberName);
 				$("#member_tel").val(data.cellphone);
 				$("#member_redPacket").val(data.redPacket);
-				$("#redPacket_num").val("0")
+				$("#redPacket_num").val("0");
+				$("#wechatName").val(data.wechatName);
 			}
 		}
 	});
@@ -148,14 +151,14 @@ $("#save_member_hbao").on("click",function(){
 	$.ajax({
 		url:"/admin/shop/cash/save",
 		data:{"cashMember":$("#member_id").val(),
-			"cashMemberName":$("#member_name").val(),
+			"cashMemberName":$("#wechatName").val(),
 			"cashAmount":$("#cashAmount").val(),
 			"cashRemark":$("#cashRemark").val(),
 			"cashType":"1"},
 		type:"POST",
 		success:function(ret){
 			if(ret.code=="000000"){
-				location=location;
+				window.location.href="/admin/shop/cash/page";
 			}
 		}
 	});

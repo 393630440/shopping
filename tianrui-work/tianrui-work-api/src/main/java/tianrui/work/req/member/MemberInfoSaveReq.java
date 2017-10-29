@@ -4,6 +4,8 @@ public class MemberInfoSaveReq {
     private String memberId;
 
     private String memberName;
+    
+    private String memberRank;
 
     private String wechat;
 
@@ -140,4 +142,12 @@ public class MemberInfoSaveReq {
     public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
+
+	public String getMemberRank() {
+		return memberRank;
+	}
+
+	public void setMemberRank(String memberRank) {
+		this.memberRank = memberRank;
+	}
 }
