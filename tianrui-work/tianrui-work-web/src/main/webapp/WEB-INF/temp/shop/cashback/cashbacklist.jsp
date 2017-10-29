@@ -7,11 +7,12 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>返现派送</title>
+<title>返现明细列表</title>
 <link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/style.new.css">
 <link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
+<link rel="stylesheet" type="text/css" href="/resources/web/css/index.css" />
 <script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
 <script type="text/javascript" src="/resources/shop/js/woxiangyao.js"></script>
 <script type="text/javascript" src="/resources/shop/js/zx/rewrite.new.js"></script>
@@ -28,7 +29,7 @@
 		<jsp:include page="../common/heads.jsp"></jsp:include>
 		<!--页面加载 结束-->
 
-		<!--header 开始-->
+		<!--header 开始
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
@@ -36,36 +37,74 @@
 						<img src="/resources/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
-				<h2>返现明细-后台派送返现</h2>
+				<h2>返现明细列表</h2>
 			</div>
 		</header>
 		<!--header 结束-->
 
-		<div class="my-dd">
-			<div class="my-info">
-				<div class="my-k1">
-					<div class="my-p2-zx">
-						<span class="my-sp3 f-l">商品111返现</span>
-						<span class="my-sp3 f-r">已反金额</span>
-						<div style="clear: both;"></div>
+		<div class="m_baoliao w">
+			<div class="my-dd">
+				<div class="my-info">
+					<div class="my-k1" id="dataList_showId">
+						<c:forEach var="data" items="${dataList}">
+							<div class="my-p2-zx">
+								<span class="my-sp3 f-l">${data.backRemark}</span>
+								<span class="my-sp3 f-r">${data.backMoney}</span>
+								<div style="clear: both;"></div>
+							</div>
+						</c:forEach>
 					</div>
-					<div class="my-p2-zx">
-						<span class="my-sp3 f-l">商品222返现</span>
-						<span class="my-sp3 f-r">已反金额</span>
-						<div style="clear: both;"></div>
-					</div>
-					<div class="my-p2-zx">
-						<span class="my-sp3 f-l">商品333返现</span>
-						<span class="my-sp3 f-r">已反金额</span>
-						<div style="clear: both;"></div>
-					</div>
+				</div>
+			</div>
+	
+			<div class="w-zx-1">
+				<div class="bl_more">
+					<a href="javascript:void(0);" onclick="toLoad();">加载更多</a>
 				</div>
 			</div>
 		</div>
 
+		<!-- foods -->
+		<jsp:include page="../common/foods.jsp"></jsp:include>
+		<!-- foods -->
 	</div>
 </body>
 <script type="text/javascript">
-	
+	var cashBackId = "${cashBackId}";
+	var pageNo = 0;
+	var pageSize = 10;
+
+	function toLoad() {
+		pageNo++;
+		$.ajax({
+			url : "/wechat/shop/cashback/querylist",
+			type : "POST",
+			data : {
+				"type" : "2",
+				"cashBackId" : cashBackId,
+				"pageNo" : pageNo,
+				"pageSize" : pageSize
+			},
+			success : function(ret) {
+				if (ret.code == "000000") {
+					innerHTML(ret.data);
+				}
+			}
+		});
+	}
+
+	function innerHTML(data) {
+		if (data != null) {
+			for (var a = 0; a < data.length; a++) {
+				var html = "";
+				html += "<div class=\"my-p2-zx\">";
+				html += "<span class=\"my-sp3 f-l\">" + data[a].backRemark + "</span>";
+				html += "<span class=\"my-sp3 f-r\">" + data[a].backMoney + "</span>";
+				html += "<div style=\"clear: both;\"></div>";
+				html += "</div>";
+				$("#dataList_showId").append(html);
+			}
+		}
+	}
 </script>
 </html>

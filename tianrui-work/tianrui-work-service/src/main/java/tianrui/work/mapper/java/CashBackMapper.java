@@ -5,19 +5,20 @@ import java.util.List;
 import tianrui.work.bean.CashBack;
 
 public interface CashBackMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(CashBack record);
+	int deleteByPrimaryKey(String id);
 
-    int insertSelective(CashBack record);
+	int insertSelective(CashBack record);
 
-    CashBack selectByPrimaryKey(String id);
+	CashBack selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(CashBack record);
+	int updateByPrimaryKeySelective(CashBack record);
 
-    int updateByPrimaryKey(CashBack record);
-    
-    List<CashBack> selectByCondition(CashBack record);
-    
-    long selectByCount(CashBack record);
+	List<CashBack> selectByCondition(CashBack record);
+
+	long selectByCount(CashBack record);
+
+	/** 累计收益 */
+	String getTotalEarnings(CashBack record);
+
 }

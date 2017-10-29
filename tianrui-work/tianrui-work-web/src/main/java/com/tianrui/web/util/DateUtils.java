@@ -378,4 +378,29 @@ public class DateUtils {
 		}
 		return date;
 	}
+
+	/**
+	 * 获取毫秒数
+	 * 
+	 * @param mark
+	 *            1-当日的开始时间；2-当日的结束时间
+	 * @return
+	 */
+	public static long getMillisecond(int mark) {
+		Calendar calendar = Calendar.getInstance();
+		int y = calendar.get(Calendar.YEAR);
+		int m = calendar.get(Calendar.MONTH) + 1;
+		int d = calendar.get(Calendar.DAY_OF_MONTH);
+
+		if (mark == 1)
+			calendar.set(y, m, d, 0, 0, 0);
+		else if (mark == 2)
+			calendar.set(y, m, d, 23, 59, 59);
+
+		calendar.set(Calendar.MILLISECOND, 0);
+		long millisecond = calendar.getTime().getTime();
+
+		return millisecond;
+	}
+
 }

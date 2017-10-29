@@ -6,16 +6,17 @@ import org.springframework.stereotype.Component;
 
 import tianrui.work.api.ICashBackService;
 
-/** ÏµÍ³¶¨Ê±ÈÎÎñ*/
+/** ç³»ç»Ÿå®šæ—¶ä»»åŠ¡ */
 @Component
 public class SystemQuart {
-	
+
 	@Autowired
 	ICashBackService cashBackService;
-	
-	@Scheduled(cron="0/5 * * * * ? ")//Ã»¸ô5ÃëÖ´ÐÐ
-	public void quartTest() throws Exception{
-		System.out.println("¶¨Ê±ÈÎÎñ¿ªÊ¼À²À­À­");
+
+	@Scheduled(cron = "0/5 * * * * ? ") // æ²¡éš”5ç§’æ‰§è¡Œ
+	public void quartTest() throws Exception {
+		System.out.println("å®šæ—¶ä»»åŠ¡å¼€å§‹å•¦å•¦å•¦");
 		cashBackService.cashQuart();
 	}
+
 }
