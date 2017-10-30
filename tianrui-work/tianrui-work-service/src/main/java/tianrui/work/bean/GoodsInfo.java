@@ -2,45 +2,27 @@ package tianrui.work.bean;
 
 public class GoodsInfo {
 	private String goodsId;
-
 	private String goodsName;
-
 	private String goodsImg;
-
 	private String goodsStatus;
-
 	private String goodsType;
-
 	private Double goodsPrice;
-
 	private Integer redPacket;
-
 	private String goodsDetails;
-
 	private String goodsParam;
-
 	private Double expressFee;
-
 	private Integer inventory;
-
 	private Integer salesvolume;
-
 	private Integer buyNum;
-
 	private Integer browseNum;
-
 	private String sifting;
-
 	private String classifyId;
-
 	private String classifyName;
-
 	private Long pubdate;
+	private Double discountPrice;
 
 	private Integer pageNo;
-
 	private Integer pageSize;
-
 	private String pageSort;
 
 	public Integer getPageNo() {
@@ -222,6 +204,14 @@ public class GoodsInfo {
 
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
+	}
+
+	public Double getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(Double discountPrice) {
+		this.discountPrice = discountPrice;
 	}
 
 }

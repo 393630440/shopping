@@ -23,12 +23,12 @@ public interface IGoodsInfoService {
 	Result editGoodsInfo(GoodsInfoReq req) throws Exception;
 
 	/** 查询商品信息 */
-	GoodsInfoFindResp queryGoodsInfoByOne(String goodsId) throws Exception;
+	GoodsInfoFindResp queryGoodsInfoByOne(String goodsId, String memberRank) throws Exception;
 
 	/** 列表查询商品信息 */
-	PageTool<GoodsInfoFindResp> queryGoodsInfoByList(GoodsInfoFindReq req) throws Exception;
+	PageTool<GoodsInfoFindResp> queryGoodsInfoByList(GoodsInfoFindReq req, String memberRank) throws Exception;
 
 	/** 查询商品集合信息 */
-	List<GoodsInfoFindResp> getGoodsInfoList(GoodsInfoFindReq req) throws Exception;
+	List<GoodsInfoFindResp> getGoodsInfoList(GoodsInfoFindReq req, String memberRank) throws Exception;
 
 }

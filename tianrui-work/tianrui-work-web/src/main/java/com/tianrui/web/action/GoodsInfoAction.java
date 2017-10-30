@@ -114,8 +114,9 @@ public class GoodsInfoAction {
 
 	/** 跳转商品列表页面 */
 	@RequestMapping("goodslist")
-	public ModelAndView goodsList(GoodsInfoFindReq req) throws Exception {
+	public ModelAndView goodsList(HttpServletRequest request, GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodslist]");
+		MemberInfo member = SessionManage.getSessionManage(request);
 		req.setGoodsStatus("1");
 
 		req.setPageNo(0);
@@ -146,7 +147,7 @@ public class GoodsInfoAction {
 		List<GoodsClassifyFindResp> classifyList = goodsClassifyService.getGoodsClassifyList(goodsClassifyReq);
 		view.addObject("classifyList", classifyList);
 
-		List<GoodsInfoFindResp> goodsList = goodsInfoService.getGoodsInfoList(req);
+		List<GoodsInfoFindResp> goodsList = goodsInfoService.getGoodsInfoList(req, member.getMemberRank());
 		view.addObject("goodsList", goodsList);
 
 		view.setViewName("shop/goods/goodslist");
@@ -156,8 +157,9 @@ public class GoodsInfoAction {
 	/** 加载商品数据 */
 	@RequestMapping("toloadgoodslist")
 	@ResponseBody
-	public Result toLoadGoodsList(GoodsInfoFindReq req) throws Exception {
+	public Result toLoadGoodsList(HttpServletRequest request, GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/toloadgoodslist]");
+		MemberInfo member = SessionManage.getSessionManage(request);
 		String pageSort = req.getPageSort();
 
 		if (!StringUtils.isNull(pageSort)) {
@@ -171,7 +173,7 @@ public class GoodsInfoAction {
 				req.setPageSort("goods_price asc, red_packet asc");
 		}
 
-		PageTool<GoodsInfoFindResp> goodsList = goodsInfoService.queryGoodsInfoByList(req);
+		PageTool<GoodsInfoFindResp> goodsList = goodsInfoService.queryGoodsInfoByList(req, member.getMemberRank());
 		Result rs = Result.getSuccessful();
 		rs.setData(goodsList);
 		return rs;
@@ -182,7 +184,7 @@ public class GoodsInfoAction {
 	public ModelAndView goodsDetails(HttpServletRequest request, GoodsInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodsdetails]");
 		MemberInfo member = SessionManage.getSessionManage(request);
-		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
+		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId(), member.getMemberRank());
 		String goodsImg = "/resources/file/goodsInfo/" + goodsInfo.getGoodsId() + "/" + goodsInfo.getFirstGoodsImg();
 
 		// 更新浏览记录数
@@ -225,7 +227,7 @@ public class GoodsInfoAction {
 	public Result addGoods(HttpServletRequest request, ShoppingCartReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/addgoods]");
 		MemberInfo member = SessionManage.getSessionManage(request);
-		GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
+		GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId(), member.getMemberRank());
 
 		// 添加购物车
 		req.setMemberId(member.getMemberId());
@@ -275,7 +277,7 @@ public class GoodsInfoAction {
 			}
 		} else if (FfType.equals("1")) {
 			if (memberFootprintResp == null) {
-				GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(goodsId);
+				GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(goodsId, member.getMemberRank());
 				String goodsImg = "/resources/file/goodsInfo/" + goodsId + "/" + goodsInfo.getFirstGoodsImg();
 
 				// 如果是关注，并且没有查到关注信息，则保存关注信息
@@ -305,7 +307,7 @@ public class GoodsInfoAction {
 	public ModelAndView buyNow(HttpServletRequest request, String goodsId, Integer goodsNum) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/buynow]");
 		MemberInfo member = SessionManage.getSessionManage(request);
-		GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(goodsId);
+		GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(goodsId, member.getMemberRank());
 
 		// 添加购物车
 		ShoppingCartReq shoppingCartReq = new ShoppingCartReq();

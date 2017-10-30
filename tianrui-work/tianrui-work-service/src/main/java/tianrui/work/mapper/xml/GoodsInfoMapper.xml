@@ -20,12 +20,13 @@
 		<result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
 		<result column="classify_name" property="classifyName" jdbcType="VARCHAR" />
 		<result column="pubdate" property="pubdate" jdbcType="BIGINT" />
+		<result column="discount_price" property="discountPrice" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		goods_id, goods_name, goods_img, goods_status, goods_type, goods_price,
 		red_packet, goods_details, goods_param, express_fee, inventory, salesvolume,
-		buy_num, browse_num, sifting, classify_id, classify_name, pubdate
+		buy_num, browse_num, sifting, classify_id, classify_name, pubdate, discount_price
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -72,7 +73,7 @@
 	<insert id="insert" parameterType="tianrui.work.bean.GoodsInfo">
 		insert into goods_info (goods_id, goods_name, goods_img, goods_status,
 		goods_type, goods_price, red_packet, goods_details, goods_param, express_fee,
-		inventory, salesvolume, buy_num, browse_num, sifting, classify_id, classify_name, pubdate)
+		inventory, salesvolume, buy_num, browse_num, sifting, classify_id, classify_name, pubdate, discount_price)
 		values (#{goodsId,jdbcType=VARCHAR},
 		#{goodsName,jdbcType=VARCHAR},
 		#{goodsImg,jdbcType=VARCHAR},
@@ -90,7 +91,8 @@
 		#{sifting,jdbcType=VARCHAR},
 		#{classifyId,jdbcType=VARCHAR},
 		#{classifyName,jdbcType=VARCHAR},
-		#{pubdate,jdbcType=BIGINT})
+		#{pubdate,jdbcType=BIGINT,}
+		#{discountPrice,jdbcType=DOUBLE})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.GoodsInfo">
@@ -114,6 +116,7 @@
 			<if test="classifyId != null and classifyId != ''">classify_id,</if>
 			<if test="classifyName != null and classifyName != ''">classify_name,</if>
 			<if test="pubdate != null and pubdate != ''">pubdate,</if>
+			<if test="discountPrice != null and discountPrice != ''">discount_price,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="goodsId != null and goodsId != ''">#{goodsId,jdbcType=VARCHAR},</if>
@@ -134,6 +137,7 @@
 			<if test="classifyId != null and classifyId != ''">#{classifyId,jdbcType=VARCHAR},</if>
 			<if test="classifyName != null and classifyName != ''">#{classifyName,jdbcType=VARCHAR},</if>
 			<if test="pubdate != null and pubdate != ''">#{pubdate,jdbcType=BIGINT},</if>
+			<if test="discountPrice != null and discountPrice != ''">#{discountPrice,jdbcType=DOUBLE},</if>
 		</trim>
 	</insert>
 
@@ -158,6 +162,7 @@
 			<if test="classifyId != null and classifyId != ''">classify_id = #{classifyId,jdbcType=VARCHAR},</if>
 			<if test="classifyName != null and classifyName != ''">classify_name = #{classifyName,jdbcType=VARCHAR},</if>
 			<if test="pubdate != null and pubdate != ''">pubdate = #{pubdate,jdbcType=BIGINT},</if>
+			<if test="discountPrice != null and discountPrice != ''">discount_price = #{discountPrice,jdbcType=DOUBLE},</if>
 		</set>
 		where goods_id = #{goodsId,jdbcType=VARCHAR}
 	</update>
@@ -181,6 +186,7 @@
 		classify_id = #{classifyId,jdbcType=VARCHAR},
 		classify_name = #{classifyName,jdbcType=VARCHAR},
 		pubdate = #{pubdate,jdbcType=BIGINT}
+		discount_price = #{discountPrice,jdbcType=DOUBLE},
 		where goods_id = #{goodsId,jdbcType=VARCHAR}
 	</update>
 

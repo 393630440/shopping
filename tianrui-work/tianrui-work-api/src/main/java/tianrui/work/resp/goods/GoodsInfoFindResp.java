@@ -25,8 +25,10 @@ public class GoodsInfoFindResp {
 	private String classifyId; // 分类ID
 	private String classifyName; // 分类名称
 	private Long pubdate;// 发布时间
+	private Double discountPrice;// 折扣价格
 
 	private String path;
+	private String memberRank;
 
 	public String getGoodsId() {
 		return goodsId;
@@ -83,6 +85,14 @@ public class GoodsInfoFindResp {
 	}
 
 	public Double getGoodsPrice() {
+		if (memberRank == null || memberRank.equals("")) {
+		} else {
+			if (memberRank.equals("1")) {
+			} else if (memberRank.equals("2")) {
+				goodsPrice = discountPrice;
+			} else {
+			}
+		}
 		return goodsPrice;
 	}
 
@@ -91,21 +101,41 @@ public class GoodsInfoFindResp {
 	}
 
 	public Integer getRedPacket() {
+		if (redPacket == null)
+			redPacket = 0;
 		return redPacket;
 	}
 
 	public void setRedPacket(Integer redPacket) {
-		this.redPacket = redPacket;
+		if (redPacket == null)
+			this.redPacket = 0;
+		else
+			this.redPacket = redPacket;
 	}
 
 	public String getPrice() {
 		if (goodsType == null || goodsType.equals("")) {
 		} else {
-			if (goodsType.equals("1")) {
-				price = "￥" + goodsPrice;
-			} else if (goodsType.equals("2")) {
-				price = "￥" + goodsPrice + " + " + redPacket + "宏包";
+			if (memberRank == null || memberRank.equals("")) {
+				if (goodsType.equals("1")) {
+					price = "￥" + goodsPrice;
+				} else if (goodsType.equals("2")) {
+					price = "￥" + goodsPrice + " + " + redPacket + "宏包";
+				}
 			} else {
+				if (memberRank.equals("1")) {
+					if (goodsType.equals("1")) {
+						price = "￥" + goodsPrice;
+					} else if (goodsType.equals("2")) {
+						price = "￥" + goodsPrice + " + " + redPacket + "宏包";
+					}
+				} else if (memberRank != null && memberRank.equals("") && memberRank.equals("2")) {
+					if (goodsType.equals("1")) {
+						price = "￥" + discountPrice;
+					} else if (goodsType.equals("2")) {
+						price = "￥" + discountPrice + " + " + redPacket + "宏包";
+					}
+				}
 			}
 		}
 		return price;
@@ -215,6 +245,14 @@ public class GoodsInfoFindResp {
 		this.pubdate = pubdate;
 	}
 
+	public Double getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(Double discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+
 	public String getPath() {
 		if (path == null)
 			path = "/resources/file/goodsInfo/" + goodsId + "/";
@@ -223,6 +261,14 @@ public class GoodsInfoFindResp {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getMemberRank() {
+		return memberRank;
+	}
+
+	public void setMemberRank(String memberRank) {
+		this.memberRank = memberRank;
 	}
 
 }

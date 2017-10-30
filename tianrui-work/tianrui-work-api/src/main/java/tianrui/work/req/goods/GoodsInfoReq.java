@@ -25,6 +25,7 @@ public class GoodsInfoReq {
 	private String classifyId; // 分类ID
 	private String classifyName; // 分类名称
 	private Long pubdate;// 发布时间
+	private Double discountPrice;// 折扣价格
 
 	private String goodsImgStr;// 商品图片数据
 	private String goodsDetailsStr;// 商品详情图片数据
@@ -171,6 +172,14 @@ public class GoodsInfoReq {
 
 	public void setPubdate(Long pubdate) {
 		this.pubdate = pubdate;
+	}
+
+	public Double getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(Double discountPrice) {
+		this.discountPrice = discountPrice;
 	}
 
 	public String getGoodsImgStr() {

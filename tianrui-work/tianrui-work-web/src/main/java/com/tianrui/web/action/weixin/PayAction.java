@@ -212,7 +212,6 @@ public class PayAction {
 	
 	
 	public String jsapi_ticket(){
-		// TODO Auto-generated method stub
 		String accessToken = "";
 		String jsapi_ticket = "";
 		// 凭证获取（GET）
@@ -235,7 +234,6 @@ public class PayAction {
 		try {
 			jsapi_ticket = js.getString("ticket");
 		} catch (Exception e) {
-			// TODO: handle exception
 			LoggerUtils.info(log, "jsapi_ticket请求失败");
 		}
 		return jsapi_ticket;

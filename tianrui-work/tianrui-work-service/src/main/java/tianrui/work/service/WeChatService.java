@@ -21,7 +21,6 @@ public class WeChatService implements IWeChatPayService{
 	
 	@Override
 	public Result save(WeChatPayReq req) throws Exception{
-		// TODO Auto-generated method stub
 		WeChatPay save = new WeChatPay();
 		PropertyUtils.copyProperties(save, req);
 		save.setMchid(Constant.WEIXIN_SHANGPU);
@@ -44,7 +43,6 @@ public class WeChatService implements IWeChatPayService{
 
 	@Override
 	public void uptPayStatus(String id) {
-		// TODO Auto-generated method stub
 		WeChatPay upt = new WeChatPay();
 		upt.setId(id);
 		upt.setPaystatus("1");

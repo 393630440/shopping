@@ -47,15 +47,16 @@ public class GoodsInfoService implements IGoodsInfoService {
 	}
 
 	@Override
-	public GoodsInfoFindResp queryGoodsInfoByOne(String goodsId) throws Exception {
+	public GoodsInfoFindResp queryGoodsInfoByOne(String goodsId, String memberRank) throws Exception {
 		GoodsInfo record = goodsInfoMapper.selectByPrimaryKey(goodsId);
 		GoodsInfoFindResp resp = new GoodsInfoFindResp();
 		PropertyUtils.copyProperties(resp, record);
+		resp.setMemberRank(memberRank);
 		return resp;
 	}
 
 	@Override
-	public PageTool<GoodsInfoFindResp> queryGoodsInfoByList(GoodsInfoFindReq req) throws Exception {
+	public PageTool<GoodsInfoFindResp> queryGoodsInfoByList(GoodsInfoFindReq req, String memberRank) throws Exception {
 		PageTool<GoodsInfoFindResp> page = new PageTool<GoodsInfoFindResp>();
 		GoodsInfo find = new GoodsInfo();
 		if (req.getPageNo() != null) {
@@ -79,6 +80,7 @@ public class GoodsInfoService implements IGoodsInfoService {
 		for (GoodsInfo bean : list) {
 			GoodsInfoFindResp sp = new GoodsInfoFindResp();
 			PropertyUtils.copyProperties(sp, bean);
+			sp.setMemberRank(memberRank);
 			resp.add(sp);
 		}
 
@@ -89,7 +91,7 @@ public class GoodsInfoService implements IGoodsInfoService {
 	}
 
 	@Override
-	public List<GoodsInfoFindResp> getGoodsInfoList(GoodsInfoFindReq req) throws Exception {
+	public List<GoodsInfoFindResp> getGoodsInfoList(GoodsInfoFindReq req, String memberRank) throws Exception {
 		GoodsInfo find = new GoodsInfo();
 		if (req.getPageNo() != null) {
 			find.setPageNo(req.getPageSize() * req.getPageNo());
@@ -109,6 +111,7 @@ public class GoodsInfoService implements IGoodsInfoService {
 		for (GoodsInfo bean : list) {
 			GoodsInfoFindResp sp = new GoodsInfoFindResp();
 			PropertyUtils.copyProperties(sp, bean);
+			sp.setMemberRank(memberRank);
 			resp.add(sp);
 		}
 

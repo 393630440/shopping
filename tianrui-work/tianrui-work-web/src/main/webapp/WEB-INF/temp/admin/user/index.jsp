@@ -62,7 +62,7 @@
 			  </ul>
 			</div>
 		    <div class="am-form am-g">
-		          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+		          <table style="width: 100%;" class="am-table am-table-bordered am-table-radius am-table-striped">
 		            <thead>
 		              <tr class="am-success">
 		                <th class="table-title">序号</th>

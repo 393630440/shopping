@@ -44,6 +44,7 @@ function innerHTML(data, pageNo) {
 		html += "<td>" + goodsStatus + "</td>";
 		html += "<td>" + goodsType + "</td>";
 		html += "<td>" + data[a].goodsPrice + "</td>";
+		html += "<td>" + data[a].discountPrice + "</td>";
 		html += "<td>" + data[a].redPacket + "</td>";
 		html += "<td>" + pubdate + "</td>";
 		html += "<td><div class='am-btn-toolbar'><div class='am-btn-group am-btn-group-xs'>";

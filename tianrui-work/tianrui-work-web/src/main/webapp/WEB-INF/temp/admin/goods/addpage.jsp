@@ -92,6 +92,12 @@
 								<input type="text" class="am-input-sm" id="goodsPrice" name="goodsPrice" placeholder="请输入商品价格">
 							</div>
 						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">折扣价格：</div>
+							<div class="you">
+								<input type="text" class="am-input-sm" id="discountPrice" name="discountPrice" placeholder="请输入折扣价格">
+							</div>
+						</div>
 						<div class="am-form-group am-cf" id="redPacket_div" hidden="hidden">
 							<div class="zuo">宏包：</div>
 							<div class="you">

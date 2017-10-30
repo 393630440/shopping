@@ -46,6 +46,19 @@ public class CashBackInfoReq {
 		this.pageSort = pageSort;
 	}
 
+	public void setPageSort(String sordName, String sord) {
+		if (sordName == null)
+			return;
+
+		if (sord == null)
+			sord = "desc";
+
+		if (pageSort == null)
+			pageSort = sordName + " " + sord;
+		else
+			pageSort = ", " + sordName + " " + sord;
+	}
+
 	public String getId() {
 		return id;
 	}

@@ -134,6 +134,10 @@ function add(buttonType) {
 	if (goodsPrice == "")
 		msg += "商品价格不能为空\n";
 
+	var discountPrice = $("#discountPrice").val(); // 折扣价格
+	if (discountPrice == "")
+		msg += "折扣价格不能为空\n";
+
 	var redPacket = ""; // 商品宏包
 	if (goodsType == "1") {
 		redPacket = "0";
@@ -208,6 +212,7 @@ function add(buttonType) {
 			"classifyName" : classifyName,
 			"goodsType" : goodsType,
 			"goodsPrice" : goodsPrice,
+			"discountPrice" : discountPrice,
 			"redPacket" : redPacket,
 			"goodsParam" : goodsParam,
 			"expressFee" : expressFee,

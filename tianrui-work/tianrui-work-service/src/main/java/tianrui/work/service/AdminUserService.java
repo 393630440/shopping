@@ -80,7 +80,6 @@ public class AdminUserService implements IAdminUserService{
 
 	@Override
 	public Result delete(String id) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

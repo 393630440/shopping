@@ -127,7 +127,7 @@ function innerHTML(date,type){
             "<div class='bl_title'>"+date[a].goodsName+"</div>"+
             "<div class='bl_note'>邮费："+date[a].expressFee+"</div>"+
             "<div class='bl_tag'>"+
-            "<div class='bl_price'>￥"+date[a].goodsPrice+"</div>"+
+            "<div class='bl_price'>￥"+date[a].price+"</div>"+
             //"<div class='bl_oprice'>￥138.00</div>"+
             "<div class='bl_time'>"+(new Date(date[a].pubdate).format("yyyy-MM-dd hh:mm:ss"))+"</div>"+
             "<div class='bl_mall'>"+goodsType+"</div></div>"+

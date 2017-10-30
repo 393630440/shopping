@@ -82,6 +82,7 @@
 								<th class="table-type">商品状态</th>
 								<th class="table-type">商品类型</th>
 								<th class="table-type">商品价格</th>
+								<th class="table-type">折扣价格</th>
 								<th class="table-type">商品宏包</th>
 								<th class="table-date am-hide-sm-only">发布时间</th>
 								<th width="163px" class="table-set">操作</th>

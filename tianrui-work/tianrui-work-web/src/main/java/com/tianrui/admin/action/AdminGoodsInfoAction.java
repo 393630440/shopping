@@ -53,7 +53,7 @@ public class AdminGoodsInfoAction {
 	@ResponseBody
 	public Result queryList(GoodsInfoFindReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/querylist]");
-		PageTool<GoodsInfoFindResp> page = goodsInfoService.queryGoodsInfoByList(req);
+		PageTool<GoodsInfoFindResp> page = goodsInfoService.queryGoodsInfoByList(req, "1");
 		Result rs = Result.getSuccessful();
 		rs.setData(page);
 		return rs;
@@ -121,7 +121,7 @@ public class AdminGoodsInfoAction {
 		LoggerUtils.info(log, "---------- [/admin/shop/goods/editpage]");
 		ModelAndView view = new ModelAndView();
 
-		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId());
+		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId(), "1");
 
 		String goodsType = goodsInfo.getGoodsType();
 		GoodsClassifyReq goodsClassifyReq = new GoodsClassifyReq(goodsType);

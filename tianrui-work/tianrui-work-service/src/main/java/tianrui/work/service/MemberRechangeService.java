@@ -85,7 +85,6 @@ public class MemberRechangeService implements IMemberRechangeService {
 
 	@Override
 	public Result upt(MemberRechargeReq req) throws Exception{
-		// TODO Auto-generated method stub
 		MemberRecharge upt = new MemberRecharge();
 		
 		memberRechargeMapper.updateByPrimaryKeySelective(upt);

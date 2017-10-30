@@ -231,7 +231,7 @@ public class ShoppingCartAction {
 			shoppingCartService.editShoppingCart(shoppingCartReq);
 
 			String goodsId = shoppingCartFindResp.getGoodsId();
-			GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(goodsId);
+			GoodsInfoFindResp goodsInfoFindResp = goodsInfoService.queryGoodsInfoByOne(goodsId, member.getMemberRank());
 			Integer inventory = goodsInfoFindResp.getInventory() - newGoodsNum;// 库存
 			Integer salesvolume = goodsInfoFindResp.getSalesvolume() + newGoodsNum;// 销量
 			Integer buyNum = goodsInfoFindResp.getBuyNum() + newGoodsNum; // 购买数量

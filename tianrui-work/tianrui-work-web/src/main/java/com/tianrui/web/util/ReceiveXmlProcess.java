@@ -50,7 +50,6 @@ public class ReceiveXmlProcess {
 				method.invoke(msg, ele.getText());
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("xml 格式异常: "+ strXml);
 			e.printStackTrace();
 		}
@@ -85,7 +84,6 @@ public class ReceiveXmlProcess {
 				map.put(ele.getName(), ele.getText());
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("xml 格式异常: "+ strXml);
 			e.printStackTrace();
 		}

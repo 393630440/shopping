@@ -7,7 +7,6 @@ package tianrui.work.req.goods;
  *
  */
 public class GoodsInfoFindReq {
-
 	private String goodsId; // 商品ID
 	private String goodsName; // 商品名称
 	private String goodsImg; // 商品图片 图片地址)
@@ -26,6 +25,7 @@ public class GoodsInfoFindReq {
 	private String classifyId; // 分类ID
 	private String classifyName; // 分类名称
 	private Long pubLong;// 发布时间
+	private Double discountPrice;// 折扣价格
 
 	private Integer pageNo;
 	private Integer pageSize;
@@ -207,6 +207,14 @@ public class GoodsInfoFindReq {
 
 	public void setPubLong(Long pubLong) {
 		this.pubLong = pubLong;
+	}
+
+	public Double getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(Double discountPrice) {
+		this.discountPrice = discountPrice;
 	}
 
 }
