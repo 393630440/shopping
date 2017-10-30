@@ -6,9 +6,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>充值中心</title>
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
+<script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
 </head>
 <body>
     <div class="sjsc-title1">
@@ -17,7 +17,7 @@
     </div>
     
     <div class="qrdd-info1">
-    	<img src="/resources/shop/images/sjsc19.gif">
+    	<img src="${staticRoot}/shop/images/sjsc19.gif">
     </div>
     
     <div class="qrdd-info2">

@@ -8,11 +8,11 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>提现记录</title>
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
-<link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
 
-<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
+<script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
 <script>
 $(window).load(function() {
 	$("#status").fadeOut();
@@ -31,9 +31,9 @@ $(window).load(function() {
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>提现记录</h2>
-      <div class="header_right shaixuan"><img src="/resources/web/images/iconfont-shaixuan.png"></div>
+      <div class="header_right shaixuan"><img src="${staticRoot}/web/images/iconfont-shaixuan.png"></div>
     </div>
   </header>
   <!--header 结束-->

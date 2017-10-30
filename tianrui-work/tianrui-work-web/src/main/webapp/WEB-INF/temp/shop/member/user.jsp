@@ -7,11 +7,11 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>个人中心</title>
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
-<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
-<script src="/resources/web/layer/layer.js"></script>
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
+<script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
+<script src="${staticRoot}/web/layer/layer.js"></script>
 </head>
 <body>
 <div class="mobile">
@@ -20,7 +20,7 @@
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="#"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="#"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>个人中心</h2>
       </div>
   </header>

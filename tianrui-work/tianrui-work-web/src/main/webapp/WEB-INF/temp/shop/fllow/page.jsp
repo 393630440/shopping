@@ -6,22 +6,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>我的足迹</title>
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
 
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
-<link href="/resources/web/css/user.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
 
 
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
+<script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
 </head>
 
 <body>
 <div class="mobile">
 	<!--header 开始-->
   <header>
-	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>我的足迹</h2>
     </div>
   </header>

@@ -8,14 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
 <title>返现派送</title>
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.new.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<link rel="stylesheet" type="text/css" href="/resources/web/css/index.css" />
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
-<script type="text/javascript" src="/resources/shop/js/woxiangyao.js"></script>
-<!-- <script type="text/javascript" src="/resources/shop/js/zx/rewrite.new.js"></script> -->
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.new.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/index.css" />
+<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/public.css" />
+<script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
+<script type="text/javascript" src="${staticRoot}/shop/js/woxiangyao.js"></script>
+<!-- <script type="text/javascript" src="${staticRoot}/shop/js/zx/rewrite.new.js"></script> -->
 <script>
 	$(window).load(function() {
 		$("#status").fadeOut();
@@ -34,7 +34,7 @@
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
 					<span style="margin-left: 8px;">
-						<img src="/resources/web/images/iconfont-fanhui.png">
+						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
 				<h2>返现派送</h2>

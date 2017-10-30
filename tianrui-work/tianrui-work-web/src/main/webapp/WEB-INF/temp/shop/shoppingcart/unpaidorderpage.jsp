@@ -9,19 +9,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
 <title>确认订单</title>
-<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/owl.carousel.css" rel="stylesheet">
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/index.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/baoliao.css" rel="stylesheet" type="text/css">
-<link href="/resources/web/css/login.css" rel="stylesheet" type="text/css">
-<link href="/resources/shop/css/style.css" rel="stylesheet" type="text/css">
-<link href="/resources/shop/css/shoujisc.css" rel="stylesheet" type="text/css">
-<link href="/resources/shop/css/style.new.css" rel="stylesheet" type="text/css">
-<script src="/resources/web/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="/resources/web/js/owl.carousel.min.js" type="text/javascript"></script>
-<script src="/resources/web/layer/layer.js" type="text/javascript"></script>
-<script src="/resources/shop/js/zx/prodDetail.js" type="text/javascript"></script>
+<link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/owl.carousel.css" rel="stylesheet">
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/index.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/login.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/shop/css/style.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/shop/css/shoujisc.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/shop/css/style.new.css" rel="stylesheet" type="text/css">
+<script src="${staticRoot}/web/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="${staticRoot}/web/js/owl.carousel.min.js" type="text/javascript"></script>
+<script src="${staticRoot}/web/layer/layer.js" type="text/javascript"></script>
+<script src="${staticRoot}/shop/js/zx/prodDetail.js" type="text/javascript"></script>
 <script>
 	$(window).load(function() {
 		$("#status").fadeOut();
@@ -40,7 +40,7 @@
 			<div class="header">
 				<a class="new-a-back" href="/wechat/shop/order/index">
 					<span style="margin-left: 8px;">
-						<img src="/resources/web/images/iconfont-fanhui.png">
+						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
 				<h2>确认订单</h2>

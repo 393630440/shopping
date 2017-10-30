@@ -11,13 +11,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="/resources/admin/i/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="/resources/admin/i/app-icon72x72@2x.png">
+<link rel="icon" type="image/png" href="${staticRoot}/admin/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="${staticRoot}/admin/i/app-icon72x72@2x.png">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="/resources/admin/css/amazeui.min.css" />
-<link rel="stylesheet" href="/resources/admin/css/admin.css">
-<script src="/resources/admin/js/jquery.min.js"></script>
-<script src="/resources/admin/js/app.js"></script>
+<link rel="stylesheet" href="${staticRoot}/admin/css/amazeui.min.css" />
+<link rel="stylesheet" href="${staticRoot}/admin/css/admin.css">
+<script src="${staticRoot}/admin/js/jquery.min.js"></script>
+<script src="${staticRoot}/admin/js/app.js"></script>
 </head>
 <body>
 	<!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -141,12 +141,12 @@
 	<!--[if lt IE 9]>
 	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-	<script src="/resources/admin/js/polyfill/rem.min.js"></script>
-	<script src="/resources/admin/js/polyfill/respond.min.js"></script>
-	<script src="/resources/admin/js/amazeui.legacy.js"></script>
+	<script src="${staticRoot}/admin/js/polyfill/rem.min.js"></script>
+	<script src="${staticRoot}/admin/js/polyfill/respond.min.js"></script>
+	<script src="${staticRoot}/admin/js/amazeui.legacy.js"></script>
 	<![endif]-->
 	<!--[if (gte IE 9)|!(IE)]><!-->
-	<script src="/resources/admin/js/amazeui.min.js"></script>
+	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
 	<script src="/resources/js/admin/order/audit.js?0728"></script>
 </body>

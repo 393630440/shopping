@@ -10,8 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="/resources/admin/i/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="/resources/admin/i/app-icon72x72@2x.png">
+<link rel="icon" type="image/png" href="${staticRoot}/admin/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="${staticRoot}/admin/i/app-icon72x72@2x.png">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <link rel="stylesheet" href="${staticRoot}/admin/css/amazeui.min.css"/>
 <link rel="stylesheet" href="${staticRoot}/admin/css/admin.css">

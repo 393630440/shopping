@@ -9,15 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
 <title>大众商品</title>
-<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/owl.carousel.css" rel="stylesheet">
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/index.css" rel="stylesheet" type="text/css" />
-<link href="/resources/shop/css/shoujisc.css" rel="stylesheet" type="text/css">
-<link href="/resources/shop/css/style.new.css" rel="stylesheet" type="text/css">
-<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
-<script src="/resources/web/js/owl.carousel.min.js"></script>
-<script src="/resources/web/layer/layer.js"></script>
+<link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/owl.carousel.css" rel="stylesheet">
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/index.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/shop/css/shoujisc.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/shop/css/style.new.css" rel="stylesheet" type="text/css">
+<script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
+<script src="${staticRoot}/web/js/owl.carousel.min.js"></script>
+<script src="${staticRoot}/web/layer/layer.js"></script>
 </head>
 <body>
 	<div class="mobile">
@@ -30,7 +30,7 @@
 			<div class="header">
 				<a class="new-a-back" href="/wechat/shop/member/userPage">
 					<span style="margin-left: 8px;">
-						<img src="/resources/web/images/iconfont-fanhui.png">
+						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
 				<h2>大众商品</h2>
@@ -58,7 +58,7 @@
 		<!-- 商品列表 -->
 		<div class="m_baoliao w">
 			<div class="baoliao_title">
-				<span>大众商城</span><em><span onclick="init(0,0)"><img src="/resources/web/images/iconfont-shuaxin.png"></span></em>
+				<span>大众商城</span><em><span onclick="init(0,0)"><img src="${staticRoot}/web/images/iconfont-shuaxin.png"></span></em>
 			</div>
 			<ul class="ssjg-ul-zx" id="innerHml"></ul>
 			<div class="baoliao_content" style="margin-top: 0px; margin-bottom: 50px;"></div>
@@ -117,7 +117,7 @@
 			hml += "</dt>";
 			//hml += "<dd>";
 			//hml += "<a href=\"javascript:void(0);\" onclick=\"addGoods('" + date[a].goodsId + "');\">";
-			//hml += "<img src=\"/resources/shop/images/sjsc-09.gif\">";
+			//hml += "<img src=\"${staticRoot}/shop/images/sjsc-09.gif\">";
 			//hml += "</a>";
 			//hml += "</dd>";
 			hml += "</dl>";

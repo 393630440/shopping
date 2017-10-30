@@ -6,10 +6,10 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>提现申请</title>
-<link href="/resources/web/css/public.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
-<link href="/resources/web/css/login.css" rel="stylesheet" type="text/css">
-<script src="/resources/web/js/jquery-1.8.3.min.js"></script>
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/login.css" rel="stylesheet" type="text/css">
+<script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
 <div class="mobile">
@@ -18,7 +18,7 @@
   <!--页面加载 结束--> 
   <!--header 开始-->
   <header>
-    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="/resources/web/images/iconfont-fanhui.png"></span> </a>
+    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>提现申请</h2>
       </div>
   </header>

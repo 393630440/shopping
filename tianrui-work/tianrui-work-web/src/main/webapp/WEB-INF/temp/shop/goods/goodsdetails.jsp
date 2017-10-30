@@ -8,19 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
 <title>商品详情</title>
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/shoujisc.css">
-<link rel="stylesheet" type="text/css" href="/resources/shop/css/style.new.css">
-<script type="text/javascript" src="/resources/shop/js/jQuery.js"></script>
-<script type="text/javascript" src="/resources/shop/js/woxiangyao.js"></script>
-<script type="text/javascript" src="/resources/shop/js/TouchSlide.1.1.js"></script>
-<script type="text/javascript" src="/resources/shop/js/foot.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/web/css/public.css">
-<link rel="stylesheet" type="text/css" href="/resources/web/frozenui/css/frozen.css">
-<link rel="stylesheet" type="text/css" href="/resources/web/css/baoliao.css">
-<link rel="stylesheet" type="text/css" href="/resources/web/css/shoujisc.css">
-<script type="text/javascript" src="/resources/web/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/resources/shop/js/zx/prodDetail.js"></script>
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.new.css">
+<script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
+<script type="text/javascript" src="${staticRoot}/shop/js/woxiangyao.js"></script>
+<script type="text/javascript" src="${staticRoot}/shop/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="${staticRoot}/shop/js/foot.js"></script>
+<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/public.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/web/frozenui/css/frozen.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/baoliao.css">
+<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/shoujisc.css">
+<script type="text/javascript" src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${staticRoot}/shop/js/zx/prodDetail.js"></script>
 <script>
 	$(window).load(function() {
 		$("#status").fadeOut();
@@ -39,7 +39,7 @@
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
 					<span style="margin-left: 8px;">
-						<img src="/resources/web/images/iconfont-fanhui.png">
+						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
 				<h2>商品详情</h2>
@@ -101,7 +101,7 @@
 									<span class="bl_view_user" style="margin-left:8px;">收藏</span>
 								</a>
 								<button class="if3-btnn if3-btn2 f-l" onclick="addGoods(0);" title="加入购物车">
-									<img src="/resources/shop/images/sjsc-17-2.png" style="width: 18px;height: 15px;margin-right: 5px;">
+									<img src="${staticRoot}/shop/images/sjsc-17-2.png" style="width: 18px;height: 15px;margin-right: 5px;">
 									加入购物车
 								</button>
 								<button class="if3-btnn if3-btn1 f-l" onclick="addGoods(1);" title="立即购买">立即购买</button>

@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <header class="am-topbar admin-header">
-  <div class="am-topbar-brand"><img src="/resources/admin/i/logo.png"></div>
+  <div class="am-topbar-brand"><img src="${staticRoot}/admin/i/logo.png"></div>
 
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
