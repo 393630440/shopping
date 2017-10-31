@@ -111,7 +111,7 @@
 			hml += "</h3>";
 			hml += "<dl class=\"ssjg-dl1\" style=\"margin-top:-10px;\">";
 			hml += "<dt>";
-			hml += "<span style=\"color: #DB3751; margin-left: 0px; font-size:12px;\">" + date[a].price + "</span>";
+			hml += "<span style=\"color: #DB3751; margin-left: 0px; font-size:12px;\">" + date[a].goodsPrice + "</span>";
 			//hml += "<br />";
 			//hml += "<span style=\"color: #7F7F7F; font-size: 12px; margin-left: 0px;\">销售量：" + date[a].salesvolume + "</span>";
 			hml += "</dt>";

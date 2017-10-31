@@ -70,7 +70,7 @@
 						</div>
 						<div class="bl_view_title">${goodsInfo.goodsName}</div>
 						<div class="bl_view_tag">
-							<div class="bl_view_price">${goodsInfo.price}</div>
+							<div class="bl_view_price">${goodsInfo.goodsPrice}</div>
 						</div>
 						<div class="bl_view_tag">
 							<div class="bl_view_user">快递：${goodsInfo.expressFeeStr}</div>
