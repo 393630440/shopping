@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tpscz-zx {
+	position: absolute;;
+	left: 0px;
+	top: 0px;
+	background: url(../i/tpscz.gif);
+	width: 100%;
+	filter: alpha(opacity = 60); /*设置透明度为60%*/
+	opacity: 0.6; /*非IE浏览器下设置透明度为60%*/
+	display: none;
+	z-index: 1;
+}

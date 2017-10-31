@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.MemberGainMapper" >
+  <resultMap id="BaseResultMap" type="tianrui.work.bean.MemberGain" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="rp_type" property="rpType" jdbcType="VARCHAR" />
+    <result column="rp_num" property="rpNum" jdbcType="DOUBLE" />
+    <result column="source_id" property="sourceId" jdbcType="VARCHAR" />
+    <result column="source_describe" property="sourceDescribe" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
+     <result column="wechat_name" property="wechatName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, rp_type, rp_num, source_id, source_describe, createtime
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="tianrui.work.bean.MemberGain" >
+    select 
+    	rg.id, rg.member_id, rg.rp_type, rg.rp_num, 
+    	rg.source_id, rg.source_describe, rg.createtime,
+    	m.wechat_name
+    from member_rp_gain rg 
+    	LEFT JOIN member_info m ON m.member_id = rg.member_id
+    <where>
+    	<if test="wechatName != null and wechatName != ''">
+    		and m.wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
+    	</if>
+    	<if test="memberId != null and memberId != ''">
+    		and rg.member_id = #{memberId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="rpType != null and rpType != ''">
+    		and rg.rp_type = #{rpType,jdbcType=VARCHAR}
+    	</if>
+    </where>
+    order by rg.createtime desc
+    <if test="pageNo != null">
+   		limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+   	</if>
+  </select>
+  <select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.MemberGain" >
+    select 
+    count(0)
+    from member_rp_gain rg 
+    	LEFT JOIN member_info m ON m.member_id = rg.member_id
+    <where>
+    	<if test="wechatName != null and wechatName != ''">
+    		and m.wechat_name like "%" #{wechatName,jdbcType=VARCHAR} "%"
+    	</if>
+    	<if test="memberId != null and memberId != ''">
+    		and rg.member_id = #{memberId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="rpType != null and rpType != ''">
+    		and rg.rp_type = #{rpType,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_rp_gain
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member_rp_gain
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tianrui.work.bean.MemberGain" >
+    insert into member_rp_gain (id, member_id, rp_type, 
+      rp_num, source_id, source_describe, 
+      createtime)
+    values (#{id,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{rpType,jdbcType=VARCHAR}, 
+      #{rpNum,jdbcType=DOUBLE}, #{sourceId,jdbcType=VARCHAR}, #{sourceDescribe,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="tianrui.work.bean.MemberGain" >
+    insert into member_rp_gain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="rpType != null" >
+        rp_type,
+      </if>
+      <if test="rpNum != null" >
+        rp_num,
+      </if>
+      <if test="sourceId != null" >
+        source_id,
+      </if>
+      <if test="sourceDescribe != null" >
+        source_describe,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="rpType != null" >
+        #{rpType,jdbcType=VARCHAR},
+      </if>
+      <if test="rpNum != null" >
+        #{rpNum,jdbcType=DOUBLE},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceDescribe != null" >
+        #{sourceDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.MemberGain" >
+    update member_rp_gain
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="rpType != null" >
+        rp_type = #{rpType,jdbcType=VARCHAR},
+      </if>
+      <if test="rpNum != null" >
+        rp_num = #{rpNum,jdbcType=DOUBLE},
+      </if>
+      <if test="sourceId != null" >
+        source_id = #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceDescribe != null" >
+        source_describe = #{sourceDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.MemberGain" >
+    update member_rp_gain
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      rp_type = #{rpType,jdbcType=VARCHAR},
+      rp_num = #{rpNum,jdbcType=DOUBLE},
+      source_id = #{sourceId,jdbcType=VARCHAR},
+      source_describe = #{sourceDescribe,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tianrui.work.mapper.java.ConfigurationInfoMapper">
+	<resultMap id="BaseResultMap" type="tianrui.work.bean.ConfigurationInfo">
+		<id column="paramkey" property="paramkey" jdbcType="VARCHAR" />
+		<result column="paramvalue" property="paramvalue" jdbcType="VARCHAR" />
+		<result column="depict" property="depict" jdbcType="VARCHAR" />
+		<result column="flag" property="flag" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		paramkey, paramvalue, depict, flag
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from configuration_info
+		where paramkey = #{paramkey,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectList" resultMap="BaseResultMap" parameterType="tianrui.work.bean.ConfigurationInfo">
+		select
+		<include refid="Base_Column_List" />
+		from configuration_info
+		<where>
+			<if test="flag != null and flag != ''">and flag = #{flag,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+	<select id="selectByConfigurationInfo" resultMap="BaseResultMap" parameterType="tianrui.work.bean.ConfigurationInfo">
+		select
+		<include refid="Base_Column_List" />
+		from configuration_info
+		<where>
+			<if test="flag != null and flag != ''">and flag = #{flag,jdbcType=VARCHAR}</if>
+		</where>
+		<if test="pageNo != null">
+			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.AdInfo">
+		select count(0) from configuration_info
+		<where>
+			<if test="flag != null and flag != ''">and flag = #{flag,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from configuration_info
+		where paramkey = #{paramkey,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insert" parameterType="tianrui.work.bean.ConfigurationInfo">
+		insert into configuration_info (paramkey, paramvalue, depict, flag)
+		values (#{paramkey,jdbcType=VARCHAR},
+		#{paramvalue,jdbcType=VARCHAR},
+		#{depict,jdbcType=VARCHAR},
+		#{flag,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertSelective" parameterType="tianrui.work.bean.ConfigurationInfo">
+		insert into configuration_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="paramkey != null">paramkey,</if>
+			<if test="paramvalue != null">paramvalue,</if>
+			<if test="depict != null">depict,</if>
+			<if test="flag != null">flag,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="paramkey != null">#{paramkey,jdbcType=VARCHAR},</if>
+			<if test="paramvalue != null">#{paramvalue,jdbcType=VARCHAR},</if>
+			<if test="depict != null">#{depict,jdbcType=VARCHAR},</if>
+			<if test="flag != null">#{flag,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.ConfigurationInfo">
+		update configuration_info
+		<set>
+			<if test="paramvalue != null">paramvalue = #{paramvalue,jdbcType=VARCHAR},</if>
+			<if test="depict != null">depict = #{depict,jdbcType=VARCHAR},</if>
+			<if test="flag != null">flag = #{flag,jdbcType=VARCHAR},</if>
+		</set>
+		where paramkey = #{paramkey,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.ConfigurationInfo">
+		update configuration_info
+		set paramvalue = #{paramvalue,jdbcType=VARCHAR},
+		depict = #{depict,jdbcType=VARCHAR},
+		flag = #{flag,jdbcType=VARCHAR}
+		where paramkey = #{paramkey,jdbcType=VARCHAR}
+	</update>
+
+</mapper>
