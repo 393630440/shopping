@@ -8,7 +8,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>大众商品</title>
+<title>商品</title>
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/owl.carousel.css" rel="stylesheet">
 <link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
@@ -26,6 +26,7 @@
 		<!--页面加载 结束-->
 
 		<!--header 开始-->
+		<!-- 
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="/wechat/shop/member/userPage">
@@ -36,6 +37,7 @@
 				<h2>大众商品</h2>
 			</div>
 		</header>
+		 -->
 		<!--header 结束-->
 
 		<div class="top w">
@@ -57,9 +59,11 @@
 		</div>
 		<!-- 商品列表 -->
 		<div class="m_baoliao w">
+			<!-- 
 			<div class="baoliao_title">
 				<span>大众商城</span><em><span onclick="init(0,0)"><img src="${staticRoot}/web/images/iconfont-shuaxin.png"></span></em>
 			</div>
+			 -->
 			<ul class="ssjg-ul-zx" id="innerHml"></ul>
 			<div class="baoliao_content" style="margin-top: 0px; margin-bottom: 50px;"></div>
 		</div>

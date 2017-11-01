@@ -34,6 +34,7 @@
 		<!--页面加载 结束-->
 
 		<!--header 开始-->
+		<!-- 
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
@@ -48,6 +49,7 @@
 				</c:if>
 			</div>
 		</header>
+		 -->
 		<!--header 结束-->
 
 		<c:if test="${goodsInfoList.size()  != 0}">

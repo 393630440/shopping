@@ -26,8 +26,10 @@
 		</h3>
 		<ul>
 			<li><a href="/admin/shop/member/page">会员列表</a></li>
+			<!-- 
 			<li><a href="/admin/shop/member/saveHbaoPage">宏包派发</a></li>
 			<li><a href="/admin/shop/member/gainPage">宏包记录</a></li>
+			 -->
 			<li><a href="/admin/shop/deposit/page">提现管理</a></li>
 		</ul>
 		<h3 class="am-icon-users" id="user_class">
@@ -38,12 +40,14 @@
 			<li><a href="/admin/shop/user/saveUsre">添加管理员</a></li>
 			<li><a href="/admin/shop/user/uptPage">个人中心</a></li>
 		</ul>
+		<!-- 
 		<h3 class="am-icon-volume-up" id="creditor_class">
 			<em></em> 债权中心
 		</h3>
 		<ul>
 			<li><a href="/admin/shop/creditor/index">债权管理 </a></li>
 		</ul>
+		 -->
 		<h3 class="am-icon-volume-up" id="cash_class">
 			<em></em> 返现管理
 		</h3>

@@ -19,11 +19,13 @@
   <jsp:include page="../common/heads.jsp"></jsp:include>
   <!--页面加载 结束--> 
   <!--header 开始-->
+  <!-- 
   <header>
     <div class="header"> <a class="new-a-back" href="#"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>个人中心</h2>
       </div>
   </header>
+   -->
   <!--header 结束-->
 	<div class="user_top w">
 		<a href="/wechat/shop/member/memberInfo">
@@ -44,6 +46,7 @@
                     <div class="u_money"><i>${balance }元</i></div>
               </a>
             </li>
+            <!-- 
             <li>
             	<a href="/wechat/shop/Hbao/page">
                 	<div class="u_nav_icon huibi"></div>
@@ -52,6 +55,7 @@
                     <div class="u_money"><i>${redpack }个</i></div>
               </a>
             </li>
+             -->
             <li>
             	<a href="/wechat/shop/deposit/savePage">
                 	<div class="u_nav_icon tixian"></div>

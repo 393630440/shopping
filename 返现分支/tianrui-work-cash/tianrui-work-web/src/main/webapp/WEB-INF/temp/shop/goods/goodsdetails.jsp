@@ -35,6 +35,7 @@
 		<!--页面加载 结束-->
 
 		<!--header 开始-->
+		<!-- 
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
@@ -45,6 +46,7 @@
 				<h2>商品详情</h2>
 			</div>
 		</header>
+		 -->
 		<!--header 结束-->
 
 		<div class="spxq-info2">
@@ -85,9 +87,6 @@
 									<a href="javascript:void(0);" class="add"></a>
 								</div>
 							</div>
-						</div>
-						<div class="bl_view_tag details_con">
-						
 						</div>
 						<div class="bl_view_tag details_con">
 							<div class="spxq-info3-zx">

@@ -34,6 +34,7 @@
 		<!--页面加载 结束-->
 
 		<!--header 开始-->
+		<!-- 
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
@@ -48,12 +49,15 @@
 				</c:if>
 			</div>
 		</header>
+		 -->
 		<!--header 结束-->
 
 		<div class="w-zx">
 			<ul class="ui-tab-nav">
-				<li class="current"><a href="javascript:void(0);">大众商品</a></li>
+				<li class="current"><a href="javascript:void(0);">我的购物车</a></li>
+				<!-- 
 				<li><a href="/wechat/shop/shoppingcart/redpacketlist">宏包商品</a></li>
+				 -->
 			</ul>
 		</div>
 

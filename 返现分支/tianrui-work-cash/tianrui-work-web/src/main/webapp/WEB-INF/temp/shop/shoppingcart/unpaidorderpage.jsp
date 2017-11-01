@@ -36,6 +36,7 @@
 		<!--页面加载 结束-->
 
 		<!--header 开始-->
+		<!-- 
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="/wechat/shop/order/index">
@@ -46,6 +47,7 @@
 				<h2>确认订单</h2>
 			</div>
 		</header>
+		 -->
 		<!--header 结束-->
 
 		<c:if test="${addressInfo == null}">
@@ -118,7 +120,7 @@
 			<p>快递单号：${orderInfo.wuliuNumb}</p>
 			<div style="clear: both;"></div>
 		</div>
-		
+		<!-- 
 		<c:if test="${orderInfo.goodsType eq 1}">
 		<div class="drdd-info4">
 			<p>商品类别：大众商品</p>
@@ -129,7 +131,8 @@
 			<div style="clear: both;"></div>
 		</div>
 		</c:if>
-		
+		 -->
+		<!-- 
 		<c:if test="${orderInfo.goodsType eq 2}">
 		<div class="drdd-info4">
 			<p>商品类别：宏包商品</p>
@@ -142,6 +145,7 @@
 			<div style="clear: both;"></div>
 		</div>
 		</c:if>
+		 -->
 
 		<div class="fbsd-info4">
 			<textarea placeholder="客户留言" id="buyerWord"></textarea>
