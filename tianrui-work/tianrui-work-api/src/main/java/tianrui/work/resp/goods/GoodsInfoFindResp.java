@@ -129,7 +129,7 @@ public class GoodsInfoFindResp {
 					} else if (goodsType.equals("2")) {
 						price = "￥" + goodsPrice + " + " + redPacket + "宏包";
 					}
-				} else if (memberRank != null && memberRank.equals("") && memberRank.equals("2")) {
+				} else if (memberRank.equals("2")) {
 					if (goodsType.equals("1")) {
 						price = "￥" + discountPrice;
 					} else if (goodsType.equals("2")) {
