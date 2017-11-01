@@ -41,6 +41,7 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
+						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
@@ -48,6 +49,8 @@
 								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="2"> 宏包商品 </label>
 							</div>
 						</div>
+						 -->
+						<input type="hidden" id="adgoodsType" value="1">
 						<div class="am-form-group am-cf">
 							<div class="zuo">分类名称：</div>
 							<div class="you">
@@ -93,7 +96,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goodsclassify/add.js?0728"></script>
+	<script src="/resources/js/admin/goodsclassify/add.js?1101"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

@@ -110,7 +110,7 @@ function del(list, id) {
 
 function add(buttonType) {
 	var msg = "";
-	var goodsType = $('input:radio[name="goodsType"]:checked').val(); // 商品类型:1-大众商品;2-宏包商品
+	var goodsType = $("#adgoodsType").val(); // 商品类型:1-大众商品;2-宏包商品
 	if (goodsType == "" || goodsType == undefined)
 		msg += "商品类型不能为空\n";
 

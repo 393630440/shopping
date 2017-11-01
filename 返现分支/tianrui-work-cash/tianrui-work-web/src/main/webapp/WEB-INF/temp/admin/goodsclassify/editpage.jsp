@@ -39,6 +39,7 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
+						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
@@ -46,6 +47,7 @@
 								<c:if test="${goodsClassify.goodsType == '2'}">宏包商品</c:if>
 							</div>
 						</div>
+						 -->
 						<div class="am-form-group am-cf">
 							<div class="zuo">分类名称：</div>
 							<div class="you">

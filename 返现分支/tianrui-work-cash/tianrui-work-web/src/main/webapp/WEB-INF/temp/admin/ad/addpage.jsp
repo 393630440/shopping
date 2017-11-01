@@ -41,6 +41,7 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
+						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
@@ -48,6 +49,8 @@
 								<label class="am-checkbox-inline"> <input type="radio" name="type" value="2"> 宏包商品 </label>
 							</div>
 						</div>
+						 -->
+						 <input type="hidden" id="adType" name="type" value="1">
 						<div class="am-form-group am-cf">
 							<div class="zuo">广告图片：</div>
 							<div class="you" id="input_div_showId">
@@ -64,7 +67,7 @@
 						<div class="am-form-group am-cf">
 							<div class="zuo">广告链接：</div>
 							<div class="you">
-								<input type="text" class="am-input-sm" id="url" name="url" value="/wechat/shop/goods/goodsdetails?goodsId=" placeholder="请输入广告链接">
+								<input type="text" class="am-input-sm" id="url" name="url" value="#" placeholder="请输入广告链接">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -93,7 +96,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/ad/add.js?0728"></script>
+	<script src="/resources/js/admin/ad/add.js?1101"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

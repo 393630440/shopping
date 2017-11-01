@@ -51,6 +51,7 @@
 								</select>
 							</div>
 						</li>
+						<!-- 
 						<li>
 							<div class="am-btn-group am-btn-group-xs">
 								<select id="type" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
@@ -60,6 +61,7 @@
 								</select>
 							</div>
 						</li>
+						 -->
 						<li><input type="text" id="depict" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="广告描述" /></li>
 						<li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 					</ul>
@@ -71,7 +73,9 @@
 								<th class="table-id">序号</th>
 								<th class="table-title">广告描述</th>
 								<th class="table-type">广告状态</th>
+								<!-- 
 								<th class="table-type">商品类型</th>
+								 -->
 								<th class="table-type">广告图片</th>
 								<th class="table-date am-hide-sm-only">发布时间</th>
 								<th width="163px" class="table-set">操作</th>
@@ -101,6 +105,6 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/ad/index.js?0728"></script>
+	<script src="/resources/js/admin/ad/index.js?1101"></script>
 </body>
 </html>

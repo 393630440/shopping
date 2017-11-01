@@ -53,7 +53,7 @@ function add(buttonType) {
 	if (depict == "")
 		msg += "广告描述不能为空\n";
 
-	var type = $('input:radio[name="type"]:checked').val(); // 商品类型:1-大众商品;2-宏包商品
+	var type = $("#adType").val(); // 商品类型:1-大众商品;2-宏包商品
 	if (type == "" || type == undefined)
 		msg += "商品类型不能为空\n";
 

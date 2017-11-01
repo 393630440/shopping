@@ -49,6 +49,7 @@
 								</select>
 							</div>
 						</li>
+						<!-- 
 						<li>
 							<div class="am-btn-group am-btn-group-xs">
 								<select id="goodsType" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
@@ -58,6 +59,7 @@
 								</select>
 							</div>
 						</li>
+						 -->
 						<li>
 							<div class="am-btn-group am-btn-group-xs">
 								<select id="classifyId" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
@@ -80,10 +82,14 @@
 								<th class="table-title">分类名称</th>
 								<th class="table-title">商品名称</th>
 								<th class="table-type">商品状态</th>
+								<!-- 
 								<th class="table-type">商品类型</th>
+								 -->
 								<th class="table-type">商品价格</th>
 								<th class="table-type">折扣价格</th>
+								<!-- 
 								<th class="table-type">商品宏包</th>
+								 -->
 								<th class="table-date am-hide-sm-only">发布时间</th>
 								<th width="163px" class="table-set">操作</th>
 							</tr>
@@ -112,6 +118,6 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goods/index.js?0728"></script>
+	<script src="/resources/js/admin/goods/index.js?1101"></script>
 </body>
 </html>

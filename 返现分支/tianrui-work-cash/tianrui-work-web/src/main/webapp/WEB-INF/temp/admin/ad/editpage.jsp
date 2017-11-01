@@ -41,6 +41,7 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
+						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
@@ -48,6 +49,7 @@
 								<c:if test="${adInfo.type == '2'}">宏包商品</c:if>
 							</div>
 						</div>
+						 -->
 						<div class="am-form-group am-cf">
 							<div class="zuo">广告图片：</div>
 							<div class="you" id="input_div_showId"></div>

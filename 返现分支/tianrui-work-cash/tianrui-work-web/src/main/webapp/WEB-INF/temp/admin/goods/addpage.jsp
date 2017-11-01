@@ -43,6 +43,7 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
+						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
@@ -54,6 +55,8 @@
 								</label>
 							</div>
 						</div>
+						 -->
+						<input type="hidden" value="1" id="adgoodsType">
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品名称：</div>
 							<div class="you">
@@ -185,7 +188,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goods/add.js?0728"></script>
+	<script src="/resources/js/admin/goods/add.js?1101"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

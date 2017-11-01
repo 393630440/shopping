@@ -53,7 +53,7 @@ function add(buttonType) {
 	if (classifyName == "")
 		msg += "分类名称不能为空\n";
 
-	var goodsType = $('input:radio[name="goodsType"]:checked').val(); // 商品类型:1-大众商品;2-宏包商品
+	var goodsType = $("#adgoodsType").val(); // 商品类型:1-大众商品;2-宏包商品
 	if (goodsType == "" || goodsType == undefined)
 		msg += "商品类型不能为空\n";
 

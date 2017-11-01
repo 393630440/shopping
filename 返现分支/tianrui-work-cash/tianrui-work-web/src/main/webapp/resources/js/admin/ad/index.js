@@ -40,7 +40,7 @@ function innerHTML(data, pageNo) {
 		var html = "<tr><td>" + (a + 1) + "</td>";
 		html += "<td>" + data[a].depict + "</td>";
 		html += "<td>" + status + "</td>";
-		html += "<td>" + type + "</td>";
+//		html += "<td>" + type + "</td>";
 		html += "<td><img src=\"/resources/file/adInfo/" + data[a].img;
 		html += "\" style=\"height: 45px; width: 50px;\"/></td>";
 		html += "<td>" + pubdate + "</td>";
