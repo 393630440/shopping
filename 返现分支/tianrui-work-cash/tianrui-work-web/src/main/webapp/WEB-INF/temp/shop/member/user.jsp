@@ -57,6 +57,14 @@
             </li>
              -->
             <li>
+            	<a href="/wechat/shop/cashback/index">
+                	<div class="u_nav_icon huibi"></div>
+                    <div class="u_nav_name">账户中心</div>
+                    <div class="nt_icon"></div>
+                    <div class="u_money"><i></i></div>
+              </a>
+            </li>
+            <li>
             	<a href="/wechat/shop/deposit/savePage">
                 	<div class="u_nav_icon tixian"></div>
                     <div class="u_nav_name">金额提现</div>

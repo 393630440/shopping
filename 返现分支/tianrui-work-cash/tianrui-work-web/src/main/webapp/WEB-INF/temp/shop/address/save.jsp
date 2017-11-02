@@ -19,12 +19,14 @@
 <body>
 <div class="mobile">
 	<!--header 开始-->
+  <!-- 
   <header>
 	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>收货地址</h2>
       <div class="header_right shaixuan"></div>
     </div>
   </header>
+   -->
   <!--header 结束-->  	
     <form id="address_id">
 	    <ul class="xzdz-ul1">

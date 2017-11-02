@@ -30,12 +30,14 @@ $(window).load(function() {
   </div>
   <!--页面加载 结束--> 
   <!--header 开始-->
+  <!-- 
   <header>
     <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>提现记录</h2>
       <div class="header_right shaixuan"><img src="${staticRoot}/web/images/iconfont-shaixuan.png"></div>
     </div>
   </header>
+   -->
   <!--header 结束-->
    <ul class="ui-tab-nav">
          <li class="current"><a href="/wechat/shop/deposit/page">提现记录</a></li>

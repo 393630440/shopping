@@ -20,11 +20,13 @@
 <body>
 <div class="mobile">
 	<!--header 开始-->
+  <!-- 
   <header>
 	<div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img style="margin-left: 20px" src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>我的足迹</h2>
     </div>
   </header>
+   -->
   <!--header 结束-->  
   <ul class="ui-tab-nav">
          <li class="typeClass current"><a>我的足迹</a></li>

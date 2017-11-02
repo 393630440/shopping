@@ -17,11 +17,13 @@
   <jsp:include page="../common/heads.jsp"></jsp:include>
   <!--页面加载 结束--> 
   <!--header 开始-->
+  <!-- 
   <header>
     <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>账户充值</h2>
       </div>
   </header>
+   -->
   <!--header 结束-->
   <div class="w main">
      <div class="item item-password">

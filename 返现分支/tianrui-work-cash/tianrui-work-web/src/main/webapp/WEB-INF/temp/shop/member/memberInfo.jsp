@@ -17,11 +17,13 @@
   <jsp:include page="../common/heads.jsp"></jsp:include>
   <!--页面加载 结束--> 
   <!--header 开始-->
+  <!-- 
   <header>
     <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>账户信息</h2>
       </div>
   </header>
+   -->
   <!--header 结束-->
   <div class="w main">
      <div class="item item-password">
@@ -44,6 +46,7 @@
        <input type="text" class="txt-input txt-username uptInfo" id="city_req" value="${MemberInfo.city }" placeholder="所在城市">
      </div>
      <input type="hidden" id="memberId_req" value="${MemberInfo.memberId }">
+     <!-- 
      <div class="item item-password">
        <select id="rpExchangeRatio_req" class="txt-input txt-username uptInfo">
        	<option value="" >交易比例</option>
@@ -57,13 +60,15 @@
        	<option value="0.3" <c:if test="${MemberInfo.rpExchangeRatio eq 0.3}">selected = "selected"</c:if>>0.3</option>
        </select>
      </div>
-     
+      -->
+     <!-- 
      <div class="item item-password">
        <input type="text" id="rpTradeMark_req" class="txt-input txt-username" readonly="readonly" value="是否开启宏包交易">
        
        <b class="tp-btn_PwdTwo <c:if test="${MemberInfo.rpTradeMark eq 0}">btn-off_PwdTwo</c:if>
        <c:if test="${MemberInfo.rpTradeMark eq 1}">btn-on_PwdTwo</c:if>" typeValue=${MemberInfo.rpTradeMark }></b> 
      </div>
+      -->
      
      <div style="height: 30px">
      </div>

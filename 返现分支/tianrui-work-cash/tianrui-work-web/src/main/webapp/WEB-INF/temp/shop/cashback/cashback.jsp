@@ -9,12 +9,12 @@
 <meta name="format-detection" content="telephone=no">
 <title>返现派送</title>
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.new.css">
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
-<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/index.css" />
-<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/public.css" />
+
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
-<script type="text/javascript" src="${staticRoot}/shop/js/woxiangyao.js"></script>
 <!-- <script type="text/javascript" src="${staticRoot}/shop/js/zx/rewrite.new.js"></script> -->
 <script>
 	$(window).load(function() {
@@ -41,12 +41,53 @@
 			</div>
 		</header>
 		<!--header 结束-->
+		<div class="user_top w">
+			<a href="/wechat/shop/member/memberInfo">
+	    	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
+	        <div class="user_info">
+	        	<div class="user_name">${MemberInfo.wechatName }</div>
+	            <div class="user_dengji">会员等级：
+	            <c:if test="${MemberInfo.memberRank eq '1'}">
+	            	普通会员
+	            </c:if>
+	            <c:if test="${MemberInfo.memberRank eq '2'}">
+	            	加盟商
+	            </c:if>
+	            </div>
+	            <div class="user_dengji">账户余额：${balance}</div>
+	        </div>
+			</a>
+	    </div>
+		<ul class="ui-tab-nav">
+	         <li class="typeClass current"><a>累计收益：${totalEarnings}</a></li>
+	         <li class="typeClass"><a>消费记录</a></li>
+	         <li class="typeClass"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
+	   	</ul>
+	   	<div class="user_nav_list w">
+	   		<ul>
+	   			<a>
+               	<div class="u_nav_icon money"></div>
+                <div class="u_nav_name">当天收益</div>
+                <div class="nt_icon"></div>
+                <div class="u_money"><i>${todayEarnings}</i></div>
+                </a>
+	   		</ul>
+	   	</div>
+	   	<div class="user_nav_list w">
+	   		<ul>
+	   			<a>
+               	<div class="u_nav_icon money"></div>
+                <div class="u_nav_name">历史收益</div>
+                <div class="nt_icon"></div>
+                <div class="u_money"><i></i></div>
+                </a>
+	   		</ul>
+	   	</div>
 
 		<div class="m_baoliao w">
 			<div class="baoliao_title">
 				<span style="margin-left: 30%; color: #040504;">账户余额：${balance}</span>
 			</div>
-
 			<ul class="quanbu-title2-zx">
 				<li style="width: 40%;"><a href="JavaScript:;">累计收益：${totalEarnings}</a></li>
 				<li style="width: 40%;"><a href="JavaScript:;">当天收益：${todayEarnings}</a></li>

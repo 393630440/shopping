@@ -17,11 +17,13 @@
   <jsp:include page="../common/heads.jsp"></jsp:include>
   <!--页面加载 结束--> 
   <!--header 开始-->
+  <!-- 
   <header>
     <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
       <h2>提现申请</h2>
       </div>
   </header>
+   -->
   <!--header 结束-->
   <div class="w main">
      <div class="item item-password">
