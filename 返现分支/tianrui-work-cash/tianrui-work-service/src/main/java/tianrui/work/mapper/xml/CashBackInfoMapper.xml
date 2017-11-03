@@ -32,9 +32,18 @@
 			<if test="cashBackId != null and cashBackId != ''">and cash_back_id = #{cashBackId,jdbcType=VARCHAR}</if>
 			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
 			<if test="memberName != null and memberName != ''">and member_name like "%" #{memberName,jdbcType=VARCHAR} "%"</if>
+			<if test="createTimeBegin != null and createTimeBegin != ''">
+				and create_time &gt; #{createTimeBegin,jdbcType=BIGINT}
+			</if>
+			<if test="createTimeEnd != null and createTimeEnd != ''">
+				and create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+			</if>
 		</where>
 		<if test="pageSort != null and pageSort != ''">
 			order by ${pageSort}
+		</if>
+		<if test="pageSort == null">
+			order by create_time desc
 		</if>
 		<if test="pageNo != null">
 			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
@@ -47,6 +56,12 @@
 			<if test="cashBackId != null and cashBackId != ''">and cash_back_id = #{cashBackId,jdbcType=VARCHAR}</if>
 			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
 			<if test="memberName != null and memberName != ''">and member_name like "%" #{memberName,jdbcType=VARCHAR} "%"</if>
+			<if test="createTimeBegin != null and createTimeBegin != ''">
+				and create_time &gt; #{createTimeBegin,jdbcType=BIGINT}
+			</if>
+			<if test="createTimeEnd != null and createTimeEnd != ''">
+				and create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+			</if>
 		</where>
 	</select>
 

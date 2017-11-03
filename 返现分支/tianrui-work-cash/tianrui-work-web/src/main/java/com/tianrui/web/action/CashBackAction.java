@@ -1,5 +1,7 @@
 package com.tianrui.web.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
 import tianrui.work.resp.cash.CashBackResp;
+import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 
 @Controller
@@ -96,6 +99,27 @@ public class CashBackAction {
 		return view;
 	}
 
+	@RequestMapping("findList")
+	@ResponseBody
+	public Result findList(HttpServletRequest request,CashBackInfoReq req) throws Exception{
+		Result rs = Result.getSuccessful();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		req.setMemberId(info.getMemberId());
+		SimpleDateFormat smp = new SimpleDateFormat("yyyy-MM-dd");
+		String time = smp.format(new Date());
+		if(req.getType().equals("1")){
+			//当天
+			req.setTimeBegin(smp.parse(time).getTime());
+		}
+		if(req.getType().equals("2")){
+			//历史
+			req.setTimeEnd(smp.parse(time).getTime());
+		}
+		PageTool<CashBackInfoResp> page = cashBackService.queryCashBackInfo(req);
+		rs.setData(page);
+		return rs;
+	}
+	
 	/** 查询列表数据 */
 	@RequestMapping("querylist")
 	@ResponseBody

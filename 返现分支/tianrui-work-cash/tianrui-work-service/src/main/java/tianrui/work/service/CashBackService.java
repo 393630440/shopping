@@ -94,6 +94,8 @@ public class CashBackService implements ICashBackService {
 		query.setCashBackId(req.getCashBackId());
 		query.setMemberId(req.getMemberId());
 		query.setMemberName(req.getMemberName());
+		query.setCreateTimeBegin(req.getTimeBegin());
+		query.setCreateTimeEnd(req.getTimeEnd());
 		List<CashBackInfo> list = cashBackInfoMapper.selectByCondition(query);
 		long a = cashBackInfoMapper.selectByCount(query);
 		page.setList(copyPropertieInfo(list));

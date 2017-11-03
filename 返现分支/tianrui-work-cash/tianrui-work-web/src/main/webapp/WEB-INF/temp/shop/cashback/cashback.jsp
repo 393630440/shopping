@@ -72,6 +72,10 @@
                 <div class="u_money"><i>${todayEarnings}</i></div>
                 </a>
 	   		</ul>
+	   		<ul class="gwc-ul1" id="nowHtml">
+    		
+    		</ul>
+	   		
 	   	</div>
 	   	<div class="user_nav_list w">
 	   		<ul>
@@ -82,79 +86,56 @@
                 <div class="u_money"><i></i></div>
                 </a>
 	   		</ul>
+	   		<ul class="gwc-ul1" id="innerHml">
+
+    		</ul>
 	   	</div>
-
-		<div class="m_baoliao w">
-			<div class="baoliao_title">
-				<span style="margin-left: 30%; color: #040504;">账户余额：${balance}</span>
-			</div>
-			<ul class="quanbu-title2-zx">
-				<li style="width: 40%;"><a href="JavaScript:;">累计收益：${totalEarnings}</a></li>
-				<li style="width: 40%;"><a href="JavaScript:;">当天收益：${todayEarnings}</a></li>
-				<li style="width: 20%;"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
-				<div style="clear: both;"></div>
-			</ul>
-
-			<div class="my-dd">
-				<div class="my-info">
-					<div class="my-k1" id="dataList_showId">
-						<c:forEach var="data" items="${dataList}">
-							<div class="my-p2-zx">
-								<span class="my-sp3 f-l">${data.backRemark}</span>
-								<span class="my-sp3-zx f-l">${data.backAmount}</span>
-								<span class="my-sp3 f-r">${data.backMoney}</span>
-								<div style="clear: both;"></div>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-			</div>
-
-			<div class="w-zx-1">
-				<div class="bl_more">
-					<a href="javascript:void(0);" onclick="toLoad();">加载更多</a>
-				</div>
-			</div>
-		</div>
 
 		<!-- foods -->
 		<jsp:include page="../common/foods.jsp"></jsp:include>
 		<!-- foods -->
 	</div>
 </body>
+<script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
 	var pageNo = 0;
 	var pageSize = 10;
-
-	function toLoad() {
+	$(function(){
+		toLoad(1);
+		toLoad(2);
+	});
+	function toLoad(type) {
 		pageNo++;
 		$.ajax({
-			url : "/wechat/shop/cashback/querylist",
+			url : "/wechat/shop/cashback/findList",
 			type : "POST",
 			data : {
-				"type" : "1",
+				"type":type,
 				"pageNo" : pageNo,
 				"pageSize" : pageSize
 			},
 			success : function(ret) {
 				if (ret.code == "000000") {
-					innerHTML(ret.data);
+					innerHTML(ret.data.list,type);
 				}
 			}
 		});
 	}
-
-	function innerHTML(data) {
+	
+	function innerHTML(data,type){
 		if (data != null) {
 			for (var a = 0; a < data.length; a++) {
-				var html = "";
-				html += "<div class=\"my-p2-zx\">";
-				html += "<span class=\"my-sp3 f-l\">" + data[a].backRemark + "</span>";
-				html += "<span class=\"my-sp3-zx f-l\">" + data[a].backAmount + "</span>";
-				html += "<span class=\"my-sp3 f-r\">" + data[a].backMoney + "</span>";
-				html += "<div style=\"clear: both;\"></div>";
-				html += "</div>";
-				$("#dataList_showId").append(html);
+				var hml = "<a href='#'><div class='msg w'>"+
+							"<div class='msg_title'>"+
+							"<h1>"+data[a].backRemark+"</h1>"+
+							"<span>"+(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
+							"</div>"+
+							"<div class='msg_content'>总额："+data[a].backAmount+"<span>返现金额："+data[a].backMoney+"</span></div></div></a>";
+				if(type == 1){
+					$("#nowHtml").append(hml);
+				}else if(type == 2){
+					$("#innerHml").append(hml);
+				}
 			}
 		}
 	}

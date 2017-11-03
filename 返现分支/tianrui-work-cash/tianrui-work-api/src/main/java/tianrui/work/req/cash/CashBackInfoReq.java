@@ -2,6 +2,7 @@ package tianrui.work.req.cash;
 
 public class CashBackInfoReq {
 	private String id;
+	private String type; //1-当天  2-历史
 	private String cashBackId;
 	private String memberId;
 	private String memberName;
@@ -11,6 +12,10 @@ public class CashBackInfoReq {
 	private String backRemark;
 	private String creater;
 	private Long createTime;
+	
+	private Long timeBegin;
+	
+	private Long timeEnd;
 	private String modify;
 	private Long modifyTime;
 	private String desc1;
@@ -67,6 +72,22 @@ public class CashBackInfoReq {
 		this.id = id == null ? null : id.trim();
 	}
 
+	public Long getTimeBegin() {
+		return timeBegin;
+	}
+
+	public void setTimeBegin(Long timeBegin) {
+		this.timeBegin = timeBegin;
+	}
+
+	public Long getTimeEnd() {
+		return timeEnd;
+	}
+
+	public void setTimeEnd(Long timeEnd) {
+		this.timeEnd = timeEnd;
+	}
+
 	public String getCashBackId() {
 		return cashBackId;
 	}
@@ -109,6 +130,14 @@ public class CashBackInfoReq {
 
 	public Double getBackRatio() {
 		return backRatio;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setBackRatio(Double backRatio) {
