@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,12 +10,11 @@
 <meta name="format-detection" content="telephone=no">
 <title>我的返现</title>
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
-<link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.new.css">
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
-<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/index.css" />
-<link rel="stylesheet" type="text/css" href="${staticRoot}/web/css/public.css" />
+<link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${staticRoot}/web/css/baoliao.css" rel="stylesheet" type="text/css">
+<link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
-<script type="text/javascript" src="${staticRoot}/shop/js/woxiangyao.js"></script>
 <!-- <script type="text/javascript" src="${staticRoot}/shop/js/zx/rewrite.new.js"></script> -->
 <script>
 	$(window).load(function() {
@@ -46,69 +46,54 @@
 			<div class="my-dd">
 				<div class="my-info">
 					<div class="my-k1" id="dataList_showId">
-						<c:forEach var="data" items="${dataList}">
-							<div class="my-p2-zx">
-								<span class="my-sp3 f-l" onclick="toListPage('${data.id}');">${data.cashRemark}</span>
-								<span class="my-sp3-zx f-l">${data.cashAmount}</span>
-								<span class="my-sp3 f-r">${data.cashAlre}</span>
-								<div style="clear: both;"></div>
-							</div>
-						</c:forEach>
+						
 					</div>
 				</div>
 			</div>
-	
-			<div class="w-zx-1">
-				<div class="bl_more">
-					<a href="javascript:void(0);" onclick="toLoad();">加载更多</a>
-				</div>
-			</div>
 		</div>
-
 		<!-- foods -->
 		<jsp:include page="../common/foods.jsp"></jsp:include>
 		<!-- foods -->
 	</div>
 </body>
+<input type="hidden" id="scrollPage">
+<input type="hidden" id="scrollTotal">
+<script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
-	var pageNo = 0;
-	var pageSize = 10;
-
-	function toLoad() {
-		pageNo++;
+	init(0,0);
+	function init(pageNo,type) {
+		$("#scrollPage").val(pageNo);
 		$.ajax({
-			url : "/wechat/shop/cashback/querylist",
+			url : "/wechat/shop/cashback/queryBackList",
 			type : "POST",
 			data : {
-				"type" : "0",
 				"pageNo" : pageNo,
-				"pageSize" : pageSize
+				"pageSize" : 10
 			},
 			success : function(ret) {
 				if (ret.code == "000000") {
-					innerHTML(ret.data);
+					$("#scrollTotal").val(ret.data.total);
+					innerHTML(ret.data.list,type);
 				}
 			}
 		});
 	}
-
-	function innerHTML(data) {
+	
+	function innerHTML(data,type){
+		if (type == 0) {
+			$("#dataList_showId").empty();
+		}
 		if (data != null) {
 			for (var a = 0; a < data.length; a++) {
-				var html = "";
-				html += "<div class=\"my-p2-zx\">";
-				html += "<span class=\"my-sp3 f-l\"  onclick=\"toListPage('"+data[a].id+"');\">" + data[a].cashRemark + "</span>";
-				html += "<span class=\"my-sp3-zx f-l\">" + data[a].cashAmount + "</span>";
-				html += "<span class=\"my-sp3 f-r\">" + data[a].cashAlre + "</span>";
-				html += "<div style=\"clear: both;\"></div>";
-				html += "</div>";
-				$("#dataList_showId").append(html);
+				var hml = "<a href='/wechat/shop/cashback/cashbacklist?cashBackId="+data[a].id+"'><div class='msg w'>"+
+					"<div class='msg_title'>"+
+					"<h1>"+data[a].cashRemark+"</h1>"+
+					"<span>"+(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
+					"</div>"+
+					"<div class='msg_content'>总额："+data[a].cashAmount+"<span>返现金额："+data[a].cashAlre+"</span></div></div></a>";
+					$("#dataList_showId").append(hml);
 			}
 		}
-	}
-
-	function toListPage(id) {
-		window.location.href = "/wechat/shop/cashback/cashbacklist?cashBackId="+id;
 	}
 </script>
 </html>

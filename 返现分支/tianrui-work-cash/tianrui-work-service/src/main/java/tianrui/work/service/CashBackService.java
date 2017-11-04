@@ -174,7 +174,7 @@ public class CashBackService implements ICashBackService {
 	public static long getMillisecond(int mark) {
 		Calendar calendar = Calendar.getInstance();
 		int y = calendar.get(Calendar.YEAR);
-		int m = calendar.get(Calendar.MONTH) + 1;
+		int m = calendar.get(Calendar.MONTH);
 		int d = calendar.get(Calendar.DAY_OF_MONTH);
 
 		if (mark == 1)

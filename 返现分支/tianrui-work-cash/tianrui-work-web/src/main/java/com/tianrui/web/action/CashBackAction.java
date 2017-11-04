@@ -39,22 +39,12 @@ public class CashBackAction {
 		LoggerUtils.info(log, "---------- [/wechat/shop/cashback/index]");
 		MemberInfo info = SessionManage.getSessionManage(request);
 		String memberId = info.getMemberId();
-
-		CashBackInfoReq cashBackInfo = new CashBackInfoReq();
-		cashBackInfo.setMemberId(memberId);
-		cashBackInfo.setPageNo(0);
-		cashBackInfo.setPageSize(10);
-		cashBackInfo.setPageSort("create_time desc");
-		List<CashBackInfoResp> dataList = cashBackService.queryCashBackInfoList(cashBackInfo);
-
-		String totalEarnings = cashBackService.getTotalEarnings(memberId);
+//		String totalEarnings = cashBackService.getTotalEarnings(memberId);
 		String todayEarnings = cashBackService.getTodayEarnings(memberId);
-
 		ModelAndView view = new ModelAndView();
 		view.addObject("balance", info.getBalance());// 账户余额
-		view.addObject("totalEarnings", totalEarnings);// 累计收益
+		view.addObject("totalEarnings", info.getCashMoney());// 累计收益
 		view.addObject("todayEarnings", todayEarnings);// 今日收益
-		view.addObject("dataList", dataList);// 列表信息
 		view.setViewName("shop/cashback/cashback");
 		return view;
 	}
@@ -63,17 +53,7 @@ public class CashBackAction {
 	@RequestMapping("mycashback")
 	public ModelAndView myCashBack(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/cashback/mycashback]");
-		MemberInfo info = SessionManage.getSessionManage(request);
-
-		CashBackReq cashBack = new CashBackReq();
-		cashBack.setCashMember(info.getMemberId());
-		cashBack.setPageNo(0);
-		cashBack.setPageSize(10);
-		cashBack.setPageSort("create_time desc");
-		List<CashBackResp> dataList = cashBackService.queryCashBackList(cashBack);
-
 		ModelAndView view = new ModelAndView();
-		view.addObject("dataList", dataList);
 		view.setViewName("shop/cashback/mycashback");
 		return view;
 	}
@@ -82,19 +62,8 @@ public class CashBackAction {
 	@RequestMapping("cashbacklist")
 	public ModelAndView cashBackList(HttpServletRequest request, String cashBackId) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/cashback/cashbacklist]");
-		MemberInfo info = SessionManage.getSessionManage(request);
-
-		CashBackInfoReq cashBackInfo = new CashBackInfoReq();
-		cashBackInfo.setMemberId(info.getMemberId());
-		cashBackInfo.setCashBackId(cashBackId);
-		cashBackInfo.setPageNo(0);
-		cashBackInfo.setPageSize(10);
-		cashBackInfo.setPageSort("create_time desc");
-		List<CashBackInfoResp> dataList = cashBackService.queryCashBackInfoList(cashBackInfo);
-
 		ModelAndView view = new ModelAndView();
 		view.addObject("cashBackId", cashBackId);
-		view.addObject("dataList", dataList);
 		view.setViewName("shop/cashback/cashbacklist");
 		return view;
 	}
@@ -107,15 +76,25 @@ public class CashBackAction {
 		req.setMemberId(info.getMemberId());
 		SimpleDateFormat smp = new SimpleDateFormat("yyyy-MM-dd");
 		String time = smp.format(new Date());
-		if(req.getType().equals("1")){
+		if("0".equals(req.getType())){
 			//当天
 			req.setTimeBegin(smp.parse(time).getTime());
 		}
-		if(req.getType().equals("2")){
+		if("1".equals(req.getType())){
 			//历史
 			req.setTimeEnd(smp.parse(time).getTime());
 		}
 		PageTool<CashBackInfoResp> page = cashBackService.queryCashBackInfo(req);
+		rs.setData(page);
+		return rs;
+	}
+	@RequestMapping("queryBackList")
+	@ResponseBody
+	public Result queryBackList(HttpServletRequest request,CashBackReq req) throws Exception{
+		Result rs = Result.getSuccessful();
+		MemberInfo info = SessionManage.getSessionManage(request);
+		req.setCashMember(info.getMemberId());
+		PageTool<CashBackResp> page = cashBackService.queryCashBack(req);
 		rs.setData(page);
 		return rs;
 	}

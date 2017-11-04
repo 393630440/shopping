@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -60,7 +61,7 @@
 	    </div>
 		<ul class="ui-tab-nav">
 	         <li class="typeClass current"><a>累计收益：${totalEarnings}</a></li>
-	         <li class="typeClass"><a>消费记录</a></li>
+	         <li class="typeClass"><a href="/wechat/shop/deposit/page">消费记录</a></li>
 	         <li class="typeClass"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
 	   	</ul>
 	   	<div class="user_nav_list w">
@@ -75,7 +76,6 @@
 	   		<ul class="gwc-ul1" id="nowHtml">
     		
     		</ul>
-	   		
 	   	</div>
 	   	<div class="user_nav_list w">
 	   		<ul>
@@ -96,26 +96,27 @@
 		<!-- foods -->
 	</div>
 </body>
+<input type="hidden" id="scrollPage">
+<input type="hidden" id="scrollTotal">
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
-	var pageNo = 0;
-	var pageSize = 10;
 	$(function(){
-		toLoad(1);
-		toLoad(2);
+		init(0,1);
+		init(0,0);
 	});
-	function toLoad(type) {
-		pageNo++;
+	function init(pageNo,type) {
+		$("#scrollPage").val(pageNo);
 		$.ajax({
 			url : "/wechat/shop/cashback/findList",
 			type : "POST",
 			data : {
-				"type":type,
+				"type": type,
 				"pageNo" : pageNo,
-				"pageSize" : pageSize
+				"pageSize" : 10
 			},
 			success : function(ret) {
 				if (ret.code == "000000") {
+					$("#scrollTotal").val(ret.data.total);
 					innerHTML(ret.data.list,type);
 				}
 			}
@@ -125,15 +126,15 @@
 	function innerHTML(data,type){
 		if (data != null) {
 			for (var a = 0; a < data.length; a++) {
-				var hml = "<a href='#'><div class='msg w'>"+
+				var hml = "<a href='/wechat/shop/cashback/cashbacklist?cashBackId="+data[a].cashBackId+"'><div class='msg w'>"+
 							"<div class='msg_title'>"+
 							"<h1>"+data[a].backRemark+"</h1>"+
 							"<span>"+(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 							"</div>"+
 							"<div class='msg_content'>总额："+data[a].backAmount+"<span>返现金额："+data[a].backMoney+"</span></div></div></a>";
-				if(type == 1){
+				if(type == 0){
 					$("#nowHtml").append(hml);
-				}else if(type == 2){
+				}else if(type == 1){
 					$("#innerHml").append(hml);
 				}
 			}
