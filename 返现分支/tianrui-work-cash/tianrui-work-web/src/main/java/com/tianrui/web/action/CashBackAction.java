@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,9 @@ public class CashBackAction {
 		String memberId = info.getMemberId();
 //		String totalEarnings = cashBackService.getTotalEarnings(memberId);
 		String todayEarnings = cashBackService.getTodayEarnings(memberId);
+		if(StringUtils.isBlank(todayEarnings)){
+			todayEarnings = "0.00";
+		}
 		ModelAndView view = new ModelAndView();
 		view.addObject("balance", info.getBalance());// 账户余额
 		view.addObject("totalEarnings", info.getCashMoney());// 累计收益

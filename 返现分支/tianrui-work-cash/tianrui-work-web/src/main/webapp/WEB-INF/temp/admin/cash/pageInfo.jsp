@@ -77,6 +77,6 @@
 		</div>
 </div>
 <script src="${staticRoot}/admin/js/amazeui.min.js"></script>
-<script src="/resources/js/admin/cash/pageInfo.js?01026"></script>
+<script src="/resources/js/admin/cash/pageInfo.js?01114"></script>
 </body>
 </html>

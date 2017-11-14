@@ -13,10 +13,12 @@ public class SystemQuart {
 	@Autowired
 	ICashBackService cashBackService;
 
-//	@Scheduled(cron = "0/5 * * * * ? ") // 没隔5秒执行
+	/** 每天0点01执行定时*/
+	@Scheduled(cron = "0 1 0 * * ?") 
 	public void quartTest() throws Exception {
-		System.out.println("定时任务开始啦啦啦");
+		System.out.println("---------定时任务开始啦啦啦-------");
 		cashBackService.cashQuart();
+		System.out.println("---------定时任务执行完毕---------");
 	}
 
 }

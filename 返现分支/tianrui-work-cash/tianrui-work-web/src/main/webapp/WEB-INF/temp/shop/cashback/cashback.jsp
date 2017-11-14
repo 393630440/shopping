@@ -46,7 +46,6 @@
 			<a href="/wechat/shop/member/memberInfo">
 	    	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
 	        <div class="user_info">
-	        	<div class="user_name">${MemberInfo.wechatName }</div>
 	            <div class="user_dengji">会员等级：
 	            <c:if test="${MemberInfo.memberRank eq '1'}">
 	            	普通会员
@@ -60,9 +59,11 @@
 			</a>
 	    </div>
 		<ul class="ui-tab-nav">
-	         <li class="typeClass current"><a>累计收益：${totalEarnings}</a></li>
+	         <li class="typeClass current" style="width: 50%"><a>累计收益：${totalEarnings}</a></li>
+	         <!-- 
 	         <li class="typeClass"><a href="/wechat/shop/deposit/page">消费记录</a></li>
-	         <li class="typeClass"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
+	          -->
+	         <li class="typeClass" style="width: 50%"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
 	   	</ul>
 	   	<div class="user_nav_list w">
 	   		<ul>
