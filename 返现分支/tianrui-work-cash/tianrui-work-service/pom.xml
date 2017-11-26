@@ -33,6 +33,33 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.24</version>
 		</dependency>
+		<!-- mongo -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${ver.mongo}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${ver.mongodb-spring}</version>
+		</dependency>
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.8</version>
+		</dependency>	
+		<dependency>
+		    <groupId>com.github.davidcarboni</groupId>
+		    <artifactId>encrypted-file-upload</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${ver.spring}</version>
+		</dependency>
+		<!-- mongo end -->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>

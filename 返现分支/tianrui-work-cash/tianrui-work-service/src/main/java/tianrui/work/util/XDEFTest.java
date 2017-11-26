@@ -13,8 +13,8 @@ public class XDEFTest {
 
 	public static void main(String[] args) {
 		try {
-			FileInputStream in=new FileInputStream(new File("F:/c14d1691fa60477fe921f6c577ce0a43.jpg"));
-			boolean flag = uploadFile("47.91.240.215", 21, "uftp", "123456", "/home/uftp", "ce0a43.jpg", in);
+			FileInputStream in=new FileInputStream(new File("F:/ddd.txt"));
+			boolean flag = uploadFile("47.91.240.215", 21, "uftp", "123456", "/home/uftp", "ddd.txt", in);
 			System.out.println(flag);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

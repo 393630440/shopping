@@ -90,6 +90,12 @@ public class FtpUtil {
 
     }
 
+    public static void main(String[] args) throws FileNotFoundException {
+//    	uploadFile("47.91.240.215", 21, "uftp", "123456", "/home/uftp", "ddd.txt", in);
+    	FileInputStream in=new FileInputStream(new File("F:/ddd.txt"));
+    	uploadFile("47.91.240.215","uftp","123456",21,"/home/uftp","ddd.txt",in);
+	}
+    
     /**
      * Description: 向FTP服务器上传文件
      * @param ftpHost FTP服务器hostname
