@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("web/show/qr")
-public class ShowQRAction {
+public class SSSSSQRAction {
 
 	@RequestMapping("index")
 	public ModelAndView index(){
