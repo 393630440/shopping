@@ -29,10 +29,10 @@ public class Oauth2Action {
 	@Autowired
 	IMemberInfoService memberInfoService;
 	
-	@RequestMapping("/MP_verify_T6OvneLFANuYNbvr.txt")
+	@RequestMapping("/MP_verify_xNE20nqeZABSEqki.txt")
 	@ResponseBody
 	public String conf(){
-		return "T6OvneLFANuYNbvr";
+		return "xNE20nqeZABSEqki";
 	}
 	
 	@RequestMapping("weChat")
