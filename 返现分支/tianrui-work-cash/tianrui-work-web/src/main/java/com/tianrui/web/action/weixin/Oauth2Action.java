@@ -2,6 +2,7 @@ package com.tianrui.web.action.weixin;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.CommonUtil;
 
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.api.IMemberReleteService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.vo.Result;
@@ -28,6 +30,8 @@ public class Oauth2Action {
 
 	@Autowired
 	IMemberInfoService memberInfoService;
+	@Autowired
+	IMemberReleteService memberReleteService;
 	
 	@RequestMapping("/MP_verify_xNE20nqeZABSEqki.txt")
 	@ResponseBody
@@ -36,11 +40,12 @@ public class Oauth2Action {
 	}
 	
 	@RequestMapping("weChat")
-	public ModelAndView weChat(String code,String state,HttpServletRequest request) throws Exception{
+	public ModelAndView weChat(String code,String state,String fatherId,HttpServletRequest request) throws Exception{
 		Result rs = Result.getSuccessful();
 		ModelAndView view = new ModelAndView();
 		JSONObject obj = CommonUtil.getOpenid(code);
 		String openid= obj.getString("openid");
+		
 		String access_token = obj.getString("access_token");
 		rs = memberInfoService.selectByOpenid(openid);
 		if(!rs.getCode().equals("000000")){
@@ -53,6 +58,9 @@ public class Oauth2Action {
 			req.setWechat(openid);
 			req.setCity(objInfo.getString("city"));
 			rs = memberInfoService.saveMember(req);
+		}
+		if(StringUtils.isNotBlank(fatherId)){
+			memberReleteService.saveMemberRelete(fatherId,openid);
 		}
 		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
 		switch (state) {
@@ -68,7 +76,6 @@ public class Oauth2Action {
 		case "goodsB":
 			view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=2");
 			break;
-
 		default:
 			view.setViewName("redirect:/wechat/shop/member/memberInfo");
 			break;
