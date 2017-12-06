@@ -45,7 +45,7 @@ function innerHTML(data,pageNo){
 //				"<td>"+data[a].wechat+"</td>" +
 				"<td>"+rank+"</td>" +
 //				"<td class='am-hide-sm-only'>"+ststus+"</td>" +
-				"<td>"+data[a].wechatName+"</td>" +
+				"<td><a href='/admin/shop/member/memberInfo?id="+data[a].memberId+"'>"+data[a].wechatName+"</a></td>" +
 				"<td>"+data[a].memberName+"</td>" +
 				"<td>"+data[a].cellphone+"</td>" +
 				"<td>"+data[a].birthTime+"</td>" +

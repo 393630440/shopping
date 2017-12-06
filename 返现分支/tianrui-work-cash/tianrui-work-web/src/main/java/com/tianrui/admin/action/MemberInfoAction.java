@@ -29,6 +29,15 @@ public class MemberInfoAction {
 	@Autowired
 	IMemberGainService memberGainService;
 	
+	@RequestMapping("memberInfo")
+	@AutherWeb(typeString = "admin")
+	public ModelAndView memberInfo(String id) throws Exception{
+		ModelAndView view = new ModelAndView();
+		view.addObject("member", memberInfoService.selectByOpenid(id).getData());
+		view.setViewName("/admin/member/member_info");
+		return view;
+	}
+	
 	@RequestMapping("page")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView page(){

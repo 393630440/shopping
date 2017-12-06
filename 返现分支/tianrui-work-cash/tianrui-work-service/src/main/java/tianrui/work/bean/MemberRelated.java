@@ -2,6 +2,10 @@ package tianrui.work.bean;
 
 public class MemberRelated {
     private String id;
+    
+    private Integer pageNo;
+    
+    private Integer pageSize;
 
     private String member;
 
@@ -90,4 +94,20 @@ public class MemberRelated {
     public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
+
+	public Integer getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(Integer pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 }

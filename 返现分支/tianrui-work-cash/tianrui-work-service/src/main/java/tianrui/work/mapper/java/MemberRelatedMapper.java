@@ -1,5 +1,7 @@
 package tianrui.work.mapper.java;
 
+import java.util.List;
+
 import tianrui.work.bean.MemberRelated;
 
 public interface MemberRelatedMapper {
@@ -14,4 +16,8 @@ public interface MemberRelatedMapper {
     int updateByPrimaryKeySelective(MemberRelated record);
 
     int updateByPrimaryKey(MemberRelated record);
+    
+    List<MemberRelated> selectByCoudition(MemberRelated record);
+    
+    long selectByCount(MemberRelated record);
 }
