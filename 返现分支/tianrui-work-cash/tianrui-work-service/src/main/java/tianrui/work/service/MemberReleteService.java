@@ -8,6 +8,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.druid.util.StringUtils;
+
 import tianrui.work.api.IMemberReleteService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.MemberRelated;
@@ -37,6 +39,8 @@ public class MemberReleteService implements IMemberReleteService {
 			page.setPageNo(req.getPageNo());
 			page.setPageSize(req.getPageSize());
 		}
+		query.setMember(req.getMember());
+		query.setMemberFather(req.getMemberFather());
 		long a = memberRelatedMapper.selectByCount(query);
 		page.setTotal(a);
 		List<MemberRelated> list = memberRelatedMapper.selectByCoudition(query);
@@ -56,22 +60,24 @@ public class MemberReleteService implements IMemberReleteService {
 	@Override
 	public Result saveMemberRelete(String fatherId, String memberId) {
 		Result rs = Result.getSuccessful();
-		//删除用户原有关系
-		deleteMemberRelete(memberId);
-		MemberInfo m = memberInfoMapper.selectByPrimaryKey(memberId);
-		MemberInfo f = memberInfoMapper.selectByPrimaryKey(fatherId);
-		MemberRelated save = new MemberRelated();
-		save.setId(UUIDUtil.getUUID());
-		save.setCreatetime(System.currentTimeMillis());
-		//子类
-		save.setMember(memberId);
-		save.setMemberImg(m.getWechatImg());
-		save.setMemberName(m.getWechatName());
-		//父类
-		save.setMemberFather(fatherId);
-		save.setFatherImg(f.getWechatImg());
-		save.setFatherName(f.getWechatName());
-		memberRelatedMapper.insertSelective(save);
+		if(!StringUtils.equals(memberId, fatherId)){
+			//删除用户原有关系
+			deleteMemberRelete(memberId);
+			MemberInfo m = memberInfoMapper.selectByPrimaryKey(memberId);
+			MemberInfo f = memberInfoMapper.selectByPrimaryKey(fatherId);
+			MemberRelated save = new MemberRelated();
+			save.setId(UUIDUtil.getUUID());
+			save.setCreatetime(System.currentTimeMillis());
+			//子类
+			save.setMember(memberId);
+			save.setMemberImg(m.getWechatImg());
+			save.setMemberName(m.getWechatName());
+			//父类
+			save.setMemberFather(fatherId);
+			save.setFatherImg(f.getWechatImg());
+			save.setFatherName(f.getWechatName());
+			memberRelatedMapper.insertSelective(save);
+		}
 		return rs;
 	}
 	private void deleteMemberRelete(String memberId) {

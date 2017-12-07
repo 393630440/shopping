@@ -34,12 +34,10 @@ function innerHTML(data,pageNo){
 //			upt = "<span class='am-icon-copy'>开启</span>";
 //		}
 		var rank = "";
-		if(data[a].memberRank == "1"){
-			rank = "普通会员";
-			ststus = "<i class='am-icon-close am-text-primary'></i>";
-			upt = "<span class='am-icon-copy'>会员升级</span>";
-		}else if(data[a].memberRank == "2"){
+		if(data[a].memberRank == "S"){
 			rank = "加盟商";
+		}else{
+			rank = data[a].memberRank+"级会员";
 		}
 		var hml = "<tr><td>"+(a+1)+"</td>" +
 //				"<td>"+data[a].wechat+"</td>" +
@@ -56,9 +54,6 @@ function innerHTML(data,pageNo){
 				"<td>"+(data[a].createtime==undefined?"":(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss")))+"</td>" +
 				"<td><div class='am-btn-toolbar'>" +
 					"<div class='am-btn-group am-btn-group-xs'>" +
-						"<button onclick=\"uptUser('"+data[a].memberId+"','"+pageNo+"')\" class='am-btn am-btn-default am-btn-xs am-text-danger am-round'>"+
-						upt+
-						"</button>" +
 					"</div>" +
 				"</div></td>" +
 				"</tr>";

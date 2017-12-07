@@ -53,17 +53,7 @@
 		          <div class="zuo">会员头像：</div>
 		          <div class="you">
 		            <img style="width: 60px" src="${member.wechatImg }">
-		         	<img style="width: 60px" src="${member.wechatImg }">
-		        	<img style="width: 60px" src="${member.wechatImg }">
-			        <img style="width: 60px" src="${member.wechatImg }">
-			        <img style="width: 60px" src="${member.wechatImg }">
-		          </div>
-		        </div>
-		        <div class="am-form-group am-cf">
-		          <div class="zuo">唯一标识：</div>
-		          <div class="you">
-		          	<input type="text" value="${member.memberId }" readonly="readonly" class="am-input-sm">
-		          </div>
+	         	  </div>
 		        </div>
 		        <div class="am-form-group am-cf">
 		          <div class="zuo">会员名称：</div>
@@ -78,8 +68,47 @@
 		          </div>
 		        </div>
 		        <div class="am-form-group am-cf">
+		          <div class="zuo">父级：</div>
+		          <div class="you">
+					<c:forEach items="${f_member }" var="fm">
+			            <a href="/admin/shop/member/memberInfo?id=${fm.memberFather }">
+			            <img style="width: 60px" src="${fm.fatherImg }"><br>${fm.fatherName }
+			            </a>
+					</c:forEach>
+	         	  </div>
+		        </div>
+		        <div class="am-form-group am-cf">
+		          <div class="zuo">子级：</div>
+		          <div class="you">
+					<c:forEach items="${c_member }" var="cm">
+			            <a href="/admin/shop/member/memberInfo?id=${cm.member }">
+			            <img style="width: 60px" src="${cm.memberImg }"><br>${cm.memberName }
+			            </a>
+					</c:forEach>
+	         	  </div>
+		        </div>
+		        
+		         <div class="am-form-group am-cf">
+		          <div class="zuo">会员等级</div>
+		          <div class="you">
+		          	<select id="member_rank">
+		          		<option value="">未设置</option>
+		          		<option value="S">加盟商</option>
+		          		<option value="A">A级会员</option>
+		          		<option value="B">B级会员</option>
+		          		<option value="C">C级会员</option>
+		          	</select>
+		          </div>
+		        </div>
+		         <div class="am-form-group am-cf">
+		          <div class="zuo">缴费金额</div>
+		          <div class="you">
+		         	 <input type="text" id="rank_money" placeholder="单位：元">
+		          </div>
+		        </div>
+		        <div class="am-form-group am-cf">
 		          <div class="you" style="margin-left: 11%;">
-		              <button type="button" id="save_member_hbao" class="am-btn am-btn-success am-radius">派发</button>
+		              <button type="button" id="set_member_rank" class="am-btn am-btn-success am-radius">设置</button>
 		          </div>
 		        </div>
 		      </form>
@@ -87,7 +116,9 @@
 		</div>
 	</div>
 </div>
-<input type="hidden" id="wechatName">
+<input type="hidden" id="memberId" value="${member.memberId }">
+<input type="hidden" id="mmm_rank" value="${member.memberRank }">
+
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
@@ -99,47 +130,22 @@
 <script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript">
-$(function(){
-	$("#member_class").addClass("on");
-	$(".select2").select2(); 
-});
-$(".select2").on("change",function(){
-	var openid = $(this).val();
-	$("#wechatName").val("");
-	$.ajax({
-		url:"/admin/shop/member/findMemberID",
-		data:{"id":openid},
-		type:"POST",
-		success:function(ret){
-			if(ret.code == "000000"){
-				var data = ret.data;
-				$("#member_img").attr("src",data.wechatImg);
-				$("#member_id").val(data.memberId);
-				$("#member_name").val(data.memberName);
-				$("#member_tel").val(data.cellphone);
-				$("#member_redPacket").val(data.redPacket);
-				$("#redPacket_num").val("0");
-				$("#wechatName").val(data.wechatName);
-			}
-		}
-	});
-});
-$("#save_member_hbao").on("click",function(){
-	if($("#member_id").val()==""){
-		alert("请选择会员");
+$("#member_rank").val($("#mmm_rank").val());
+$("#set_member_rank").on("click",function(){
+	var rank = $("#member_rank").val();
+	if(rank == ""){
+		alert("请选择会员等级");
 		return;
 	}
 	$.ajax({
-		url:"/admin/shop/cash/save",
-		data:{"cashMember":$("#member_id").val(),
-			"cashMemberName":$("#wechatName").val(),
-			"cashAmount":$("#cashAmount").val(),
-			"cashRemark":$("#cashRemark").val(),
-			"cashType":"1"},
+		url:"/admin/shop/member/uptMemberRank",
+		data:{"id":$("#memberId").val(),"rank":rank},
 		type:"POST",
 		success:function(ret){
-			if(ret.code=="000000"){
-				window.location.href="/admin/shop/cash/page";
+			if(ret.code == "000000"){
+				window.location.href=location;
+			}else{
+				alert(ret.error);
 			}
 		}
 	});

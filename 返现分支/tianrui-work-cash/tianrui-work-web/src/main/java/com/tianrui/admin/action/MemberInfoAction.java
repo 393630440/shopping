@@ -12,12 +12,15 @@ import com.tianrui.web.smvc.AutherWeb;
 
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.api.IMemberReleteService;
 import tianrui.work.req.gain.MemberGainFindReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
+import tianrui.work.req.related.MemberRelatedReq;
 import tianrui.work.resp.gain.MemberGainResp;
 import tianrui.work.resp.member.MemberInfoResp;
+import tianrui.work.resp.related.MemberRelatedResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
 @Controller
@@ -28,11 +31,23 @@ public class MemberInfoAction {
 	IMemberInfoService memberInfoService;
 	@Autowired
 	IMemberGainService memberGainService;
+	@Autowired
+	IMemberReleteService memberReleteService;
 	
 	@RequestMapping("memberInfo")
 	@AutherWeb(typeString = "admin")
 	public ModelAndView memberInfo(String id) throws Exception{
+		MemberRelatedReq req = new MemberRelatedReq();
+		req.setMember(id);
+		//查询用户父级
+		PageTool<MemberRelatedResp> fm = memberReleteService.select(req);
+		req.setMember("");
+		req.setMemberFather(id);
+		//查询用户子级
+		PageTool<MemberRelatedResp> m = memberReleteService.select(req);
 		ModelAndView view = new ModelAndView();
+		view.addObject("c_member", m.getList());
+		view.addObject("f_member", fm.getList());
 		view.addObject("member", memberInfoService.selectByOpenid(id).getData());
 		view.setViewName("/admin/member/member_info");
 		return view;
@@ -59,11 +74,11 @@ public class MemberInfoAction {
 	@RequestMapping("uptMemberRank")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
-	public Result uptMemberRank(String id) throws Exception{
+	public Result uptMemberRank(String id,String rank) throws Exception{
 		Result rs = Result.getSuccessful();
 		MemberInfoSaveReq req = new MemberInfoSaveReq();
 		req.setMemberId(id);
-		req.setMemberRank("2");
+		req.setMemberRank(rank);
 		memberInfoService.uptMemberInfo(req);
 		return rs;
 	}
