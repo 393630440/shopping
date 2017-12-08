@@ -37,4 +37,5 @@
 		<property name="WEIXIN_SIGN_KEY" value="${weixin.sign.key}"></property>
 	</bean>
      <import resource="applicationContext-db.xml"/>
+     <import resource="applicationContext-mongo.xml"/>
 </beans>

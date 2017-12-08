@@ -25,7 +25,12 @@
 		  <artifactId>commons-lang</artifactId>
 		  <version>${ver.commons.lang}</version>
 		</dependency>
-		
+		<!-- json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${ver.json}</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
