@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 
 import tianrui.work.api.IFileUploadService;
+import tianrui.work.comm.Constant;
 import tianrui.work.vo.Result;
 import tianrui.work.vo.UUIDUtil;
 
@@ -28,7 +29,7 @@ public class FileUploadService implements IFileUploadService{
 				byte[] out = Base64.decodeBase64(base64Str);
 				InputStream input = new ByteArrayInputStream(out);
 				gridFsTemplate.store(input, imgName);
-				rs.setData(imgName);
+				rs.setData(Constant.BASE_IMG_URL+imgName);
 			}else{
 				rs.setCode("1");
 				rs.setError("图片不能为空");

@@ -4,16 +4,5 @@
     	<dl><a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a></dl>
 </div>
 <script type="text/javascript">
-function uploadImg(imgStr){
-	var data = null;
-	$.ajax({
-		url:"/upload/add",
-		data:{imgStr:imgStr},
-		type:"POST",
-		success:function(ret){
-			data = ret;
-		}
-	});
-	return data;
-}
+
 </script>

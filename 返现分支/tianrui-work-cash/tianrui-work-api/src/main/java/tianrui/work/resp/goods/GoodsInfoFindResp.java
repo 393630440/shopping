@@ -254,8 +254,7 @@ public class GoodsInfoFindResp {
 	}
 
 	public String getPath() {
-		if (path == null)
-			path = "/resources/file/goodsInfo/" + goodsId + "/";
+		path = "";
 		return path;
 	}
 

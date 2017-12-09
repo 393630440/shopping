@@ -188,7 +188,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goods/add.js?1101"></script>
+	<script src="/resources/js/admin/goods/add.js?1209"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@
 		<property name="WEIXIN_APPID" value="${weixin.appid}"></property>
 		<property name="WEIXIN_APPSECRET" value="${weixin.appsecret}"></property>
 		<property name="WEIXIN_SHANGPU" value="${weixin.shangpu}"></property>
-		
+		<property name="BASE_IMG_URL" value="${base.img.url}"></property>
 		<property name="WEIXIN_SIGN_KEY" value="${weixin.sign.key}"></property>
 	</bean>
      <import resource="applicationContext-db.xml"/>

@@ -109,6 +109,7 @@ function del(list, id) {
 }
 
 function add(buttonType) {
+	show();
 	var msg = "";
 	var goodsType = $("#adgoodsType").val(); // 商品类型:1-大众商品;2-宏包商品
 	if (goodsType == "" || goodsType == undefined)
@@ -174,30 +175,9 @@ function add(buttonType) {
 		alert(msg);
 		return;
 	}
-
-	// var goodsImgStrArr = [];// 商品图片数据
-	// var img_showId = "goodsImg_img_showId";
-	// for (var i = 0; i < goodsImgFileIds.length; i++) {
-	// var input_Id_front = goodsImgFileIds[i];
-	// var imgId = img_showId + "_" + input_Id_front;
-	// var imgStr = $("#" + imgId)[0].src;
-	// var size = imgStr.length;
-	// var index = imgStr.indexOf("base64,") + 7;
-	// var data = imgStr.substring(index, size);
-	// goodsImgStrArr[goodsImgStrArr.length] = data;
-	// }
-
-	// var goodsDetailsStrArr = [];// 商品详情图片数据
-	// var details_showid = "goodsDetails_img_showId";
-	// for (var i = 0; i < goodsDetailsFileIds.length; i++) {
-	// var input_Id_front = goodsDetailsFileIds[i];
-	// var imgId = details_showid + "_" + input_Id_front;
-	// var imgStr = $("#" + imgId)[0].src;
-	// var size = imgStr.length;
-	// var index = imgStr.indexOf("base64,") + 7;
-	// var data = imgStr.substring(index, size);
-	// goodsDetailsStrArr[goodsDetailsStrArr.length] = data;
-	// }
+	var head = saveImg_head();
+	var detail = saveImg_detail();
+//	alert("hhh="+head+"ttt="+detail);
 
 	$.ajax({
 		url : "/admin/shop/goods/add",
@@ -217,16 +197,12 @@ function add(buttonType) {
 			"goodsParam" : goodsParam,
 			"expressFee" : expressFee,
 			"inventory" : inventory,
-			// "goodsImgStrArr" : goodsImgStrArr,
-			// "goodsDetailsStrArr" : goodsDetailsStrArr,
+			"goodsImg" : head,
+			"goodsDetails" : detail,
 			"sifting" : sifting
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				// var goodsId = ret.data.goodsId;
-				// imgUpload(goodsImgFileIds, goodsId, 1);
-				// imgUpload(goodsDetailsFileIds, goodsId, 2);
-				saveImg(ret.data);
 				if (buttonType == 2) {
 					window.location.href = "/admin/shop/goods/addpage";
 				} else {
@@ -238,6 +214,7 @@ function add(buttonType) {
 			alert(e);
 		}
 	});
+	hide();
 }
 
 function imgUpload(fileElementId, id, flag) {
@@ -272,10 +249,8 @@ function imgUpload(fileElementId, id, flag) {
 	});
 }
 
-function saveImg(goodsId) {
-	show();
-
-	var goodsImgStrArr = [];// 商品图片数据
+function saveImg_head() {
+	var goodsImgStrArr = "";// 商品图片数据
 	var img_showId = "goodsImg_img_showId";
 	for (var i = 0; i < goodsImgFileIds.length; i++) {
 		var input_Id_front = goodsImgFileIds[i];
@@ -284,11 +259,14 @@ function saveImg(goodsId) {
 		var size = imgStr.length;
 		var index = imgStr.indexOf("base64,") + 7;
 		var data = imgStr.substring(index, size);
-		goodsImgStrArr[goodsImgStrArr.length] = data;
+		var ret = uploadImg(data);
+		goodsImgStrArr = goodsImgStrArr + ret + "|";
 	}
-	uploadGoodsImg(goodsImgStrArr, 0, goodsId);
+	return goodsImgStrArr;
+}
 
-	var goodsDetailsStrArr = [];// 商品详情图片数据
+function saveImg_detail() {
+	var goodsDetailsStrArr = "";
 	var details_showid = "goodsDetails_img_showId";
 	for (var i = 0; i < goodsDetailsFileIds.length; i++) {
 		var input_Id_front = goodsDetailsFileIds[i];
@@ -297,13 +275,26 @@ function saveImg(goodsId) {
 		var size = imgStr.length;
 		var index = imgStr.indexOf("base64,") + 7;
 		var data = imgStr.substring(index, size);
-		goodsDetailsStrArr[goodsDetailsStrArr.length] = data;
+		var ret = uploadImg(data);
+		goodsDetailsStrArr = goodsDetailsStrArr + ret + "|";
 	}
-	uploadGoodsDetails(goodsDetailsStrArr, 0, goodsId);
+	return goodsDetailsStrArr;
+}
 
-	exit(goodsId);
-
-	hide();
+function uploadImg(imgStr){
+	var imgUrl = "";
+	$.ajax({
+		url:"/upload/add",
+		data:{imgStr:imgStr},
+		type:"POST",
+		async: false,
+		success : function(ret){
+			if(ret.code=="000000"){
+				imgUrl = ret.data;
+			}
+		}
+	});
+	return imgUrl;
 }
 
 var goodsImgName = "";

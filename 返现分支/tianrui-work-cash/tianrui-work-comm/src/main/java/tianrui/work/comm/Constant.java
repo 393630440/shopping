@@ -1,6 +1,8 @@
 package tianrui.work.comm;
 
 public class Constant {
+	
+	public static String BASE_IMG_URL;
 
 	public static String WEIXIN_BASE_URL;
 	
@@ -73,5 +75,61 @@ public class Constant {
 
 	public static void setWEIXIN_SIGN_KEY(String wEIXIN_SIGN_KEY) {
 		WEIXIN_SIGN_KEY = wEIXIN_SIGN_KEY;
+	}
+
+	public static String getBASE_IMG_URL() {
+		return BASE_IMG_URL;
+	}
+
+	public static void setBASE_IMG_URL(String bASE_IMG_URL) {
+		BASE_IMG_URL = bASE_IMG_URL;
+	}
+
+	public static String getWEIXIN_PAY_JSAPI() {
+		return WEIXIN_PAY_JSAPI;
+	}
+
+	public static void setWEIXIN_PAY_JSAPI(String wEIXIN_PAY_JSAPI) {
+		WEIXIN_PAY_JSAPI = wEIXIN_PAY_JSAPI;
+	}
+
+	public static String getWEIXIN_PAY_NATIVE() {
+		return WEIXIN_PAY_NATIVE;
+	}
+
+	public static void setWEIXIN_PAY_NATIVE(String wEIXIN_PAY_NATIVE) {
+		WEIXIN_PAY_NATIVE = wEIXIN_PAY_NATIVE;
+	}
+
+	public static String getMESSAGE_HPAO() {
+		return MESSAGE_HPAO;
+	}
+
+	public static void setMESSAGE_HPAO(String mESSAGE_HPAO) {
+		MESSAGE_HPAO = mESSAGE_HPAO;
+	}
+
+	public static String getMESSAGE_DINGD() {
+		return MESSAGE_DINGD;
+	}
+
+	public static void setMESSAGE_DINGD(String mESSAGE_DINGD) {
+		MESSAGE_DINGD = mESSAGE_DINGD;
+	}
+
+	public static String getMESSAGE_DSUCCE() {
+		return MESSAGE_DSUCCE;
+	}
+
+	public static void setMESSAGE_DSUCCE(String mESSAGE_DSUCCE) {
+		MESSAGE_DSUCCE = mESSAGE_DSUCCE;
+	}
+
+	public static String getMESSAGE_WDING() {
+		return MESSAGE_WDING;
+	}
+
+	public static void setMESSAGE_WDING(String mESSAGE_WDING) {
+		MESSAGE_WDING = mESSAGE_WDING;
 	}
 }
