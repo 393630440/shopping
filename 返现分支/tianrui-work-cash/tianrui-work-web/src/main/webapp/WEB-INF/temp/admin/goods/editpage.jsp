@@ -190,7 +190,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goods/edit.js?0728"></script>
+	<script src="/resources/js/admin/goods/edit.js?1210"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ var mark = 0;
 
 function iconInit() {
 	var html = "<span id=\"icon_span_showId\">";
-	html += "<img src=\"/resources/file/goodsClassify/" + icon + "\" style=\"height: 45px; width: 50px;\"/>";
+	html += "<img src=\"" + icon + "\" style=\"height: 45px; width: 50px;\"/>";
 	html += "<button type=\"button\" onclick=\"iconDelete(1);\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\">";
 	html += "<span class=\"am-icon-trash-o\"></span>";
 	html += "</button>";

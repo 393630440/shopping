@@ -105,6 +105,6 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/ad/index.js?1101"></script>
+	<script src="/resources/js/admin/ad/index.js?1210"></script>
 </body>
 </html>

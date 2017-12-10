@@ -80,8 +80,7 @@ public class GoodsClassifyFindResp {
 	}
 
 	public String getPath() {
-		if (path == null)
-			path = "/resources/file/goodsClassify/";
+		path = "";
 		return path;
 	}
 

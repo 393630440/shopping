@@ -109,7 +109,7 @@ function del(list, id) {
 }
 
 function add(buttonType) {
-	show();
+	
 	var msg = "";
 	var goodsType = $("#adgoodsType").val(); // 商品类型:1-大众商品;2-宏包商品
 	if (goodsType == "" || goodsType == undefined)
@@ -175,6 +175,7 @@ function add(buttonType) {
 		alert(msg);
 		return;
 	}
+	show();
 	var head = saveImg_head();
 	var detail = saveImg_detail();
 //	alert("hhh="+head+"ttt="+detail);

@@ -12,6 +12,7 @@ import com.tianrui.web.util.FileUtils;
 import com.tianrui.web.util.LoggerUtils;
 import com.tianrui.web.util.StringUtils;
 
+import tianrui.work.api.IFileUploadService;
 import tianrui.work.api.IGoodsClassifyService;
 import tianrui.work.req.goods.GoodsClassifyFindReq;
 import tianrui.work.req.goods.GoodsClassifyReq;
@@ -27,6 +28,8 @@ public class AdminGoodsClassifyAction {
 
 	@Autowired
 	IGoodsClassifyService goodsClassifyService;
+	@Autowired
+	IFileUploadService fileUploadService;
 
 	/** 跳转列表页面 */
 	@RequestMapping("index")
@@ -66,18 +69,22 @@ public class AdminGoodsClassifyAction {
 	@ResponseBody
 	public Result add(GoodsClassifyReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goodsclassify/add]");
-
+		Result rs = Result.getSuccessful();
+		
 		if (StringUtils.isNull(req.getIconStr())) {
 			throw new Exception("没有图片怎么可以");
 		} else {
-			String imgName = FileUtils.saveImgFile("goodsClassify/", "", 0, ".png", req.getIconStr());
-			req.setIcon(imgName);
+			rs = fileUploadService.saveImg(req.getIconStr());
+//			String imgName = FileUtils.saveImgFile("goodsClassify/", "", 0, ".png", req.getIconStr());
+			if(rs.getCode().equals("000000")){
+				req.setIcon(rs.getData().toString());
+			}
 		}
 
 		req.setClassifyId(UUIDUtil.getUUID());// 商品分类ID
 		req.setClassifyStatus("1");// 商品分类状态
 		req.setPubdate(System.currentTimeMillis());
-		Result rs = goodsClassifyService.addGoodsClassify(req);
+		rs = goodsClassifyService.addGoodsClassify(req);
 		// rs.setData(req);
 		return rs;
 	}
@@ -99,13 +106,13 @@ public class AdminGoodsClassifyAction {
 	@ResponseBody
 	public Result edit(GoodsClassifyReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/goodsclassify/edit]");
-
-		if (!StringUtils.isNull(req.getIconStr())) {
-			String imgName = FileUtils.saveImgFile("goodsClassify/", "", 0, ".png", req.getIconStr());
-			req.setIcon(imgName);
-		}
-
 		Result rs = Result.getSuccessful();
+		if (!StringUtils.isNull(req.getIconStr())) {
+			rs = fileUploadService.saveImg(req.getIconStr());
+			if(rs.getCode().equals("000000")){
+				req.setIcon(rs.getData().toString());
+			}
+		}
 		rs = goodsClassifyService.editGoodsClassify(req);
 		return rs;
 	}

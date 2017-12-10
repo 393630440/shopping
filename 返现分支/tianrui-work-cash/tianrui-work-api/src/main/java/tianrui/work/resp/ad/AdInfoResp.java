@@ -76,7 +76,7 @@ public class AdInfoResp {
 
 	public String getPath() {
 		if (path == null)
-			path = "/resources/file/adInfo/";
+			path = "";
 		return path;
 	}
 

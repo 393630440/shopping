@@ -41,7 +41,7 @@ function innerHTML(data, pageNo) {
 		html += "<td>" + data[a].depict + "</td>";
 		html += "<td>" + status + "</td>";
 //		html += "<td>" + type + "</td>";
-		html += "<td><img src=\"/resources/file/adInfo/" + data[a].img;
+		html += "<td><img src=\"" + data[a].img;
 		html += "\" style=\"height: 45px; width: 50px;\"/></td>";
 		html += "<td>" + pubdate + "</td>";
 		html += "<td><div class='am-btn-toolbar'><div class='am-btn-group am-btn-group-xs'>";

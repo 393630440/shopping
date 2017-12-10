@@ -228,6 +228,9 @@ function edit() {
 		alert(msg);
 		return;
 	}
+	//TOOD
+	var head = upload(0);
+	var detail = upload(1);
 
 	$.ajax({
 		url : "/admin/shop/goods/edit",
@@ -243,11 +246,13 @@ function edit() {
 			"goodsParam" : goodsParam,
 			"expressFee" : expressFee,
 			"inventory" : inventory,
-			"sifting" : sifting
+			"sifting" : sifting,
+			"goodsImg":head,
+			"goodsDetails":detail
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
-				upload();
+//				upload();
 				window.location.href = "/admin/shop/goods/index";
 			}
 		},
@@ -257,57 +262,46 @@ function edit() {
 	});
 }
 
-function upload() {
+function upload(type) {
 	show();
-
 	var oldData = "";
 	var oldList = [];
 	var oldMap = {};
 	var fileElementId = [];
-	var mark = "";
-
-	for (var i = 0; i < 2; i++) {
-		if (i == 0) {
-			oldData = oldGoodsImg;
-			oldList = oldGoodsImgList;
-			oldMap = oldGoodsImgMap;
-			fileElementId = goodsImgFileIds;
-			mark = "goodsImg";
-		} else if (i == 1) {
-			oldData = oldGoodsDetails;
-			oldList = oldGoodsDetailsList;
-			oldMap = oldGoodsDetailsMap;
-			fileElementId = goodsDetailsFileIds;
-			mark = "goodsDetails";
-		} else {
-			break;
-		}
-
+	var imgurl = "";
+	if(type == 0){//head
+		oldData = oldGoodsImg;
+		oldList = oldGoodsImgList;
+		oldMap = oldGoodsImgMap;
+		fileElementId = goodsImgFileIds;
+		
 		var old = oldData;
-		if (!compare(oldData, oldList))
+		if (!compare(oldData, oldList)){
 			old = getOld(oldList, oldMap);
-
-		if (fileElementId.length > 0) {
-			// imgUpload(fileElementId, mark, old);
-			saveImg(i, old);
-		} else {
-			if (old != oldData) {
-				// imgUpdate(old, mark);
-				if (mark == "goodsImg")
-					goodsImgName = old;
-				else if (mark == "goodsDetails")
-					goodsDetailsName = old;
-			}
 		}
-	}
+		
+		imgurl = imgurl + old;
+		if (fileElementId.length > 0) {
+			imgurl = imgurl + saveImg_head();
+		}
+	}else if(type == 1){//detail
+		oldData = oldGoodsDetails;
+		oldList = oldGoodsDetailsList;
+		oldMap = oldGoodsDetailsMap;
+		fileElementId = goodsDetailsFileIds;
+		
+		var old = oldData;
+		if (!compare(oldData, oldList)){
+			old = getOld(oldList, oldMap);
+		}
 
-	if (goodsImgName == "" && goodsDetailsName == "") {
-		// 没有做任何修改则不更新图片名称
-	} else {
-		exit();
+		imgurl = imgurl + old;
+		if (fileElementId.length > 0) {
+			imgurl = imgurl + saveImg_detail();
+		} 
 	}
-
 	hide();
+	return imgurl;
 }
 
 function compare(oldData, oldList) {
@@ -387,37 +381,52 @@ function imgUpdate(old, mark) {
 	});
 }
 
-function saveImg(flag, old) {
-	if (flag == 0) {
-		goodsImgName += old;
-		var goodsImgStrArr = [];// 商品图片数据
-		var img_showId = "goodsImg_img_showId";
-		for (var i = 0; i < goodsImgFileIds.length; i++) {
-			var input_Id_front = goodsImgFileIds[i];
-			var imgId = img_showId + "_" + input_Id_front;
-			var imgStr = $("#" + imgId)[0].src;
-			var size = imgStr.length;
-			var index = imgStr.indexOf("base64,") + 7;
-			var data = imgStr.substring(index, size);
-			goodsImgStrArr[goodsImgStrArr.length] = data;
-		}
-		uploadGoodsImg(goodsImgStrArr, 0);
-	} else if (flag == 1) {
-		goodsDetailsName += old;
-		var goodsDetailsStrArr = [];// 商品详情图片数据
-		var details_showid = "goodsDetails_img_showId";
-		for (var i = 0; i < goodsDetailsFileIds.length; i++) {
-			var input_Id_front = goodsDetailsFileIds[i];
-			var imgId = details_showid + "_" + input_Id_front;
-			var imgStr = $("#" + imgId)[0].src;
-			var size = imgStr.length;
-			var index = imgStr.indexOf("base64,") + 7;
-			var data = imgStr.substring(index, size);
-			goodsDetailsStrArr[goodsDetailsStrArr.length] = data;
-		}
-		uploadGoodsDetails(goodsDetailsStrArr, 0);
+function saveImg_head() {
+	var goodsImgStrArr = "";// 商品图片数据
+	var img_showId = "goodsImg_img_showId";
+	for (var i = 0; i < goodsImgFileIds.length; i++) {
+		var input_Id_front = goodsImgFileIds[i];
+		var imgId = img_showId + "_" + input_Id_front;
+		var imgStr = $("#" + imgId)[0].src;
+		var size = imgStr.length;
+		var index = imgStr.indexOf("base64,") + 7;
+		var data = imgStr.substring(index, size);
+		goodsImgStrArr = goodsImgStrArr + uploadImg(data)+"|";
 	}
+	return goodsImgStrArr;
 }
+
+function saveImg_detail() {
+	var goodsDetailsStrArr = "";// 商品详情图片数据
+	var details_showid = "goodsDetails_img_showId";
+	for (var i = 0; i < goodsDetailsFileIds.length; i++) {
+		var input_Id_front = goodsDetailsFileIds[i];
+		var imgId = details_showid + "_" + input_Id_front;
+		var imgStr = $("#" + imgId)[0].src;
+		var size = imgStr.length;
+		var index = imgStr.indexOf("base64,") + 7;
+		var data = imgStr.substring(index, size);
+		goodsDetailsStrArr = goodsDetailsStrArr + uploadImg(data)+"|";
+	}
+	return goodsDetailsStrArr;
+}
+
+function uploadImg(imgStr){
+	var imgUrl = "";
+	$.ajax({
+		url:"/upload/add",
+		data:{imgStr:imgStr},
+		type:"POST",
+		async: false,
+		success : function(ret){
+			if(ret.code=="000000"){
+				imgUrl = ret.data;
+			}
+		}
+	});
+	return imgUrl;
+}
+
 
 var goodsImgName = "";
 function uploadGoodsImg(goodsImgStrArr, index) {

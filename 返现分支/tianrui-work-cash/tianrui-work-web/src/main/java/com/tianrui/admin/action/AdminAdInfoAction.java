@@ -13,6 +13,7 @@ import com.tianrui.web.util.LoggerUtils;
 import com.tianrui.web.util.StringUtils;
 
 import tianrui.work.api.IAdInfoService;
+import tianrui.work.api.IFileUploadService;
 import tianrui.work.req.ad.AdInfoFindReq;
 import tianrui.work.req.ad.AdInfoReq;
 import tianrui.work.resp.ad.AdInfoResp;
@@ -26,6 +27,8 @@ public class AdminAdInfoAction {
 
 	@Autowired
 	IAdInfoService adInfoService;
+	@Autowired
+	IFileUploadService fileUploadService;
 
 	/** 跳转列表页面 */
 	@RequestMapping("index")
@@ -65,17 +68,19 @@ public class AdminAdInfoAction {
 	@ResponseBody
 	public Result add(AdInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/ad/add]");
-
+		Result rs = Result.getSuccessful();
 		if (StringUtils.isNull(req.getImgStr())) {
 			throw new Exception("没有图片怎么可以");
 		} else {
-			String imgName = FileUtils.saveImgFile("adInfo/", "", 0, ".png", req.getImgStr());
-			req.setImg(imgName);
+			rs = fileUploadService.saveImg(req.getImgStr());
+			if(rs.getCode().equals("000000")){
+				req.setImg(rs.getData().toString());
+			}
 		}
 
 		req.setStatus("1");
 		req.setPubdate(System.currentTimeMillis());
-		Result rs = adInfoService.addAdInfo(req);
+		rs = adInfoService.addAdInfo(req);
 		// rs.setData(req);
 		return rs;
 	}
@@ -97,13 +102,14 @@ public class AdminAdInfoAction {
 	@ResponseBody
 	public Result edit(AdInfoReq req) throws Exception {
 		LoggerUtils.info(log, "---------- [/admin/shop/ad/edit]");
-
+		Result rs = Result.getSuccessful();
 		if (!StringUtils.isNull(req.getImgStr())) {
-			String imgName = FileUtils.saveImgFile("adInfo/", "", 0, ".png", req.getImgStr());
-			req.setImg(imgName);
+			rs = fileUploadService.saveImg(req.getImgStr());
+			if(rs.getCode().equals("000000")){
+				req.setImg(rs.getData().toString());
+			}
 		}
-
-		Result rs = adInfoService.editAdInfo(req);
+		rs = adInfoService.editAdInfo(req);
 		return rs;
 	}
 

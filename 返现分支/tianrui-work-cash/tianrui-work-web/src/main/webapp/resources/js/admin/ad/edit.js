@@ -6,7 +6,7 @@ var mark = 0;
 
 function imgInit() {
 	var html = "<span id=\"img_span_showId\">";
-	html += "<img src=\"/resources/file/adInfo/" + img + "\" style=\"height: 45px; width: 50px;\"/>";
+	html += "<img src=\"" + img + "\" style=\"height: 45px; width: 50px;\"/>";
 	html += "<button type=\"button\" onclick=\"imgDelete(1);\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\">";
 	html += "<span class=\"am-icon-trash-o\"></span>";
 	html += "</button>";
