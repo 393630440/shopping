@@ -8,16 +8,23 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.druid.util.StringUtils;
+
 import tianrui.work.api.ICashBackService;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.CashBack;
 import tianrui.work.bean.CashBackInfo;
 import tianrui.work.bean.ConfigurationInfo;
+import tianrui.work.bean.MemberInfo;
+import tianrui.work.bean.MemberRelated;
 import tianrui.work.mapper.java.CashBackInfoMapper;
 import tianrui.work.mapper.java.CashBackMapper;
 import tianrui.work.mapper.java.ConfigurationInfoMapper;
+import tianrui.work.mapper.java.MemberInfoMapper;
+import tianrui.work.mapper.java.MemberRelatedMapper;
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
+import tianrui.work.req.cash.MemberCashBackReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
 import tianrui.work.resp.cash.CashBackResp;
@@ -36,6 +43,74 @@ public class CashBackService implements ICashBackService {
 	ConfigurationInfoMapper configurationInfoMapper;
 	@Autowired
 	IMemberInfoService memberInfoService;
+	@Autowired
+	MemberRelatedMapper memberRelatedMapper;
+	@Autowired
+	MemberInfoMapper memberInfoMapper;
+
+	@Override
+	public Result memberCashBack(MemberCashBackReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		//获取用户信息
+		if(!req.getRank().equals("S")){
+			MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getId());
+			CashBackReq save = new CashBackReq();
+			save.setCashType("1");
+			save.setCashMember(info.getMemberId());
+			save.setCashMemberName(info.getWechatName());
+			save.setCashAmount(req.getMoney());
+			save.setCashRemark(info.getMemberName()+"开通会员返现");
+			addCashBack(save);
+		}
+		ConfigurationInfo mconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(req.getRank()));
+		if(mconf != null){
+			MemberRelated query = new MemberRelated();
+			query.setMember(req.getId());
+			//查询缴费用户 父级会员等级
+			List<MemberRelated> list = memberRelatedMapper.selectByCoudition(query);
+			for(MemberRelated rel : list){
+				//父级返现
+				MemberInfo info = memberInfoMapper.selectByPrimaryKey(rel.getMemberFather());
+				ConfigurationInfo fconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(info.getMemberRank()));
+				if(fconf != null && mconf.getFlag().equals("1")&&fconf.getFlag().equals("1")){
+					//父级子级均开启返现功能
+					Double ter = Double.valueOf(fconf.getParamvalue())+Double.valueOf(mconf.getParamvalue());
+					CashBackReq save = new CashBackReq();
+					save.setCashType("1");
+					save.setCashMember(info.getMemberId());
+					save.setCashMemberName(info.getWechatName());
+					save.setCashAmount(req.getMoney()*ter);
+					save.setCashRemark(rel.getMemberName()+"开通会员返现");
+					addCashBack(save);
+				}
+			}
+		}
+		return rs;
+	}
+	
+	private String changeRankRext(String rank){
+		String rext = "";
+		switch (rank) {
+		case "A":
+			rext = "CASH_BACK_A";
+			break;
+		case "B":
+			rext = "CASH_BACK_B";		
+			break;
+		
+		case "C":
+			rext = "CASH_BACK_C";
+			break;
+		
+		case "S":
+			rext = "CASH_BACK_S";
+			break;
+
+		default:
+			break;
+		}
+		return rext;
+	}
 	
 	@Override
 	public Result addCashBack(CashBackReq req) throws Exception {
@@ -44,7 +119,7 @@ public class CashBackService implements ICashBackService {
 		PropertyUtils.copyProperties(save, req);
 		save.setId(UUIDUtil.getUUID());
 		save.setCashAlre(0.00);// 已反金额
-		save.setCashRatio(0.0001);// 配置
+//		save.setCashRatio(0.0001);// 配置
 		save.setCreateTime(System.currentTimeMillis());
 		cashBackMapper.insertSelective(save);
 		return rs;
@@ -229,5 +304,4 @@ public class CashBackService implements ICashBackService {
 			}
 		}
 	}
-
 }

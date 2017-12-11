@@ -4,6 +4,7 @@ import java.util.List;
 
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
+import tianrui.work.req.cash.MemberCashBackReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
 import tianrui.work.resp.cash.CashBackResp;
 import tianrui.work.vo.PageTool;
@@ -11,6 +12,9 @@ import tianrui.work.vo.Result;
 
 public interface ICashBackService {
 
+	/** 用户返现 */
+	Result memberCashBack(MemberCashBackReq req) throws Exception;
+	
 	/** 添加返现 */
 	Result addCashBack(CashBackReq req) throws Exception;
 

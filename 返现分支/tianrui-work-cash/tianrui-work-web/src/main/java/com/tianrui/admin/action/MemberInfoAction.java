@@ -10,9 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tianrui.web.smvc.AutherWeb;
 
+import tianrui.work.api.ICashBackService;
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.api.IMemberReleteService;
+import tianrui.work.req.cash.CashBackReq;
+import tianrui.work.req.cash.MemberCashBackReq;
 import tianrui.work.req.gain.MemberGainFindReq;
 import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
@@ -33,6 +36,8 @@ public class MemberInfoAction {
 	IMemberGainService memberGainService;
 	@Autowired
 	IMemberReleteService memberReleteService;
+	@Autowired
+	ICashBackService cashBackService;
 	
 	@RequestMapping("memberInfo")
 	@AutherWeb(typeString = "admin")
@@ -74,12 +79,19 @@ public class MemberInfoAction {
 	@RequestMapping("uptMemberRank")
 	@AutherWeb(typeString = "admin")
 	@ResponseBody
-	public Result uptMemberRank(String id,String rank) throws Exception{
+	public Result uptMemberRank(String id,String rank,Double rankMoney) throws Exception{
 		Result rs = Result.getSuccessful();
 		MemberInfoSaveReq req = new MemberInfoSaveReq();
 		req.setMemberId(id);
 		req.setMemberRank(rank);
 		memberInfoService.uptMemberInfo(req);
+		if(rankMoney != null){
+			MemberCashBackReq mem = new MemberCashBackReq();
+			mem.setId(id);
+			mem.setMoney(rankMoney);
+			mem.setRank(rank);
+			cashBackService.memberCashBack(mem);
+		}
 		return rs;
 	}
 	

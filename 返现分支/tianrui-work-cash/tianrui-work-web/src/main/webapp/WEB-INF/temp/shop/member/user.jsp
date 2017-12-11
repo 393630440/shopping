@@ -32,7 +32,14 @@
     	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
         <div class="user_info">
         	<div class="user_name">${MemberInfo.wechatName }</div>
-            <div class="user_dengji">会员等级：普通会员</div>
+            <div class="user_dengji">会员等级：
+    			<c:if test="${MemberInfo.memberRank eq '1' }">普通会员</c:if>        
+            	<c:if test="${MemberInfo.memberRank eq 'S' }">加盟商</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'A' }">A级会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'B' }">B级会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'C' }">C级会员</c:if>        
+         
+            </div>
         </div>
 		</a>
     </div>
@@ -64,6 +71,16 @@
                     <div class="u_money"><i></i></div>
               </a>
             </li>
+           
+            <li>
+            	<a href="/wechat/shop/member/memberRelete">
+                	<div class="u_nav_icon huibi"></div>
+                    <div class="u_nav_name">我的会员</div>
+                    <div class="nt_icon"></div>
+                    <div class="u_money"><i></i></div>
+              </a>
+            </li>
+            
             <li>
             	<a href="/wechat/shop/deposit/savePage">
                 	<div class="u_nav_icon tixian"></div>

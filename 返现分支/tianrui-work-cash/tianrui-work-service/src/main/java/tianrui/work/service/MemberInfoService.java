@@ -98,9 +98,9 @@ public class MemberInfoService implements IMemberInfoService{
 			save.setRpListingRatio("*");
 			save.setCreatetime(System.currentTimeMillis());
 			memberInfoMapper.insertSelective(save);
-			MemberSetting set = new MemberSetting();
-			set.setMemberId(req.getMemberId());
-			memberSettingMapper.insertSelective(set);
+//			MemberSetting set = new MemberSetting();
+//			set.setMemberId(req.getMemberId());
+//			memberSettingMapper.insertSelective(set);
 			rs.setData(save);
 		}
 		return rs;

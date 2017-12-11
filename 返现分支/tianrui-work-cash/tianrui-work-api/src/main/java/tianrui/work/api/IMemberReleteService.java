@@ -1,8 +1,6 @@
 package tianrui.work.api;
 
-import tianrui.work.req.WithdrawalFindReq;
 import tianrui.work.req.related.MemberRelatedReq;
-import tianrui.work.resp.WithdrawalResp;
 import tianrui.work.resp.related.MemberRelatedResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;

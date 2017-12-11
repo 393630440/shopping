@@ -36,6 +36,8 @@ function innerHTML(data,pageNo){
 		var rank = "";
 		if(data[a].memberRank == "S"){
 			rank = "加盟商";
+		}else if(data[a].memberRank == "1"){
+			rank = "普通会员";
 		}else{
 			rank = data[a].memberRank+"级会员";
 		}

@@ -47,12 +47,12 @@
 	    	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
 	        <div class="user_info">
 	            <div class="user_dengji">会员等级：
-	            <c:if test="${MemberInfo.memberRank eq '1'}">
-	            	普通会员
-	            </c:if>
-	            <c:if test="${MemberInfo.memberRank eq '2'}">
-	            	加盟商
-	            </c:if>
+	           <c:if test="${MemberInfo.memberRank eq '1' }">普通会员</c:if>        
+            	<c:if test="${MemberInfo.memberRank eq 'S' }">加盟商</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'A' }">A级会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'B' }">B级会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'C' }">C级会员</c:if>        
+         
 	            </div>
 	            <div class="user_dengji">账户余额：${balance}</div>
 	        </div>

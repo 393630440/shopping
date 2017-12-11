@@ -185,7 +185,6 @@ public class GoodsInfoAction {
 		LoggerUtils.info(log, "---------- [/wechat/shop/goods/goodsdetails]");
 		MemberInfo member = SessionManage.getSessionManage(request);
 		GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(req.getGoodsId(), member.getMemberRank());
-		String goodsImg = "/resources/file/goodsInfo/" + goodsInfo.getGoodsId() + "/" + goodsInfo.getFirstGoodsImg();
 
 		// 更新浏览记录数
 		req.setBrowseNum(goodsInfo.getBrowseNum() + 1);
@@ -198,7 +197,7 @@ public class GoodsInfoAction {
 		memberFootprintSaveReq.setFfType("2");// 1-关注;2-足迹
 		memberFootprintSaveReq.setSeetheTime(System.currentTimeMillis());// 查看时间
 		memberFootprintSaveReq.setGoodsName(goodsInfo.getGoodsName());// 商品名称
-		memberFootprintSaveReq.setGoodsImg(goodsImg);// 商品图片
+		memberFootprintSaveReq.setGoodsImg(goodsInfo.getFirstGoodsImg());// 商品图片
 		memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
 		memberFootprintService.save(memberFootprintSaveReq);
 
@@ -278,7 +277,6 @@ public class GoodsInfoAction {
 		} else if (FfType.equals("1")) {
 			if (memberFootprintResp == null) {
 				GoodsInfoFindResp goodsInfo = goodsInfoService.queryGoodsInfoByOne(goodsId, member.getMemberRank());
-				String goodsImg = "/resources/file/goodsInfo/" + goodsId + "/" + goodsInfo.getFirstGoodsImg();
 
 				// 如果是关注，并且没有查到关注信息，则保存关注信息
 				MemberFootprintSaveReq memberFootprintSaveReq = new MemberFootprintSaveReq();
@@ -287,7 +285,7 @@ public class GoodsInfoAction {
 				memberFootprintSaveReq.setFfType("1");// 1-关注;2-足迹
 				memberFootprintSaveReq.setSeetheTime(System.currentTimeMillis());// 查看时间
 				memberFootprintSaveReq.setGoodsName(goodsInfo.getGoodsName());// 商品名称
-				memberFootprintSaveReq.setGoodsImg(goodsImg);// 商品图片
+				memberFootprintSaveReq.setGoodsImg(goodsInfo.getFirstGoodsImg());// 商品图片
 				memberFootprintSaveReq.setGoodsPrice(goodsInfo.getGoodsPrice());// 商品价格
 				memberFootprintService.save(memberFootprintSaveReq);
 			} else {

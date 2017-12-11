@@ -103,7 +103,7 @@
 		         <div class="am-form-group am-cf">
 		          <div class="zuo">缴费金额</div>
 		          <div class="you">
-		         	 <input type="text" id="rank_money" placeholder="单位：元">
+		         	 <input type="number" id="rank_money"  placeholder="单位：元">
 		          </div>
 		        </div>
 		        <div class="am-form-group am-cf">
@@ -139,7 +139,7 @@ $("#set_member_rank").on("click",function(){
 	}
 	$.ajax({
 		url:"/admin/shop/member/uptMemberRank",
-		data:{"id":$("#memberId").val(),"rank":rank},
+		data:{"id":$("#memberId").val(),"rank":rank,"rankMoney":$("#rank_money").val()},
 		type:"POST",
 		success:function(ret){
 			if(ret.code == "000000"){

@@ -74,7 +74,7 @@
 						</div>
 						<div class="hwc-tu f-l">
 							<a href="/wechat/shop/goods/goodsdetails?goodsId=${goodsInfo.goodsId}">
-								<img src="${goodsInfo.path}${goodsInfo.goodsImg}">
+								<img src="${goodsInfo.goodsImg}">
 							</a>
 						</div>
 						<div class="gwc-md f-l">
