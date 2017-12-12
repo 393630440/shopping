@@ -11,8 +11,54 @@
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
 <script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
-<script src="${staticRoot}/web/layer/layer.js"></script>
+<script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
+<script src="/resources/web/js/bootstrap.min.js"></script>
+<style type="text/css">
+.member_top {
+    overflow: hidden;
+    position: relative;
+    max-width: 768px;
+    margin: 0 auto;
+}
+.member_m_z {
+    width: 30%;
+    position: absolute;
+    left: 32%;
+    top: 10%;
+}
+.member_m_pic {
+    width: 25%;
+    text-align: center;
+    position: absolute;
+    top: 6%;
+    left: 3%;
+    height: 100%;
+    border-radius: 50%;
+}
+.member_m_x {
+    color: #fff;
+    font-size: 15px;
+}
+.member_m_r {
+    width: 33%;
+    position: absolute;
+    right: 4%;
+    text-align: right;
+    bottom: 10%;
+    color: #fff;
+    font-size: 10px;
+}
+.member_mp_img {
+    position: absolute;
+    width: 35px;
+    top: 10px;
+    right: 10px;
+    height: 44px;
+}
+
+</style>
 </head>
+
 <body>
 <div class="mobile">
   <!--页面加载 开始-->
@@ -27,6 +73,17 @@
   </header>
    -->
   <!--header 结束-->
+	<div class="member_top member_top_1">
+		<div class="member_top_bg"><img  src="/resources/member_bg.png"></div>
+		<div class="member_m_pic member_m_pic_1">
+			<img class="img-circle" src="${MemberInfo.wechatImg }">
+       			</div>
+		<div  class="member_m_z member_m_z_1">
+			<div class="member_m_x">萧雅哲</div>
+			</div>
+	</div>
+	<div class="member_mp_img" data-toggle="modal" data-target="#myModalmin" data-title="我的名片" data-tpl="mp"><img src="/resources/member_mp_img.png"></div>
+		
 	<div class="user_top w">
 		<a href="/wechat/shop/member/memberInfo">
     	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
