@@ -28,33 +28,55 @@
     font-weight: normal;
     opacity: 1;
 }
+.member_m_pic {
+    width: 25%;
+    text-align: center;
+    position: absolute;
+    top: 6%;
+    left: 3%;
+    height: 100%;
+    border-radius: 50%;
+}
 
 .pic_head{
 	width:100%;
     text-align: center;
+    border:2px solid #F8F8FF;
 }
 </style>
 </head>
-<body>
-<div class="modal-header member_tc_top">
-
-</div>
-<div class="pic_head">
-	<img style="width: 200px;" src="${MemberInfo.wechatImg }">
-</div>
-<input id="pathUrl" type="hidden" value="${pathUrl }"/><br />
-<div>
-	<div style="text-align: center">${MemberInfo.wechatName }</div>
-	<div style="width: 30%;display: inline-block;"></div>
-	<div id="qrcode" style="width:30%; margin-top:15px;display: inline-block;"></div>
-	<div style="width: 30%;display: inline-block;"></div>
+<body style="background-color:#8EE5EE;">
+<div style="width: 100%;height: 100% ">
+	<div style="overflow:hidden;width: 100%;padding-top: 20px;">
+		<div class="member_m_pic">
+			<img style="width: 60px;border:2px solid #F8F8FF;"  src="${MemberInfo.wechatImg }">
+		</div>
+		<div style="display:inline;overflow:hidden;padding-top: 1px;">
+			<span style="margin-left: 90px;font-weight:20px">
+			我是<span style="color: blue;font-size: 35px">${MemberInfo.wechatName }</span>
+			</span>
+			<br>
+			<span style="margin-left: 90px">
+				我为<span style="color: red;font-size: 30px;">自己代言...</span>
+			</span>
+		</div>
+	</div>
+	<input id="pathUrl" type="hidden" value="${pathUrl }"/>
+	<div style="margin-top: 200px">
+		<div style="width: 30%;display: inline-block;"></div>
+		<div id="qrcode" class="pic_head" style="width:40%; margin-top:15px;display: inline-block;"></div>
+		<div style="width: 30%;display: inline-block;"></div>
+	</div>
+	<div style="text-align: center;">
+		<span style="font-size: 35px;color: red">
+		会员返点&nbsp消费返现<br>快快加入我们吧
+		</span>
+	</div>
 </div>
 
 </body>
 <script type="text/javascript">
 var qrcode = new QRCode(document.getElementById("qrcode"), {
-	width : 100,
-	height : 100
 });
 
 function makeCode () {		
@@ -68,4 +90,5 @@ function makeCode () {
 	qrcode.makeCode(elText.value);
 }
 makeCode();
+$("#qrcode").find("img").addClass("pic_head");
 </script>
