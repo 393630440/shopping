@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.work.mapper.java.MemberRelatedMapper" >
+  <resultMap id="BaseResultMap" type="com.work.bean.MemberRelated" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="member" property="member" jdbcType="VARCHAR" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_img" property="memberImg" jdbcType="VARCHAR" />
+    <result column="member_father" property="memberFather" jdbcType="VARCHAR" />
+    <result column="father_name" property="fatherName" jdbcType="VARCHAR" />
+    <result column="father_img" property="fatherImg" jdbcType="VARCHAR" />
+    <result column="rel_type" property="relType" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member, member_name, member_img, member_father, father_name, father_img, rel_type, 
+    createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_related
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member_related
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.work.bean.MemberRelated" >
+    insert into member_related (id, member, member_name, 
+      member_img, member_father, father_name, 
+      father_img, rel_type, createtime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{member,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, 
+      #{memberImg,jdbcType=VARCHAR}, #{memberFather,jdbcType=VARCHAR}, #{fatherName,jdbcType=VARCHAR}, 
+      #{fatherImg,jdbcType=VARCHAR}, #{relType,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.work.bean.MemberRelated" >
+    insert into member_related
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="memberImg != null" >
+        member_img,
+      </if>
+      <if test="memberFather != null" >
+        member_father,
+      </if>
+      <if test="fatherName != null" >
+        father_name,
+      </if>
+      <if test="fatherImg != null" >
+        father_img,
+      </if>
+      <if test="relType != null" >
+        rel_type,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberImg != null" >
+        #{memberImg,jdbcType=VARCHAR},
+      </if>
+      <if test="memberFather != null" >
+        #{memberFather,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherName != null" >
+        #{fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherImg != null" >
+        #{fatherImg,jdbcType=VARCHAR},
+      </if>
+      <if test="relType != null" >
+        #{relType,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.work.bean.MemberRelated" >
+    update member_related
+    <set >
+      <if test="member != null" >
+        member = #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberImg != null" >
+        member_img = #{memberImg,jdbcType=VARCHAR},
+      </if>
+      <if test="memberFather != null" >
+        member_father = #{memberFather,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherName != null" >
+        father_name = #{fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherImg != null" >
+        father_img = #{fatherImg,jdbcType=VARCHAR},
+      </if>
+      <if test="relType != null" >
+        rel_type = #{relType,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.work.bean.MemberRelated" >
+    update member_related
+    set member = #{member,jdbcType=VARCHAR},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_img = #{memberImg,jdbcType=VARCHAR},
+      member_father = #{memberFather,jdbcType=VARCHAR},
+      father_name = #{fatherName,jdbcType=VARCHAR},
+      father_img = #{fatherImg,jdbcType=VARCHAR},
+      rel_type = #{relType,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
