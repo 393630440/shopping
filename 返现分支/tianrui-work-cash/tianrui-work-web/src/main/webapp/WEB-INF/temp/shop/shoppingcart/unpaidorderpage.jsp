@@ -112,6 +112,22 @@
 		</div>
 		
 		<div class="drdd-info4">
+			<p>账户余额：<input type="text" id="show_balance" value="${MemberInfo.balance}"> </p>
+			<input type="hidden" id="hidden_balance" value="${MemberInfo.balance}"> 
+			<div style="clear: both;"></div>
+		</div>
+		<div class="drdd-info4">
+			<p>返现金额：<input type="text" id="show_cashMoney" value="${MemberInfo.cashMoney}"></p>
+			<input type="hidden" id="hidden_cashMoney"  value="${MemberInfo.cashMoney}">
+			<div style="clear: both;"></div>
+		</div>
+		<div class="drdd-info4">
+			<p>用户积分：<input type="text" id="show_redPacket" value="${MemberInfo.redPacket}"></p>
+			<input type="hidden" id="hidden_redPacket"  value="${MemberInfo.redPacket}">
+			<div style="clear: both;"></div>
+		</div>
+		
+		<div class="drdd-info4">
 			<p>配送方式：${orderInfo.wuliuName}</p>
 			<div style="clear: both;"></div>
 		</div>
@@ -120,32 +136,6 @@
 			<p>快递单号：${orderInfo.wuliuNumb}</p>
 			<div style="clear: both;"></div>
 		</div>
-		<!-- 
-		<c:if test="${orderInfo.goodsType eq 1}">
-		<div class="drdd-info4">
-			<p>商品类别：大众商品</p>
-			<div style="clear: both;"></div>
-		</div>
-		<div class="drdd-info4">
-			<p>奖励宏包：<fmt:formatNumber type="number" value="${orderInfo.orderAmount * redPark}" maxFractionDigits="0"/></p>
-			<div style="clear: both;"></div>
-		</div>
-		</c:if>
-		 -->
-		<!-- 
-		<c:if test="${orderInfo.goodsType eq 2}">
-		<div class="drdd-info4">
-			<p>商品类别：宏包商品</p>
-			<div style="clear: both;"></div>
-		</div>
-		<div class="drdd-info4">
-			<p>我的宏包：<fmt:formatNumber type="number" value="${myredPark}" maxFractionDigits="0"/></p>
-			<input type="hidden" value="${orderInfo.orderRedPacket}" id="xfRedPack">
-			<input type="hidden" value="${myredPark}" id="oldRedPack">
-			<div style="clear: both;"></div>
-		</div>
-		</c:if>
-		 -->
 
 		<div class="fbsd-info4">
 			<textarea placeholder="客户留言" id="buyerWord"></textarea>
@@ -173,5 +163,5 @@
 	var orderId = "${orderId}";
 	var addressId = "${addressId}";
 </script>
-<script src="/resources/js/web/shoppingcart/unpaidorderpage.js"></script>
+<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?12183"></script>
 </html>

@@ -45,7 +45,7 @@ public class PayAction {
 	IOrderInfoService orderInfoService;
 	
 	@RequestMapping("billPay")
-	public ModelAndView billPay(HttpServletRequest request,String id) throws Exception{
+	public ModelAndView billPay(HttpServletRequest request,String id,double balance,double cashMoney,double redPacket) throws Exception{
 		ModelAndView view = new ModelAndView();
 		MemberInfo info = SessionManage.getSessionManage(request);
 		LoggerUtils.info(log, "订单支付结算开始");
@@ -60,7 +60,7 @@ public class PayAction {
 		String spbill_create_ip = request.getRemoteAddr();
 		//config签名验证,调用微信jssdk凭证
 		ZhifuSign zhifu = new ZhifuSign();
-		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/billPay?id="+id,nonce_str,timestamp);//网页验证成功
+		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/billPay?id="+id+"&cashMoney="+cashMoney+"&redPacket="+redPacket+"&balance="+balance,nonce_str,timestamp);//网页验证成功
 		zhifu.setAppid(Constant.WEIXIN_APPID);
 		Map<String, String> way = new HashMap<String, String>();
 		PayEntity pay = new PayEntity();
@@ -72,7 +72,7 @@ public class PayAction {
 		xd.setIp(spbill_create_ip);
 		xd.setOpenid(openid);
 		xd.setWaybillid(payNo);
-		Double money = resp.getOrderAmount()+resp.getExpressFee();
+		Double money = resp.getOrderAmount()+resp.getExpressFee()-balance-cashMoney-redPacket;
 		xd.setMoney(money.toString());
 		xd.setTotal("订单支付");
 		xd.setNotify("/weChat/payNotify/billPay");
@@ -81,6 +81,9 @@ public class PayAction {
 		WeChatPayReq save = new WeChatPayReq();
 		save.setTransid(id);
 		save.setTotalfee(money);
+		save.setCashMoney(cashMoney);
+		save.setBlance(balance);
+		save.setRedPacket(redPacket);
 		save.setPayNum(Double.valueOf(resp.getOrderRedPacket()));
 		save.setOpenid(info.getMemberId());
 		save.setOuttradeno(payNo);

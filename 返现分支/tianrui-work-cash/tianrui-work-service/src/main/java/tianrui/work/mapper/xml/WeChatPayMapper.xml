@@ -9,14 +9,19 @@
     <result column="transId" property="transid" jdbcType="VARCHAR" />
     <result column="totalFee" property="totalfee" jdbcType="DOUBLE" />
     <result column="payNum" property="paynum" jdbcType="DOUBLE" />
+    <result column="cashMoney" property="cashMoney" jdbcType="DOUBLE" />
     <result column="outTradeNo" property="outtradeno" jdbcType="VARCHAR" />
     <result column="payStatus" property="paystatus" jdbcType="VARCHAR" />
     <result column="memberId" property="memberid" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="BIGINT" />
+  	
+  	<result column="blance" property="blance" jdbcType="DOUBLE" />
+    <result column="redPacket" property="redPacket" jdbcType="DOUBLE" />
+  	
   </resultMap>
   <sql id="Base_Column_List" >
     id, appId, mchId, openid, transId, totalFee, payNum, outTradeNo, payStatus, memberId, 
-    createtime
+    createtime,cashMoney,blance,redPacket
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -32,11 +37,14 @@
     insert into weChatPay (id, appId, mchId, 
       openid, transId, totalFee, 
       payNum, outTradeNo, payStatus, 
-      memberId, createtime)
+      memberId, createtime,cashMoney,blance,redPacket)
     values (#{id,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, #{mchid,jdbcType=VARCHAR}, 
       #{openid,jdbcType=VARCHAR}, #{transid,jdbcType=VARCHAR}, #{totalfee,jdbcType=DOUBLE}, 
       #{paynum,jdbcType=DOUBLE}, #{outtradeno,jdbcType=VARCHAR}, #{paystatus,jdbcType=VARCHAR}, 
-      #{memberid,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT})
+      #{memberid,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT},
+      #{cashMoney,jdbcType=DOUBLE},
+      #{blance,jdbcType=DOUBLE},
+      #{redPacket,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="tianrui.work.bean.WeChatPay" >
     insert into weChatPay
@@ -74,6 +82,15 @@
       <if test="createtime != null" >
         createtime,
       </if>
+      <if test="cashMoney != null">
+      	cashMoney,
+      </if>
+      <if test="blance != null">
+      	 blance,
+      </if>
+      <if test="redPacket != null">
+     	 redPacket,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -109,11 +126,29 @@
       <if test="createtime != null" >
         #{createtime,jdbcType=BIGINT},
       </if>
+       <if test="cashMoney != null">
+      	 #{cashMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="blance != null">
+      	 #{blance,jdbcType=DOUBLE},
+      </if>
+      <if test="redPacket != null">
+     	 #{redPacket,jdbcType=DOUBLE},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.WeChatPay" >
     update weChatPay
     <set >
+    	<if test="blance != null">
+      	 blance = #{blance,jdbcType=DOUBLE},
+      </if>
+      <if test="redPacket != null">
+     	redPacket = #{redPacket,jdbcType=DOUBLE},
+      </if>
+    	<if test="cashMoney != null">
+      	cashMoney = #{cashMoney,jdbcType=DOUBLE},
+      </if>
       <if test="appid != null" >
         appId = #{appid,jdbcType=VARCHAR},
       </if>
@@ -150,6 +185,9 @@
   <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.WeChatPay" >
     update weChatPay
     set appId = #{appid,jdbcType=VARCHAR},
+      cashMoney = #{cashMoney,jdbcType=DOUBLE},
+      blance = #{blance,jdbcType=DOUBLE},
+      redPacket = #{redPacket,jdbcType=DOUBLE},
       mchId = #{mchid,jdbcType=VARCHAR},
       openid = #{openid,jdbcType=VARCHAR},
       transId = #{transid,jdbcType=VARCHAR},

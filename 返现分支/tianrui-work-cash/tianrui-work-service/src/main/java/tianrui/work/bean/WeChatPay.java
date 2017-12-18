@@ -14,6 +14,12 @@ public class WeChatPay {
     private Double totalfee;
 
     private Double paynum;
+    
+    private Double cashMoney;
+    
+    private Double blance;
+    
+    private Double redPacket;
 
     private String outtradeno;
 
@@ -110,4 +116,28 @@ public class WeChatPay {
     public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
+
+	public Double getCashMoney() {
+		return cashMoney;
+	}
+
+	public void setCashMoney(Double cashMoney) {
+		this.cashMoney = cashMoney;
+	}
+
+	public Double getBlance() {
+		return blance;
+	}
+
+	public void setBlance(Double blance) {
+		this.blance = blance;
+	}
+
+	public Double getRedPacket() {
+		return redPacket;
+	}
+
+	public void setRedPacket(Double redPacket) {
+		this.redPacket = redPacket;
+	}
 }

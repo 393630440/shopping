@@ -73,6 +73,7 @@
   </header>
    -->
   <!--header 结束-->
+	<!-- 
 	<div class="member_top member_top_1">
 		<div class="member_top_bg"><img  src="/resources/member_bg.png"></div>
 		<div class="member_m_pic member_m_pic_1">
@@ -83,6 +84,7 @@
 			</div>
 	</div>
 	<div class="member_mp_img" data-toggle="modal" data-target="#myModalmin" data-title="我的名片" data-tpl="mp"><img src="/resources/member_mp_img.png"></div>
+	 -->
 		
 	<div class="user_top w">
 		<a href="/wechat/shop/member/memberInfo">

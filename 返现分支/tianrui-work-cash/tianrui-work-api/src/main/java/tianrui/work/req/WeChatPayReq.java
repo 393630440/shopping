@@ -14,6 +14,12 @@ public class WeChatPayReq {
     private Double totalfee;
     
     private Double payNum;
+    
+    private Double cashMoney;
+    
+    private Double blance;
+    
+    private Double redPacket;
 
     private String outtradeno;
 
@@ -99,5 +105,29 @@ public class WeChatPayReq {
 
 	public void setPayNum(Double payNum) {
 		this.payNum = payNum;
+	}
+
+	public Double getCashMoney() {
+		return cashMoney;
+	}
+
+	public void setCashMoney(Double cashMoney) {
+		this.cashMoney = cashMoney;
+	}
+
+	public Double getBlance() {
+		return blance;
+	}
+
+	public void setBlance(Double blance) {
+		this.blance = blance;
+	}
+
+	public Double getRedPacket() {
+		return redPacket;
+	}
+
+	public void setRedPacket(Double redPacket) {
+		this.redPacket = redPacket;
 	}
 }

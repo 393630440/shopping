@@ -210,7 +210,7 @@ public class MemberInfoService implements IMemberInfoService{
 		if(info != null){
 			MemberInfo upt = new MemberInfo();
 			upt.setMemberId(req.getMemberId());
-			upt.setBalance(info.getBalance()+req.getCashMoney());
+//			upt.setBalance(info.getBalance()+req.getCashMoney());
 			upt.setCashMoney(info.getCashMoney()+req.getCashMoney());
 			memberInfoMapper.updateByPrimaryKeySelective(upt);
 		}else{
