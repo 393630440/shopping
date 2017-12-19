@@ -25,7 +25,6 @@ import tianrui.work.resp.WeChatPayResp;
 import tianrui.work.vo.Result;
 
 /**
- * 寰俊鏀粯鍥炶皟
  * */
 @Controller
 @RequestMapping("weChat/payNotify")
@@ -62,18 +61,10 @@ public class PayNotifyAction {
         	String outTradeNo = map.get("out_trade_no").toString();
         	WeChatPayResp resp = weChatPayService.select(outTradeNo);
         	if(resp.getPaystatus().equals("0")){
-        		orderInfoService.orderPaySuccess(resp.getTransid(),resp.getTotalfee());
-        		MemberRechargeReq req = new MemberRechargeReq();
-        		req.setMemberId(resp.getOpenid());
-        		req.setRechargeAmount(resp.getTotalfee());
-        		req.setRemark("商品消费");
-        		req.setDesc1("2");
-        		Result rs = memberRechangeService.save(req);
-        		if(rs.getCode().equals("000000")){
-        			weChatPayService.uptPayStatus(outTradeNo);
-        			System.out.println("---充值成功");
-        			return "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
-        		}
+        		orderInfoService.orderPaySuccess(resp);
+    			weChatPayService.uptPayStatus(outTradeNo);
+    			System.out.println("---充值成功");
+    			return "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
         	}
         }
         return "";

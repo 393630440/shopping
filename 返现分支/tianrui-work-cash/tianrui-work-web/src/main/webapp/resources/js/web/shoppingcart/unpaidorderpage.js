@@ -31,7 +31,6 @@ function pay() {
 	}
 	var buyerWord = $("#buyerWord").val();
 	var uuul = "/wechat/shop/pay/billPay?id="+orderId+"&cashMoney="+show_cashMoney+"&redPacket="+show_redPacket+"&balance="+show_balance;
-	alert(uuul);
 	if (addressId == "-1" && buyerWord == "") {
 		window.location.href = uuul;
 	} else {

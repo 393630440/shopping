@@ -14,6 +14,13 @@ public class WeChatPayResp {
     private String transid;
 
     private Double totalfee;
+    
+    private Double cashMoney;
+    
+    private Double blance;
+    
+    private Double redPacket;
+
 
     private String outtradeno;
 
@@ -100,4 +107,28 @@ public class WeChatPayResp {
 	public void setMemberid(String memberid) {
         this.memberid = memberid == null ? null : memberid.trim();
     }
+
+	public Double getCashMoney() {
+		return cashMoney;
+	}
+
+	public void setCashMoney(Double cashMoney) {
+		this.cashMoney = cashMoney;
+	}
+
+	public Double getBlance() {
+		return blance;
+	}
+
+	public void setBlance(Double blance) {
+		this.blance = blance;
+	}
+
+	public Double getRedPacket() {
+		return redPacket;
+	}
+
+	public void setRedPacket(Double redPacket) {
+		this.redPacket = redPacket;
+	}
 }

@@ -112,7 +112,6 @@
                     <div class="u_money"><i>${balance }元</i></div>
               </a>
             </li>
-            <!-- 
             <li>
             	<a href="/wechat/shop/Hbao/page">
                 	<div class="u_nav_icon huibi"></div>
@@ -121,7 +120,6 @@
                     <div class="u_money"><i>${redpack }个</i></div>
               </a>
             </li>
-             -->
             <li>
             	<a href="/wechat/shop/cashback/index">
                 	<div class="u_nav_icon huibi"></div>

@@ -30,7 +30,9 @@ import tianrui.work.bean.PayEntity;
 import tianrui.work.bean.ZhifuSign;
 import tianrui.work.comm.Constant;
 import tianrui.work.req.HbaoPayReq;
+import tianrui.work.req.JfPaySuccessReq;
 import tianrui.work.req.WeChatPayReq;
+import tianrui.work.resp.WeChatPayResp;
 import tianrui.work.resp.order.OrderInfoFindResp;
 
 @Controller
@@ -50,56 +52,63 @@ public class PayAction {
 		MemberInfo info = SessionManage.getSessionManage(request);
 		LoggerUtils.info(log, "订单支付结算开始");
 		OrderInfoFindResp resp = orderInfoService.queryOrderInfoByOne(id);
-		String openid = info.getMemberId();
-		LoggerUtils.info(log, "用户openid"+openid);
-		String nonce_str = PaySignUtil.create_nonce_str().substring(0,31);//随记字符创
-	    String timestamp = PaySignUtil.create_timestamp();//时间戳
-	    //获取jsapi_ticket
-	    String jsapi_ticket = jsapi_ticket();
-		//获取发送者IP；
-		String spbill_create_ip = request.getRemoteAddr();
-		//config签名验证,调用微信jssdk凭证
-		ZhifuSign zhifu = new ZhifuSign();
-		zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/billPay?id="+id+"&cashMoney="+cashMoney+"&redPacket="+redPacket+"&balance="+balance,nonce_str,timestamp);//网页验证成功
-		zhifu.setAppid(Constant.WEIXIN_APPID);
-		Map<String, String> way = new HashMap<String, String>();
-		PayEntity pay = new PayEntity();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm"); 
-		String payNo = formatter.format(new Date())+timestamp; 
-		//微信支付下单
-		PayxiadanReq xd = new PayxiadanReq();
-		xd.setNonce_str(nonce_str);
-		xd.setIp(spbill_create_ip);
-		xd.setOpenid(openid);
-		xd.setWaybillid(payNo);
 		Double money = resp.getOrderAmount()+resp.getExpressFee()-balance-cashMoney-redPacket;
-		xd.setMoney(money.toString());
-		xd.setTotal("订单支付");
-		xd.setNotify("/weChat/payNotify/billPay");
-		way = new Payxiadan().getprepay_id(xd);
-		
-		WeChatPayReq save = new WeChatPayReq();
-		save.setTransid(id);
-		save.setTotalfee(money);
-		save.setCashMoney(cashMoney);
-		save.setBlance(balance);
-		save.setRedPacket(redPacket);
-		save.setPayNum(Double.valueOf(resp.getOrderRedPacket()));
-		save.setOpenid(info.getMemberId());
-		save.setOuttradeno(payNo);
-		weChatPayService.save(save);
-		
-		pay.setPackages("prepay_id="+way.get("prepay_id").toString());
-		
-		//微信支付签名
-		pay.setNonceStr(nonce_str);
-		pay.setTimeStamp(timestamp);
-		PayEntity payEntity=Sign.llpaysign(pay);
-		
-		view.addObject("zhifu", zhifu);
-		view.addObject("payEntity", payEntity);
-		view.addObject("payMoney", money);
-		view.setViewName("/shop/pay/weChatPay");
+		if(money<=0){
+			WeChatPayResp req = new WeChatPayResp();
+			req.setTransid(id);
+			req.setBlance(balance);
+			req.setCashMoney(cashMoney);
+			req.setRedPacket(redPacket);
+			orderInfoService.orderPaySuccess(req);
+			view.setViewName("redirect:/wechat/shop/member/userPage");
+		}else{
+			String openid = info.getMemberId();
+			LoggerUtils.info(log, "用户openid"+openid);
+			String nonce_str = PaySignUtil.create_nonce_str().substring(0,31);//随记字符创
+			String timestamp = PaySignUtil.create_timestamp();//时间戳
+			//获取jsapi_ticket
+			String jsapi_ticket = jsapi_ticket();
+			//获取发送者IP；
+			String spbill_create_ip = request.getRemoteAddr();
+			//config签名验证,调用微信jssdk凭证
+			ZhifuSign zhifu = new ZhifuSign();
+			zhifu = PaySignUtil.mapSign(jsapi_ticket, Constant.WEIXIN_BASE_URL+"/wechat/shop/pay/billPay?id="+id+"&cashMoney="+cashMoney+"&redPacket="+redPacket+"&balance="+balance,nonce_str,timestamp);//网页验证成功
+			zhifu.setAppid(Constant.WEIXIN_APPID);
+			Map<String, String> way = new HashMap<String, String>();
+			PayEntity pay = new PayEntity();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm"); 
+			String payNo = formatter.format(new Date())+timestamp; 
+			//微信支付下单
+			PayxiadanReq xd = new PayxiadanReq();
+			xd.setNonce_str(nonce_str);
+			xd.setIp(spbill_create_ip);
+			xd.setOpenid(openid);
+			xd.setWaybillid(payNo);
+			xd.setMoney(money.toString());
+			xd.setTotal("订单支付");
+			xd.setNotify("/weChat/payNotify/billPay");
+			way = new Payxiadan().getprepay_id(xd);
+			
+			WeChatPayReq save = new WeChatPayReq();
+			save.setTransid(id);
+			save.setTotalfee(money);
+			save.setCashMoney(cashMoney);
+			save.setBlance(balance);
+			save.setRedPacket(redPacket);
+			save.setPayNum(Double.valueOf(resp.getOrderRedPacket()));
+			save.setOpenid(info.getMemberId());
+			save.setOuttradeno(payNo);
+			weChatPayService.save(save);
+			pay.setPackages("prepay_id="+way.get("prepay_id").toString());
+			//微信支付签名
+			pay.setNonceStr(nonce_str);
+			pay.setTimeStamp(timestamp);
+			PayEntity payEntity=Sign.llpaysign(pay);
+			view.addObject("zhifu", zhifu);
+			view.addObject("payEntity", payEntity);
+			view.addObject("payMoney", money);
+			view.setViewName("/shop/pay/weChatPay");
+		}
 		return view;
 	}
 	

@@ -1,7 +1,9 @@
 package tianrui.work.api;
 
+import tianrui.work.req.JfPaySuccessReq;
 import tianrui.work.req.order.OrderInfoFindReq;
 import tianrui.work.req.order.OrderInfoReq;
+import tianrui.work.resp.WeChatPayResp;
 import tianrui.work.resp.order.OrderInfoFindResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
@@ -26,6 +28,8 @@ public interface IOrderInfoService {
 	/** 列表查询订单信息 */
 	PageTool<OrderInfoFindResp> queryOrderInfoByList(OrderInfoFindReq req) throws Exception;
 	/** 订单支付成功 */
-	Result orderPaySuccess(String id,Double tootal)throws Exception;
+	Result orderPaySuccess(WeChatPayResp weChatPay)throws Exception;
+	
+	Result jfPaySuccess(JfPaySuccessReq req );
 
 }

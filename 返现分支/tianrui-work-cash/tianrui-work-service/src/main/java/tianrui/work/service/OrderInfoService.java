@@ -18,10 +18,13 @@ import tianrui.work.bean.OrderInfo;
 import tianrui.work.comm.Constant;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.OrderInfoMapper;
+import tianrui.work.req.JfPaySuccessReq;
 import tianrui.work.req.gain.MemberGainSaveReq;
 import tianrui.work.req.massage.MessageReq;
 import tianrui.work.req.order.OrderInfoFindReq;
 import tianrui.work.req.order.OrderInfoReq;
+import tianrui.work.req.rechange.MemberRechargeReq;
+import tianrui.work.resp.WeChatPayResp;
 import tianrui.work.resp.configuration.ConfigurationInfoResp;
 import tianrui.work.resp.order.OrderInfoFindResp;
 import tianrui.work.vo.PageTool;
@@ -131,59 +134,46 @@ public class OrderInfoService implements IOrderInfoService {
 	}
 
 	@Override
-	public Result orderPaySuccess(String id,Double tootal) throws Exception {
+	public Result orderPaySuccess(WeChatPayResp weChatPay) throws Exception {
 		Result rs = Result.getSuccessful();
-		OrderInfo info = orderInfoMapper.selectByPrimaryKey(id);
-		if (StringUtils.equals("1", info.getOrderStatus())) {
-			// 宏包记录
-			if(info.getGoodsType().equals("2")){
-				//宏包商品
-				if (info.getOrderRedPacket() != 0) {
-					MemberGainSaveReq gain = new MemberGainSaveReq();
-					gain.setMemberId(info.getMemberId());
-					gain.setRpType("2");
-					gain.setRpNum(-Double.valueOf(info.getOrderRedPacket()));
-					gain.setSourceId("2");
-					gain.setSourceDescribe("商品消费宏包");
-					memberGainService.save(gain);
-					
-					MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
-					MemberInfo uptto = new MemberInfo();
-					uptto.setMemberId(member.getMemberId());
-					uptto.setRedPacket(member.getRedPacket() - info.getOrderRedPacket());
-					memberInfoMapper.updateByPrimaryKeySelective(uptto);
-				}
-			}else if(info.getGoodsType().equals("1")){
-				//大众商品
-				ConfigurationInfoResp sp = configurationInfoService.queryConfigurationInfoByOne("RED_PACKET_AWARD_RATE");
-				if(sp.getFlag().equals("1")){
-					//派送宏包有效
-					//宏包派送比例
-					String value = sp.getParamvalue();
-					//宏包派送数量
-					Double unmb = info.getOrderAmount()*Double.valueOf(value);
-					MemberGainSaveReq gain = new MemberGainSaveReq();
-					gain.setMemberId(info.getMemberId());
-					gain.setRpType("2");
-					gain.setRpNum(unmb);
-					gain.setSourceId("1");
-					gain.setSourceDescribe("购买商品赠送宏包");
-					memberGainService.save(gain);
-					
-					MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
-					MemberInfo uptto = new MemberInfo();
-					uptto.setMemberId(member.getMemberId());
-					uptto.setRedPacket(member.getRedPacket() + unmb);
-					memberInfoMapper.updateByPrimaryKeySelective(uptto);
-				}
+		OrderInfo info = orderInfoMapper.selectByPrimaryKey(weChatPay.getTransid());
+		if (StringUtils.equals("1", info.getOrderStatus())) {//待付款
+			Double coMone = 0.00;
+			if(weChatPay.getTotalfee()!=null){
+				coMone = coMone + weChatPay.getTotalfee();
 			}
+			if(weChatPay.getBlance()!=null){
+				coMone = coMone + weChatPay.getBlance();
+			}
+			if(weChatPay.getCashMoney()!=null){
+				coMone = coMone + weChatPay.getCashMoney();
+			}
+			if(weChatPay.getRedPacket()!=null){
+				coMone = coMone + weChatPay.getRedPacket();
+			}
+			
+			MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
+			MemberInfo uptto = new MemberInfo();
+			uptto.setMemberId(member.getMemberId());
+			uptto.setRedPacket(member.getRedPacket() - weChatPay.getRedPacket());
+			uptto.setBalance(member.getBalance()-weChatPay.getBlance());
+			uptto.setCashMoney(member.getCashMoney()-weChatPay.getCashMoney());
+			memberInfoMapper.updateByPrimaryKeySelective(uptto);
+			
+			MemberRechargeReq req = new MemberRechargeReq();
+    		req.setMemberId(member.getMemberId());
+    		req.setRechargeAmount(coMone);
+    		req.setRemark("商品消费");
+    		req.setDesc1("2");
+    		memberRechangeService.save(req);
+			
 			//TODO
 			MessageReq msg = new MessageReq();
 			msg.setId(Constant.MESSAGE_WDING);
 			msg.setOpenid(info.getMemberId());
 			msg.setFirst("哎呀，购物成功了，欢迎对本平台的支持..\n");
 			msg.setObj1(info.getOrderCode());
-			msg.setObj2(tootal.toString());
+			msg.setObj2(coMone.toString());
 			msg.setFoots("\n客服人员将以最快的方式为您寄送宝贝");
 			weChatMassageService.saveMassage(msg);
 			OrderInfo upt = new OrderInfo();
@@ -195,6 +185,12 @@ public class OrderInfoService implements IOrderInfoService {
 			rs.setError("不合法的支付状态");
 		}
 		return rs;
+	}
+
+	@Override
+	public Result jfPaySuccess(JfPaySuccessReq req) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
