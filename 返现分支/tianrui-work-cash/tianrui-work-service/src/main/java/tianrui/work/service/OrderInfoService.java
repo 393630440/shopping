@@ -13,9 +13,13 @@ import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IOrderInfoService;
 import tianrui.work.api.IWeChatMassageService;
+import tianrui.work.bean.CashBackInfo;
+import tianrui.work.bean.MemberGain;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.OrderInfo;
 import tianrui.work.comm.Constant;
+import tianrui.work.mapper.java.CashBackInfoMapper;
+import tianrui.work.mapper.java.MemberGainMapper;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.OrderInfoMapper;
 import tianrui.work.req.JfPaySuccessReq;
@@ -29,6 +33,7 @@ import tianrui.work.resp.configuration.ConfigurationInfoResp;
 import tianrui.work.resp.order.OrderInfoFindResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
+import tianrui.work.vo.UUIDUtil;
 
 /**
  * 订单信息
@@ -50,6 +55,10 @@ public class OrderInfoService implements IOrderInfoService {
 	IConfigurationInfoService configurationInfoService;
 	@Autowired
 	IWeChatMassageService weChatMassageService;
+	@Autowired
+	MemberGainMapper memberGainMapper;
+	@Autowired
+	CashBackInfoMapper cashBackInfoMapper;
 
 	@Override
 	public Result addOrderInfo(OrderInfoReq req) throws Exception {
@@ -138,6 +147,8 @@ public class OrderInfoService implements IOrderInfoService {
 		Result rs = Result.getSuccessful();
 		OrderInfo info = orderInfoMapper.selectByPrimaryKey(weChatPay.getTransid());
 		if (StringUtils.equals("1", info.getOrderStatus())) {//待付款
+			MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
+			
 			Double coMone = 0.00;
 			if(weChatPay.getTotalfee()!=null){
 				coMone = coMone + weChatPay.getTotalfee();
@@ -146,13 +157,30 @@ public class OrderInfoService implements IOrderInfoService {
 				coMone = coMone + weChatPay.getBlance();
 			}
 			if(weChatPay.getCashMoney()!=null){
-				coMone = coMone + weChatPay.getCashMoney();
+				CashBackInfo in = new CashBackInfo();
+				in.setId(UUIDUtil.getUUID());
+				in.setMemberId(member.getMemberId());
+				in.setMemberName(member.getWechatName());
+				in.setBackAmount(0.00);
+				in.setBackMoney(-weChatPay.getCashMoney());
+				in.setBackRemark("购买商品消费");
+				in.setCreateTime(System.currentTimeMillis());
+				in.setDesc1("3");
+				cashBackInfoMapper.insertSelective(in);
 			}
 			if(weChatPay.getRedPacket()!=null){
-				coMone = coMone + weChatPay.getRedPacket();
+				MemberGain gain = new MemberGain();
+				gain.setId(UUIDUtil.getUUID());
+				gain.setMemberId(member.getMemberId());
+				gain.setRpType("2");
+				gain.setWechatName(member.getWechatName());
+				gain.setRpNum(-weChatPay.getRedPacket());
+				gain.setSourceId("2");
+				gain.setSourceDescribe("购买商品消费宏包");
+				gain.setCreatetime(System.currentTimeMillis());
+				memberGainMapper.insertSelective(gain);
 			}
 			
-			MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
 			MemberInfo uptto = new MemberInfo();
 			uptto.setMemberId(member.getMemberId());
 			uptto.setRedPacket(member.getRedPacket() - weChatPay.getRedPacket());
@@ -160,12 +188,14 @@ public class OrderInfoService implements IOrderInfoService {
 			uptto.setCashMoney(member.getCashMoney()-weChatPay.getCashMoney());
 			memberInfoMapper.updateByPrimaryKeySelective(uptto);
 			
-			MemberRechargeReq req = new MemberRechargeReq();
-    		req.setMemberId(member.getMemberId());
-    		req.setRechargeAmount(coMone);
-    		req.setRemark("商品消费");
-    		req.setDesc1("2");
-    		memberRechangeService.save(req);
+			if(coMone > 0){
+				MemberRechargeReq req = new MemberRechargeReq();
+				req.setMemberId(member.getMemberId());
+				req.setRechargeAmount(-coMone);
+				req.setRemark("商品消费");
+				req.setDesc1("2");
+				memberRechangeService.save(req);
+			}
 			
 			//TODO
 			MessageReq msg = new MessageReq();

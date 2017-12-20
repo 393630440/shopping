@@ -81,7 +81,7 @@ function innerHTML(data,type){
 		if(data[a].rechargeStatus == "0"){
 			sta = "充值中";
 		}else if(data[a].rechargeStatus == "1"){
-			sta = "充值成功";
+			sta = "消费成功";
 		}else if(data[a].rechargeStatus == "2"){
 			sta = "充值失败";
 		}

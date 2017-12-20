@@ -82,6 +82,7 @@
 			<p class="p1 f-l">共 ${orderInfo.goodsNum} 件商品</p>
 			<p class="p2 f-r">
 				总计：<span>${orderInfo.price}</span>
+				<input type="hidden" id="price_info" value="${orderInfo.orderAmount}">
 			</p>
 			<div style="clear: both;"></div>
 		</div>
@@ -108,6 +109,7 @@
 
 		<div class="drdd-info4">
 			<p>配送费：${orderInfo.expressFeeStr}</p>
+			<input type="hidden" id="expressFeeStr_info" value="${orderInfo.expressFee}">
 			<div style="clear: both;"></div>
 		</div>
 		
@@ -163,5 +165,5 @@
 	var orderId = "${orderId}";
 	var addressId = "${addressId}";
 </script>
-<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?12183"></script>
+<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?1220"></script>
 </html>

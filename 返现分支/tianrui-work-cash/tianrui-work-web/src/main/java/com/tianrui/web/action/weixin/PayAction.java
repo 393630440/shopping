@@ -53,6 +53,7 @@ public class PayAction {
 		LoggerUtils.info(log, "订单支付结算开始");
 		OrderInfoFindResp resp = orderInfoService.queryOrderInfoByOne(id);
 		Double money = resp.getOrderAmount()+resp.getExpressFee()-balance-cashMoney-redPacket;
+		LoggerUtils.info(log, "结算金额="+money);
 		if(money<=0){
 			WeChatPayResp req = new WeChatPayResp();
 			req.setTransid(id);

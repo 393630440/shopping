@@ -29,6 +29,13 @@ function pay() {
 		alert("用户积分不足");
 		return;
 	}
+	var price_info = $("#price_info").val();
+	var expressFeeStr_info = $("#expressFeeStr_info").val();
+	if((Number(show_balance)+Number(show_cashMoney)+Number(show_redPacket))
+			>(Number(price_info)+Number(expressFeeStr_info))){
+		alert("请输入正确的金额");
+		return;
+	}
 	var buyerWord = $("#buyerWord").val();
 	var uuul = "/wechat/shop/pay/billPay?id="+orderId+"&cashMoney="+show_cashMoney+"&redPacket="+show_redPacket+"&balance="+show_balance;
 	if (addressId == "-1" && buyerWord == "") {
