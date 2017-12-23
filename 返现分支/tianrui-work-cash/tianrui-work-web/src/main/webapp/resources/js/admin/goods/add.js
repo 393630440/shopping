@@ -146,7 +146,7 @@ function add(buttonType) {
 		redPacket = $("#redPacket").val();
 	}
 	if (redPacket == "")
-		msg += "商品宏包不能为空\n";
+		msg += "商品积分不能为空\n";
 
 	if (goodsImgFileIds.length == 0)
 		msg += "商品图片不能为空\n";

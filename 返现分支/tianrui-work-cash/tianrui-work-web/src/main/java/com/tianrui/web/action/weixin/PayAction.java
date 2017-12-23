@@ -169,7 +169,7 @@ public class PayAction {
 	@RequestMapping("page")
 	public ModelAndView page(HttpServletRequest request,HbaoPayReq req) throws Exception{
 		
-		LoggerUtils.info(log, "宏包交易结算开始");
+		LoggerUtils.info(log, "积分交易结算开始");
 		ModelAndView view = new ModelAndView();
 		MemberInfo info = SessionManage.getSessionManage(request);
 		
@@ -196,7 +196,7 @@ public class PayAction {
 		xd.setOpenid(openid);
 		xd.setWaybillid(payNo);
 		xd.setMoney(req.getPayMoney().toString());
-		xd.setTotal("宏包交易");
+		xd.setTotal("积分交易");
 		xd.setNotify("/weChat/payNotify/main");
 		way = new Payxiadan().getprepay_id(xd);
 		

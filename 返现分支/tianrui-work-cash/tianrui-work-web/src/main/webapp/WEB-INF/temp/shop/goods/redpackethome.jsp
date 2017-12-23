@@ -8,7 +8,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>宏包商品</title>
+<title>积分商品</title>
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/owl.carousel.css" rel="stylesheet">
 <link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
@@ -33,7 +33,7 @@
 						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
-				<h2>宏包商品</h2>
+				<h2>积分商品</h2>
 			</div>
 		</header>
 		<!--header 结束-->
@@ -58,7 +58,7 @@
 		<!-- 商品列表 -->
 		<div class="m_baoliao w">
 			<div class="baoliao_title">
-				<span>宏包商城</span><em><span onclick="init(0,0)"><img src="${staticRoot}/web/images/iconfont-shuaxin.png"></span></em>
+				<span>积分商城</span><em><span onclick="init(0,0)"><img src="${staticRoot}/web/images/iconfont-shuaxin.png"></span></em>
 			</div>
 			<ul class="ssjg-ul-zx" id="innerHml"></ul>
 			<div class="baoliao_content" style="margin-top: 0px; margin-bottom: 50px;"></div>

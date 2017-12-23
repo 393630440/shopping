@@ -7,7 +7,7 @@
 <meta name="author" content="m.178hui.com" />
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<title>宏包</title>
+<title>积分明细</title>
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 
 <link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
@@ -32,16 +32,20 @@ $(window).load(function() {
   </div>
   <!--页面加载 结束--> 
   <!--header 开始-->
+  <!-- 
   <header>
     <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
-      <h2>宏包</h2>
+      <h2>积分</h2>
       <div class="header_right shaixuan"><img src="${staticRoot}/web/images/iconfont-shaixuan.png"></div>
     </div>
   </header>
+   -->
   <!--header 结束-->
 	<ul class="ui-tab-nav">
-         <li><a href="/wechat/shop/Hbao/pubPage">宏包广场</a></li>
-         <li class="current"><a href="/wechat/shop/Hbao/page">我的宏包</a></li>
+         <!-- 
+         <li><a href="/wechat/shop/Hbao/pubPage">积分广场</a></li>
+          -->
+         <li class="current"><a href="/wechat/shop/Hbao/page">积分明细</a></li>
    	</ul>
    	 <ul class="gwc-ul1" id="innerHml">
 
@@ -80,7 +84,7 @@ function innerHTML(data,type){
 	for (var a = 0; a < data.length; a++) {
 		var hml = "<div class='msg w'>"+
 				"<div class='msg_title'>"+
-				"<h1>宏包交易记录</h1>"+
+				"<h1>积分明细记录</h1>"+
 				"<span>"+(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 				"</div>"+
 				"<div class='msg_content'>"+

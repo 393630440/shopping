@@ -46,7 +46,7 @@
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
 								<c:if test="${goodsInfo.goodsType == '1'}">大众商品</c:if>
-								<c:if test="${goodsInfo.goodsType == '2'}">宏包商品</c:if>
+								<c:if test="${goodsInfo.goodsType == '2'}">积分商品</c:if>
 							</div>
 						</div>
 						 -->
@@ -93,7 +93,7 @@
 							<div class="am-form-group am-cf" id="redPacket_div">
 								<div class="zuo">宏包：</div>
 								<div class="you">
-									<input type="text" class="am-input-sm" id="redPacket" name="redPacket" value="${goodsInfo.redPacket}" placeholder="请输入宏包数量">
+									<input type="text" class="am-input-sm" id="redPacket" name="redPacket" value="${goodsInfo.redPacket}" placeholder="请输入积分数量">
 								</div>
 							</div>
 						</c:if>

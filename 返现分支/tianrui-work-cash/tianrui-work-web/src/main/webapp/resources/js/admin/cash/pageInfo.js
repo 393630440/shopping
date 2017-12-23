@@ -22,6 +22,7 @@ function innerHTML(data,pageNo){
 	for (var a = 0; a < data.length; a++) {
 		var hml = "<tr><td>"+(a+1)+"</td>" +
 				"<td>"+(data[a].memberName||"")+"</td>" +
+				"<td>"+(data[a].backRemark||"")+"</td>" +
 				"<td>"+(data[a].backAmount||"")+"</td>" +
 				"<td>"+(data[a].backMoney||"")+"</td>" +
 				"<td>"+(data[a].backRatio||"")+"</td>" +

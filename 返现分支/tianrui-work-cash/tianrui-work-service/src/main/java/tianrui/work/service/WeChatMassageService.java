@@ -40,9 +40,9 @@ public class WeChatMassageService implements IWeChatMassageService{
 //		req.setId(Constant.MESSAGE_HPAO);
 //		req.setOpenid("o-OJTv_ftDalms42QPVn38jZ30L8");
 //		req.setObj1("2015-12-12");//交易时间
-//		req.setObj2("宏包交易");//交易类型
+//		req.setObj2("积分交易");//交易类型
 //		req.setObj3("15");//交易积分
-//		req.setObj4("个人宏包");//交易来源
+//		req.setObj4("个人积分");//交易来源
 //		putMessageHbao(req,token);
 //		
 		req.setId(Constant.MESSAGE_DINGD);
@@ -213,7 +213,7 @@ public class WeChatMassageService implements IWeChatMassageService{
 		JSONObject dd = new JSONObject();
 		
 		JSONObject dd2 = new JSONObject();
-		dd2.put("value", "您有会员宏包交易...\n");//消息提示
+		dd2.put("value", "您有会员积分交易...\n");//消息提示
 		dd2.put("color", "#173177");
 		dd.put("first", dd2);
 		

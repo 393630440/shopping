@@ -75,6 +75,7 @@
 		               	<th class="table-type">所在城市</th>
 		               	<th class="table-type">余额</th>
 		               	<th class="table-type">返现金额</th>
+		               	<th class="table-type">积分</th>
 		               	<th class="table-type">关注时间</th>
 		                <th width="163px" class="table-set">操作</th>
 		              </tr>
@@ -104,6 +105,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/member/page.js?1211"></script>
+<script src="/resources/js/admin/member/page.js?1223"></script>
 </body>
 </html>

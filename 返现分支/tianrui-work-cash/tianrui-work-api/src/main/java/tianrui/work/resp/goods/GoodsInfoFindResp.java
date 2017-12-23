@@ -120,20 +120,20 @@ public class GoodsInfoFindResp {
 				if (goodsType.equals("1")) {
 					price = "￥" + goodsPrice;
 				} else if (goodsType.equals("2")) {
-					price = "￥" + goodsPrice + " + " + redPacket + "宏包";
+					price = "￥" + goodsPrice + " + " + redPacket + "积分";
 				}
 			} else {
 				if (memberRank.equals("1")) {
 					if (goodsType.equals("1")) {
 						price = "￥" + goodsPrice;
 					} else if (goodsType.equals("2")) {
-						price = "￥" + goodsPrice + " + " + redPacket + "宏包";
+						price = "￥" + goodsPrice + " + " + redPacket + "积分";
 					}
 				} else if (memberRank.equals("2")) {
 					if (goodsType.equals("1")) {
 						price = "￥" + discountPrice;
 					} else if (goodsType.equals("2")) {
-						price = "￥" + discountPrice + " + " + redPacket + "宏包";
+						price = "￥" + discountPrice + " + " + redPacket + "积分";
 					}
 				}
 			}

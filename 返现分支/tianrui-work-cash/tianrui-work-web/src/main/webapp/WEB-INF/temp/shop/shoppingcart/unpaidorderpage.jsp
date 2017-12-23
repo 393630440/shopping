@@ -165,5 +165,5 @@
 	var orderId = "${orderId}";
 	var addressId = "${addressId}";
 </script>
-<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?1220"></script>
+<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?1223"></script>
 </html>

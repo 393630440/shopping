@@ -27,8 +27,8 @@
 		<ul>
 			<li><a href="/admin/shop/member/page">会员列表</a></li>
 			<!-- 
-			<li><a href="/admin/shop/member/saveHbaoPage">宏包派发</a></li>
-			<li><a href="/admin/shop/member/gainPage">宏包记录</a></li>
+			<li><a href="/admin/shop/member/saveHbaoPage">积分派发</a></li>
+			<li><a href="/admin/shop/member/gainPage">积分记录</a></li>
 			 -->
 			<li><a href="/admin/shop/deposit/page">提现管理</a></li>
 		</ul>

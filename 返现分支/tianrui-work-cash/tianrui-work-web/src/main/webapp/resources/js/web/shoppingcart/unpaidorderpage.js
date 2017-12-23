@@ -36,6 +36,9 @@ function pay() {
 		alert("请输入正确的金额");
 		return;
 	}
+	show_cashMoney = show_cashMoney == ""?"0":show_cashMoney;
+	show_redPacket = show_redPacket == ""?"0":show_redPacket;
+	show_balance = show_balance == ""?"0":show_balance;
 	var buyerWord = $("#buyerWord").val();
 	var uuul = "/wechat/shop/pay/billPay?id="+orderId+"&cashMoney="+show_cashMoney+"&redPacket="+show_redPacket+"&balance="+show_balance;
 	if (addressId == "-1" && buyerWord == "") {

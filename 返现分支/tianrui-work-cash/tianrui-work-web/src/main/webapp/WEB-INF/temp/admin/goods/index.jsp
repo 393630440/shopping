@@ -55,7 +55,7 @@
 								<select id="goodsType" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
 									<option value="">商品类型</option>
 									<option value="1">大众商品</option>
-									<option value="2">宏包商品</option>
+									<option value="2">积分商品</option>
 								</select>
 							</div>
 						</li>
@@ -88,7 +88,7 @@
 								<th class="table-type">商品价格</th>
 								<th class="table-type">折扣价格</th>
 								<!-- 
-								<th class="table-type">商品宏包</th>
+								<th class="table-type">商品积分</th>
 								 -->
 								<th class="table-date am-hide-sm-only">发布时间</th>
 								<th width="163px" class="table-set">操作</th>

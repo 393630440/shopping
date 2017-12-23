@@ -46,7 +46,7 @@
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
 								<c:if test="${adInfo.type == '1'}">大众商品</c:if>
-								<c:if test="${adInfo.type == '2'}">宏包商品</c:if>
+								<c:if test="${adInfo.type == '2'}">积分商品</c:if>
 							</div>
 						</div>
 						 -->

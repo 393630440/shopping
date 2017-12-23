@@ -32,4 +32,6 @@ public interface IMemberInfoService {
 	public Result changeHbao(HbaoPayReq req)throws Exception;
 	/**定时返现修改用户余额*/
 	public Result cashBackUptMember(MemberInfoHBaoReq req)throws Exception;
+	/** 返现余额 提到账户余额*/
+	public Result uptCashBack(String id,Double cashMoney)throws Exception;
 }

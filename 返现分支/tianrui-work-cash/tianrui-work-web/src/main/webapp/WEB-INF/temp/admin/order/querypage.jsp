@@ -49,7 +49,7 @@
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
 								<c:if test="${orderInfo.goodsType == '1'}">大众商品</c:if>
-								<c:if test="${orderInfo.goodsType == '2'}">宏包商品</c:if>
+								<c:if test="${orderInfo.goodsType == '2'}">积分商品</c:if>
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -69,7 +69,7 @@
 							<div class="you">${orderInfo.orderAmount}</div>
 						</div>
 						<div class="am-form-group am-cf">
-							<div class="zuo">订单总宏包：</div>
+							<div class="zuo">订单总积分：</div>
 							<div class="you">${orderInfo.orderRedPacket}</div>
 						</div>
 						<div class="am-form-group am-cf">

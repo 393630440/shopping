@@ -7,7 +7,7 @@
 <meta name="author" content="m.178hui.com" />
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<title>宏包</title>
+<title>积分</title>
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/baoliao.css" rel="stylesheet" type="text/css">
@@ -26,14 +26,14 @@
   <!--header 开始-->
   <header>
     <div class="header"> <a class="new-a-back" href="/wechat/shop/member/userPage"> <span><img src="${staticRoot}/web/images/iconfont-fanhui.png"></span> </a>
-      <h2>宏包</h2>
+      <h2>积分</h2>
       <div class="header_right shaixuan"><img src="${staticRoot}/web/images/iconfont-shaixuan.png"></div>
     </div>
   </header>
   <!--header 结束-->
 	<ul class="ui-tab-nav">
-         <li class="current"><a href="/wechat/shop/Hbao/pubPage">宏包广场</a></li>
-         <li><a href="/wechat/shop/Hbao/page">我的宏包</a></li>
+         <li class="current"><a href="/wechat/shop/Hbao/pubPage">积分广场</a></li>
+         <li><a href="/wechat/shop/Hbao/page">我的积分</a></li>
    	</ul>
    <span id="innerHml"></span>
   </div>
@@ -73,7 +73,7 @@ function innerHTML(data,type){
 	for (var a = 0; a < data.length; a++) {
 		var hml = "<a href='/wechat/shop/HbaoPay/page?id="+data[a].memberId+"'><div class='baoliao_content'><div class='bl_img'><img src='"+data[a].wechatImg+"' /></div>"+
         "<div class='bl_right'>"+
-        "<div class='bl_title'>"+data[a].wechatName+"--出售宏包数量"+data[a].redPacket+"个</div>"+
+        "<div class='bl_title'>"+data[a].wechatName+"--出售积分数量"+data[a].redPacket+"个</div>"+
         "<div class='bl_tag'>"+
         "<div class='bl_price'>优惠价："+(data[a].redPacket*data[a].rpExchangeRatio)+"</div>"+
         "<div class='bl_oprice'>原价："+data[a].redPacket+"</div>"+

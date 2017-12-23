@@ -52,6 +52,7 @@
 		              <tr class="am-success">
 		                <th class="table-title">序号</th>
 		               	<th class="table-type">返现用户</th>
+		               	<th class="table-type">返现备注</th>
 		               	<th class="table-title">返现总额 </th>
 		               	<th class="table-type">返现金额</th>
 		               	<th class="table-type">返现比例</th>
@@ -77,6 +78,6 @@
 		</div>
 </div>
 <script src="${staticRoot}/admin/js/amazeui.min.js"></script>
-<script src="/resources/js/admin/cash/pageInfo.js?01114"></script>
+<script src="/resources/js/admin/cash/pageInfo.js?1223"></script>
 </body>
 </html>

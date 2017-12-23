@@ -51,7 +51,7 @@
 									<input type="radio" name="goodsType" value="1" onclick="goodsType(1);" checked="checked"> 大众商品
 								</label>
 								<label class="am-checkbox-inline">
-									<input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 宏包商品
+									<input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 积分商品
 								</label>
 							</div>
 						</div>
@@ -102,9 +102,9 @@
 							</div>
 						</div>
 						<div class="am-form-group am-cf" id="redPacket_div" hidden="hidden">
-							<div class="zuo">宏包：</div>
+							<div class="zuo">积分：</div>
 							<div class="you">
-								<input type="text" class="am-input-sm" id="redPacket" name="redPacket" placeholder="请输入宏包数量" value="0">
+								<input type="text" class="am-input-sm" id="redPacket" name="redPacket" placeholder="请输入积分数量" value="0">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">

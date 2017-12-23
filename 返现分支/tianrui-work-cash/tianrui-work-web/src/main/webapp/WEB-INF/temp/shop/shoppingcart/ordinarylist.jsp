@@ -56,7 +56,7 @@
 			<ul class="ui-tab-nav">
 				<li class="current"><a href="javascript:void(0);">我的购物车</a></li>
 				<!-- 
-				<li><a href="/wechat/shop/shoppingcart/redpacketlist">宏包商品</a></li>
+				<li><a href="/wechat/shop/shoppingcart/redpacketlist">积分商品</a></li>
 				 -->
 			</ul>
 		</div>

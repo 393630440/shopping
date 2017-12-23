@@ -56,7 +56,7 @@ function goodsNumShow() {
 		if (goodsType1 == "1")
 			subtotalShowStr += (goodsPrice * newGoodsNum).toFixed(2);
 		else if (goodsType1 == "2")
-			subtotalShowStr += (goodsPrice * newGoodsNum).toFixed(2) + " + " + (goodsRedPacket * newGoodsNum) + "宏包";
+			subtotalShowStr += (goodsPrice * newGoodsNum).toFixed(2) + " + " + (goodsRedPacket * newGoodsNum) + "积分";
 		else
 			continue;
 
@@ -66,7 +66,7 @@ function goodsNumShow() {
 		$(subtotal_showId).append(subtotalShowStr);
 	}
 
-	// var sizeTotalStr = "共" + size + "件商品，总计：<span>￥" + price + " + " + redPacket + "宏包</span>";
+	// var sizeTotalStr = "共" + size + "件商品，总计：<span>￥" + price + " + " + redPacket + "积分</span>";
 	// $("#size_total").empty();
 	// $("#size_total").append(sizeTotalStr);
 }
@@ -92,7 +92,7 @@ function check() {
 		$("#size_total").show();
 		var sizeTotalStr = "共选 " + size + " 件商品，总计：<span>￥" + price.toFixed(2);
 		if (goodsType == "2")
-			sizeTotalStr += " + " + redPacket + "宏包</span>";
+			sizeTotalStr += " + " + redPacket + "积分</span>";
 		$("#size_total").empty();
 		$("#size_total").append(sizeTotalStr);
 	} else {

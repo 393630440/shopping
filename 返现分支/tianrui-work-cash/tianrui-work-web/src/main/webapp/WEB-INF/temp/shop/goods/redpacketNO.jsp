@@ -8,7 +8,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>宏包商品</title>
+<title>积分商品</title>
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/owl.carousel.css" rel="stylesheet">
 <link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
@@ -31,7 +31,7 @@
 						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
-				<h2>宏包商品</h2>
+				<h2>积分商品</h2>
 			</div>
 		</header>
 		<!--header 结束-->
@@ -55,7 +55,7 @@
 		</div>
 		<!-- 商品列表 -->
 		<div class="m_baoliao w">
-		  	<div class="baoliao_title"><span>宏包商城</span><em><span onclick="init(0,0)"><img src="${staticRoot}/web/images/iconfont-shuaxin.png"></span></em></div>
+		  	<div class="baoliao_title"><span>积分商城</span><em><span onclick="init(0,0)"><img src="${staticRoot}/web/images/iconfont-shuaxin.png"></span></em></div>
 		    <div class="baoliao_list" id="innerHml">
 		        <a href="#">
 		        <div class="baoliao_content">
@@ -86,7 +86,7 @@
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
 $(function(){
-	alert("您的消费金额不足，不能进入宏包商城");
+	alert("您的消费金额不足，不能进入积分商城");
 	window.location.href="/wechat/shop/goods/goodshome?goodsType=1";
 	init(0,0);
 });
@@ -116,7 +116,7 @@ function innerHTML(date,type){
 		if(date[a].goodsType == 1){
 			goodsType = "大众商品";
 		}else if(date[a].goodsType == 2) {
-			goodsType = "宏包商品";
+			goodsType = "积分商品";
 		}
 		
 		var hml = "<a href='/wechat/shop/goods/goodsdetails?goodsId="+date[a].goodsId+"'>"+

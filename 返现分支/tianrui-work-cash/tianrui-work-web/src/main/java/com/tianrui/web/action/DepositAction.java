@@ -37,6 +37,15 @@ public class DepositAction {
 	IMemberInfoService memberInfoService;
 	@Autowired
 	IMemberRechangeService memberRechangeService;
+	
+	@RequestMapping("uptCashBack")
+	@ResponseBody
+	public Result uptCashBack(String id,Double cashMoney) throws Exception{
+		Result rs = Result.getSuccessful();
+		rs = memberInfoService.uptCashBack(id, cashMoney);
+		return rs;
+	}
+	
 	/**
 	 * 提现
 	 * */
@@ -126,5 +135,4 @@ public class DepositAction {
 		rs.setData(page);
 		return rs;
 	}
-	
 }

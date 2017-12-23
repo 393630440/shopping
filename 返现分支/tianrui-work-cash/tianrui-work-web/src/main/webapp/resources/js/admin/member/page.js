@@ -51,8 +51,8 @@ function innerHTML(data,pageNo){
 				"<td>"+data[a].birthTime+"</td>" +
 				"<td>"+data[a].city+"</td>" +
 				"<td>"+data[a].balance+"</td>" +
-//				"<td>"+data[a].redPacket+"</td>" +
 				"<td>"+data[a].cashMoney+"</td>" +
+				"<td>"+data[a].redPacket+"</td>" +
 				"<td>"+(data[a].createtime==undefined?"":(new Date(data[a].createtime).format("yyyy-MM-dd hh:mm:ss")))+"</td>" +
 				"<td><div class='am-btn-toolbar'>" +
 					"<div class='am-btn-group am-btn-group-xs'>" +

@@ -34,6 +34,26 @@ public class MemberInfoService implements IMemberInfoService{
 	@Autowired
 	IMemberGainService memberGainService;
 	
+	
+	@Override
+	public Result uptCashBack(String id, Double cashMoney) throws Exception {
+		Result rs = Result.getSuccessful();
+		MemberInfo info = memberInfoMapper.selectByPrimaryKey(id);
+		if(cashMoney <= info.getCashMoney()){
+			MemberInfo upt = new MemberInfo();
+			upt.setMemberId(id);
+			upt.setBalance(info.getBalance()+(cashMoney/2));
+			upt.setRedPacket(info.getRedPacket()+(cashMoney/2));
+			upt.setCashMoney(info.getCashMoney()-cashMoney);
+			memberInfoMapper.updateByPrimaryKeySelective(upt);
+		}else{
+			rs.setCode("0");
+			rs.setError("输入金额有误");
+		}
+		return rs;
+	}
+
+	
 	@Override
 	public Result selectByOpenid(String id) throws Exception {
 		Result rs = Result.getSuccessful();
@@ -136,7 +156,7 @@ public class MemberInfoService implements IMemberInfoService{
 		save.setMemberId(req.getMemberId());
 		save.setRpNum(req.getRedPacket());
 		save.setRpType("2");
-		save.setSourceDescribe("商城派送宏包");
+		save.setSourceDescribe("商城派送积分");
 		save.setSourceId("1");
 		memberGainService.save(save);
 		return rs;
@@ -151,7 +171,7 @@ public class MemberInfoService implements IMemberInfoService{
 		MemberInfo toPay = memberInfoMapper.selectByPrimaryKey(req.getToPayOpenid());
 		if(req.getPayNum()>toPay.getRedPacket()){
 			rs.setCode("1");
-			rs.setError("宏包数量不够");
+			rs.setError("积分数量不够");
 			return rs;
 		}
 		
@@ -164,7 +184,7 @@ public class MemberInfoService implements IMemberInfoService{
 		save.setMemberId(goPay.getMemberId());
 		save.setRpNum(req.getPayNum());
 		save.setRpType("2");
-		save.setSourceDescribe("宏包商城购买宏包");
+		save.setSourceDescribe("积分商城购买积分");
 		save.setSourceId("1");
 		memberGainService.save(save);
 		
@@ -179,7 +199,7 @@ public class MemberInfoService implements IMemberInfoService{
 		save2.setMemberId(toPay.getMemberId());
 		save2.setRpNum(req.getPayNum());
 		save2.setRpType("2");
-		save2.setSourceDescribe("宏包商城卖出宏包");
+		save2.setSourceDescribe("积分商城卖出积分");
 		save2.setSourceId("1");
 		memberGainService.save(save2);
 		return rs;
@@ -219,5 +239,5 @@ public class MemberInfoService implements IMemberInfoService{
 		}
 		return rs;
 	}
-
+	
 }

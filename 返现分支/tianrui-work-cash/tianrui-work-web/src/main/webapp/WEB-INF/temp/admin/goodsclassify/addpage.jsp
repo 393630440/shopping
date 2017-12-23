@@ -46,7 +46,7 @@
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
 								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="1"> 大众商品 </label> 
-								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="2"> 宏包商品 </label>
+								<label class="am-checkbox-inline"> <input type="radio" name="goodsType" value="2"> 积分商品 </label>
 							</div>
 						</div>
 						 -->

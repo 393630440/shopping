@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>宏包记录</title>
+<title>积分记录</title>
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
@@ -37,8 +37,8 @@
 		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 宏包记录</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">宏包记录</a></dl>
+		      <ul class="am-icon-flag on"> 积分记录</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">积分记录</a></dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>
@@ -54,7 +54,7 @@
 		               	<th class="table-type">微信唯一标识</th>
 		               	<th class="table-type">微信名称</th>
 		               	<th class="table-type">描述</th>
-		               	<th class="table-type">宏包</th>
+		               	<th class="table-type">积分</th>
 		               	<th class="table-type">操作时间</th>
 		                <!-- 
 		                <th width="163px" class="table-set">操作</th>

@@ -149,7 +149,7 @@ public class ShoppingCartFindResp {
 			if (goodsType.equals("1")) {
 				price = "￥" + goodsPrice;
 			} else if (goodsType.equals("2")) {
-				price = "￥" + goodsPrice + " + " + goodsRedPacket + "宏包";
+				price = "￥" + goodsPrice + " + " + goodsRedPacket + "积分";
 			} else {
 			}
 		}
@@ -170,7 +170,7 @@ public class ShoppingCartFindResp {
 			} else if (goodsType.equals("2")) {
 				double d = goodsPrice * goodsNum;
 				d = (double) Math.round(d * 100) / 100;
-				subtotal = "￥" + String.valueOf(d) + " + " + (goodsRedPacket * goodsNum) + "宏包";
+				subtotal = "￥" + String.valueOf(d) + " + " + (goodsRedPacket * goodsNum) + "积分";
 			} else {
 			}
 		}

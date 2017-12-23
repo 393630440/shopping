@@ -43,7 +43,7 @@
 		</header>
 		<!--header 结束-->
 		<div class="user_top w">
-			<a href="/wechat/shop/member/memberInfo">
+			<a href="/wechat/shop/deposit/page">
 	    	<div class="user_logo"><div class="img"><img src="${MemberInfo.wechatImg }"></div></div>
 	        <div class="user_info">
 	            <div class="user_dengji">会员等级：
@@ -59,11 +59,12 @@
 			</a>
 	    </div>
 		<ul class="ui-tab-nav">
-	         <li class="typeClass current" style="width: 50%"><a>累计收益：${totalEarnings}</a></li>
+	         <li class="typeClass current" style="width: 33.33%"><a>返现余额：${totalEarnings}</a></li>
+	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/Hbao/page">积分余额：${redParkEarnings}</a></li>
 	         <!-- 
 	         <li class="typeClass"><a href="/wechat/shop/deposit/page">消费记录</a></li>
 	          -->
-	         <li class="typeClass" style="width: 50%"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
+	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
 	   	</ul>
 	   	<div class="user_nav_list w">
 	   		<ul>

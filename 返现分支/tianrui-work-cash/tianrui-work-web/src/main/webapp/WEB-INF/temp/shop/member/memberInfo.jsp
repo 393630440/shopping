@@ -63,7 +63,7 @@
       -->
      <!-- 
      <div class="item item-password">
-       <input type="text" id="rpTradeMark_req" class="txt-input txt-username" readonly="readonly" value="是否开启宏包交易">
+       <input type="text" id="rpTradeMark_req" class="txt-input txt-username" readonly="readonly" value="是否开启积分交易">
        
        <b class="tp-btn_PwdTwo <c:if test="${MemberInfo.rpTradeMark eq 0}">btn-off_PwdTwo</c:if>
        <c:if test="${MemberInfo.rpTradeMark eq 1}">btn-on_PwdTwo</c:if>" typeValue=${MemberInfo.rpTradeMark }></b> 

@@ -288,7 +288,7 @@ public class OrderInfoFindResp {
 			if (goodsType.equals("1")) {
 				price = "￥" + orderAmount;
 			} else if (goodsType.equals("2")) {
-				price = "￥" + orderAmount + " + " + orderRedPacket + "宏包";
+				price = "￥" + orderAmount + " + " + orderRedPacket + "积分";
 			} else {
 			}
 		}

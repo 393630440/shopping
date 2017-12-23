@@ -65,7 +65,7 @@
 					</span>
 				</a>
 				<c:if test="${goodsType == '1'}"><h2>大众商品</h2></c:if>
-				<c:if test="${goodsType == '2'}"><h2>宏包商品</h2></c:if>
+				<c:if test="${goodsType == '2'}"><h2>积分商品</h2></c:if>
 				<div class="header_right shaixuan">
 					<img src="${staticRoot}/web/images/iconfont-shaixuan.png">
 				</div>

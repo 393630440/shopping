@@ -23,11 +23,11 @@
     
     <div class="qrdd-info2">
     	<div class="qrdd-xian">
-            <p class="qrdd-p1">宏包广场交易宏包</p>
+            <p class="qrdd-p1">积分广场交易积分</p>
             <p class="qrdd-p1">${time }</p>
         </div>
-    	<p class="qrdd-p2">宏包数量<span>  ${info.redPacket }</span></p>
-    	<p class="qrdd-p2">宏包单价<span>  ¥${info.rpExchangeRatio }</span></p>
+    	<p class="qrdd-p2">积分数量<span>  ${info.redPacket }</span></p>
+    	<p class="qrdd-p2">积分单价<span>  ¥${info.rpExchangeRatio }</span></p>
        	<p class="qrdd-p2">购买数量
 	       	<span>  
 	       		<input type="text" id="baoNum" value="${info.redPacket }">

@@ -215,7 +215,7 @@ public class OrderInfoService implements IOrderInfoService {
 				coMone = coMone + weChatPay.getBlance();
 			}
 			//返现消费金额记录
-			if(weChatPay.getCashMoney()!=null){
+			if(weChatPay.getCashMoney()!=null&&weChatPay.getCashMoney()!=0){
 				CashBackInfo in = new CashBackInfo();
 				in.setId(UUIDUtil.getUUID());
 				in.setMemberId(member.getMemberId());
@@ -228,7 +228,7 @@ public class OrderInfoService implements IOrderInfoService {
 				cashBackInfoMapper.insertSelective(in);
 			}
 			//积分消费金额记录
-			if(weChatPay.getRedPacket()!=null){
+			if(weChatPay.getRedPacket()!=null&&weChatPay.getRedPacket()!=0){
 				MemberGain gain = new MemberGain();
 				gain.setId(UUIDUtil.getUUID());
 				gain.setMemberId(member.getMemberId());
@@ -236,7 +236,7 @@ public class OrderInfoService implements IOrderInfoService {
 				gain.setWechatName(member.getWechatName());
 				gain.setRpNum(-weChatPay.getRedPacket());
 				gain.setSourceId("2");
-				gain.setSourceDescribe("购买商品消费宏包");
+				gain.setSourceDescribe("购买商品消费积分");
 				gain.setCreatetime(System.currentTimeMillis());
 				memberGainMapper.insertSelective(gain);
 			}

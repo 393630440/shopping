@@ -48,7 +48,7 @@
 				<input type="text" id="price" class="txt-input txt-username" value="金额：${order.orderAmount }">
 			</div>
 			<div class="item item-password">
-				<input type="text" id="price" class="txt-input txt-username" value="宏包：${order.orderRedPacket }">
+				<input type="text" id="price" class="txt-input txt-username" value="积分：${order.orderRedPacket }">
 			</div>
 
 			<c:if test="${order.orderStatus eq '1' }">

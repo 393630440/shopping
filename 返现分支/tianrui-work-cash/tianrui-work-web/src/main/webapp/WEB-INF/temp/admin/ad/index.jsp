@@ -57,7 +57,7 @@
 								<select id="type" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
 									<option value="">商品类型</option>
 									<option value="1">大众商品</option>
-									<option value="2">宏包商品</option>
+									<option value="2">积分商品</option>
 								</select>
 							</div>
 						</li>

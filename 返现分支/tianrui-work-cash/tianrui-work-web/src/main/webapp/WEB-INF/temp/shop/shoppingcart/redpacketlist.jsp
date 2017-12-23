@@ -53,7 +53,7 @@
 		<div class="w-zx">
 			<ul class="ui-tab-nav">
 				<li><a href="/wechat/shop/shoppingcart/ordinarylist">大众商品</a></li>
-				<li class="current"><a href="javascript:void(0);">宏包商品</a></li>
+				<li class="current"><a href="javascript:void(0);">积分商品</a></li>
 			</ul>
 		</div>
 

@@ -48,6 +48,7 @@ public class CashBackAction {
 		ModelAndView view = new ModelAndView();
 		view.addObject("balance", info.getBalance());// 账户余额
 		view.addObject("totalEarnings", info.getCashMoney());// 累计收益
+		view.addObject("redParkEarnings", info.getRedPacket());//积分
 		view.addObject("todayEarnings", todayEarnings);// 今日收益
 		view.setViewName("shop/cashback/cashback");
 		return view;

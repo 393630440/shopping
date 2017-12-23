@@ -53,5 +53,5 @@ function auditpage(orderId) {
 
 var goodsTypeMap = {
 	"1" : "大众商品",
-	"2" : "宏包商品"
+	"2" : "积分商品"
 };

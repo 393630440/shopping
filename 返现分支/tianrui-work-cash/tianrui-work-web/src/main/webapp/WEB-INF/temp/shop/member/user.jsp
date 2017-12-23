@@ -104,6 +104,7 @@
     </div>
     <div class="user_nav_list w">
     	<ul>
+           <!-- 
             <li>
             	<a href="/wechat/shop/deposit/page">
                 	<div class="u_nav_icon money"></div>
@@ -115,11 +116,12 @@
             <li>
             	<a href="/wechat/shop/Hbao/page">
                 	<div class="u_nav_icon huibi"></div>
-                    <div class="u_nav_name">我的宏包</div>
+                    <div class="u_nav_name">我的积分</div>
                     <div class="nt_icon"></div>
                     <div class="u_money"><i>${redpack }个</i></div>
               </a>
             </li>
+            -->
             <li>
             	<a href="/wechat/shop/cashback/index">
                 	<div class="u_nav_icon huibi"></div>

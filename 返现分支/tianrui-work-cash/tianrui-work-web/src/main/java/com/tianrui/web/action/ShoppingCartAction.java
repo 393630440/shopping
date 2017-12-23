@@ -86,7 +86,7 @@ public class ShoppingCartAction {
 				shoppingCartIdList.add(goodsInfo.getShoppingCartId());
 			}
 			// size = goodsInfoList.size();
-			total = formatDoubleToString(price) + " + " + String.valueOf(redPacket) + "宏包";
+			total = formatDoubleToString(price) + " + " + String.valueOf(redPacket) + "积分";
 		}
 
 		ModelAndView view = new ModelAndView();

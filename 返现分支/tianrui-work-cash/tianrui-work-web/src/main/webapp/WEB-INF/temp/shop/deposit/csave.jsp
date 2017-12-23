@@ -37,8 +37,26 @@
      </div>
      
      <div class="item item-password">
+       <input type="text" class="txt-input txt-username" 
+       readonly="readonly" value="返现余额：${info.cashMoney }">
+     </div>
+     
+      <div class="item item-password">
+       <input type="text" class="txt-input txt-username" 
+       readonly="readonly" value="使用返现余额">
+       <b class="tp-btn_PwdTwo btn-off_PwdTwo " setType="0"></b>
+       <input type="hidden" id="save_type" value="0">
+     </div>
+     
+     <div class="item item-password blance_money">
        <input type="text" id="price" class="txt-input txt-username" 
-        placeholder="充值金额">
+        placeholder="使用现金充值">
+     </div>
+     
+     <div class="item item-password cash_money">
+       <input type="text" id="cash_price" class="txt-input txt-username"
+        value="${info.cashMoney }" readonly="readonly"
+        placeholder="使用返现余额充值">
      </div>
      
      <div class="ui-btn-wrap"> 
@@ -48,6 +66,7 @@
      
      <div style="height: 30px">
      </div>
+     <input type="hidden" id="memberId" value="${info.memberId }">
   </div>
 	<!-- foods -->
     <jsp:include page="../common/foods.jsp"></jsp:include>
@@ -55,13 +74,50 @@
 </div>
 </body>
 <script type="text/javascript">
-$("#save").on("click",function(){
-	var price = $("#price").val();
-	if(price == ""){
-		alert("请输入金额");	
-		return;
+$(".cash_money").hide();
+$(".tp-btn_PwdTwo").on("click",function(){
+	var setType = $(this).attr("setType");
+	if(setType == "1"){
+		$(this).removeClass("btn-on_PwdTwo");
+		$(this).addClass("btn-off_PwdTwo");
+		$(this).attr("setType","0");
+		$("#save_type").val(0);
+		$(".blance_money").show();
+		$(".cash_money").hide();
+	}else if(setType == "0"){
+		$(this).addClass("btn-on_PwdTwo");
+		$(this).removeClass("btn-off_PwdTwo");
+		$(this).attr("setType","1");
+		$("#save_type").val(1);
+		$(".blance_money").hide();
+		$(".cash_money").show();
 	}
-	window.location.href="/wechat/shop/deposit/payPage?money="+price;
+});
+
+$("#save").on("click",function(){
+	var save_type = $("#save_type").val();
+	if(save_type == 0){
+		var price = $("#price").val();
+		if(price == ""){
+			alert("请输入金额");	
+			return;
+		}
+		window.location.href="/wechat/shop/deposit/payPage?money="+price;
+	}else{
+		$.ajax({
+			url:"/wechat/shop/deposit/uptCashBack",
+			data:{id:$("#memberId").val(),
+				cashMoney:$("#cash_price").val()},
+			type:"POST",
+			success:function(ret){
+				if(ret.code=="000000"){
+					window.location.href=location;
+				}else{
+					alert(ret.error);
+				}
+			}
+		});
+	}
 });
 </script>
 </html>

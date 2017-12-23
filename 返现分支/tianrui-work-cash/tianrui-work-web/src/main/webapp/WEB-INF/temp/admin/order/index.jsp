@@ -63,7 +63,7 @@
 								<select id="goodsType" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
 									<option value="">商品类型</option>
 									<option value="1">大众商品</option>
-									<option value="2">宏包商品</option>
+									<option value="2">积分商品</option>
 								</select>
 							</div>
 						</li>
@@ -82,7 +82,7 @@
 								<th class="table-type">商品小计</th>
 								<th class="table-type">运费</th>
 								<th class="table-type">订单总金额</th>
-								<th class="table-type">订单总宏包</th>
+								<th class="table-type">订单总积分</th>
 								<th class="table-type">订单状态</th>
 								<th class="table-title">所在地区</th>
 								<th class="table-date am-hide-sm-only">创建时间</th>
