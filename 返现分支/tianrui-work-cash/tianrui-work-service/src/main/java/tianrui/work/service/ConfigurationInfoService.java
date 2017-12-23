@@ -92,4 +92,39 @@ public class ConfigurationInfoService implements IConfigurationInfoService {
 		return resp;
 	}
 
+	@Override
+	public Result selectMembreRankConf(String membreRank) throws Exception {
+		Result rs = Result.getSuccessful();
+		ConfigurationInfo info = configurationInfoMapper.selectByPrimaryKey(memberRank(membreRank));
+		if(info != null){
+			rs.setData(info);
+		}else{
+			rs.setCode("1");
+			rs.setError("未查到数据");
+		}
+		return rs;
+		
+	}
+	
+	private String memberRank(String rank){
+		String rs = "";
+		switch (rank) {
+		case "A":
+			rs = "CASH_BACK_A";
+			break;
+		case "B":
+			rs = "CASH_BACK_B";	
+			break;
+		case "C":
+			rs = "CASH_BACK_C";
+			break;
+		case "S":
+			rs = "CASH_BACK_S";
+			break;
+		default:
+			break;
+		}
+		return rs;
+	}
+
 }

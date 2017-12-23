@@ -8,15 +8,14 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.druid.util.StringUtils;
 
 import tianrui.work.api.ICashBackService;
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.api.IMemberReleteService;
 import tianrui.work.bean.CashBack;
 import tianrui.work.bean.CashBackInfo;
 import tianrui.work.bean.ConfigurationInfo;
 import tianrui.work.bean.MemberInfo;
-import tianrui.work.bean.MemberRelated;
 import tianrui.work.mapper.java.CashBackInfoMapper;
 import tianrui.work.mapper.java.CashBackMapper;
 import tianrui.work.mapper.java.ConfigurationInfoMapper;
@@ -47,13 +46,15 @@ public class CashBackService implements ICashBackService {
 	MemberRelatedMapper memberRelatedMapper;
 	@Autowired
 	MemberInfoMapper memberInfoMapper;
+	@Autowired
+	IMemberReleteService memberReleteService;
 
 	@Override
 	public Result memberCashBack(MemberCashBackReq req) throws Exception {
 		Result rs = Result.getSuccessful();
+		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getId());
 		//获取用户信息
 		if(!req.getRank().equals("S")){
-			MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getId());
 			CashBackReq save = new CashBackReq();
 			save.setCashType("1");
 			save.setCashMember(info.getMemberId());
@@ -62,26 +63,26 @@ public class CashBackService implements ICashBackService {
 			save.setCashRemark(info.getMemberName()+"开通会员返现");
 			addCashBack(save);
 		}
-		ConfigurationInfo mconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(req.getRank()));
-		if(mconf != null){
-			MemberRelated query = new MemberRelated();
-			query.setMember(req.getId());
-			//查询缴费用户 父级会员等级
-			List<MemberRelated> list = memberRelatedMapper.selectByCoudition(query);
-			for(MemberRelated rel : list){
-				//父级返现
-				MemberInfo info = memberInfoMapper.selectByPrimaryKey(rel.getMemberFather());
-				ConfigurationInfo fconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(info.getMemberRank()));
-				if(fconf != null && mconf.getFlag().equals("1")&&fconf.getFlag().equals("1")){
+		
+		rs = memberReleteService.getFatherMember(req.getId());
+		if(rs.getCode().equals("000000")){
+			//父级返现
+			MemberInfo finfo = (MemberInfo) rs.getData();
+			if(getmemberRank(finfo.getMemberRank())>=getmemberRank(req.getRank())){
+				//父级等级 大于 等于 用户等级
+				ConfigurationInfo mconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(req.getRank()));
+				ConfigurationInfo fconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(finfo.getMemberRank()));
+				if(mconf != null && fconf != null && mconf.getFlag().equals("1")&&fconf.getFlag().equals("1")){
 					//父级子级均开启返现功能
 					Double ter = Double.valueOf(fconf.getParamvalue())+Double.valueOf(mconf.getParamvalue());
-					CashBackReq save = new CashBackReq();
-					save.setCashType("1");
-					save.setCashMember(info.getMemberId());
-					save.setCashMemberName(info.getWechatName());
-					save.setCashAmount(req.getMoney()*ter);
-					save.setCashRemark(rel.getMemberName()+"开通会员返现");
-					addCashBack(save);
+					
+					CashBackInfoReq csinfo = new CashBackInfoReq();
+					csinfo.setBackAmount(req.getMoney()*ter);
+					csinfo.setBackMoney(req.getMoney()*ter);
+					csinfo.setBackRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行返现");
+					csinfo.setMemberId(finfo.getMemberId());
+					csinfo.setMemberName(finfo.getWechatName());
+					addCashBackInfo(csinfo);
 				}
 			}
 		}
@@ -112,6 +113,27 @@ public class CashBackService implements ICashBackService {
 		return rext;
 	}
 	
+	private int getmemberRank(String rank){
+		int a = 0;
+		switch (rank) {
+		case "A":
+			a = 6;
+			break;
+		case "B":
+			a = 5;	
+			break;
+		case "C":
+			a = 4;
+			break;
+		case "S":
+			a = 9;
+			break;
+		default:
+			break;
+		}
+
+		return a;
+	}
 	@Override
 	public Result addCashBack(CashBackReq req) throws Exception {
 		Result rs = Result.getSuccessful();
@@ -303,5 +325,27 @@ public class CashBackService implements ICashBackService {
 				memberInfoService.cashBackUptMember(cback);
 			}
 		}
+	}
+
+	@Override
+	public Result addCashBackInfo(CashBackInfoReq req) throws Exception {
+		Result rs = Result.getSuccessful();
+		CashBackInfo save = new CashBackInfo();
+		save.setId(UUIDUtil.getUUID());
+		save.setBackAmount(req.getBackAmount());
+		save.setBackMoney(req.getBackMoney());// 本次返现金额
+//		save.setBackRatio(rateVal);
+		save.setBackRemark(req.getBackRemark());
+		save.setMemberId(req.getMemberId());
+		save.setMemberName(req.getMemberName());
+		save.setDesc1("3");//子用户消费
+		save.setCreateTime(System.currentTimeMillis());
+		cashBackInfoMapper.insertSelective(save);
+		
+		MemberInfoHBaoReq cback = new MemberInfoHBaoReq();
+		cback.setMemberId(req.getMemberId());
+		cback.setCashMoney(req.getBackAmount());
+		memberInfoService.cashBackUptMember(cback);
+		return rs;
 	}
 }

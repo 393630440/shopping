@@ -15,8 +15,11 @@ public interface ICashBackService {
 	/** 用户返现 */
 	Result memberCashBack(MemberCashBackReq req) throws Exception;
 	
-	/** 添加返现 */
+	/** 添加返现任务 */
 	Result addCashBack(CashBackReq req) throws Exception;
+	/** 添加返现金额
+	 * @throws Exception */
+	Result addCashBackInfo(CashBackInfoReq req) throws Exception;
 
 	/** 列表返现 */
 	PageTool<CashBackResp> queryCashBack(CashBackReq req) throws Exception;

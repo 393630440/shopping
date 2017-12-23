@@ -18,5 +18,7 @@ public interface IConfigurationInfoService {
 	PageTool<ConfigurationInfoResp> queryConfigurationInfoByList(ConfigurationInfoReq req) throws Exception;
 
 	List<ConfigurationInfoResp> getConfigurationInfoList(ConfigurationInfoReq req) throws Exception;
-
+	/** 查询用户等级比例状态*/
+	Result selectMembreRankConf(String membreRank)throws Exception;
+	
 }

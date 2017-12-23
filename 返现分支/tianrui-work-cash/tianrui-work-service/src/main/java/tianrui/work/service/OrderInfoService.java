@@ -8,21 +8,29 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tianrui.work.api.ICashBackService;
 import tianrui.work.api.IConfigurationInfoService;
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberRechangeService;
+import tianrui.work.api.IMemberReleteService;
 import tianrui.work.api.IOrderInfoService;
 import tianrui.work.api.IWeChatMassageService;
 import tianrui.work.bean.CashBackInfo;
+import tianrui.work.bean.ConfigurationInfo;
 import tianrui.work.bean.MemberGain;
 import tianrui.work.bean.MemberInfo;
+import tianrui.work.bean.MemberRelated;
 import tianrui.work.bean.OrderInfo;
 import tianrui.work.comm.Constant;
 import tianrui.work.mapper.java.CashBackInfoMapper;
+import tianrui.work.mapper.java.ConfigurationInfoMapper;
 import tianrui.work.mapper.java.MemberGainMapper;
 import tianrui.work.mapper.java.MemberInfoMapper;
+import tianrui.work.mapper.java.MemberRelatedMapper;
 import tianrui.work.mapper.java.OrderInfoMapper;
 import tianrui.work.req.JfPaySuccessReq;
+import tianrui.work.req.cash.CashBackInfoReq;
+import tianrui.work.req.cash.CashBackReq;
 import tianrui.work.req.gain.MemberGainSaveReq;
 import tianrui.work.req.massage.MessageReq;
 import tianrui.work.req.order.OrderInfoFindReq;
@@ -59,6 +67,10 @@ public class OrderInfoService implements IOrderInfoService {
 	MemberGainMapper memberGainMapper;
 	@Autowired
 	CashBackInfoMapper cashBackInfoMapper;
+	@Autowired
+	IMemberReleteService memberReleteService;
+	@Autowired
+	ICashBackService cashBackService;
 
 	@Override
 	public Result addOrderInfo(OrderInfoReq req) throws Exception {
@@ -148,6 +160,52 @@ public class OrderInfoService implements IOrderInfoService {
 		OrderInfo info = orderInfoMapper.selectByPrimaryKey(weChatPay.getTransid());
 		if (StringUtils.equals("1", info.getOrderStatus())) {//待付款
 			MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
+			//判断用户会员等级  加盟商 购物金额返现
+			if(weChatPay.getTotalfee()!=null){
+				//本次支付金额不为空  非积分余额消费
+				if("S".equals(member.getMemberRank())){
+					//S用户更 加盟商
+					//添加 消费金额返现
+					CashBackReq req = new CashBackReq();
+					req.setCashType("1");
+					req.setCashMember(member.getMemberId());
+					req.setCashMemberName(member.getWechatName());
+					req.setCashAmount(weChatPay.getTotalfee());
+					req.setCashRemark("购买商品返现");
+					cashBackService.addCashBack(req);
+				}else{
+					//非加盟商
+					rs = memberReleteService.getFatherMember(member.getMemberId());
+					if("000000".equals(rs.getCode())){
+						MemberInfo finfo = (MemberInfo) rs.getData();
+						if(getmemberRank(finfo.getMemberRank())>=getmemberRank(member.getMemberRank())){
+							//父级会员等级大于或等于子级
+							if("S".equals(finfo.getMemberRank())){
+								//父级为加盟商 
+								Result mrs = configurationInfoService.selectMembreRankConf(member.getMemberRank());
+								Result frs = configurationInfoService.selectMembreRankConf(finfo.getMemberRank());
+								if("000000".equals(mrs.getCode())&&"000000".equals(frs.getCode())){
+									ConfigurationInfo mc = (ConfigurationInfo) mrs.getData();
+									ConfigurationInfo fc = (ConfigurationInfo) frs.getData();
+									if("1".equals(mc.getFlag())&&"1".equals(fc.getFlag())){
+										//两个返现配置均开启  父级享受一次性返现
+										double cha = Double.valueOf(mc.getParamvalue())+Double.valueOf(fc.getParamvalue());
+										//父级返现金额
+										double cash = weChatPay.getTotalfee() * cha;
+										CashBackInfoReq csinfo = new CashBackInfoReq();
+										csinfo.setBackAmount(cash);
+										csinfo.setBackMoney(cash);
+										csinfo.setBackRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行返现");
+										csinfo.setMemberId(finfo.getMemberId());
+										csinfo.setMemberName(finfo.getWechatName());
+										cashBackService.addCashBackInfo(csinfo);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 			
 			Double coMone = 0.00;
 			if(weChatPay.getTotalfee()!=null){
@@ -156,6 +214,7 @@ public class OrderInfoService implements IOrderInfoService {
 			if(weChatPay.getBlance()!=null){
 				coMone = coMone + weChatPay.getBlance();
 			}
+			//返现消费金额记录
 			if(weChatPay.getCashMoney()!=null){
 				CashBackInfo in = new CashBackInfo();
 				in.setId(UUIDUtil.getUUID());
@@ -168,6 +227,7 @@ public class OrderInfoService implements IOrderInfoService {
 				in.setDesc1("3");
 				cashBackInfoMapper.insertSelective(in);
 			}
+			//积分消费金额记录
 			if(weChatPay.getRedPacket()!=null){
 				MemberGain gain = new MemberGain();
 				gain.setId(UUIDUtil.getUUID());
@@ -180,14 +240,7 @@ public class OrderInfoService implements IOrderInfoService {
 				gain.setCreatetime(System.currentTimeMillis());
 				memberGainMapper.insertSelective(gain);
 			}
-			
-			MemberInfo uptto = new MemberInfo();
-			uptto.setMemberId(member.getMemberId());
-			uptto.setRedPacket(member.getRedPacket() - weChatPay.getRedPacket());
-			uptto.setBalance(member.getBalance()-weChatPay.getBlance());
-			uptto.setCashMoney(member.getCashMoney()-weChatPay.getCashMoney());
-			memberInfoMapper.updateByPrimaryKeySelective(uptto);
-			
+			//现金 余额 消费记录
 			if(coMone > 0){
 				MemberRechargeReq req = new MemberRechargeReq();
 				req.setMemberId(member.getMemberId());
@@ -196,8 +249,14 @@ public class OrderInfoService implements IOrderInfoService {
 				req.setDesc1("2");
 				memberRechangeService.save(req);
 			}
-			
-			//TODO
+			//修改账户余额
+			MemberInfo uptto = new MemberInfo();
+			uptto.setMemberId(member.getMemberId());
+			uptto.setRedPacket(member.getRedPacket() - weChatPay.getRedPacket());
+			uptto.setBalance(member.getBalance()-weChatPay.getBlance());
+			uptto.setCashMoney(member.getCashMoney()-weChatPay.getCashMoney());
+			memberInfoMapper.updateByPrimaryKeySelective(uptto);
+			//推送模板消息
 			MessageReq msg = new MessageReq();
 			msg.setId(Constant.MESSAGE_WDING);
 			msg.setOpenid(info.getMemberId());
@@ -206,6 +265,7 @@ public class OrderInfoService implements IOrderInfoService {
 			msg.setObj2(coMone.toString());
 			msg.setFoots("\n客服人员将以最快的方式为您寄送宝贝");
 			weChatMassageService.saveMassage(msg);
+			//修改订单为待发货状态
 			OrderInfo upt = new OrderInfo();
 			upt.setOrderId(info.getOrderId());
 			upt.setOrderStatus("2");// 待发货
@@ -215,6 +275,28 @@ public class OrderInfoService implements IOrderInfoService {
 			rs.setError("不合法的支付状态");
 		}
 		return rs;
+	}
+	
+	private int getmemberRank(String rank){
+		int a = 0;
+		switch (rank) {
+		case "A":
+			a = 6;
+			break;
+		case "B":
+			a = 5;	
+			break;
+		case "C":
+			a = 4;
+			break;
+		case "S":
+			a = 9;
+			break;
+		default:
+			break;
+		}
+
+		return a;
 	}
 
 	@Override

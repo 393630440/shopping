@@ -88,5 +88,22 @@ public class MemberReleteService implements IMemberReleteService {
 			memberRelatedMapper.deleteByPrimaryKey(bean.getId());
 		}
 	}
+	@Override
+	public Result getFatherMember(String id) {
+		Result rs = Result.getSuccessful();
+		MemberRelated query = new MemberRelated();
+		query.setMember(id);
+		List<MemberRelated> list = memberRelatedMapper.selectByCoudition(query);
+		MemberInfo info = new MemberInfo();
+		if(list.size() == 1){
+			MemberRelated rel = list.get(0);
+			info = memberInfoMapper.selectByPrimaryKey(rel.getMemberFather());
+			rs.setData(info);
+		}else{
+			rs.setCode("1");
+			rs.setError("未找到父级");;
+		}
+		return rs;
+	}
 
 }

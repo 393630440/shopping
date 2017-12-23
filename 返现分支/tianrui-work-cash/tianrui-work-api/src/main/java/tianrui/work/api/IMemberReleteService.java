@@ -9,6 +9,8 @@ public interface IMemberReleteService {
 
 	/** 建立用户关系*/
 	Result saveMemberRelete(String fatherId,String memberId);
+	/** 获取父级用户*/
+	Result getFatherMember(String id);
 	
 	public PageTool<MemberRelatedResp> select(MemberRelatedReq req)throws Exception;
 }
