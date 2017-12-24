@@ -9,9 +9,15 @@ import org.springframework.stereotype.Service;
 
 import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.bean.CashBackInfo;
+import tianrui.work.bean.MemberGain;
 import tianrui.work.bean.MemberInfo;
+import tianrui.work.bean.MemberRecharge;
 import tianrui.work.bean.MemberSetting;
+import tianrui.work.mapper.java.CashBackInfoMapper;
+import tianrui.work.mapper.java.MemberGainMapper;
 import tianrui.work.mapper.java.MemberInfoMapper;
+import tianrui.work.mapper.java.MemberRechargeMapper;
 import tianrui.work.mapper.java.MemberSettingMapper;
 import tianrui.work.req.HbaoPayReq;
 import tianrui.work.req.gain.MemberGainSaveReq;
@@ -19,10 +25,12 @@ import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.req.member.MemberSetUptReq;
+import tianrui.work.req.rechange.MemberRechargeReq;
 import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.resp.member.MemberSetResp;
 import tianrui.work.vo.PageTool;
 import tianrui.work.vo.Result;
+import tianrui.work.vo.UUIDUtil;
 
 @Service
 public class MemberInfoService implements IMemberInfoService{
@@ -33,7 +41,12 @@ public class MemberInfoService implements IMemberInfoService{
 	MemberSettingMapper memberSettingMapper;
 	@Autowired
 	IMemberGainService memberGainService;
-	
+	@Autowired
+	CashBackInfoMapper cashBackInfoMapper;
+	@Autowired
+	MemberGainMapper memberGainMapper;
+	@Autowired
+	MemberRechargeMapper memberRechargeMapper;
 	
 	@Override
 	public Result uptCashBack(String id, Double cashMoney) throws Exception {
@@ -46,6 +59,41 @@ public class MemberInfoService implements IMemberInfoService{
 			upt.setRedPacket(info.getRedPacket()+(cashMoney/2));
 			upt.setCashMoney(info.getCashMoney()-cashMoney);
 			memberInfoMapper.updateByPrimaryKeySelective(upt);
+			
+			//返现提现记录
+			CashBackInfo in = new CashBackInfo();
+			in.setId(UUIDUtil.getUUID());
+			in.setMemberId(info.getMemberId());
+			in.setMemberName(info.getWechatName());
+			in.setBackAmount(0.00);
+			in.setBackMoney(-cashMoney);
+			in.setBackRemark("返现金额提现");
+			in.setCreateTime(System.currentTimeMillis());
+			in.setDesc1("3");
+			cashBackInfoMapper.insertSelective(in);
+			
+			MemberGain gain = new MemberGain();
+			gain.setId(UUIDUtil.getUUID());
+			gain.setMemberId(info.getMemberId());
+			gain.setRpType("2");
+			gain.setWechatName(info.getWechatName());
+			gain.setRpNum(cashMoney/2);
+			gain.setSourceId("2");
+			gain.setSourceDescribe("返现提现获得积分");
+			gain.setCreatetime(System.currentTimeMillis());
+			memberGainMapper.insertSelective(gain);
+			
+			MemberRecharge save = new MemberRecharge();
+			save.setId(UUIDUtil.getUUID());
+			save.setMemberId(info.getMemberId());
+			save.setRechargeAmount(cashMoney/2);
+			save.setRechargeStatus("1");
+			save.setCreatetime(System.currentTimeMillis());
+			save.setRemark("返现金额提现到余额");
+			save.setMemberName(info.getWechatName());
+			save.setDesc1("1");
+			memberRechargeMapper.insertSelective(save);
+			
 		}else{
 			rs.setCode("0");
 			rs.setError("输入金额有误");

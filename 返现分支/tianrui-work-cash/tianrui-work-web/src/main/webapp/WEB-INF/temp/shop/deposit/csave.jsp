@@ -104,6 +104,10 @@ $("#save").on("click",function(){
 		}
 		window.location.href="/wechat/shop/deposit/payPage?money="+price;
 	}else{
+		if($("#cash_price").val()==0){
+			alert("请输入正确金额");
+			return;
+		}
 		$.ajax({
 			url:"/wechat/shop/deposit/uptCashBack",
 			data:{id:$("#memberId").val(),
@@ -111,7 +115,7 @@ $("#save").on("click",function(){
 			type:"POST",
 			success:function(ret){
 				if(ret.code=="000000"){
-					window.location.href=location;
+					alert("操作成功");
 				}else{
 					alert(ret.error);
 				}

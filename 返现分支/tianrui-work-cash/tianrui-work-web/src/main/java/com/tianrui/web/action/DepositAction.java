@@ -14,6 +14,7 @@ import tianrui.work.api.IMemberInfoService;
 import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IWithdrawalService;
 import tianrui.work.bean.MemberInfo;
+import tianrui.work.mapper.java.CashBackInfoMapper;
 import tianrui.work.req.WithdrawalFindReq;
 import tianrui.work.req.WithdrawalReq;
 import tianrui.work.req.rechange.RechargeFindReq;
@@ -37,6 +38,7 @@ public class DepositAction {
 	IMemberInfoService memberInfoService;
 	@Autowired
 	IMemberRechangeService memberRechangeService;
+	
 	
 	@RequestMapping("uptCashBack")
 	@ResponseBody
