@@ -26,7 +26,7 @@
 	
 	<bean id="resourcePathExposer" class="com.tianrui.util.ResourcePathExposer"
 		init-method="init" >
-		<property name="staticRoot" value="http://47.91.240.215/webStatic" />
+		<property name="staticRoot" value="http://47.95.37.104/webStatic" />
 	</bean>
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
