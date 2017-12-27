@@ -1,4 +1,5 @@
 $(function() {
+	$("#save").hide();
 	// 编辑
 	$("#edit").click(function(event) {
 		$(".gwc-p2").hide();

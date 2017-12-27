@@ -116,6 +116,8 @@
 				共${size}件商品，总计：<span>￥${total}</span>
 			</p>
 			<button onclick="placeOrder();">立即下单</button>
+			<button id="edit">编辑</button>
+			<button id="save">完成</button>
 			<div style="clear: both;"></div>
 		</div>
 
@@ -125,5 +127,5 @@
 	var shoppingCartIdList = ${shoppingCartIdList};
 	var goodsType = "1";
 </script>
-<script src="/resources/js/web/shoppingcart/shoppingcartlist.js"></script>
+<script src="/resources/js/web/shoppingcart/shoppingcartlist.js?1227"></script>
 </html>

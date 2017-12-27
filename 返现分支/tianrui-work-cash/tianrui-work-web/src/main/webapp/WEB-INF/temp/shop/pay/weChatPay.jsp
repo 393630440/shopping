@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
    */
   wx.config({
-      debug: true ,
+      debug: false ,
       appId: '${zhifu.appid}',
       timestamp: '${zhifu.timestamp}',
       nonceStr: '${zhifu.nonceStr}',
@@ -88,12 +88,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           "paySign":"${payEntity.paySign}"
 	       },
 	       function(res){ 
-	       		WeixinJSBridge.log(res.err_msg);
-	       		alert(res.err_code +","+ res.err_desc +","+ res.err_msg);
+	       		//WeixinJSBridge.log(res.err_msg);
+	       		//alert(res.err_code +","+ res.err_desc +","+ res.err_msg);
 	           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 	           // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
-	           		alert("支付成功");
-	           		//window.location.href="http://183-lisijia.imwork.net/weixin/pay?money=${money}&openid=${openid}";
+	           		window.location.href="/wechat/shop/order/index";
 	           }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
 	           		alert("支付取消");
 	           }else{

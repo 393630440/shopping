@@ -106,6 +106,7 @@ public class ShoppingCartAction {
 
 		ShoppingCartFindReq req = new ShoppingCartFindReq();
 		req.setMemberId(member.getMemberId());
+		
 		req.setGoodsType("1");// ; // 商品类型:1-大众商品;2-宏包商品
 		req.setShoppingCartStatus("1");// 购物车商品状态:1-已添加;2-已购买;3-已删除
 

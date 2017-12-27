@@ -143,7 +143,7 @@ $("#set_member_rank").on("click",function(){
 		type:"POST",
 		success:function(ret){
 			if(ret.code == "000000"){
-				window.location.href=location;
+				window.location.href="/admin/shop/member/page";
 			}else{
 				alert(ret.error);
 			}

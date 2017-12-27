@@ -71,7 +71,7 @@ public class OrderInfoAction {
 		Result rs = Result.getSuccessful();
 
 		MemberInfo info = SessionManage.getSessionManage(request);
-		if (info.getMemberRank().equals("2")) {
+		if (info.getMemberRank().equals("S")) {
 			rs.setCode("1");
 			rs.setError("加盟商不允许退货");
 		} else {
