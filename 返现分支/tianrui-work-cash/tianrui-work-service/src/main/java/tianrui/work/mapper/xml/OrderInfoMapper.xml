@@ -48,7 +48,7 @@
 			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
 			<if test="true">and order_status not in ('8','9','0')</if>
 		</where>
-		order by creationTime desc
+		order by creation_time desc
 		<if test="pageNo != null">
 			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 		</if>
