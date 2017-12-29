@@ -119,7 +119,7 @@
 			<div style="clear: both;"></div>
 		</div>
 		<div class="drdd-info4">
-			<p>返现金额：<input type="text" id="show_cashMoney" value="${MemberInfo.cashMoney}"></p>
+			<p>补贴金额：<input type="text" id="show_cashMoney" value="${MemberInfo.cashMoney}"></p>
 			<input type="hidden" id="hidden_cashMoney"  value="${MemberInfo.cashMoney}">
 			<div style="clear: both;"></div>
 		</div>

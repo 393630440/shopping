@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>返现派发</title>
+<title>补贴派发</title>
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
@@ -38,8 +38,8 @@
 		</div>
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on">返现派发</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">返现派发</a></dl>
+		      <ul class="am-icon-flag on">补贴派发</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">补贴派发</a></dl>
 		    </div>
 			<div class="fbneirong">
 		      <form class="am-form" id="form_member">
@@ -79,7 +79,7 @@
 		          </div>
 		        </div>
 		        <div class="am-form-group am-cf">
-		          <div class="zuo">返现：</div>
+		          <div class="zuo">补贴：</div>
 		          <div class="you">
 		            <input type="text" id="member_redPacket" readonly="readonly" class="am-input-sm">
 		          </div>

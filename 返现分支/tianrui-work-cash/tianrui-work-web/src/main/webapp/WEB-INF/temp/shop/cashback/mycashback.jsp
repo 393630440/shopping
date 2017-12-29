@@ -8,7 +8,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>我的返现</title>
+<title>我的补贴</title>
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
 <link href="${staticRoot}/web/css/public.css" rel="stylesheet" type="text/css" />
@@ -37,7 +37,7 @@
 						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
-				<h2>我的返现</h2>
+				<h2>我的补贴</h2>
 			</div>
 		</header>
 		<!--header 结束-->
@@ -90,7 +90,7 @@
 					"<h1>"+data[a].cashRemark+"</h1>"+
 					"<span>"+(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 					"</div>"+
-					"<div class='msg_content'>总额："+data[a].cashAmount+"<span>返现金额："+data[a].cashAlre+"</span></div></div></a>";
+					"<div class='msg_content'>总额："+data[a].cashAmount+"<span>补贴金额："+data[a].cashAlre+"</span></div></div></a>";
 					$("#dataList_showId").append(hml);
 			}
 		}

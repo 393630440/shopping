@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>返现明细管理</title>
+<title>补贴明细管理</title>
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
@@ -37,8 +37,8 @@
 		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 返现明细管理</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">返现明细管理</a></dl>
+		      <ul class="am-icon-flag on"> 补贴明细管理</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">补贴明细管理</a></dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>
@@ -51,12 +51,12 @@
 		            <thead>
 		              <tr class="am-success">
 		                <th class="table-title">序号</th>
-		               	<th class="table-type">返现用户</th>
-		               	<th class="table-type">返现备注</th>
-		               	<th class="table-title">返现总额 </th>
-		               	<th class="table-type">返现金额</th>
-		               	<th class="table-type">返现比例</th>
-		               	<th class="table-type">返现时间</th>
+		               	<th class="table-type">补贴用户</th>
+		               	<th class="table-type">补贴备注</th>
+		               	<th class="table-title">补贴总额 </th>
+		               	<th class="table-type">补贴金额</th>
+		               	<th class="table-type">补贴比例</th>
+		               	<th class="table-type">补贴时间</th>
 		                <!-- 
 		                <th width="163px" class="table-set">操作</th>
 		                 -->

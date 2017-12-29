@@ -54,7 +54,7 @@ public class CashBackAction {
 		return view;
 	}
 
-	/** 我的返现 */
+	/** 我的补贴 */
 	@RequestMapping("mycashback")
 	public ModelAndView myCashBack(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/cashback/mycashback]");

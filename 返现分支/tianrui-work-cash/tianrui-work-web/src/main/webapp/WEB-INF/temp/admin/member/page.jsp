@@ -47,7 +47,10 @@
 			        <select id="memberRankReq" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
 			          <option value="">会员等级</option>
 			          <option value="1">普通会员</option>
-			          <option value="2">加盟商</option>
+			          <option value="S">加盟商</option>
+			          <option value="A">准股东</option>
+			          <option value="B">VIP会员</option>
+			          <option value="C">VIP客户</option>
 			        </select>
 			      </div>
 			    </li>
@@ -74,7 +77,7 @@
 		               	<th class="table-type">出生日期</th>
 		               	<th class="table-type">所在城市</th>
 		               	<th class="table-type">余额</th>
-		               	<th class="table-type">返现金额</th>
+		               	<th class="table-type">补贴金额</th>
 		               	<th class="table-type">积分</th>
 		               	<th class="table-type">关注时间</th>
 		                <th width="163px" class="table-set">操作</th>

@@ -94,9 +94,9 @@
             <div class="user_dengji">会员等级：
     			<c:if test="${MemberInfo.memberRank eq '1' }">普通会员</c:if>        
             	<c:if test="${MemberInfo.memberRank eq 'S' }">加盟商</c:if>        
-         		<c:if test="${MemberInfo.memberRank eq 'A' }">A级会员</c:if>        
-         		<c:if test="${MemberInfo.memberRank eq 'B' }">B级会员</c:if>        
-         		<c:if test="${MemberInfo.memberRank eq 'C' }">C级会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'A' }">准股东</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'B' }">VIP会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'C' }">VIP客户</c:if>        
          
             </div>
         </div>

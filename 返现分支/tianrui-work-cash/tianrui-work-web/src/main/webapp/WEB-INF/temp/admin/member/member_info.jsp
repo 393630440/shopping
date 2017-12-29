@@ -94,9 +94,9 @@
 		          	<select id="member_rank">
 		          		<option value="">未设置</option>
 		          		<option value="S">加盟商</option>
-		          		<option value="A">A级会员</option>
-		          		<option value="B">B级会员</option>
-		          		<option value="C">C级会员</option>
+		          		<option value="A">准股东</option>
+		          		<option value="B">VIP会员</option>
+		          		<option value="C">VIP客户</option>
 		          	</select>
 		          </div>
 		        </div>

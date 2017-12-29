@@ -45,8 +45,8 @@
 }
 </style>
 </head>
-<body>
-<div style="width: 100%;height: 100% ;background-image: url(/resources/erm_bg.jpg)">
+<body style="background-color:#8EE5EE;">
+<div style="width: 100%;height: 100% ">
 	<div style="overflow:hidden;width: 100%;padding-top: 20px;">
 		<div class="member_m_pic">
 			<img style="width: 60px;border:2px solid #F8F8FF;"  src="${base.wechatImg }">

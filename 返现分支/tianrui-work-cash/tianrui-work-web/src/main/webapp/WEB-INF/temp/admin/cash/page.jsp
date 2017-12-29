@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>返现管理</title>
+<title>补贴管理</title>
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
@@ -37,15 +37,15 @@
 		
 		<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-		      <ul class="am-icon-flag on"> 返现管理</ul>
-		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">返现管理</a></dl>
+		      <ul class="am-icon-flag on"> 补贴管理</ul>
+		      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">补贴管理</a></dl>
 		    </div>
 			<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
 			  <ul>
 			   	<li>
 			      <div class="am-btn-group am-btn-group-xs">
 			        <select id="cashTypeReq" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-			          <option value="">返现类型</option>
+			          <option value="">补贴类型</option>
 			          <option value="1">后台</option>
 			          <option value="2">前台</option>
 			        </select>
@@ -53,7 +53,7 @@
 			    </li>
 			   	<li>
 			   	<input type="text" id="cashMemberNameReq" style="width: 160px"
-			   	 class="am-form-field am-input-sm am-input-xm" placeholder="返现用户" /></li>
+			   	 class="am-form-field am-input-sm am-input-xm" placeholder="补贴用户" /></li>
 			    <li>
 			    <input type="text" id="cashRemarkReq" style="width: 160px" 
 			    class="am-form-field am-input-sm am-input-xm" placeholder="备注信息" /></li>
@@ -65,10 +65,10 @@
 		            <thead>
 		              <tr class="am-success">
 		                <th class="table-title">序号</th>
-		               	<th class="table-type">返现用户</th>
+		               	<th class="table-type">补贴用户</th>
 		               	<th class="table-type">备注信息</th>
-		               	<th class="table-type">返现类别 </th>
-		               	<th class="table-type">返现金额</th>
+		               	<th class="table-type">补贴类别 </th>
+		               	<th class="table-type">补贴金额</th>
 		               	<th class="table-type">已返金额</th>
 		               	<th class="table-type">创建时间</th>
 		               	<th class="table-type">更新时间</th>

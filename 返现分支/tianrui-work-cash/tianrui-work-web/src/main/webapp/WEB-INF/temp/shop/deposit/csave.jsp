@@ -38,12 +38,12 @@
      
      <div class="item item-password">
        <input type="text" class="txt-input txt-username" 
-       readonly="readonly" value="返现余额：${info.cashMoney }">
+       readonly="readonly" value="补贴余额：${info.cashMoney }">
      </div>
      
       <div class="item item-password">
        <input type="text" class="txt-input txt-username" 
-       readonly="readonly" value="使用返现余额">
+       readonly="readonly" value="使用补贴余额">
        <b class="tp-btn_PwdTwo btn-off_PwdTwo " setType="0"></b>
        <input type="hidden" id="save_type" value="0">
      </div>
@@ -56,7 +56,7 @@
      <div class="item item-password cash_money">
        <input type="text" id="cash_price" class="txt-input txt-username"
         value="${info.cashMoney }" readonly="readonly"
-        placeholder="使用返现余额充值">
+        placeholder="使用补贴余额充值">
      </div>
      
      <div class="ui-btn-wrap"> 

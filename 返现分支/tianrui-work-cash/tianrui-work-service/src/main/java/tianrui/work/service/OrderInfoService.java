@@ -160,18 +160,18 @@ public class OrderInfoService implements IOrderInfoService {
 		OrderInfo info = orderInfoMapper.selectByPrimaryKey(weChatPay.getTransid());
 		if (StringUtils.equals("1", info.getOrderStatus())) {//待付款
 			MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
-			//判断用户会员等级  加盟商 购物金额返现
+			//判断用户会员等级  加盟商 购物金额补贴
 			if(weChatPay.getTotalfee()!=null){
 				//本次支付金额不为空  非积分余额消费
 				if("S".equals(member.getMemberRank())){
 					//S用户更 加盟商
-					//添加 消费金额返现
+					//添加 消费金额补贴
 					CashBackReq req = new CashBackReq();
 					req.setCashType("1");
 					req.setCashMember(member.getMemberId());
 					req.setCashMemberName(member.getWechatName());
 					req.setCashAmount(weChatPay.getTotalfee());
-					req.setCashRemark("购买商品返现");
+					req.setCashRemark("购买商品补贴");
 					cashBackService.addCashBack(req);
 				}else{
 					//非加盟商
@@ -188,14 +188,14 @@ public class OrderInfoService implements IOrderInfoService {
 									ConfigurationInfo mc = (ConfigurationInfo) mrs.getData();
 									ConfigurationInfo fc = (ConfigurationInfo) frs.getData();
 									if("1".equals(mc.getFlag())&&"1".equals(fc.getFlag())){
-										//两个返现配置均开启  父级享受一次性返现
+										//两个补贴配置均开启  父级享受一次性补贴
 										double cha = Double.valueOf(mc.getParamvalue())+Double.valueOf(fc.getParamvalue());
-										//父级返现金额
+										//父级补贴金额
 										double cash = weChatPay.getTotalfee() * cha;
 										CashBackInfoReq csinfo = new CashBackInfoReq();
 										csinfo.setBackAmount(cash);
 										csinfo.setBackMoney(cash);
-										csinfo.setBackRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行返现");
+										csinfo.setBackRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
 										csinfo.setMemberId(finfo.getMemberId());
 										csinfo.setMemberName(finfo.getWechatName());
 										cashBackService.addCashBackInfo(csinfo);
@@ -214,7 +214,7 @@ public class OrderInfoService implements IOrderInfoService {
 			if(weChatPay.getBlance()!=null){
 				coMone = coMone + weChatPay.getBlance();
 			}
-			//返现消费金额记录
+			//补贴消费金额记录
 			if(weChatPay.getCashMoney()!=null&&weChatPay.getCashMoney()!=0){
 				CashBackInfo in = new CashBackInfo();
 				in.setId(UUIDUtil.getUUID());

@@ -36,10 +36,14 @@ function innerHTML(data,pageNo){
 		var rank = "";
 		if(data[a].memberRank == "S"){
 			rank = "加盟商";
-		}else if(data[a].memberRank == "1"){
+		}else if(data[a].memberRank == "A"){
+			rank = "准股东";
+		}else if(data[a].memberRank == "B"){
+			rank = "VIP会员";
+		}else if(data[a].memberRank == "C"){
+			rank = "VIP客户";
+		}else {
 			rank = "普通会员";
-		}else{
-			rank = data[a].memberRank+"级会员";
 		}
 		var hml = "<tr><td>"+(a+1)+"</td>" +
 //				"<td>"+data[a].wechat+"</td>" +

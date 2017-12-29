@@ -60,26 +60,26 @@ public class CashBackService implements ICashBackService {
 			save.setCashMember(info.getMemberId());
 			save.setCashMemberName(info.getWechatName());
 			save.setCashAmount(req.getMoney());
-			save.setCashRemark(info.getMemberName()+"开通会员返现");
+			save.setCashRemark(info.getMemberName()+"开通会员补贴");
 			addCashBack(save);
 		}
 		
 		rs = memberReleteService.getFatherMember(req.getId());
 		if(rs.getCode().equals("000000")){
-			//父级返现
+			//父级补贴
 			MemberInfo finfo = (MemberInfo) rs.getData();
 			if(getmemberRank(finfo.getMemberRank())>=getmemberRank(req.getRank())){
 				//父级等级 大于 等于 用户等级
 				ConfigurationInfo mconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(req.getRank()));
 				ConfigurationInfo fconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(finfo.getMemberRank()));
 				if(mconf != null && fconf != null && mconf.getFlag().equals("1")&&fconf.getFlag().equals("1")){
-					//父级子级均开启返现功能
+					//父级子级均开启补贴功能
 					Double ter = Double.valueOf(fconf.getParamvalue())+Double.valueOf(mconf.getParamvalue());
 					
 					CashBackInfoReq csinfo = new CashBackInfoReq();
 					csinfo.setBackAmount(req.getMoney()*ter);
 					csinfo.setBackMoney(req.getMoney()*ter);
-					csinfo.setBackRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行返现");
+					csinfo.setBackRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行补贴");
 					csinfo.setMemberId(finfo.getMemberId());
 					csinfo.setMemberName(finfo.getWechatName());
 					addCashBackInfo(csinfo);
@@ -288,14 +288,14 @@ public class CashBackService implements ICashBackService {
 
 	@Override
 	public void cashQuart() throws Exception {
-		// 获取系统设置返现比例
+		// 获取系统设置补贴比例
 		ConfigurationInfo rate = configurationInfoMapper.selectByPrimaryKey("SYSTEM_CASH_BACK_RATE");
-		// 获取系统返现比例
+		// 获取系统补贴比例
 		Double rateVal = Double.valueOf(rate.getParamvalue());
 		if (rate.getFlag().equals("1")) {
-			// 返现功能后台已开启
+			// 补贴功能后台已开启
 			CashBack query = new CashBack();
-			query.setDesc1("1");// 1-返现中 2-返现成功
+			query.setDesc1("1");// 1-补贴中 2-补贴成功
 			List<CashBack> list = cashBackMapper.selectByCondition(query);
 			for (CashBack back : list) {
 				CashBack upt = new CashBack();
@@ -303,7 +303,7 @@ public class CashBackService implements ICashBackService {
 				upt.setCashAlre(back.getCashAlre() + (back.getCashAmount() * rateVal));
 				upt.setModifyTime(System.currentTimeMillis());
 				if (upt.getCashAlre() >= back.getCashAmount()) {
-					// 已反金额 大于返现金额 返现完成
+					// 已反金额 大于补贴金额 补贴完成
 					upt.setCashAlre(back.getCashAmount() - back.getCashAlre());
 					upt.setDesc1("2");
 				}
@@ -311,9 +311,9 @@ public class CashBackService implements ICashBackService {
 				save.setId(UUIDUtil.getUUID());
 				save.setCashBackId(back.getId());
 				save.setBackAmount(back.getCashAmount());
-				save.setBackMoney(upt.getCashAlre() - back.getCashAlre());// 本次返现金额
+				save.setBackMoney(upt.getCashAlre() - back.getCashAlre());// 本次补贴金额
 				save.setBackRatio(rateVal);
-				save.setBackRemark("系统定时返现");
+				save.setBackRemark("系统定时补贴");
 				save.setMemberId(back.getCashMember());
 				save.setMemberName(back.getCashMemberName());
 				save.setDesc1(back.getCashType());
@@ -334,7 +334,7 @@ public class CashBackService implements ICashBackService {
 		CashBackInfo save = new CashBackInfo();
 		save.setId(UUIDUtil.getUUID());
 		save.setBackAmount(req.getBackAmount());
-		save.setBackMoney(req.getBackMoney());// 本次返现金额
+		save.setBackMoney(req.getBackMoney());// 本次补贴金额
 //		save.setBackRatio(rateVal);
 		save.setBackRemark(req.getBackRemark());
 		save.setMemberId(req.getMemberId());

@@ -20,7 +20,7 @@ function pay() {
 	var show_cashMoney = $("#show_cashMoney").val();
 	var hidden_cashMoney = $("#hidden_cashMoney").val();
 	if(Number(show_cashMoney)>Number(hidden_cashMoney)){
-		alert("返现余额不足");
+		alert("补贴余额不足");
 		return;
 	}
 	var show_redPacket = $("#show_redPacket").val();

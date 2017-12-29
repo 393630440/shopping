@@ -49,12 +49,12 @@
 		</ul>
 		 -->
 		<h3 class="am-icon-volume-up" id="cash_class">
-			<em></em> 返现管理
+			<em></em> 补贴管理
 		</h3>
 		<ul>
-			<li><a href="/admin/shop/cash/page">用户返现列表 </a></li>
-			<li><a href="/admin/shop/cash/pageInfo">用户返现明细 </a></li>
-			<li><a href="/admin/shop/cash/savepage">新增用户返现 </a></li>
+			<li><a href="/admin/shop/cash/page">用户补贴列表 </a></li>
+			<li><a href="/admin/shop/cash/pageInfo">用户补贴明细 </a></li>
+			<li><a href="/admin/shop/cash/savepage">新增用户补贴 </a></li>
 		</ul>
 		<h3 class="am-icon-gears">
 			<em></em> 系统设置

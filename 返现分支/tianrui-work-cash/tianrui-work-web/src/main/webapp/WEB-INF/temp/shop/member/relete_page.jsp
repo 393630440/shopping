@@ -34,7 +34,7 @@
 				<div class='hwc-tu f-l'><img src='${father.fatherImg }'></div>
 			       <div class='gwc-md f-l'>
 			       <p class='gwc-p1'>微信名称：<span>${father.fatherName }</span></p>
-			       <p class='gwc-p2'>父级会员</p>
+			       <p class='gwc-p2'>上级会员</p>
 			       <!-- 
 			       <h3>关注时间：new Date(${father.createtime }).format("yyyy-MM-dd hh:mm:ss")</h3>
 			        -->
@@ -77,7 +77,7 @@ function innerHTML(date){
 		var hml = "<li><div class='hwc-tu f-l'><img src='"+date[a].memberImg+"'></div>"+
 		       "<div class='gwc-md f-l'>"+
 		       "<p class='gwc-p1'>会员名称：<span>"+date[a].memberName+"</span></p>"+
-		       "<p class='gwc-p2'>子级会员</p>"+
+		       "<p class='gwc-p2'>我的会员</p>"+
 		       "<h3>关注时间："+(new Date(date[a].createtime).format("yyyy-MM-dd hh:mm:ss"))+"</h3>"+
 		       "</div><div style='clear:both;'></div></li></a>";
 		$("#innerHml").append(hml);

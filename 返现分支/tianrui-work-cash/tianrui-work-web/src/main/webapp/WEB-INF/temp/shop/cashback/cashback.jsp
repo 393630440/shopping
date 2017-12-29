@@ -8,7 +8,7 @@
 <meta name="applicable-device" content="mobile" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="format-detection" content="telephone=no">
-<title>返现派送</title>
+<title>补贴派送</title>
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/style.css">
 <link rel="stylesheet" type="text/css" href="${staticRoot}/shop/css/shoujisc.css">
 
@@ -38,7 +38,7 @@
 						<img src="${staticRoot}/web/images/iconfont-fanhui.png">
 					</span>
 				</a>
-				<h2>返现派送</h2>
+				<h2>补贴派送</h2>
 			</div>
 		</header>
 		<!--header 结束-->
@@ -49,9 +49,9 @@
 	            <div class="user_dengji">会员等级：
 	           <c:if test="${MemberInfo.memberRank eq '1' }">普通会员</c:if>        
             	<c:if test="${MemberInfo.memberRank eq 'S' }">加盟商</c:if>        
-         		<c:if test="${MemberInfo.memberRank eq 'A' }">A级会员</c:if>        
-         		<c:if test="${MemberInfo.memberRank eq 'B' }">B级会员</c:if>        
-         		<c:if test="${MemberInfo.memberRank eq 'C' }">C级会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'A' }">准股东</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'B' }">VIP会员</c:if>        
+         		<c:if test="${MemberInfo.memberRank eq 'C' }">VIP客户</c:if>        
          
 	            </div>
 	            <div class="user_dengji">账户余额：${balance}</div>
@@ -59,12 +59,12 @@
 			</a>
 	    </div>
 		<ul class="ui-tab-nav">
-	         <li class="typeClass current" style="width: 33.33%"><a>返现余额：${totalEarnings}</a></li>
+	         <li class="typeClass current" style="width: 33.33%"><a>补贴余额：${totalEarnings}</a></li>
 	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/Hbao/page">积分余额：${redParkEarnings}</a></li>
 	         <!-- 
 	         <li class="typeClass"><a href="/wechat/shop/deposit/page">消费记录</a></li>
 	          -->
-	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/cashback/mycashback">我的返现</a></li>
+	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/cashback/mycashback">我的补贴</a></li>
 	   	</ul>
 	   	<div class="user_nav_list w">
 	   		<ul>
@@ -133,7 +133,7 @@
 							"<h1>"+data[a].backRemark+"</h1>"+
 							"<span>"+(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 							"</div>"+
-							"<div class='msg_content'>总额："+data[a].backAmount+"<span>返现金额："+data[a].backMoney+"</span></div></div></a>";
+							"<div class='msg_content'>总额："+data[a].backAmount+"<span>补贴金额："+data[a].backMoney+"</span></div></div></a>";
 				if(type == 0){
 					$("#nowHtml").append(hml);
 				}else if(type == 1){

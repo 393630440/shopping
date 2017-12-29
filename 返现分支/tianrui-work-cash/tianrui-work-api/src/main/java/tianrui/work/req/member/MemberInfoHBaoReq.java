@@ -14,7 +14,7 @@ public class MemberInfoHBaoReq {
     private Double balance;
 
     private Double redPacket;
-    //返现金额
+    //补贴金额
     private Double cashMoney;
 
 

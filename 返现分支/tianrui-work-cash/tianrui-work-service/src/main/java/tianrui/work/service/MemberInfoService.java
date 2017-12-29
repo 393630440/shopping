@@ -60,14 +60,14 @@ public class MemberInfoService implements IMemberInfoService{
 			upt.setCashMoney(info.getCashMoney()-cashMoney);
 			memberInfoMapper.updateByPrimaryKeySelective(upt);
 			
-			//返现提现记录
+			//补贴提现记录
 			CashBackInfo in = new CashBackInfo();
 			in.setId(UUIDUtil.getUUID());
 			in.setMemberId(info.getMemberId());
 			in.setMemberName(info.getWechatName());
 			in.setBackAmount(0.00);
 			in.setBackMoney(-cashMoney);
-			in.setBackRemark("返现金额提现");
+			in.setBackRemark("补贴金额提现");
 			in.setCreateTime(System.currentTimeMillis());
 			in.setDesc1("3");
 			cashBackInfoMapper.insertSelective(in);
@@ -79,7 +79,7 @@ public class MemberInfoService implements IMemberInfoService{
 			gain.setWechatName(info.getWechatName());
 			gain.setRpNum(cashMoney/2);
 			gain.setSourceId("2");
-			gain.setSourceDescribe("返现提现获得积分");
+			gain.setSourceDescribe("补贴提现获得积分");
 			gain.setCreatetime(System.currentTimeMillis());
 			memberGainMapper.insertSelective(gain);
 			
@@ -89,7 +89,7 @@ public class MemberInfoService implements IMemberInfoService{
 			save.setRechargeAmount(cashMoney/2);
 			save.setRechargeStatus("1");
 			save.setCreatetime(System.currentTimeMillis());
-			save.setRemark("返现金额提现到余额");
+			save.setRemark("补贴金额提现到余额");
 			save.setMemberName(info.getWechatName());
 			save.setDesc1("1");
 			memberRechargeMapper.insertSelective(save);

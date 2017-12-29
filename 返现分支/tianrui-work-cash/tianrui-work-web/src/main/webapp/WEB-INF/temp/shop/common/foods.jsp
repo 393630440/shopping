@@ -16,10 +16,10 @@ a {
         </li>
     	<li class="foods_02" style="width: 25%">
         	<div class="qu-tu1">
-            	<a href="/web/show/qr/index" class="atu1"><img src="${staticRoot}/shop/images/sjsc-16.png"></a>
-            	<a href="/web/show/qr/index" class="atu2"><img src="${staticRoot}/shop/images/sjsc-16-1.png"></a>
+            	<a href="/web/show/qr/index?memberId=${MemberInfo.memberId }" class="atu1"><img src="${staticRoot}/shop/images/sjsc-16.png"></a>
+            	<a href="/web/show/qr/index?memberId=${MemberInfo.memberId }" class="atu2"><img src="${staticRoot}/shop/images/sjsc-16-1.png"></a>
             </div>
-            <a href="/web/show/qr/index" class="qu-ul1a">分享</a>
+            <a href="/web/show/qr/index?memberId=${MemberInfo.memberId }" class="qu-ul1a">分享</a>
         </li>
     	<li class="foods_03" style="width: 25%">
         	<div class="qu-tu1">
