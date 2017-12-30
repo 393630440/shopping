@@ -46,28 +46,30 @@
 </style>
 </head>
 <body>
-<div style="width: 100%;height: 100% ;background-image: url(/resources/erm_bg.jpg)">
+<div style="width: 100%;height: 100% ;">
 	<div style="overflow:hidden;width: 100%;padding-top: 20px;">
-		<div class="member_m_pic">
-			<img style="width: 60px;border:2px solid #F8F8FF;"  src="${base.wechatImg }">
+		<div style="float: left;">
+			<img style="width: 70px;border:2px solid #F8F8FF;"  src="${base.wechatImg }">
 		</div>
-		<div style="display:inline;overflow:hidden;padding-top: 1px;">
-			<span style="margin-left: 90px;font-weight:20px">
-			我是<span style="color: blue;font-size: 35px">${base.wechatName }</span>
-			</span>
-			<br>
-			<span style="margin-left: 90px">
-				我为<span style="color: red;font-size: 30px;">禄里堂代言</span>
-			</span>
+		<div style="float: left; margin-top: 10px;margin-left: 10px;">
+			<span style="font-size: 30px;">我是${base.wechatName }</span><br>
+			<span style="font-size: 30px;">欢迎加入禄里堂</span>
 		</div>
+		<!-- 
+		<div style="float: right;">
+			<img style="height: 70px" src="/resources/logo_B.jpg">
+		</div>
+		 -->
+	</div>
+	<div align="center" style="margin-top: 30px">
+		<img style="height: 80px" src="/resources/logo_B.jpg">
+		<img style="height: 80px" src="/resources/logo_A.jpg">
 	</div>
 	<input id="pathUrl" type="hidden" value="${pathUrl }"/>
-	<div style="margin-top: 200px">
-		<div style="width: 30%;display: inline-block;"></div>
-		<div id="qrcode" class="pic_head" style="width:40%; margin-top:15px;display: inline-block;"></div>
-		<div style="width: 30%;display: inline-block;"></div>
+	<div align="center" style="margin-top: 30px">
+		<div id="qrcode" align="center" class="pic_head" style="width:40%; margin-top:15px;display: inline-block;"></div>
 	</div>
-	<div style="text-align: center;">
+	<div style="text-align: center;margin-top: 30px">
 		<span style="font-size: 35px;color: red">
 		艾灸禄里堂，消费获补贴。转发有惊喜
 		</span>
