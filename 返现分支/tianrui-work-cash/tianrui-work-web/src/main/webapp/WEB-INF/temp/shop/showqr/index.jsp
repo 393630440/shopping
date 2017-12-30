@@ -53,7 +53,7 @@
 		</div>
 		<div style="float: left; margin-top: 10px;margin-left: 10px;">
 			<span style="font-size: 30px;">我是${base.wechatName }</span><br>
-			<span style="font-size: 30px;">欢迎加入禄里堂</span>
+			<span style="font-size: 30px;">我为禄里堂代言</span>
 		</div>
 		<!-- 
 		<div style="float: right;">
