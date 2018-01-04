@@ -178,29 +178,21 @@ public class OrderInfoService implements IOrderInfoService {
 					rs = memberReleteService.getFatherMember(member.getMemberId());
 					if("000000".equals(rs.getCode())){
 						MemberInfo finfo = (MemberInfo) rs.getData();
-						if(getmemberRank(finfo.getMemberRank())>=getmemberRank(member.getMemberRank())){
-							//父级会员等级大于或等于子级
-							if("S".equals(finfo.getMemberRank())){
-								//父级为加盟商 
-								Result mrs = configurationInfoService.selectMembreRankConf(member.getMemberRank());
-								Result frs = configurationInfoService.selectMembreRankConf(finfo.getMemberRank());
-								if("000000".equals(mrs.getCode())&&"000000".equals(frs.getCode())){
-									ConfigurationInfo mc = (ConfigurationInfo) mrs.getData();
-									ConfigurationInfo fc = (ConfigurationInfo) frs.getData();
-									if("1".equals(mc.getFlag())&&"1".equals(fc.getFlag())){
-										//两个补贴配置均开启  父级享受一次性补贴
-										double cha = Double.valueOf(mc.getParamvalue())+Double.valueOf(fc.getParamvalue());
-										//父级补贴金额
-										double cash = weChatPay.getTotalfee() * cha;
-										CashBackInfoReq csinfo = new CashBackInfoReq();
-										csinfo.setBackAmount(cash);
-										csinfo.setBackMoney(cash);
-										csinfo.setBackRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
-										csinfo.setMemberId(finfo.getMemberId());
-										csinfo.setMemberName(finfo.getWechatName());
-										cashBackService.addCashBackInfo(csinfo);
-									}
-								}
+						if("S".equals(finfo.getMemberRank())){
+							//父级为加盟商 
+							String confKey = finfo.getMemberRank()+"_back_"+member.getMemberRank();
+							ConfigurationInfoResp conf = configurationInfoService.queryConfigurationInfoByOne(confKey);
+							if("1".equals(conf.getFlag())){
+								double cha = Double.valueOf(conf.getParamvalue());
+								//父级补贴金额
+								double cash = weChatPay.getTotalfee() * cha;
+								CashBackInfoReq csinfo = new CashBackInfoReq();
+								csinfo.setBackAmount(cash);
+								csinfo.setBackMoney(cash);
+								csinfo.setBackRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
+								csinfo.setMemberId(finfo.getMemberId());
+								csinfo.setMemberName(finfo.getWechatName());
+								cashBackService.addCashBackInfo(csinfo);
 							}
 						}
 					}

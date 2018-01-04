@@ -68,22 +68,21 @@ public class CashBackService implements ICashBackService {
 		if(rs.getCode().equals("000000")){
 			//父级补贴
 			MemberInfo finfo = (MemberInfo) rs.getData();
-			if(getmemberRank(finfo.getMemberRank())>=getmemberRank(req.getRank())){
-				//父级等级 大于 等于 用户等级
-				ConfigurationInfo mconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(req.getRank()));
-				ConfigurationInfo fconf = configurationInfoMapper.selectByPrimaryKey(changeRankRext(finfo.getMemberRank()));
-				if(mconf != null && fconf != null && mconf.getFlag().equals("1")&&fconf.getFlag().equals("1")){
-					//父级子级均开启补贴功能
-					Double ter = Double.valueOf(fconf.getParamvalue())+Double.valueOf(mconf.getParamvalue());
-					
-					CashBackInfoReq csinfo = new CashBackInfoReq();
-					csinfo.setBackAmount(req.getMoney()*ter);
-					csinfo.setBackMoney(req.getMoney()*ter);
-					csinfo.setBackRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行补贴");
-					csinfo.setMemberId(finfo.getMemberId());
-					csinfo.setMemberName(finfo.getWechatName());
-					addCashBackInfo(csinfo);
-				}
+			
+			String confKey = finfo.getMemberRank()+"_back_"+req.getRank();
+			ConfigurationInfo mconf = configurationInfoMapper.selectByPrimaryKey(confKey);
+			
+			if(mconf != null && mconf.getFlag().equals("1")){
+				//父级子级均开启补贴功能
+				Double ter = Double.valueOf(mconf.getParamvalue());
+				
+				CashBackInfoReq csinfo = new CashBackInfoReq();
+				csinfo.setBackAmount(req.getMoney()*ter);
+				csinfo.setBackMoney(req.getMoney()*ter);
+				csinfo.setBackRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行补贴");
+				csinfo.setMemberId(finfo.getMemberId());
+				csinfo.setMemberName(finfo.getWechatName());
+				addCashBackInfo(csinfo);
 			}
 		}
 		return rs;
