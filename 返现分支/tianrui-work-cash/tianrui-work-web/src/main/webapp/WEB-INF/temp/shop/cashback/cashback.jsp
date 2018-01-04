@@ -70,9 +70,12 @@
 	   		<ul>
 	   			<a>
                	<div class="u_nav_icon money"></div>
-                <div class="u_nav_name">当天收益</div>
+                <div class="u_nav_name">当天明细</div>
                 <div class="nt_icon"></div>
+                <!-- 
                 <div class="u_money"><i>${todayEarnings}</i></div>
+                 -->
+                <div class="u_money"><i></i></div>
                 </a>
 	   		</ul>
 	   		<ul class="gwc-ul1" id="nowHtml">
@@ -83,13 +86,21 @@
 	   		<ul>
 	   			<a>
                	<div class="u_nav_icon money"></div>
-                <div class="u_nav_name">历史收益</div>
+                <div class="u_nav_name">历史明细</div>
                 <div class="nt_icon"></div>
                 <div class="u_money"><i></i></div>
                 </a>
 	   		</ul>
 	   		<ul class="gwc-ul1" id="innerHml">
 
+    		</ul>
+    		<ul class="gwc-ul1">
+				<div class='msg w'>
+					<div class='msg_title'>
+					</div>
+					<div class='msg_content'>
+					</div>
+				</div>
     		</ul>
 	   	</div>
 
@@ -128,12 +139,12 @@
 	function innerHTML(data,type){
 		if (data != null) {
 			for (var a = 0; a < data.length; a++) {
-				var hml = "<a href='/wechat/shop/cashback/cashbacklist?cashBackId="+data[a].cashBackId+"'><div class='msg w'>"+
+				var hml = "<a "+(data[a].desc1 == "1"?"href='/wechat/shop/cashback/cashbacklist?cashBackId="+data[a].cashBackId+"'":"")+"><div class='msg w'>"+
 							"<div class='msg_title'>"+
 							"<h1>"+data[a].backRemark+"</h1>"+
 							"<span>"+(new Date(data[a].createTime).format("yyyy-MM-dd hh:mm:ss"))+"</span>"+
 							"</div>"+
-							"<div class='msg_content'>总额："+data[a].backAmount+"<span>补贴金额："+data[a].backMoney+"</span></div></div></a>";
+							"<div class='msg_content'>"+(data[a].backAmount!=undefined?("总额："+data[a].backAmount):"")+"<span>金额："+data[a].backMoney+"</span></div></div></a>";
 				if(type == 0){
 					$("#nowHtml").append(hml);
 				}else if(type == 1){

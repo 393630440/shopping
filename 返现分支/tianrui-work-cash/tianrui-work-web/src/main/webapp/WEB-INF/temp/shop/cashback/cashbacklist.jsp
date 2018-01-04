@@ -48,6 +48,14 @@
 					<div class="my-k1" id="dataList_showId">
 						
 					</div>
+					<ul class="gwc-ul1">
+						<div class='msg w'>
+							<div class='msg_title'>
+							</div>
+							<div class='msg_content'>
+							</div>
+						</div>
+		    		</ul>
 				</div>
 			</div>
 		</div>

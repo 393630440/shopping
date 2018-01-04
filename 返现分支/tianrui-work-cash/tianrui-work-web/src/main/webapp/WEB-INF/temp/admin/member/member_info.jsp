@@ -72,7 +72,8 @@
 		          <div class="you">
 					<c:forEach items="${f_member }" var="fm">
 			            <a href="/admin/shop/member/memberInfo?id=${fm.memberFather }">
-			            <img style="width: 60px" src="${fm.fatherImg }"><br>${fm.fatherName }
+			            <img style="width: 60px" src="${fm.fatherImg }"><br>
+			            ${fm.fatherName }
 			            </a>
 					</c:forEach>
 	         	  </div>
@@ -81,9 +82,12 @@
 		          <div class="zuo">子级：</div>
 		          <div class="you">
 					<c:forEach items="${c_member }" var="cm">
-			            <a href="/admin/shop/member/memberInfo?id=${cm.member }">
-			            <img style="width: 60px" src="${cm.memberImg }"><br>${cm.memberName }
-			            </a>
+			            <div  style="width: 60px;overflow: hidden;float: left;margin-left: 20px">
+				            <a href="/admin/shop/member/memberInfo?id=${cm.member }">
+				            <img style="width: 60px" src="${cm.memberImg }"><br>
+				            ${cm.memberName }
+				            </a>
+			            </div>
 					</c:forEach>
 	         	  </div>
 		        </div>

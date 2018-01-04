@@ -18,6 +18,7 @@ import com.tianrui.web.action.session.SessionManage;
 import com.tianrui.web.util.LoggerUtils;
 
 import tianrui.work.api.ICashBackService;
+import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
@@ -33,12 +34,18 @@ public class CashBackAction {
 
 	@Autowired
 	ICashBackService cashBackService;
-
+	@Autowired
+	IMemberInfoService memberInfoService;
+	
 	/**  */
 	@RequestMapping("index")
 	public ModelAndView index(HttpServletRequest request) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/cashback/index]");
 		MemberInfo info = SessionManage.getSessionManage(request);
+		Result rs = memberInfoService.selectByOpenid(info.getMemberId());
+		
+		MemberInfo upt = (MemberInfo) rs.getData();
+		SessionManage.uptSessionManage(request,upt);
 		String memberId = info.getMemberId();
 //		String totalEarnings = cashBackService.getTotalEarnings(memberId);
 		String todayEarnings = cashBackService.getTodayEarnings(memberId);
@@ -46,9 +53,9 @@ public class CashBackAction {
 			todayEarnings = "0.00";
 		}
 		ModelAndView view = new ModelAndView();
-		view.addObject("balance", info.getBalance());// 账户余额
-		view.addObject("totalEarnings", info.getCashMoney());// 累计收益
-		view.addObject("redParkEarnings", info.getRedPacket());//积分
+		view.addObject("balance", upt.getBalance());// 账户余额
+		view.addObject("totalEarnings", upt.getCashMoney());// 累计收益
+		view.addObject("redParkEarnings", upt.getRedPacket());//积分
 		view.addObject("todayEarnings", todayEarnings);// 今日收益
 		view.setViewName("shop/cashback/cashback");
 		return view;
