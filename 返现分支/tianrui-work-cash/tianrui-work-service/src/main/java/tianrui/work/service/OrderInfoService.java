@@ -180,7 +180,7 @@ public class OrderInfoService implements IOrderInfoService {
 						MemberInfo finfo = (MemberInfo) rs.getData();
 						if("S".equals(finfo.getMemberRank())){
 							//父级为加盟商 
-							String confKey = finfo.getMemberRank()+"_back_"+member.getMemberRank();
+							String confKey = "GOODS_CASH_BACK";
 							ConfigurationInfoResp conf = configurationInfoService.queryConfigurationInfoByOne(confKey);
 							if("1".equals(conf.getFlag())){
 								double cha = Double.valueOf(conf.getParamvalue());

@@ -131,9 +131,9 @@
 			</div>
 		</div>
 
-		<!-- foods -->
+		<!-- 
 		<jsp:include page="../common/foods.jsp"></jsp:include>
-		<!-- foods -->
+		 foods -->
 	</div>
 </body>
 <script type="text/javascript">
