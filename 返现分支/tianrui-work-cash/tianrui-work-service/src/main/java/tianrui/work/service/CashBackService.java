@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import tianrui.work.api.ICashBackService;
 import tianrui.work.api.IMemberInfoService;
+import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IMemberReleteService;
 import tianrui.work.bean.CashBack;
 import tianrui.work.bean.CashBackInfo;
@@ -25,6 +26,7 @@ import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
 import tianrui.work.req.cash.MemberCashBackReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
+import tianrui.work.req.rechange.MemberRechargeReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
 import tianrui.work.resp.cash.CashBackResp;
 import tianrui.work.vo.PageTool;
@@ -48,6 +50,8 @@ public class CashBackService implements ICashBackService {
 	MemberInfoMapper memberInfoMapper;
 	@Autowired
 	IMemberReleteService memberReleteService;
+	@Autowired
+	IMemberRechangeService memberRechangeService;
 
 	@Override
 	public Result memberCashBack(MemberCashBackReq req) throws Exception {
@@ -76,13 +80,12 @@ public class CashBackService implements ICashBackService {
 				//父级子级均开启补贴功能
 				Double ter = Double.valueOf(mconf.getParamvalue());
 				
-				CashBackInfoReq csinfo = new CashBackInfoReq();
-				csinfo.setBackAmount(req.getMoney()*ter);
-				csinfo.setBackMoney(req.getMoney()*ter);
-				csinfo.setBackRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行补贴");
-				csinfo.setMemberId(finfo.getMemberId());
-				csinfo.setMemberName(finfo.getWechatName());
-				addCashBackInfo(csinfo);
+				MemberRechargeReq rech = new MemberRechargeReq();
+				rech.setMemberId(finfo.getMemberId());
+				rech.setRechargeAmount(req.getMoney()*ter);
+				rech.setRemark(info.getWechatName()+"通过您扫码升级会员，系统对您进行补贴");
+				rech.setDesc1("1");
+        		memberRechangeService.save(rech);
 			}
 		}
 		return rs;
