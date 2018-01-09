@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import tianrui.work.api.ICashBackService;
+import tianrui.work.api.IMemberGainService;
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.api.IMemberRechangeService;
 import tianrui.work.api.IMemberReleteService;
@@ -25,6 +26,7 @@ import tianrui.work.mapper.java.MemberRelatedMapper;
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
 import tianrui.work.req.cash.MemberCashBackReq;
+import tianrui.work.req.gain.MemberGainSaveReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.rechange.MemberRechargeReq;
 import tianrui.work.resp.cash.CashBackInfoResp;
@@ -52,6 +54,8 @@ public class CashBackService implements ICashBackService {
 	IMemberReleteService memberReleteService;
 	@Autowired
 	IMemberRechangeService memberRechangeService;
+	@Autowired
+	IMemberGainService memberGainService;
 
 	@Override
 	public Result memberCashBack(MemberCashBackReq req) throws Exception {
@@ -66,6 +70,20 @@ public class CashBackService implements ICashBackService {
 			save.setCashAmount(req.getMoney());
 			save.setCashRemark(info.getMemberName()+"开通会员补贴");
 			addCashBack(save);
+			
+
+			MemberInfo uptgo = new MemberInfo();
+			uptgo.setMemberId(info.getMemberId());
+			uptgo.setRedPacket(info.getRedPacket()+req.getMoney());
+			memberInfoMapper.updateByPrimaryKeySelective(uptgo);
+			//宏包记录
+			MemberGainSaveReq gain = new MemberGainSaveReq();
+			gain.setMemberId(info.getMemberId());
+			gain.setRpNum(req.getMoney());
+			gain.setRpType("2");
+			gain.setSourceDescribe("升级会员赠送积分");
+			gain.setSourceId("1");
+			memberGainService.save(gain);
 		}
 		
 		rs = memberReleteService.getFatherMember(req.getId());

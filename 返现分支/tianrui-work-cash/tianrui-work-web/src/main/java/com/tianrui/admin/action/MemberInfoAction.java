@@ -53,6 +53,9 @@ public class MemberInfoAction {
 		ModelAndView view = new ModelAndView();
 		view.addObject("c_member", m.getList());
 		view.addObject("f_member", fm.getList());
+		if(fm.getList().size()!=0){
+			view.addObject("fathur",memberInfoService.selectByOpenid(fm.getList().get(0).getMemberFather()).getData());
+		}
 		view.addObject("member", memberInfoService.selectByOpenid(id).getData());
 		view.setViewName("/admin/member/member_info");
 		return view;

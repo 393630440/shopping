@@ -42,6 +42,14 @@
     </where>
   </select>
   
+  <select id="selectByMemberOnly" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_address
+    where member_id = #{id,jdbcType=VARCHAR} and is_default = '1'
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

@@ -97,10 +97,30 @@
 		          <div class="you">
 		          	<select id="member_rank">
 		          		<option value="">未设置</option>
-		          		<option value="S">加盟商</option>
-		          		<option value="A">准股东</option>
-		          		<option value="B">VIP会员</option>
-		          		<option value="C">VIP客户</option>
+		          		<c:if test="${fathur.memberRank eq 'S' }">
+		          			<option value="S">加盟商</option>
+			          		<option value="A">准股东</option>
+			          		<option value="B">VIP会员</option>
+			          		<option value="C">VIP客户</option>
+		          		</c:if>
+		          		<c:if test="${fathur.memberRank eq 'A' }">
+			          		<option value="A">准股东</option>
+			          		<option value="B">VIP会员</option>
+			          		<option value="C">VIP客户</option>
+		          		</c:if>
+		          		<c:if test="${fathur.memberRank eq 'B' }">
+			          		<option value="B">VIP会员</option>
+			          		<option value="C">VIP客户</option>
+		          		</c:if>
+		          		<c:if test="${fathur.memberRank eq 'C' }">
+			          		<option value="C">VIP客户</option>
+		          		</c:if>
+		          		<c:if test="${fathur.memberRank eq null }">
+			          		<option value="S">加盟商</option>
+			          		<option value="A">准股东</option>
+			          		<option value="B">VIP会员</option>
+			          		<option value="C">VIP客户</option>
+		          		</c:if>
 		          	</select>
 		          </div>
 		        </div>
@@ -139,6 +159,11 @@ $("#set_member_rank").on("click",function(){
 	var rank = $("#member_rank").val();
 	if(rank == ""){
 		alert("请选择会员等级");
+		return;
+	}
+	var money = $("#rank_money").val();
+	if(money <= 0){
+		alert("请输入正确的金额");
 		return;
 	}
 	$.ajax({

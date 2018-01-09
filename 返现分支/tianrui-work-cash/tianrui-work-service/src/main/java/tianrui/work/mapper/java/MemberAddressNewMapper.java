@@ -12,6 +12,8 @@ public interface MemberAddressNewMapper {
     int insertSelective(MemberAddressNew record);
 
     MemberAddressNew selectByPrimaryKey(String id);
+    
+    MemberAddressNew selectByMemberOnly(String id);
 
     int updateByPrimaryKeySelective(MemberAddressNew record);
 

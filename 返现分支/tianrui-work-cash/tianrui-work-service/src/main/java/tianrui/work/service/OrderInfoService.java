@@ -160,40 +160,48 @@ public class OrderInfoService implements IOrderInfoService {
 		OrderInfo info = orderInfoMapper.selectByPrimaryKey(weChatPay.getTransid());
 		if (StringUtils.equals("1", info.getOrderStatus())) {//待付款
 			MemberInfo member = memberInfoMapper.selectByPrimaryKey(info.getMemberId());
-			//判断用户会员等级  加盟商 购物金额补贴
-			if(weChatPay.getTotalfee()!=null){
-				//本次支付金额不为空  非积分余额消费
-				if("S".equals(member.getMemberRank())){
-					//S用户更 加盟商
-					//添加 消费金额补贴
-					CashBackReq req = new CashBackReq();
-					req.setCashType("1");
-					req.setCashMember(member.getMemberId());
-					req.setCashMemberName(member.getWechatName());
-					req.setCashAmount(weChatPay.getTotalfee());
-					req.setCashRemark("购买商品补贴");
-					cashBackService.addCashBack(req);
-				}else{
-					//非加盟商
-					rs = memberReleteService.getFatherMember(member.getMemberId());
-					if("000000".equals(rs.getCode())){
-						MemberInfo finfo = (MemberInfo) rs.getData();
-						if("S".equals(finfo.getMemberRank())){
-							//父级为加盟商 
-							String confKey = "GOODS_CASH_BACK";
-							ConfigurationInfoResp conf = configurationInfoService.queryConfigurationInfoByOne(confKey);
-							if("1".equals(conf.getFlag())){
-								double cha = Double.valueOf(conf.getParamvalue());
-								//父级补贴金额
-								double cash = weChatPay.getTotalfee() * cha;
-								CashBackInfoReq csinfo = new CashBackInfoReq();
-								csinfo.setBackAmount(cash);
-								csinfo.setBackMoney(cash);
-								csinfo.setBackRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
-								csinfo.setMemberId(finfo.getMemberId());
-								csinfo.setMemberName(finfo.getWechatName());
-								cashBackService.addCashBackInfo(csinfo);
-							}
+			Double totMoney = 0.00;
+			if(weChatPay.getTotalfee() != null){
+				totMoney = totMoney + weChatPay.getTotalfee();
+			}
+			if(weChatPay.getBlance() != null){
+				totMoney = totMoney + weChatPay.getBlance();
+			}
+			if(weChatPay.getCashMoney() != null){
+				totMoney = totMoney + weChatPay.getCashMoney();
+			}
+			if(weChatPay.getRedPacket() != null){
+				totMoney = totMoney + weChatPay.getRedPacket();
+			}
+			if("S".equals(member.getMemberRank())){
+				//S用户更 加盟商
+				//添加 消费金额补贴
+//				CashBackReq req = new CashBackReq();
+//				req.setCashType("1");
+//				req.setCashMember(member.getMemberId());
+//				req.setCashMemberName(member.getWechatName());
+//				req.setCashAmount(weChatPay.getTotalfee());
+//				req.setCashRemark("购买商品补贴");
+//				cashBackService.addCashBack(req);
+			}else{
+				//非加盟商
+				rs = memberReleteService.getFatherMember(member.getMemberId());
+				if("000000".equals(rs.getCode())){
+					MemberInfo finfo = (MemberInfo) rs.getData();
+					if("S".equals(finfo.getMemberRank())){
+						//父级为加盟商 
+						String confKey = "GOODS_CASH_BACK";
+						ConfigurationInfoResp conf = configurationInfoService.queryConfigurationInfoByOne(confKey);
+						if("1".equals(conf.getFlag())){
+							double cha = Double.valueOf(conf.getParamvalue());
+							//父级补贴金额
+							double cash = totMoney * cha;
+							MemberRechargeReq rech = new MemberRechargeReq();
+							rech.setMemberId(finfo.getMemberId());
+							rech.setRechargeAmount(cash);
+							rech.setRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
+							rech.setDesc1("1");
+			        		memberRechangeService.save(rech);
 						}
 					}
 				}
