@@ -69,7 +69,7 @@ function innerHTML(data) {
 			html += "</h3>";
 			html += "<dl class=\"ssjg-dl1\">";
 			html += "<dt>";
-			html += "<span style=\"color: #DB3751; margin-left: 0px;\">" + data[a].price + "</span>";
+			html += "<span style=\"color: #DB3751; margin-left: 0px;\">￥" + data[a].price + "</span>";
 			html += "<br />";
 			html += "<span style=\"color: #7F7F7F; font-size: 12px; margin-left: 0px;\">销售量：" + data[a].salesvolume + "</span>";
 			html += "</dt>";

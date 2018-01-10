@@ -1,0 +1,169 @@
+/*公共样式
+wfl*/
+.advertise{
+    overflow: hidden;
+    padding: 1rem 0 0 1rem;
+}
+.advertise .advleft{
+    overflow: hidden;
+    float: left;
+    width: 2.5rem;
+    margin-right: 8px;
+}
+.advertise .advleft img{
+    width:100%;
+    border-radius: 2.5rem;
+}
+.advertise .advright{
+    overflow: hidden;
+    float: left;
+    width: 70%;
+}
+.advertise .advright h4{
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+}
+.advertise .advright label{
+    font-size:0.8rem;
+    line-height: 1.6rem;
+    display: inline-block;
+}
+.advertise .advright img{
+    height: 1.4rem;
+    padding: 0;
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+}
+.erweima{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.erweima .erbg{
+    width: 82%;
+    float: right;
+    position: relative;
+}
+.erweima .erbg img{
+    width: 100%;
+}
+.erweima .erbg .erimg{
+    width: 105%;
+    position: absolute;
+    left:-15%;
+    top: 24%;
+}
+.erweima .erimg img{
+    width: 100%;
+}
+.foot{
+    background: url("../images/greenbg.png") no-repeat 0 0;
+    background-size: 100%;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    padding-top: 2rem;
+
+}
+.foot .footcont{
+    font-family: "楷体","楷体_GB2312";
+    padding: 0.8rem 1rem 5rem 1rem;
+    min-height: 200px;
+    background: #034b01;
+}
+.foot .footcont p{
+    line-height:2.2rem;
+
+}
+.cell_bg{
+    background: #fffa9c;
+    padding: 5% 2%;
+    width: 96%;
+    color: #FFFFFF;
+
+}
+.cell_bg .note{
+    background: url("../images/erbg.jpg") no-repeat 0 0;
+    background-size: 100%;
+    padding: 0 0 40% 0;
+}
+.cell_bg .note .title{
+    width: 100%;
+    padding-top:1.2rem;
+}
+.cell_bg .note .title h3{
+    color: #da3931;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.cell_bg .note .title h4{
+    color: #da3931;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1rem;
+}
+.cell_bg .note .ershow{
+    overflow: hidden;
+    margin-top: 50%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.cell_bg .note .ershow img{
+    width: 50%;
+    display: block;
+    margin-left: 25%;
+}
+.cell_bg .note .detail{
+    overflow: hidden;
+}
+.cell_bg .note .detail p{
+    color: #ffe4e6;
+    text-align: center;
+    line-height: 2rem;
+}
+/*媒体查询*/
+@media only screen and (min-width: 319px) {
+    .yl_selc_car{
+        padding: 3px 5px;
+    }
+    .yl_selc_car i{
+        margin-right: 5px;
+    }
+    .yl_selc_car label{
+        margin-right: 10px;
+    }
+    .yl_chez label{
+        margin-right: 15px;
+    }
+
+    .cent_tit i{
+        font-size: 55px;
+    }
+}
+@media only screen and (min-width: 360px) {
+    .yl_selc_car{
+        padding: 3px 15px;
+    }
+    .yl_selc_car i{
+        margin-right: 10px;
+    }
+    .yl_selc_car label{
+        margin-right: 12px;
+    }
+    .yl_chez label{
+        margin-right: 25px;
+    }
+    .cent_tit i{
+        font-size: 63px;
+    }
+}
+@media only screen and (min-width: 414px) {
+    html {
+        font-size: 22.08px !important;
+    }
+    .yl_chez label{
+        margin-right: 30px;
+    }
+}
