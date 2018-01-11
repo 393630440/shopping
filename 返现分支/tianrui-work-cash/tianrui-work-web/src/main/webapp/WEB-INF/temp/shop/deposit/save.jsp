@@ -57,6 +57,10 @@
 <script type="text/javascript">
 $("#save").on("click",function(){
 	var price = $("#price").val();
+	if(price < 500){
+		alert("提现金额不能少于500");
+		return;
+	}
 	$.ajax({
 		url:"/wechat/shop/deposit/save",
 		type:"POST",

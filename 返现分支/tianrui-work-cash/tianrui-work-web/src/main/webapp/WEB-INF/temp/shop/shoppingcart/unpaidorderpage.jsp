@@ -18,6 +18,7 @@
 <link href="${staticRoot}/shop/css/style.css" rel="stylesheet" type="text/css">
 <link href="${staticRoot}/shop/css/shoujisc.css" rel="stylesheet" type="text/css">
 <link href="${staticRoot}/shop/css/style.new.css" rel="stylesheet" type="text/css">
+
 <script src="${staticRoot}/web/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 <script src="${staticRoot}/web/js/owl.carousel.min.js" type="text/javascript"></script>
 <script src="${staticRoot}/web/layer/layer.js" type="text/javascript"></script>
@@ -106,33 +107,44 @@
 				<div style="clear: both;"></div>
 			</div>
 		</c:forEach>
-
+		
 		<div class="drdd-info4">
 			<p>配送费：${orderInfo.expressFeeStr}</p>
 			<input type="hidden" id="expressFeeStr_info" value="${orderInfo.expressFee}">
 			<div style="clear: both;"></div>
 		</div>
 		
-		<div class="drdd-info4">
-			<p>账户余额：<input type="text" id="show_balance" value="${MemberInfo.balance}"> </p>
-			<input type="hidden" id="hidden_balance" value="${MemberInfo.balance}"> 
-			<div style="clear: both;"></div>
-		</div>
-		<div class="drdd-info4">
-			<p>补贴金额：<input type="text" id="show_cashMoney" value="${MemberInfo.cashMoney}"></p>
-			<input type="hidden" id="hidden_cashMoney"  value="${MemberInfo.cashMoney}">
-			<div style="clear: both;"></div>
-		</div>
-		<div class="drdd-info4">
-			<p>用户积分：<input type="text" id="show_redPacket" value="${MemberInfo.redPacket}"></p>
-			<input type="hidden" id="hidden_redPacket"  value="${MemberInfo.redPacket}">
-			<div style="clear: both;"></div>
+		<div class="main">
+			<div class="item item-password">
+		       <input type="text" id="show_balance_a"  class="txt-input txt-username" 
+		       readonly="readonly" value="使用账户余额">
+		       <input type="text" class="txt-input txt-username" 
+		       id="show_balance" value="">
+		       <b class="tp-btn_PwdTwo btn-off_PwdTwo " setType="0" idtype="_balance"></b>
+		       <input type="hidden" id="hidden_balance" value="${member.balance}">
+     		</div>
+			<div class="item item-password">
+		       <input type="text" id="show_cashMoney_a"  class="txt-input txt-username" 
+		       readonly="readonly" value="使用补贴金额">
+		       <input type="text" class="txt-input txt-username" 
+		       id="show_cashMoney" value="">
+		       <b class="tp-btn_PwdTwo btn-off_PwdTwo " setType="0" idtype="_cashMoney"></b>
+		       <input type="hidden" id="hidden_cashMoney" value="${member.cashMoney}">
+     		</div>
+			<div class="item item-password">
+		       <input type="text" id="show_redPacket_a"  class="txt-input txt-username" 
+		       readonly="readonly" value="使用用户积分">
+		       <input type="text" class="txt-input txt-username" 
+		       id="show_redPacket" value="">
+		       <b class="tp-btn_PwdTwo btn-off_PwdTwo " setType="0" idtype="_redPacket"></b>
+		       <input type="hidden" id="hidden_redPacket" value="${member.redPacket}">
+     		</div>
 		</div>
 		
 		<div class="drdd-info4">
 			<p>配送方式：${orderInfo.wuliuName}</p>
 			<div style="clear: both;"></div>
-		</div>
+		</div><br>
 		
 		<div class="drdd-info4">
 			<p>快递单号：${orderInfo.wuliuNumb}</p>
@@ -151,6 +163,8 @@
 		</div>
 		</c:if>
 		
+		
+		
 		<c:if test="${orderInfo.orderStatus eq 3}">
 		<div class="w main sign_bill">
 			<div class="ui-btn-wrap">
@@ -162,8 +176,36 @@
 	</div>
 </body>
 <script type="text/javascript">
+	$("#show_balance").hide();
+	$("#show_cashMoney").hide();
+	$("#show_redPacket").hide();
 	var orderId = "${orderId}";
 	var addressId = "${addressId}";
+	$(".tp-btn_PwdTwo").on("click",function(){
+		var setType = $(this).attr("setType");
+		var idtype = $(this).attr("idtype");
+		var blan = $("#hidden"+idtype).val();
+		var price_info = $("#price_info").val();
+		if(setType == "1"){
+			$(this).removeClass("btn-on_PwdTwo");
+			$(this).addClass("btn-off_PwdTwo");
+			$(this).attr("setType","0");
+			$("#show"+idtype).val("0");
+			$("#show"+idtype).hide();
+			$("#show"+idtype+"_a").show();
+		}else if(setType == "0"){
+			$(this).addClass("btn-on_PwdTwo");
+			$(this).removeClass("btn-off_PwdTwo");
+			$(this).attr("setType","1");
+			if(blan>price_info){
+				$("#show"+idtype).val(price_info);
+			}else{
+				$("#show"+idtype).val(blan);
+			}
+			$("#show"+idtype).show();
+			$("#show"+idtype+"_a").hide();
+		}
+	});
 </script>
 <script src="/resources/js/web/shoppingcart/unpaidorderpage.js?1223"></script>
 </html>

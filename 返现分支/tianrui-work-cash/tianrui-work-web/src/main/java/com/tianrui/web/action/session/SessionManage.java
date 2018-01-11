@@ -22,6 +22,8 @@ public class SessionManage {
 	public static MemberInfo getSessionManage(HttpServletRequest request) {
 		MemberInfo user = new MemberInfo();
 		user = (MemberInfo) request.getSession().getAttribute("MemberInfo");
+//		user.setMemberId("");
+//		user.setMemberRank("1");
 		return user;
 	}
 

@@ -308,6 +308,7 @@ public class ShoppingCartAction {
 		MemberAddressNew addressInfo = null;
 		if (addressId.equals("0")) {
 			addressInfo = memberAddressMapper.selectByMemberOnly(orderInfo.getMemberId());
+			addressId = addressInfo.getId();
 		} else if (addressId.equals("-1")) {
 			addressInfo = new MemberAddressNew();
 			addressInfo.setId(addressId);
@@ -336,6 +337,7 @@ public class ShoppingCartAction {
 		view.addObject("addressId", addressId);
 		view.addObject("addressInfo", addressInfo);
 		view.addObject("redPark", redPark);
+		view.addObject("member", fo);
 		view.addObject("myredPark",fo.getRedPacket());
 		view.setViewName("shop/shoppingcart/unpaidorderpage");
 		return view;
