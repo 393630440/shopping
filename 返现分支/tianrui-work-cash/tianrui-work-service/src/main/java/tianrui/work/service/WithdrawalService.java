@@ -45,8 +45,14 @@ public class WithdrawalService implements IWithdrawalService{
 			PropertyUtils.copyProperties(save, req);
 			save.setId(UUIDUtil.getUUID());
 			save.setWithdrawalStatus("0");
+			save.setWithdrawalAmount(req.getWithdrawalAmount()*0.99);
 			save.setCreatetime(System.currentTimeMillis());
 			withdrawalMapper.insertSelective(save);
+			MemberInfo upt = new MemberInfo();
+			upt.setMemberId(info.getMemberId());
+			upt.setBalance(info.getBalance()-req.getWithdrawalAmount());
+			memberInfoMapper.updateByPrimaryKeySelective(upt);
+			
 		}else{
 			rs.setCode("1");
 			rs.setError("有提现中订单");
@@ -104,8 +110,6 @@ public class WithdrawalService implements IWithdrawalService{
 				rs.setError("提现超额");
 				return rs;
 			}else{
-				info.setBalance(info.getBalance()-draw.getWithdrawalAmount());
-				memberInfoMapper.updateByPrimaryKeySelective(info);
 				draw.setWithdrawalStatus("1");
 				withdrawalMapper.updateByPrimaryKeySelective(draw);
 			}	

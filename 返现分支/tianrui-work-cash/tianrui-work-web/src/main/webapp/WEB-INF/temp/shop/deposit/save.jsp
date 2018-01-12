@@ -61,7 +61,6 @@ $("#save").on("click",function(){
 		alert("提现金额不能少于500");
 		return;
 	}
-	price = price*0.99
 	$.ajax({
 		url:"/wechat/shop/deposit/save",
 		type:"POST",

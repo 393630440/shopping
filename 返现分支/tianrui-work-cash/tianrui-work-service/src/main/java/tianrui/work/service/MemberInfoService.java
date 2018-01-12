@@ -25,7 +25,6 @@ import tianrui.work.req.member.MemberInfoFindReq;
 import tianrui.work.req.member.MemberInfoHBaoReq;
 import tianrui.work.req.member.MemberInfoSaveReq;
 import tianrui.work.req.member.MemberSetUptReq;
-import tianrui.work.req.rechange.MemberRechargeReq;
 import tianrui.work.resp.member.MemberInfoResp;
 import tianrui.work.resp.member.MemberSetResp;
 import tianrui.work.vo.PageTool;
