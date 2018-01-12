@@ -265,6 +265,7 @@ public class MemberInfoService implements IMemberInfoService{
 		upt.setRpExchangeRatio(req.getRpExchangeRatio());
 		upt.setCity(req.getCity());
 		upt.setMemberRank(req.getMemberRank());
+		upt.setRankMoney(req.getRankMoney());
 		memberInfoMapper.updateByPrimaryKeySelective(upt);
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
 		rs.setData(info);

@@ -44,11 +44,11 @@ public class MemberInfoAction {
 	public ModelAndView memberInfo(String id) throws Exception{
 		MemberRelatedReq req = new MemberRelatedReq();
 		req.setMember(id);
-		//²éÑ¯ÓÃ»§¸¸¼¶
+		//ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 		PageTool<MemberRelatedResp> fm = memberReleteService.select(req);
 		req.setMember("");
 		req.setMemberFather(id);
-		//²éÑ¯ÓÃ»§×Ó¼¶
+		//ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½Ó¼ï¿½
 		PageTool<MemberRelatedResp> m = memberReleteService.select(req);
 		ModelAndView view = new ModelAndView();
 		view.addObject("c_member", m.getList());
@@ -87,14 +87,15 @@ public class MemberInfoAction {
 		MemberInfoSaveReq req = new MemberInfoSaveReq();
 		req.setMemberId(id);
 		req.setMemberRank(rank);
-		memberInfoService.uptMemberInfo(req);
 		if(rankMoney != null){
 			MemberCashBackReq mem = new MemberCashBackReq();
 			mem.setId(id);
 			mem.setMoney(rankMoney);
 			mem.setRank(rank);
 			cashBackService.memberCashBack(mem);
+			req.setRankMoney(rankMoney);
 		}
+		memberInfoService.uptMemberInfo(req);
 		return rs;
 	}
 	

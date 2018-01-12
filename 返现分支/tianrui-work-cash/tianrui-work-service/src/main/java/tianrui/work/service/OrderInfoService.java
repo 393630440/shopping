@@ -253,7 +253,7 @@ public class OrderInfoService implements IOrderInfoService {
 			MemberInfo uptto = new MemberInfo();
 			uptto.setMemberId(member.getMemberId());
 			uptto.setRedPacket(member.getRedPacket() - weChatPay.getRedPacket());
-//			uptto.setBalance(member.getBalance()-weChatPay.getBlance());
+			uptto.setBalance(member.getBalance()-weChatPay.getBlance());
 			uptto.setCashMoney(member.getCashMoney()-weChatPay.getCashMoney());
 			memberInfoMapper.updateByPrimaryKeySelective(uptto);
 			//推送模板消息

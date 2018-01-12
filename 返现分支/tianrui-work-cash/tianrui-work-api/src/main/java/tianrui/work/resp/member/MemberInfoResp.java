@@ -16,6 +16,8 @@ public class MemberInfoResp {
 	    private String wechatName;
 
 	    private Double balance;
+	    
+	    private Double rankMoney;
 
 	    private Double redPacket;
 
@@ -158,5 +160,13 @@ public class MemberInfoResp {
 		}
 		public void setCashMoney(Double cashMoney) {
 			this.cashMoney = cashMoney;
+		}
+
+		public Double getRankMoney() {
+			return rankMoney;
+		}
+
+		public void setRankMoney(Double rankMoney) {
+			this.rankMoney = rankMoney;
 		}
 }

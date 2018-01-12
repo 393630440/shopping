@@ -13,7 +13,6 @@
 <link href="${staticRoot}/web/css/user.css" rel="stylesheet" type="text/css">
 
 
-<script type="text/javascript" src="${staticRoot}/shop/js/jQuery.js"></script>
 </head>
 
 <body>
@@ -28,82 +27,41 @@
   </header>
    -->
   <!--header 结束-->  	
-    <form id="address_id">
 	    <ul class="xzdz-ul1">
 	    	<li>
 	        	<p class="xzdz-p1 f-l">收货人</p>
-	            <input type="text" id="recipients_req" name="recipients" placeholder="姓名" class="xzdz-ipt1 f-l" />
+	            <input type="text" id="recipients_req" placeholder="姓名" class="xzdz-ipt1 f-l" />
 	            <div style="clear:both;"></div>            
 	        </li>
 	    	<li>
 	        	<p class="xzdz-p1 f-l">手机号</p>
-	            <input type="text" id="phone_req" name="phone" placeholder="11位手机号" maxlength="11" class="xzdz-ipt1 f-l" />
+	            <input type="text" id="phone_req" placeholder="11位手机号" maxlength="11" class="xzdz-ipt1 f-l" />
 	            <div style="clear:both;"></div>            
 	        </li>
 	    	<li>
 	        	<p class="xzdz-p1 f-l">地区信息</p>
 	            <div class="xzdz-ipt2box f-l">
-	            	<input type="text" id="city_sh" name="city" placeholder="省" class="xzdz-ipt2 f-l" />
-	            	<input type="text" id="city_si" name="city" placeholder="市" class="xzdz-ipt2 f-l" />
-	            	<input type="text" id="city_q" name="city" placeholder="区/县" class="xzdz-ipt2 f-l" />
+	            	<input type="text" id="city_sh" placeholder="省" class="xzdz-ipt2 f-l" />
+	            	<input type="text" id="city_si" placeholder="市" class="xzdz-ipt2 f-l" />
+	            	<input type="text" id="city_q" placeholder="区/县" class="xzdz-ipt2 f-l" />
 	                <div style="clear:both;"></div>
 	            </div>
 	            <div style="clear:both;"></div>            
 	        </li>
 	    	<li>
 	        	<p class="xzdz-p1 f-l">详细地址</p>
-	            <input type="text" id="detailAddress_req" name="detailAddress" placeholder="街道门牌信息" class="xzdz-ipt1 f-l" />
+	            <input type="text" id="detailAddress_req" placeholder="街道门牌信息" class="xzdz-ipt1 f-l" />
 	            <div style="clear:both;"></div>            
 	        </li>
 	    	<li>
 	        	<p class="xzdz-p1 f-l">邮政编码</p>
-	            <input type="text" name="zipCode" placeholder="邮政编码" class="xzdz-ipt1 f-l" />
+	            <input type="text" id="zipCodeReq" placeholder="邮政编码" class="xzdz-ipt1 f-l" />
 	            <div style="clear:both;"></div>            
 	        </li>
 	    </ul>
 	     <button class="drdd-btn" id="save_id">保存</button>
-	    
-    </form>
 </div>
 </body>
-
-<script type="text/javascript">
-$("#save_id").on("click",function(){
-	if($("#recipients_req").val()==""){
-		alert("收货人不能为空")
-		return;
-	}
-	if($("#phone_req").val()==""){
-		alert("手机号不能为空")
-		return;
-	}
-	if($("#city_sh").val()==""){
-		alert("省份不能为空")
-		return;
-	}
-	if($("#city_si").val()==""){
-		alert("市不能为空")
-		return;
-	}
-	if($("#city_q").val()==""){
-		alert("区/县不能为空")
-		return;
-	}
-	if($("#detailAddress_req").val()==""){
-		alert("详细地址不能为空")
-		return;
-	}
-	$.ajax({
-		url:"/wechat/shop/address/save",
-		data:$('#address_id').serialize(),
-		type:"POST",
-		success:function(ret){
-			if(ret.code=="000000"){
-				window.location.href="/wechat/shop/address/page";
-			}
-		}
-	});
-});
-</script>
-
+<script src="/resources/ewm/js/jquery-1.11.1.js"></script>
+<script src="/resources/js/web/address/save.js?1227"></script>
 </html>

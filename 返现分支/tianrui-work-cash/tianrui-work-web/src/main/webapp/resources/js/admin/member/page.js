@@ -54,6 +54,7 @@ function innerHTML(data,pageNo){
 				"<td>"+data[a].cellphone+"</td>" +
 				"<td>"+data[a].birthTime+"</td>" +
 				"<td>"+data[a].city+"</td>" +
+				"<td>"+data[a].rankMoney+"</td>" +
 				"<td>"+data[a].balance+"</td>" +
 				"<td>"+data[a].cashMoney+"</td>" +
 				"<td>"+data[a].redPacket+"</td>" +

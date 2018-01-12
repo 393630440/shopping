@@ -76,6 +76,7 @@
 		               	<th class="table-type">联系电话</th>
 		               	<th class="table-type">出生日期</th>
 		               	<th class="table-type">所在城市</th>
+		               	<th class="table-type">等级金额</th>
 		               	<th class="table-type">余额</th>
 		               	<th class="table-type">补贴金额</th>
 		               	<th class="table-type">积分</th>
@@ -108,6 +109,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script src="/resources/js/admin/member/page.js?1223"></script>
+<script src="/resources/js/admin/member/page.js?0112"></script>
 </body>
 </html>

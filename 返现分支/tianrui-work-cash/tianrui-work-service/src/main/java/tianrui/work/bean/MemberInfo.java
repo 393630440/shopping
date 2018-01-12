@@ -13,6 +13,8 @@ public class MemberInfo {
     private String memberRank;
     
     private Double cashMoney;
+    
+    private Double rankMoney;
 
     private String wechat;
 
@@ -180,5 +182,13 @@ public class MemberInfo {
 
 	public void setCashMoney(Double cashMoney) {
 		this.cashMoney = cashMoney;
+	}
+
+	public Double getRankMoney() {
+		return rankMoney;
+	}
+
+	public void setRankMoney(Double rankMoney) {
+		this.rankMoney = rankMoney;
 	}
 }

@@ -1,0 +1,45 @@
+$("#save_id").on("click",function(){
+	if($("#recipients_req").val()==""){
+		alert("收货人不能为空")
+		return;
+	}
+	if($("#phone_req").val()==""){
+		alert("手机号不能为空")
+		return;
+	}
+	if($("#city_sh").val()==""){
+		alert("省份不能为空")
+		return;
+	}
+	if($("#city_si").val()==""){
+		alert("市不能为空")
+		return;
+	}
+	if($("#city_q").val()==""){
+		alert("区/县不能为空")
+		return;
+	}
+	if($("#detailAddress_req").val()==""){
+		alert("详细地址不能为空")
+		return;
+	}
+	var ct = $("#city_sh").val()+","+$("#city_si").val()+","+$("#city_q").val();
+	$.ajax({
+		url:"/wechat/shop/address/save",
+		data:{
+			"recipients":$("#recipients_req").val(),
+			"phone":$("#phone_req").val(),
+			"city":ct,
+			"detailAddress":$("#detailAddress_req").val(),
+			"zipCode":$("#zipCodeReq").val()
+		},
+		type:"POST",
+		async: false,
+		success:function(ret){
+			window.location.href="/wechat/shop/member/userPage";
+			if(ret.code=="000000"){
+				//window.location.href=
+			}
+		}
+	});
+});

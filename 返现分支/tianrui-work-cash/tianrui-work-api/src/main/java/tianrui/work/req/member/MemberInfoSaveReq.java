@@ -14,6 +14,8 @@ public class MemberInfoSaveReq {
     private String wechatName;
 
     private Double balance;
+    
+    private Double rankMoney;
 
     private Double redPacket;
 
@@ -149,5 +151,13 @@ public class MemberInfoSaveReq {
 
 	public void setMemberRank(String memberRank) {
 		this.memberRank = memberRank;
+	}
+
+	public Double getRankMoney() {
+		return rankMoney;
+	}
+
+	public void setRankMoney(Double rankMoney) {
+		this.rankMoney = rankMoney;
 	}
 }

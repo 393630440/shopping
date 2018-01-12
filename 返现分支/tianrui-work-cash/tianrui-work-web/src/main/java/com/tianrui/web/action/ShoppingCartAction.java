@@ -308,7 +308,9 @@ public class ShoppingCartAction {
 		MemberAddressNew addressInfo = null;
 		if (addressId.equals("0")) {
 			addressInfo = memberAddressMapper.selectByMemberOnly(orderInfo.getMemberId());
-			addressId = addressInfo.getId();
+			if(addressInfo != null){
+				addressId = addressInfo.getId();
+			}
 		} else if (addressId.equals("-1")) {
 			addressInfo = new MemberAddressNew();
 			addressInfo.setId(addressId);
