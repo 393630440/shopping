@@ -1,6 +1,9 @@
 package tianrui.work.req.shoppingcart;
 
 public class ShoppingCartReq {
+	
+	private String cashType;//1-服务  2-普通
+	
 	private Integer shoppingCartId;
 	private String goodsId; // 商品ID
 	private String memberId; // 会员ID
@@ -118,6 +121,14 @@ public class ShoppingCartReq {
 
 	public void setExpressFee(Double expressFee) {
 		this.expressFee = expressFee;
+	}
+
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
 	}
 
 }

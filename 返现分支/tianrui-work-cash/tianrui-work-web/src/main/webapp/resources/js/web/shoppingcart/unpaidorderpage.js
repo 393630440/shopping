@@ -7,7 +7,7 @@ function selectAddress(id) {
 }
 
 function pay() {
-	if (addressId == "0") {
+	if (addressId == "0" && $("#cashType_check").val()=='2') {
 		alert("请选择发货地址");
 		return;
 	}
@@ -40,6 +40,7 @@ function pay() {
 	show_redPacket = show_redPacket == ""?"0":show_redPacket;
 	show_balance = show_balance == ""?"0":show_balance;
 	var buyerWord = $("#buyerWord").val();
+	buyerWord = buyerWord == ""?"无":"";
 	var uuul = "/wechat/shop/pay/billPay?id="+orderId+"&cashMoney="+show_cashMoney+"&redPacket="+show_redPacket+"&balance="+show_balance;
 	if (addressId == "-1" && buyerWord == "") {
 		window.location.href = uuul;
@@ -50,7 +51,8 @@ function pay() {
 			data : {
 				"orderId" : orderId,
 				"addressId" : addressId,
-				"buyerWord" : buyerWord
+				"buyerWord" : buyerWord,
+				"cashType"  : $("#cashType_check").val()
 			},
 			success : function(ret) {
 				if (ret.code == "000000") {

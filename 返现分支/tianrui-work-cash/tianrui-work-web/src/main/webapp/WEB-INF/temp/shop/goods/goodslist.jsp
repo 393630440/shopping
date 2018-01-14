@@ -57,6 +57,7 @@
 		<!--页面加载 结束-->
 
 		<!--header 开始-->
+		<!-- 
 		<header>
 			<div class="header">
 				<a class="new-a-back" href="javascript:history.back();">
@@ -71,6 +72,7 @@
 				</div>
 			</div>
 		</header>
+		 -->
 		<!--header 结束-->
 
 		<div class="w">
@@ -126,7 +128,7 @@
 					</h3>
 					<dl class="ssjg-dl1">
 						<dt>
-							<span style="color: #DB3751; margin-left: 0px;">￥${goods.price}</span>
+							<span style="color: #DB3751; margin-left: 0px;">￥${goods.goodsPrice}</span>
 							<br />
 							<span style="color: #7F7F7F; font-size: 12px; margin-left: 0px;">销售量：${goods.salesvolume}</span>
 						</dt>

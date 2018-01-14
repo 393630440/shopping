@@ -21,12 +21,15 @@
 		<result column="classify_name" property="classifyName" jdbcType="VARCHAR" />
 		<result column="pubdate" property="pubdate" jdbcType="BIGINT" />
 		<result column="discount_price" property="discountPrice" jdbcType="DOUBLE" />
+	
+		<result column="cash_type" property="cashType" jdbcType="VARCHAR" />
+	
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		goods_id, goods_name, goods_img, goods_status, goods_type, goods_price,
 		red_packet, goods_details, goods_param, express_fee, inventory, salesvolume,
-		buy_num, browse_num, sifting, classify_id, classify_name, pubdate, discount_price
+		buy_num, browse_num, sifting, classify_id, classify_name, pubdate, discount_price,cash_type
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -73,7 +76,8 @@
 	<insert id="insert" parameterType="tianrui.work.bean.GoodsInfo">
 		insert into goods_info (goods_id, goods_name, goods_img, goods_status,
 		goods_type, goods_price, red_packet, goods_details, goods_param, express_fee,
-		inventory, salesvolume, buy_num, browse_num, sifting, classify_id, classify_name, pubdate, discount_price)
+		inventory, salesvolume, buy_num, browse_num, sifting, classify_id, classify_name,
+		 pubdate, discount_price,cash_type)
 		values (#{goodsId,jdbcType=VARCHAR},
 		#{goodsName,jdbcType=VARCHAR},
 		#{goodsImg,jdbcType=VARCHAR},
@@ -92,7 +96,8 @@
 		#{classifyId,jdbcType=VARCHAR},
 		#{classifyName,jdbcType=VARCHAR},
 		#{pubdate,jdbcType=BIGINT,}
-		#{discountPrice,jdbcType=DOUBLE})
+		#{discountPrice,jdbcType=DOUBLE},
+		#{cashType,jdbcType=VARCHAR})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.GoodsInfo">
@@ -117,6 +122,9 @@
 			<if test="classifyName != null and classifyName != ''">classify_name,</if>
 			<if test="pubdate != null and pubdate != ''">pubdate,</if>
 			<if test="discountPrice != null and discountPrice != ''">discount_price,</if>
+			<if test="cashType != null">
+				cash_type,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="goodsId != null and goodsId != ''">#{goodsId,jdbcType=VARCHAR},</if>
@@ -138,12 +146,18 @@
 			<if test="classifyName != null and classifyName != ''">#{classifyName,jdbcType=VARCHAR},</if>
 			<if test="pubdate != null and pubdate != ''">#{pubdate,jdbcType=BIGINT},</if>
 			<if test="discountPrice != null and discountPrice != ''">#{discountPrice,jdbcType=DOUBLE},</if>
+			<if test="cashType != null">
+				#{cashType,jdbcType=VARCHAR},
+			</if>
 		</trim>
 	</insert>
 
 	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.GoodsInfo">
 		update goods_info
 		<set>
+			<if test="cashType != null">
+				cash_type = #{cashType,jdbcType=VARCHAR},
+			</if>
 			<if test="goodsId != null and goodsId != ''">goods_id = #{goodsId,jdbcType=VARCHAR},</if>
 			<if test="goodsName != null and goodsName != ''">goods_name = #{goodsName,jdbcType=VARCHAR},</if>
 			<if test="goodsImg != null and goodsImg != ''">goods_img = #{goodsImg,jdbcType=VARCHAR},</if>
@@ -170,6 +184,7 @@
 	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.GoodsInfo">
 		update goods_info
 		set goods_name = #{goodsName,jdbcType=VARCHAR},
+		cash_type = #{cashType,jdbcType=VARCHAR},
 		goods_img = #{goodsImg,jdbcType=VARCHAR},
 		goods_status = #{goodsStatus,jdbcType=VARCHAR},
 		goods_type = #{goodsType,jdbcType=VARCHAR},

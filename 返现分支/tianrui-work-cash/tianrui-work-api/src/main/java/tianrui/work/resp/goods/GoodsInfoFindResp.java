@@ -4,6 +4,8 @@ package tianrui.work.resp.goods;
  * 商品信息
  */
 public class GoodsInfoFindResp {
+	
+	private String cashType;
 	private String goodsId; // 商品ID
 	private String goodsName; // 商品名称
 	private String goodsImg; // 商品图片 图片地址
@@ -269,5 +271,15 @@ public class GoodsInfoFindResp {
 	public void setMemberRank(String memberRank) {
 		this.memberRank = memberRank;
 	}
+
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
+	}
+	
+	
 
 }

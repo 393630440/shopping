@@ -21,6 +21,7 @@ import tianrui.work.bean.MemberGain;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.MemberRelated;
 import tianrui.work.bean.OrderInfo;
+import tianrui.work.bean.ShoppingCart;
 import tianrui.work.comm.Constant;
 import tianrui.work.mapper.java.CashBackInfoMapper;
 import tianrui.work.mapper.java.ConfigurationInfoMapper;
@@ -28,6 +29,7 @@ import tianrui.work.mapper.java.MemberGainMapper;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.MemberRelatedMapper;
 import tianrui.work.mapper.java.OrderInfoMapper;
+import tianrui.work.mapper.java.ShoppingCartMapper;
 import tianrui.work.req.JfPaySuccessReq;
 import tianrui.work.req.cash.CashBackInfoReq;
 import tianrui.work.req.cash.CashBackReq;
@@ -71,6 +73,8 @@ public class OrderInfoService implements IOrderInfoService {
 	IMemberReleteService memberReleteService;
 	@Autowired
 	ICashBackService cashBackService;
+	@Autowired
+	ShoppingCartMapper shoppingCartMapper;
 
 	@Override
 	public Result addOrderInfo(OrderInfoReq req) throws Exception {
@@ -173,35 +177,42 @@ public class OrderInfoService implements IOrderInfoService {
 			if(weChatPay.getRedPacket() != null){
 				totMoney = totMoney + weChatPay.getRedPacket();
 			}
-			if("S".equals(member.getMemberRank())){
-				//S用户更 加盟商
-				//添加 消费金额补贴
-//				CashBackReq req = new CashBackReq();
-//				req.setCashType("1");
-//				req.setCashMember(member.getMemberId());
-//				req.setCashMemberName(member.getWechatName());
-//				req.setCashAmount(weChatPay.getTotalfee());
-//				req.setCashRemark("购买商品补贴");
-//				cashBackService.addCashBack(req);
-			}else{
-				//非加盟商
-				rs = memberReleteService.getFatherMember(member.getMemberId());
-				if("000000".equals(rs.getCode())){
-					MemberInfo finfo = (MemberInfo) rs.getData();
-					if("S".equals(finfo.getMemberRank())){
-						//父级为加盟商 
-						String confKey = "GOODS_CASH_BACK";
-						ConfigurationInfoResp conf = configurationInfoService.queryConfigurationInfoByOne(confKey);
-						if("1".equals(conf.getFlag())){
-							double cha = Double.valueOf(conf.getParamvalue());
-							//父级补贴金额
-							double cash = totMoney * cha;
-							MemberRechargeReq rech = new MemberRechargeReq();
-							rech.setMemberId(finfo.getMemberId());
-							rech.setRechargeAmount(cash);
-							rech.setRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
-							rech.setDesc1("1");
-			        		memberRechangeService.save(rech);
+			ShoppingCart que = new ShoppingCart();
+			que.setOrderId(info.getOrderId());
+			List<ShoppingCart> queList = shoppingCartMapper.selectByShoppingCart(que);
+			if(queList != null && queList.size()!=0){
+				if(queList.get(0).getCashType().equals("1")){
+					if("S".equals(member.getMemberRank())){
+						//S用户更 加盟商
+						//添加 消费金额补贴
+//						CashBackReq req = new CashBackReq();
+//						req.setCashType("1");
+//						req.setCashMember(member.getMemberId());
+//						req.setCashMemberName(member.getWechatName());
+//						req.setCashAmount(weChatPay.getTotalfee());
+//						req.setCashRemark("购买商品补贴");
+//						cashBackService.addCashBack(req);
+					}else{
+						//非加盟商
+						rs = memberReleteService.getFatherMember(member.getMemberId());
+						if("000000".equals(rs.getCode())){
+							MemberInfo finfo = (MemberInfo) rs.getData();
+							if("S".equals(finfo.getMemberRank())){
+								//父级为加盟商 
+								String confKey = "GOODS_CASH_BACK";
+								ConfigurationInfoResp conf = configurationInfoService.queryConfigurationInfoByOne(confKey);
+								if("1".equals(conf.getFlag())){
+									double cha = Double.valueOf(conf.getParamvalue());
+									//父级补贴金额
+									double cash = totMoney * cha;
+									MemberRechargeReq rech = new MemberRechargeReq();
+									rech.setMemberId(finfo.getMemberId());
+									rech.setRechargeAmount(cash);
+									rech.setRemark(member.getWechatName()+"通过您扫码购买商品，系统对您进行补贴");
+									rech.setDesc1("1");
+					        		memberRechangeService.save(rech);
+								}
+							}
 						}
 					}
 				}

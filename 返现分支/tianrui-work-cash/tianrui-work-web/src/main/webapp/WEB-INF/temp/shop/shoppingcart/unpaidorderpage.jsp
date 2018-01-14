@@ -50,33 +50,35 @@
 		</header>
 		 -->
 		<!--header 结束-->
-
-		<c:if test="${addressInfo == null}">
-			<dl class="drdd-info1">
-				<dt>
-					<p>选择添加收货地址</p>
-				</dt>
-				<dd>
-					<a href="javascript:void(0);" onclick="selectAddress('0');">></a>
-				</dd>
-				<div style="clear: both;"></div>
-			</dl>
-		</c:if>
-		<c:if test="${addressInfo != null}">
-			<dl class="drdd-info6-zx">
-				<dt>
-					<p>
-						<span class="f-l">收货人：${addressInfo.recipients}</span>
-						<span class="f-r">联系电话：${addressInfo.phone}</span>
-						<div style="clear: both;"></div>
-					</p>
-					<p>收货地址：${addressInfo.city} ${addressInfo.detailAddress}</p>
-				</dt>
-				<dd>
-					<a href="javascript:void(0);" onclick="selectAddress('${addressInfo.id}');">></a>
-				</dd>
-				<div style="clear: both;"></div>
-			</dl>
+		<input type="hidden" id="cashType_check" value="${cashType }">
+		<c:if test="${cashType eq '2' }">
+			<c:if test="${addressInfo == null}">
+				<dl class="drdd-info1">
+					<dt>
+						<p>选择添加收货地址</p>
+					</dt>
+					<dd>
+						<a href="javascript:void(0);" onclick="selectAddress('0');">></a>
+					</dd>
+					<div style="clear: both;"></div>
+				</dl>
+			</c:if>
+			<c:if test="${addressInfo != null}">
+				<dl class="drdd-info6-zx">
+					<dt>
+						<p>
+							<span class="f-l">收货人：${addressInfo.recipients}</span>
+							<span class="f-r">联系电话：${addressInfo.phone}</span>
+							<div style="clear: both;"></div>
+						</p>
+						<p>收货地址：${addressInfo.city} ${addressInfo.detailAddress}</p>
+					</dt>
+					<dd>
+						<a href="javascript:void(0);" onclick="selectAddress('${addressInfo.id}');">></a>
+					</dd>
+					<div style="clear: both;"></div>
+				</dl>
+			</c:if>
 		</c:if>
 
 		<div class="drdd-info2">
@@ -207,5 +209,5 @@
 		}
 	});
 </script>
-<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?1223"></script>
+<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?0114"></script>
 </html>

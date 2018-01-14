@@ -3,15 +3,10 @@ $(function() {
 });
 
 function goodsType(type) {
-	if (type == 1) { // 1-大众商品,不显示宏包
-		$("#goodsType1").show();
-		$("#goodsType2").hide();
-		$("#redPacket_div").hide();
-		$("#redPacket").val("0");
-	} else if (type == 2) { // 2-宏包商品,显示宏包
-		$("#goodsType1").hide();
-		$("#goodsType2").show();
-		$("#redPacket_div").show();
+	if (type == 1) { // 1-服务类型
+		$("#adgoodsType").val("1");
+	} else if (type == 2) { // 2-普通类型
+		$("#adgoodsType").val("2");
 	}
 }
 
@@ -119,11 +114,7 @@ function add(buttonType) {
 	if (goodsName == "")
 		msg += "商品名称不能为空\n";
 
-	var classifyId = ""; // 分类ID
-	if (goodsType == "1")
-		classifyId = $("#classifyId1").val();
-	else if (goodsType == "2")
-		classifyId = $("#classifyId2").val();
+	var classifyId = $("#classifyId1").val()
 
 	var classifyName = ""; // 分类名称
 	if (classifyId == "0")
@@ -191,7 +182,8 @@ function add(buttonType) {
 			"goodsName" : goodsName,
 			"classifyId" : classifyId,
 			"classifyName" : classifyName,
-			"goodsType" : goodsType,
+			"goodsType" : "1",
+			"cashType":goodsType,
 			"goodsPrice" : goodsPrice,
 			"discountPrice" : discountPrice,
 			"redPacket" : redPacket,

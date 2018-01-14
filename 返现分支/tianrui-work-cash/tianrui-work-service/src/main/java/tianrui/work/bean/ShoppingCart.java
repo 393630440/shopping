@@ -1,6 +1,9 @@
 package tianrui.work.bean;
 
 public class ShoppingCart {
+	
+	private String cashType;
+	
 	private Integer shoppingCartId;
 
 	private String goodsId;
@@ -150,4 +153,11 @@ public class ShoppingCart {
 		this.expressFee = expressFee;
 	}
 
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
+	}
 }

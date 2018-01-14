@@ -1,6 +1,9 @@
 package tianrui.work.resp.shoppingcart;
 
 public class ShoppingCartFindResp {
+	
+	private String cashType;
+	
 	private Integer shoppingCartId;
 	private String goodsId; // 商品ID
 	private String memberId; // 会员ID
@@ -179,6 +182,14 @@ public class ShoppingCartFindResp {
 
 	public void setSubtotal(String subtotal) {
 		this.subtotal = subtotal;
+	}
+
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
 	}
 
 }

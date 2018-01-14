@@ -80,7 +80,7 @@
 						<div class="gwc-md f-l">
 							<h3>
 								<a href="/wechat/shop/goods/goodsdetails?goodsId=${goodsInfo.goodsId}">
-									${goodsInfo.goodsName}
+									${goodsInfo.goodsName}<c:if test="${goodsInfo.cashType eq '1'}">-服务类</c:if>
 								</a>
 							</h3>
 							<p class="gwc-p1">
@@ -127,5 +127,5 @@
 	var shoppingCartIdList = ${shoppingCartIdList};
 	var goodsType = "1";
 </script>
-<script src="/resources/js/web/shoppingcart/shoppingcartlist.js?1227"></script>
+<script src="/resources/js/web/shoppingcart/shoppingcartlist.js?0114"></script>
 </html>

@@ -7,6 +7,8 @@ package tianrui.work.req.goods;
  *
  */
 public class GoodsInfoReq {
+	
+	private String cashType;//1-服务类型  2-普通类型
 	private String goodsId; // 商品ID
 	private String goodsName; // 商品名称
 	private String goodsImg; // 商品图片 图片地址
@@ -196,6 +198,14 @@ public class GoodsInfoReq {
 
 	public void setGoodsDetailsStr(String goodsDetailsStr) {
 		this.goodsDetailsStr = goodsDetailsStr;
+	}
+
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
 	}
 
 }

@@ -1,6 +1,9 @@
 package tianrui.work.bean;
 
 public class GoodsInfo {
+	
+	private String cashType;
+	
 	private String goodsId;
 	private String goodsName;
 	private String goodsImg;
@@ -212,6 +215,14 @@ public class GoodsInfo {
 
 	public void setDiscountPrice(Double discountPrice) {
 		this.discountPrice = discountPrice;
+	}
+
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
 	}
 
 }

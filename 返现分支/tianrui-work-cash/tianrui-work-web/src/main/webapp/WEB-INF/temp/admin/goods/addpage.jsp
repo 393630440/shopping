@@ -43,19 +43,17 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
-						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
 								<label class="am-checkbox-inline">
-									<input type="radio" name="goodsType" value="1" onclick="goodsType(1);" checked="checked"> 大众商品
+									<input type="radio" name="goodsType" value="1" onclick="goodsType(1);" checked="checked"> 服务类型
 								</label>
 								<label class="am-checkbox-inline">
-									<input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 积分商品
+									<input type="radio" name="goodsType" value="2" onclick="goodsType(2);"> 普通类型
 								</label>
 							</div>
 						</div>
-						 -->
 						<input type="hidden" value="1" id="adgoodsType">
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品名称：</div>
@@ -75,16 +73,6 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="you" id="goodsType2" hidden="hidden">
-								<select id="classifyId2" name="classifyId3" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-									<option value="0">所属分类</option>
-									<c:forEach var="goodsClassify" items="${goodsClassifyList}">
-										<c:if test="${goodsClassify.goodsType == '2'}">
-											<option value="${goodsClassify.classifyId}">${goodsClassify.classifyName}</option>
-										</c:if>
-									</c:forEach>
-								</select>
-							</div>
 							<c:forEach var="goodsClassify" items="${goodsClassifyList}">
 								<input id="classifyId_${goodsClassify.classifyId}" value="${goodsClassify.classifyName}" hidden="hidden" />
 							</c:forEach>
@@ -93,20 +81,6 @@
 							<div class="zuo">商品价格：</div>
 							<div class="you">
 								<input type="text" class="am-input-sm" id="goodsPrice" name="goodsPrice" placeholder="请输入商品价格">
-							</div>
-						</div>
-						<!-- 
-						<div class="am-form-group am-cf">
-							<div class="zuo">折扣价格：</div>
-							<div class="you">
-								<input type="text" class="am-input-sm" id="discountPrice" name="discountPrice" placeholder="请输入折扣价格">
-							</div>
-						</div>
-						 -->
-						<div class="am-form-group am-cf" id="redPacket_div" hidden="hidden">
-							<div class="zuo">积分：</div>
-							<div class="you">
-								<input type="text" class="am-input-sm" id="redPacket" name="redPacket" placeholder="请输入积分数量" value="0">
 							</div>
 						</div>
 						<div class="am-form-group am-cf">
@@ -190,7 +164,7 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goods/add.js?1209"></script>
+	<script src="/resources/js/admin/goods/add.js?0114"></script>
 	<script src="/resources/js/admin/ajaxfileupload.js"></script>
 </body>
 </html>

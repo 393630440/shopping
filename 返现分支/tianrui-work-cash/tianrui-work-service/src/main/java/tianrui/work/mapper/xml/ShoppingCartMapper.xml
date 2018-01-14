@@ -15,11 +15,13 @@
 		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
 		<result column="shopping_cart_status" property="shoppingCartStatus" jdbcType="VARCHAR" />
 		<result column="express_fee" property="expressFee" jdbcType="DOUBLE" />
+	
+		<result column="cashType" property="cashType" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		shopping_cart_id, goods_id, member_id, order_id, creation_time, goods_name, goods_img,
-		goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee
+		goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee, cashType
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -78,7 +80,8 @@
 
 	<insert id="insert" parameterType="tianrui.work.bean.ShoppingCart">
 		insert into shopping_cart (shopping_cart_id, goods_id, member_id, order_id, creation_time, goods_name,
-		goods_img, goods_price, goods_red_packet, goods_num, goods_type, shopping_cart_status, express_fee)
+		goods_img, goods_price, goods_red_packet, goods_num, goods_type, 
+		shopping_cart_status, express_fee,cashType)
 		values (#{shoppingCartId,jdbcType=INTEGER},
 		#{goodsId,jdbcType=VARCHAR},
 		#{memberId,jdbcType=VARCHAR},
@@ -91,7 +94,8 @@
 		#{goodsNum,jdbcType=INTEGER},
 		#{goodsType,jdbcType=VARCHAR},
 		#{shoppingCartStatus,jdbcType=VARCHAR},
-		#{expressFee,jdbcType=DOUBLE})
+		#{expressFee,jdbcType=DOUBLE},
+		#{cashType,jdbcType=VARCHAR})
 	</insert>
 
 	<insert id="insertSelective" parameterType="tianrui.work.bean.ShoppingCart">
@@ -110,6 +114,8 @@
 			<if test="goodsType != null and goodsType != ''">goods_type,</if>
 			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">shopping_cart_status,</if>
 			<if test="expressFee != null and expressFee != ''">express_fee,</if>
+			<if test="cashType != null and cashType != ''">cashType,</if>
+			
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="shoppingCartId != null and shoppingCartId != ''">#{shoppingCartId,jdbcType=INTEGER},</if>
@@ -125,12 +131,14 @@
 			<if test="goodsType != null and goodsType != ''">#{goodsType,jdbcType=VARCHAR},</if>
 			<if test="shoppingCartStatus != null and shoppingCartStatus != ''">#{shoppingCartStatus,jdbcType=VARCHAR},</if>
 			<if test="expressFee != null and expressFee != ''">#{expressFee,jdbcType=DOUBLE},</if>
+			<if test="cashType != null and cashType != ''">#{cashType,jdbcType=VARCHAR},</if>
 		</trim>
 	</insert>
 
 	<update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.ShoppingCart">
 		update shopping_cart
 		<set>
+			<if test="cashType != null and cashType != ''">cashType = #{cashType,jdbcType=VARCHAR},</if>
 			<if test="goodsId != null and goodsId != ''">goods_id = #{goodsId,jdbcType=VARCHAR},</if>
 			<if test="memberId != null and memberId != ''">member_id = #{memberId,jdbcType=VARCHAR},</if>
 			<if test="orderId != null and orderId != ''">order_id = #{orderId,jdbcType=VARCHAR},</if>
@@ -150,6 +158,7 @@
 	<update id="updateByPrimaryKey" parameterType="tianrui.work.bean.ShoppingCart">
 		update shopping_cart
 		set goods_id = #{goodsId,jdbcType=VARCHAR},
+		cashType = #{cashType,jdbcType=VARCHAR},
 		member_id = #{memberId,jdbcType=VARCHAR},
 		order_id = #{orderId,jdbcType=VARCHAR},
 		creation_time = #{creationTime,jdbcType=BIGINT},

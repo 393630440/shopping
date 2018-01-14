@@ -22,7 +22,7 @@ public class SessionManage {
 	public static MemberInfo getSessionManage(HttpServletRequest request) {
 		MemberInfo user = new MemberInfo();
 		user = (MemberInfo) request.getSession().getAttribute("MemberInfo");
-//		user.setMemberId("");
+//		user.setMemberId("o1DUP1kzHzTpIqmKuajnAQyqe9uU");
 //		user.setMemberRank("1");
 		return user;
 	}

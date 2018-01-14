@@ -129,6 +129,8 @@ function placeOrder() {
 		success : function(ret) {
 			if (ret.code == "000000") {
 				window.location.href = "/wechat/shop/shoppingcart/unpaidorderpage?addressId=0&orderId=" + ret.data;
+			} else {
+				alert(ret.error);
 			}
 		},
 		error : function(data, status, e) {

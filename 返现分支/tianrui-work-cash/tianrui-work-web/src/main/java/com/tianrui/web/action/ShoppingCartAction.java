@@ -183,6 +183,8 @@ public class ShoppingCartAction {
 	@ResponseBody
 	public Result placeOrder(HttpServletRequest request, String shoppingCartInfo, String goodsType) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/placeorder]");
+		Result rs = Result.getSuccessful();
+		
 		MemberInfo member = SessionManage.getSessionManage(request);
 
 		String orderId = UUIDUtil.getUUID();
@@ -214,6 +216,13 @@ public class ShoppingCartAction {
 		condition.put("shoppingCartStatus", "1");
 
 		List<ShoppingCartFindResp> shoppingCartFindRespList = shoppingCartService.getOrderByList(condition);
+		for (int i = 0; i < shoppingCartFindRespList.size(); i++) {
+			if(!shoppingCartFindRespList.get(0).getCashType().equals(shoppingCartFindRespList.get(i).getCashType())){
+				rs.setCode("1");
+				rs.setError("商品类型不统一不能合单");
+				return rs;
+			}
+		}
 		for (ShoppingCartFindResp shoppingCartFindResp : shoppingCartFindRespList) {
 			Integer newGoodsNum = shoppingCartInfoMap.get(shoppingCartFindResp.getShoppingCartId());
 			goodsNum += newGoodsNum;
@@ -263,7 +272,7 @@ public class ShoppingCartAction {
 		// req.setCity(null); // 所在地区
 		// req.setDetailAddress(null); // 详细地址
 
-		Result rs = orderInfoService.addOrderInfo(req);
+		rs = orderInfoService.addOrderInfo(req);
 		rs.setData(orderId);
 		return rs;
 	}
@@ -304,7 +313,7 @@ public class ShoppingCartAction {
 				&& !StringUtils.isNull(orderInfo.getDetailAddress())) {
 			addressId = "-1";
 		}
-
+		
 		MemberAddressNew addressInfo = null;
 		if (addressId.equals("0")) {
 			addressInfo = memberAddressMapper.selectByMemberOnly(orderInfo.getMemberId());
@@ -336,6 +345,7 @@ public class ShoppingCartAction {
 		view.addObject("orderId", orderId);
 		view.addObject("orderInfo", orderInfo);
 		view.addObject("goodsInfoList", goodsInfoList);
+		view.addObject("cashType",goodsInfoList.get(0).getCashType() );
 		view.addObject("addressId", addressId);
 		view.addObject("addressInfo", addressInfo);
 		view.addObject("redPark", redPark);
@@ -348,7 +358,7 @@ public class ShoppingCartAction {
 	/** 修改订单信息 */
 	@RequestMapping("edit")
 	@ResponseBody
-	public Result edit(String orderId, String addressId, String buyerWord) throws Exception {
+	public Result edit(String orderId, String addressId, String buyerWord, String cashType) throws Exception {
 		LoggerUtils.info(log, "---------- [/wechat/shop/shoppingcart/edit]");
 		if (addressId.equals("-1") && StringUtils.isNull(buyerWord))
 			return Result.getSuccessful();
@@ -357,7 +367,7 @@ public class ShoppingCartAction {
 		req.setOrderId(orderId); // 订单ID
 		req.setBuyerWord(buyerWord); // 买家留言
 
-		if (!addressId.equals("-1")) {
+		if (!addressId.equals("-1")&&cashType.equals("2")) {
 			MemberAddressNew addressInfo = memberAddressMapper.selectByPrimaryKey(addressId);
 			req.setRecipients(addressInfo.getRecipients()); // 收件人
 			req.setPhone(addressInfo.getPhone()); // 联系电话
