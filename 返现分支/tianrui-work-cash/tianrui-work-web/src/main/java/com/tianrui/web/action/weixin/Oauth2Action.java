@@ -76,6 +76,15 @@ public class Oauth2Action {
 		case "goodsB":
 			view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=2");
 			break;
+		case "ewm":
+			view.setViewName("redirect:/web/show/qr/index?memberId="+openid);
+			break;
+		case "relete":
+			view.setViewName("redirect:/wechat/shop/member/memberRelete");
+			break;
+		case "cash":
+			view.setViewName("redirect:/wechat/shop/cashback/index");
+			break;
 		default:
 			view.setViewName("redirect:/wechat/shop/member/userPage");
 			break;
