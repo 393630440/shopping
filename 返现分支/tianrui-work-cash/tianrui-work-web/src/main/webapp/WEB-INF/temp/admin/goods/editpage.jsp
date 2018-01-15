@@ -41,15 +41,13 @@
 				</div>
 				<div class="fbneirong">
 					<div class="am-form">
-						<!-- 
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品类型：</div>
 							<div class="you" style="margin-top: 5px;">
-								<c:if test="${goodsInfo.goodsType == '1'}">大众商品</c:if>
-								<c:if test="${goodsInfo.goodsType == '2'}">积分商品</c:if>
+								<c:if test="${goodsInfo.cashType == '1'}">服务类商品</c:if>
+								<c:if test="${goodsInfo.cashType == '2'}">普通商品</c:if>
 							</div>
 						</div>
-						 -->
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品名称：</div>
 							<div class="you">
@@ -83,20 +81,6 @@
 								<input type="text" class="am-input-sm" id="goodsPrice" name="goodsPrice" value="${goodsInfo.goodsPrice}" placeholder="请输入商品价格">
 							</div>
 						</div>
-						<div class="am-form-group am-cf">
-							<div class="zuo">折扣价格：</div>
-							<div class="you">
-								<input type="text" class="am-input-sm" id="discountPrice" name="discountPrice" value="${goodsInfo.discountPrice}" placeholder="请输入折扣价格">
-							</div>
-						</div>
-						<c:if test="${goodsInfo.goodsType == '2'}">
-							<div class="am-form-group am-cf" id="redPacket_div">
-								<div class="zuo">宏包：</div>
-								<div class="you">
-									<input type="text" class="am-input-sm" id="redPacket" name="redPacket" value="${goodsInfo.redPacket}" placeholder="请输入积分数量">
-								</div>
-							</div>
-						</c:if>
 						<div class="am-form-group am-cf">
 							<div class="zuo">商品图片：</div>
 							<div class="you" id="goodsImg_input_showId"></div>

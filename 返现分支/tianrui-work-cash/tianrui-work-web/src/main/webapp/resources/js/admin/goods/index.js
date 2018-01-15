@@ -42,7 +42,7 @@ function innerHTML(data, pageNo) {
 		html += "<td>" + data[a].classifyName + "</td>";
 		html += "<td>" + data[a].goodsName + "</td>";
 		html += "<td>" + goodsStatus + "</td>";
-//		html += "<td>" + goodsType + "</td>";
+		html += "<td>" + (data[a].cashType=="1"?"服务类":"普通商品") + "</td>";
 		html += "<td>" + data[a].goodsPrice + "</td>";
 //		html += "<td>" + data[a].discountPrice + "</td>";
 //		html += "<td>" + data[a].redPacket + "</td>";

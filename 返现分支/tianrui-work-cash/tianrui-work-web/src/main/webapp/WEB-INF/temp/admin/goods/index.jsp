@@ -82,9 +82,7 @@
 								<th class="table-title">分类名称</th>
 								<th class="table-title">商品名称</th>
 								<th class="table-type">商品状态</th>
-								<!-- 
 								<th class="table-type">商品类型</th>
-								 -->
 								<th class="table-type">商品价格</th>
 								<!-- 
 								<th class="table-type">折扣价格</th>
@@ -118,6 +116,6 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/goods/index.js?1227"></script>
+	<script src="/resources/js/admin/goods/index.js?0115"></script>
 </body>
 </html>
