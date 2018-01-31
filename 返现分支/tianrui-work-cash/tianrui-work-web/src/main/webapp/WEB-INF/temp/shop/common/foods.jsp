@@ -12,7 +12,7 @@ a {
             	<a href="/wechat/shop/goods/goodshome?goodsType=1" class="atu1"><img src="${staticRoot}/shop/images/sjsc-02.gif"></a>
             	<a href="/wechat/shop/goods/goodshome?goodsType=1" class="atu2"><img src="${staticRoot}/shop/images/sjsc-15-1.gif"></a>
             </div>
-            <a href="/wechat/shop/goods/goodshome?goodsType=1" class="qu-ul1a">会员商城</a>
+            <a href="/wechat/shop/goods/goodshome?goodsType=1" class="qu-ul1a">禄里商城</a>
         </li>
     	<li class="foods_02" style="width: 25%">
         	<div class="qu-tu1">

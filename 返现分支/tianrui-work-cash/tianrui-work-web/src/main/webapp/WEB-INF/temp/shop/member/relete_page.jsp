@@ -43,6 +43,9 @@
 	       </li>
 		</c:forEach>
     </ul>
+    <!-- foods -->
+    <jsp:include page="../common/foods.jsp"></jsp:include>
+     <!-- foods -->
     
     <input type="hidden" id="scrollPage">
     <input type="hidden" id="scrollTotal">
