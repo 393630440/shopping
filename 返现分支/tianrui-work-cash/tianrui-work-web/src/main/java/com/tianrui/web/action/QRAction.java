@@ -2,18 +2,19 @@ package com.tianrui.web.action;
 
 import java.net.URLEncoder;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tianrui.web.action.session.SessionManage;
 
 import tianrui.work.api.IMemberInfoService;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.comm.Constant;
+import tianrui.work.req.member.MemberInfoSaveReq;
+import tianrui.work.util.CommonUtil;
+import tianrui.work.util.ImgUrlWeChat;
 import tianrui.work.vo.Result;
 
 @Controller
@@ -27,8 +28,20 @@ public class QRAction {
 	public ModelAndView index(String memberId) throws Exception{
 		ModelAndView view = new ModelAndView();
 		Result rs = memberInfoService.selectByOpenid(memberId);
-		String url = Constant.WEIXIN_BASE_URL+"/web/show/qr/relete?fatherId="+memberId;
-		view.addObject("pathUrl", url);
+		MemberInfo info = (MemberInfo) rs.getData();
+		String img = "";
+		if(StringUtils.isNotBlank(info.getShowQr())){
+			img = info.getShowQr();
+		}else{
+			img = ImgUrlWeChat.getQrImg(memberId, CommonUtil.getToken().getAccessToken());
+			MemberInfoSaveReq upt = new MemberInfoSaveReq();
+			upt.setMemberId(memberId);
+			upt.setShowQr(img);
+			memberInfoService.uptMemberInfo(upt);
+		}
+//		String url = Constant.WEIXIN_BASE_URL+"/web/show/qr/relete?fatherId="+memberId;
+		
+		view.addObject("pathUrl", img);
 		view.addObject("base", rs.getData());
 		view.setViewName("shop/showqr/index");
 		return view;

@@ -119,7 +119,9 @@ public class CommonUtil {
 	@SuppressWarnings("static-access")
 	public static Tokens getToken() {
 		Tokens token = null;
-		String requestUrl = token_url.replace("APPID", Constant.WEIXIN_APPID).replace("APPSECRET", Constant.WEIXIN_APPSECRET);
+//		String requestUrl = token_url.replace("APPID", Constant.WEIXIN_APPID).replace("APPSECRET", Constant.WEIXIN_APPSECRET);
+		String requestUrl = token_url.replace("APPID", "wxf22ce076abf3d066").replace("APPSECRET", "4add7800a76bf23866778b14d69bf6d4");
+		
 		// 发起GET请求获取凭证
 		JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
 
@@ -136,4 +138,10 @@ public class CommonUtil {
 		}
 		return token;
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(getToken().getAccessToken());
+	}
+	
+	
 }

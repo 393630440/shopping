@@ -7,6 +7,8 @@ public class MemberInfo {
 	private Integer pageSize;
 	
     private String memberId;
+    
+    private String showQr;
 
     private String memberName;
     
@@ -190,5 +192,13 @@ public class MemberInfo {
 
 	public void setRankMoney(Double rankMoney) {
 		this.rankMoney = rankMoney;
+	}
+
+	public String getShowQr() {
+		return showQr;
+	}
+
+	public void setShowQr(String showQr) {
+		this.showQr = showQr;
 	}
 }

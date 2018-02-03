@@ -13,11 +13,13 @@ import tianrui.work.bean.CashBackInfo;
 import tianrui.work.bean.MemberGain;
 import tianrui.work.bean.MemberInfo;
 import tianrui.work.bean.MemberRecharge;
+import tianrui.work.bean.MemberRelated;
 import tianrui.work.bean.MemberSetting;
 import tianrui.work.mapper.java.CashBackInfoMapper;
 import tianrui.work.mapper.java.MemberGainMapper;
 import tianrui.work.mapper.java.MemberInfoMapper;
 import tianrui.work.mapper.java.MemberRechargeMapper;
+import tianrui.work.mapper.java.MemberRelatedMapper;
 import tianrui.work.mapper.java.MemberSettingMapper;
 import tianrui.work.req.HbaoPayReq;
 import tianrui.work.req.gain.MemberGainSaveReq;
@@ -46,6 +48,8 @@ public class MemberInfoService implements IMemberInfoService{
 	MemberGainMapper memberGainMapper;
 	@Autowired
 	MemberRechargeMapper memberRechargeMapper;
+	@Autowired
+	MemberRelatedMapper memberRelatedMapper;
 	
 	@Override
 	public Result uptCashBack(String id, Double cashMoney) throws Exception {
@@ -165,6 +169,18 @@ public class MemberInfoService implements IMemberInfoService{
 			save.setRpListingRatio("*");
 			save.setCreatetime(System.currentTimeMillis());
 			memberInfoMapper.insertSelective(save);
+			//TODO
+			MemberRelated rel =new MemberRelated();
+			rel.setMember(req.getMemberId());
+			List<MemberRelated> list = memberRelatedMapper.selectByCoudition(rel);
+			for(MemberRelated upt : list){
+				MemberRelated set = new MemberRelated();
+				set.setId(upt.getId());
+				set.setMemberName(req.getWechatName());
+				set.setMemberImg(req.getWechatImg());
+				memberRelatedMapper.updateByPrimaryKeySelective(set);
+			}
+			
 //			MemberSetting set = new MemberSetting();
 //			set.setMemberId(req.getMemberId());
 //			memberSettingMapper.insertSelective(set);
@@ -265,6 +281,7 @@ public class MemberInfoService implements IMemberInfoService{
 		upt.setCity(req.getCity());
 		upt.setMemberRank(req.getMemberRank());
 		upt.setRankMoney(req.getRankMoney());
+		upt.setShowQr(req.getShowQr());
 		memberInfoMapper.updateByPrimaryKeySelective(upt);
 		MemberInfo info = memberInfoMapper.selectByPrimaryKey(req.getMemberId());
 		rs.setData(info);

@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +19,16 @@ import com.tianrui.web.util.ReceiveXmlEntity;
 import com.tianrui.web.util.ReceiveXmlProcess;
 import com.tianrui.web.util.SignUtilSignature;
 
+import tianrui.work.api.IMemberReleteService;
 import tianrui.work.comm.Constant;
 
 @Controller
 @RequestMapping("work/weixin")
 public class WeixinAction {
-
+	
+	@Autowired
+	IMemberReleteService memberReleteService;
+	
 	/** 微信验证接口
 	 * @throws IOException */
 	@RequestMapping(value = "index",method=RequestMethod.GET)
@@ -79,6 +84,29 @@ public class WeixinAction {
 		
 		ReceiveXmlEntity xmlEntity =new ReceiveXmlEntity();
 		xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);//解析xml数据
+		
+		try {
+			String openid = xmlEntity.getFromUserName();
+			String fatherid = "";
+			if(xmlEntity.getMsgType().equals("event")&&xmlEntity.getEvent().equals("subscribe")){
+				fatherid = xmlEntity.getEventKey().substring(8, xmlEntity.getEventKey().length());
+				System.out.println("关注人"+xmlEntity.getFromUserName());
+				System.out.println("未关注even="+xmlEntity.getEvent());
+				System.out.println("未关注EventKey="+xmlEntity.getEventKey());
+				System.out.println("未关注Ticket="+xmlEntity.getTicket());
+			}else if(xmlEntity.getMsgType().equals("event")&&xmlEntity.getEvent().equals("SCAN")){
+				fatherid = xmlEntity.getEventKey();
+				System.out.println("关注人"+xmlEntity.getFromUserName());
+				System.out.println("已关注even="+xmlEntity.getEvent());
+				System.out.println("已关注EventKey="+xmlEntity.getEventKey());
+				System.out.println("已关注Ticket="+xmlEntity.getTicket());
+			}
+			memberReleteService.saveMemberRelete(fatherid,openid);
+		} catch (Exception e) {
+			System.out.println("关系绑定异常");
+		}
+		
+		
 		String respXml = null;
 		String contxml=Constant.WEIXIN_BASE_URL+"/public/user/loginPage?openid="+xmlEntity.getFromUserName();//发送文字内容
 		respXml = formatxmls.formatXmlAllContent(xmlEntity.getFromUserName(), xmlEntity.getToUserName(), contxml);

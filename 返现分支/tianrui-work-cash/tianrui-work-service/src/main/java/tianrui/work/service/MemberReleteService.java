@@ -63,15 +63,15 @@ public class MemberReleteService implements IMemberReleteService {
 		if(!StringUtils.equals(memberId, fatherId)){
 			//删除用户原有关系
 			deleteMemberRelete(memberId);
-			MemberInfo m = memberInfoMapper.selectByPrimaryKey(memberId);
+//			MemberInfo m = memberInfoMapper.selectByPrimaryKey(memberId);
 			MemberInfo f = memberInfoMapper.selectByPrimaryKey(fatherId);
 			MemberRelated save = new MemberRelated();
 			save.setId(UUIDUtil.getUUID());
 			save.setCreatetime(System.currentTimeMillis());
 			//子类
 			save.setMember(memberId);
-			save.setMemberImg(m.getWechatImg());
-			save.setMemberName(m.getWechatName());
+//			save.setMemberImg(m.getWechatImg());
+//			save.setMemberName(m.getWechatName());
 			//父类
 			save.setMemberFather(fatherId);
 			save.setFatherImg(f.getWechatImg());

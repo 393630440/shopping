@@ -5,6 +5,8 @@ public class MemberInfoSaveReq {
 
     private String memberName;
     
+    private String showQr;
+    
     private String memberRank;
 
     private String wechat;
@@ -159,5 +161,13 @@ public class MemberInfoSaveReq {
 
 	public void setRankMoney(Double rankMoney) {
 		this.rankMoney = rankMoney;
+	}
+
+	public String getShowQr() {
+		return showQr;
+	}
+
+	public void setShowQr(String showQr) {
+		this.showQr = showQr;
 	}
 }

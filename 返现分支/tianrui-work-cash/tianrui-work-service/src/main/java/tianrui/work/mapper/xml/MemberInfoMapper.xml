@@ -20,11 +20,13 @@
     <result column="createtime" property="createtime" jdbcType="BIGINT" />
     
     <result column="rank_money" property="rankMoney" jdbcType="DOUBLE" />
+    
+    <result column="showQr" property="showQr" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, member_name, wechat, wechat_img, wechat_name, balance, red_packet, cellphone, 
     birth_time, city, rp_exchange_ratio, rp_trade_mark, rp_listing_ratio, 
-    createtime, member_rank,cash_money,rank_money
+    createtime, member_rank,cash_money,rank_money,showQr
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -85,7 +87,7 @@
       wechat_img, wechat_name, balance, 
       red_packet, cellphone, birth_time, 
       city, rp_exchange_ratio, rp_trade_mark, 
-      rp_listing_ratio, createtime,member_rank,cash_money,rank_money)
+      rp_listing_ratio, createtime,member_rank,cash_money,rank_money,showQr)
     values (#{memberId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
       #{wechatImg,jdbcType=VARCHAR}, #{wechatName,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, 
       #{redPacket,jdbcType=DOUBLE}, #{cellphone,jdbcType=VARCHAR}, #{birthTime,jdbcType=VARCHAR}, 
@@ -93,7 +95,7 @@
       #{rpListingRatio,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=BIGINT},
       #{memberRank,jdbcType=VARCHAR},
-      #{cashMoney,jdbcType=DOUBLE},#{rankMoney,jdbcType=DOUBLE}
+      #{cashMoney,jdbcType=DOUBLE},#{rankMoney,jdbcType=DOUBLE},#{showQr,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="tianrui.work.bean.MemberInfo" >
@@ -150,6 +152,9 @@
       <if test="rankMoney != null">
       	rank_money,
       </if>
+      <if test="showQr != null">
+      	showQr,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cashMoney != null">
@@ -203,11 +208,17 @@
       <if test="rankMoney != null">
       	#{rankMoney,jdbcType=DOUBLE},
       </if>
+      <if test="showQr != null">
+      	#{showQr,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tianrui.work.bean.MemberInfo" >
     update member_info
     <set >
+    	<if test="showQr != null">
+      	showQr = #{showQr,jdbcType=VARCHAR},
+      </if>
     	<if test="rankMoney != null">
       	rank_money = #{rankMoney,jdbcType=DOUBLE},
       </if>
@@ -262,6 +273,7 @@
   <update id="updateByPrimaryKey" parameterType="tianrui.work.bean.MemberInfo" >
     update member_info
     set member_name = #{memberName,jdbcType=VARCHAR},
+    	showQr = #{showQr,jdbcType=VARCHAR},
     	rank_money = #{rankMoney,jdbcType=DOUBLE},
     	member_rank = #{memberRank,jdbcType=VARCHAR},
     	cash_money = #{cashMoney,jdbcType=DOUBLE},

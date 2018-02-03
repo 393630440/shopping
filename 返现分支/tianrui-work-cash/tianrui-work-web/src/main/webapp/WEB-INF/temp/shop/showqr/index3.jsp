@@ -26,13 +26,17 @@
         </div>
     </div>
 </div>
+<input id="pathUrl" type="hidden" value="${pathUrl }"/>
 <div class="erweima">
     <div class="erbg">
         <img src="/resources/ewm/images/circle.png">
         <div class="erimg">
 	       	<div align="center" style="margin-top: 30px">
-	            <img style="width: 140px;margin-top: 20px" src="${pathUrl }">
+				<div id="qrcode" align="center" class="pic_head" style="width:40%; margin-top:15px;display: inline-block;"></div>
 			</div>
+            <!-- 
+            <img src="images/erwei.png">
+             -->
         </div>
     </div>
 </div>
