@@ -103,16 +103,10 @@ public class WithdrawalService implements IWithdrawalService{
 	public Result audit(String id) throws Exception {
 		Result rs = Result.getSuccessful();
 		Withdrawal draw = withdrawalMapper.selectByPrimaryKey(id);
-		MemberInfo info = memberInfoMapper.selectByPrimaryKey(draw.getMemberId());
+//		MemberInfo info = memberInfoMapper.selectByPrimaryKey(draw.getMemberId());
 		if(draw.getWithdrawalStatus().equals("0")){
-			if((info.getBalance()-draw.getWithdrawalAmount())<0){
-				rs.setCode("1");
-				rs.setError("提现超额");
-				return rs;
-			}else{
-				draw.setWithdrawalStatus("1");
-				withdrawalMapper.updateByPrimaryKeySelective(draw);
-			}	
+			draw.setWithdrawalStatus("1");
+			withdrawalMapper.updateByPrimaryKeySelective(draw);
 		}else{
 			rs.setCode("1");
 			rs.setError("已处理过数据");

@@ -81,12 +81,12 @@ public class WeixinAction {
 			sb.append(s);
 		}
 		String xml = sb.toString();	//次即为接收到微信端发送过来的xml数据
-		
+		System.out.println(xml);
 		ReceiveXmlEntity xmlEntity =new ReceiveXmlEntity();
 		xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);//解析xml数据
 		
+		String openid = xmlEntity.getFromUserName();
 		try {
-			String openid = xmlEntity.getFromUserName();
 			String fatherid = "";
 			if(xmlEntity.getMsgType().equals("event")&&xmlEntity.getEvent().equals("subscribe")){
 				fatherid = xmlEntity.getEventKey().substring(8, xmlEntity.getEventKey().length());
@@ -106,10 +106,21 @@ public class WeixinAction {
 			System.out.println("关系绑定异常");
 		}
 		
+		String respXml = "";
+//		String respXml = "<xml>"
+//				+ "<ToUserName>"
+//				+ "< ![CDATA["+xmlEntity.getFromUserName()+"] ]>"
+//				+ "</ToUserName>"
+//				+ "<FromUserName>"
+//				+ "< ![CDATA["+xmlEntity.getToUserName()+"] ]>"
+//				+ "</FromUserName>"
+//				+ "<CreateTime>"+System.currentTimeMillis()+"</CreateTime>"
+//				+ "<MsgType>"
+//				+ "< ![CDATA[transfer_customer_service] ]>"
+//				+ "</MsgType></xml>";
 		
-		String respXml = null;
-		String contxml=Constant.WEIXIN_BASE_URL+"/public/user/loginPage?openid="+xmlEntity.getFromUserName();//发送文字内容
-		respXml = formatxmls.formatXmlAllContent(xmlEntity.getFromUserName(), xmlEntity.getToUserName(), contxml);
+//		String contxml=Constant.WEIXIN_BASE_URL+"/public/user/loginPage?openid="+xmlEntity.getFromUserName();//发送文字内容
+		respXml = formatxmls.formatXmlAllContent(xmlEntity.getFromUserName(), xmlEntity.getToUserName(), "欢迎光临禄里堂...");
 		return respXml;
 	}
 	

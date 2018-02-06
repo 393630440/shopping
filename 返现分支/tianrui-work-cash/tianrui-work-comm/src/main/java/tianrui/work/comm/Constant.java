@@ -19,14 +19,14 @@ public class Constant {
 	public static String WEIXIN_PAY_JSAPI="JSAPI";
 	//二维码支付
 	public static String WEIXIN_PAY_NATIVE="NATIVE";
-	//宏包交易消息推送
-	public static String MESSAGE_HPAO="O7GpLHKkc22UaQgDr9M6Etb1Ax3qm1am06b_gQe6t6c";
-	//订单发货提醒
-	public static String MESSAGE_DINGD="R3E1JBgg59RWhZTWBTtaDkm-d14G0t6Joc0rliuVvSo";
-	//订单创建成功
-	public static String MESSAGE_DSUCCE="aDYL8Y1Sy9AIvU2sm7q3Hf0_bZDXGuw51o4D43T7Kqg";
-	//网购成功
-	public static String MESSAGE_WDING="bNj7THDZI_POkyWBq2aSlADL5tQ89bI7P_eZEjXpXpU";
+	//宏包交易消息推送-ok
+	public static String MESSAGE_HPAO="lvDOwmt4iaSRat-_Dqw1SGweNO9aCAC78e-igLaeQpQ";
+	//订单发货提醒-ok
+	public static String MESSAGE_DINGD="Ldz1rjpOUKao7dOuPZFal8LAX_ior-HZZZmuv61ig6c";
+	//订单创建成功-ok
+	public static String MESSAGE_DSUCCE="DH0nBqH7pWZMbibY8ONMBilMNbHJXpGDqy9syyZNXqY";
+	//网购成功-ok
+	public static String MESSAGE_WDING="XGTeCFY13stDF0CYfKlq684KfTa4atFGMXRx5OEPNWw";
 
 
 	public static String getWEIXIN_TOKEN() {
