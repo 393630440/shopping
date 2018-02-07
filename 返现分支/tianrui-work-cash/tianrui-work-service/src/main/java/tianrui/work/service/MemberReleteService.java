@@ -61,24 +61,27 @@ public class MemberReleteService implements IMemberReleteService {
 	public Result saveMemberRelete(String fatherId, String memberId) {
 		Result rs = Result.getSuccessful();
 		if(!StringUtils.equals(memberId, fatherId)){
-			//删除用户原有关系
-			deleteMemberRelete(memberId);
-			MemberInfo m = memberInfoMapper.selectByPrimaryKey(memberId);
 			MemberInfo f = memberInfoMapper.selectByPrimaryKey(fatherId);
-			MemberRelated save = new MemberRelated();
-			save.setId(UUIDUtil.getUUID());
-			save.setCreatetime(System.currentTimeMillis());
-			//子类
-			save.setMember(memberId);
-			if(m!=null){
-				save.setMemberImg(m.getWechatImg());
-				save.setMemberName(m.getWechatName());
+			if(f != null){
+				//删除用户原有关系
+				deleteMemberRelete(memberId);
+				MemberInfo m = memberInfoMapper.selectByPrimaryKey(memberId);
+				
+				MemberRelated save = new MemberRelated();
+				save.setId(UUIDUtil.getUUID());
+				save.setCreatetime(System.currentTimeMillis());
+				//子类
+				save.setMember(memberId);
+				if(m!=null){
+					save.setMemberImg(m.getWechatImg());
+					save.setMemberName(m.getWechatName());
+				}
+				//父类
+				save.setMemberFather(fatherId);
+				save.setFatherImg(f.getWechatImg());
+				save.setFatherName(f.getWechatName());
+				memberRelatedMapper.insertSelective(save);
 			}
-			//父类
-			save.setMemberFather(fatherId);
-			save.setFatherImg(f.getWechatImg());
-			save.setFatherName(f.getWechatName());
-			memberRelatedMapper.insertSelective(save);
 		}
 		return rs;
 	}

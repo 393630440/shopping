@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,7 +102,9 @@ public class WeixinAction {
 				System.out.println("已关注EventKey="+xmlEntity.getEventKey());
 				System.out.println("已关注Ticket="+xmlEntity.getTicket());
 			}
-			memberReleteService.saveMemberRelete(fatherid,openid);
+			if(StringUtils.isNotBlank(fatherid)){
+				memberReleteService.saveMemberRelete(fatherid,openid);
+			}
 		} catch (Exception e) {
 			System.out.println("关系绑定异常");
 		}
