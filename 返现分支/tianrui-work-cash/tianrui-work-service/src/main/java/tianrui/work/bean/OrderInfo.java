@@ -2,6 +2,10 @@ package tianrui.work.bean;
 
 public class OrderInfo {
 	private String orderId;
+	
+	private String memberName;
+	
+	private String cellphone;
 
 	private String orderCode;
 	
@@ -248,6 +252,22 @@ public class OrderInfo {
 
 	public void setPayTime(Long payTime) {
 		this.payTime = payTime;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
 
 }

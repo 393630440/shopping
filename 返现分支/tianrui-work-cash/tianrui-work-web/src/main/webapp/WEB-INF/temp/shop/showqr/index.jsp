@@ -31,7 +31,7 @@
         <img src="/resources/ewm/images/circle.png">
         <div class="erimg">
 	       	<div align="center" style="margin-top: 30px">
-	            <img style="width: 140px;margin-top: 20px" src="${pathUrl }">
+	            <img style="width: 120px;margin-top: 20px" src="${pathUrl }">
 			</div>
         </div>
     </div>

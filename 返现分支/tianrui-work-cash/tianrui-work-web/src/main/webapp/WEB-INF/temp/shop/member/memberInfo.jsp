@@ -10,6 +10,12 @@
 <link href="${staticRoot}/web/css/shoujisc.css" rel="stylesheet" type="text/css" />
 <link href="${staticRoot}/web/css/login.css" rel="stylesheet" type="text/css">
 <script src="${staticRoot}/web/js/jquery-1.8.3.min.js"></script>
+<style>
+a {
+    color: #000;
+    text-decoration: none;
+}
+</style>
 </head>
 <body>
 <div class="mobile">
@@ -46,40 +52,79 @@
        <input type="text" class="txt-input txt-username uptInfo" id="city_req" value="${MemberInfo.city }" placeholder="所在城市">
      </div>
      <input type="hidden" id="memberId_req" value="${MemberInfo.memberId }">
-     <!-- 
-     <div class="item item-password">
-       <select id="rpExchangeRatio_req" class="txt-input txt-username uptInfo">
-       	<option value="" >交易比例</option>
-       	<option value="1" <c:if test="${MemberInfo.rpExchangeRatio eq 1}">selected = "selected"</c:if>>1.0</option>
-       	<option value="0.9" <c:if test="${MemberInfo.rpExchangeRatio eq 0.9}">selected = "selected"</c:if>>0.9</option>
-       	<option value="0.8" <c:if test="${MemberInfo.rpExchangeRatio eq 0.8}">selected = "selected"</c:if>>0.8</option>
-       	<option value="0.7" <c:if test="${MemberInfo.rpExchangeRatio eq 0.7}">selected = "selected"</c:if>>0.7</option>
-       	<option value="0.6" <c:if test="${MemberInfo.rpExchangeRatio eq 0.6}">selected = "selected"</c:if>>0.6</option>
-       	<option value="0.5" <c:if test="${MemberInfo.rpExchangeRatio eq 0.5}">selected = "selected"</c:if>>0.5</option>
-       	<option value="0.4" <c:if test="${MemberInfo.rpExchangeRatio eq 0.4}">selected = "selected"</c:if>>0.4</option>
-       	<option value="0.3" <c:if test="${MemberInfo.rpExchangeRatio eq 0.3}">selected = "selected"</c:if>>0.3</option>
-       </select>
-     </div>
-      -->
-     <!-- 
-     <div class="item item-password">
-       <input type="text" id="rpTradeMark_req" class="txt-input txt-username" readonly="readonly" value="是否开启积分交易">
-       
-       <b class="tp-btn_PwdTwo <c:if test="${MemberInfo.rpTradeMark eq 0}">btn-off_PwdTwo</c:if>
-       <c:if test="${MemberInfo.rpTradeMark eq 1}">btn-on_PwdTwo</c:if>" typeValue=${MemberInfo.rpTradeMark }></b> 
-     </div>
-      -->
-     
      <div style="height: 30px">
      </div>
   </div>
-	<!-- foods -->
-    <jsp:include page="../common/foods.jsp"></jsp:include>
-     <!-- foods -->
+	
+	
+	<ul class="quanbu-ul1" style="z-index:999">
+    	<li class="foods_01" style="width: 25%">
+        	<div class="qu-tu1">
+            	<a class="atu1"><img src="${staticRoot}/shop/images/sjsc-02.gif"></a>
+            	<a class="atu2"><img src="${staticRoot}/shop/images/sjsc-15-1.gif"></a>
+            </div>
+            <a class="qu-ul1a">禄里商城</a>
+        </li>
+    	<li class="foods_02" style="width: 25%">
+        	<div class="qu-tu1">
+            	<a class="atu1"><img src="${staticRoot}/shop/images/sjsc-16.png"></a>
+            	<a class="atu2"><img src="${staticRoot}/shop/images/sjsc-16-1.png"></a>
+            </div>
+            <a class="qu-ul1a">分享</a>
+        </li>
+    	<li class="foods_03" style="width: 25%">
+        	<div class="qu-tu1">
+            	<a class="atu1"><img src="${staticRoot}/shop/images/sjsc-17.png"></a>
+            	<a class="atu2"><img src="${staticRoot}/shop/images/sjsc-17-1.png"></a>
+            </div>
+            <a class="qu-ul1a">购物车</a>
+        </li>
+    	 
+    	<li class="foods_05" style="width: 25%">
+        	<div class="qu-tu1">
+            	<a class="atu1"><img src="${staticRoot}/shop/images/sjsc-18.png"></a>
+            	<a class="atu2"><img src="${staticRoot}/shop/images/sjsc18-1.png"></a>
+            </div>
+            <a class="qu-ul1a">我</a>
+        </li>
+        <div style="clear:both;"></div>
+    </ul>
 </div>
 </body>
 </html>
 <script type="text/javascript" >
+	$(".foods_01").on("click",function(){
+		if($("#memberName_req").val()==""||$("#cellphone_req").val()==""){
+			alert("请完善个人信息");
+		}else{
+			window.location.href="/wechat/shop/goods/goodshome?goodsType=1";
+		}
+	});
+	$(".foods_02").on("click",function(){
+		if($("#memberName_req").val()==""||$("#cellphone_req").val()==""){
+			alert("请完善个人信息");
+		}else{
+			window.location.href="/web/show/qr/index?memberId="+$("#memberId_req").val();
+		}
+		
+	});
+	$(".foods_03").on("click",function(){
+		if($("#memberName_req").val()==""||$("#cellphone_req").val()==""){
+			alert("请完善个人信息");
+		}else{
+			window.location.href="/wechat/shop/shoppingcart/ordinarylist";
+		}
+		
+	});
+	$(".foods_05").on("click",function(){
+		if($("#memberName_req").val()==""||$("#cellphone_req").val()==""){
+			alert("请完善个人信息");
+		}else{
+			window.location.href="/wechat/shop/member/userPage";
+		}
+		
+	});
+	
 	$(".tp-btn_PwdTwo").on("click",function(){
 		var value = $(this).attr("typeValue");
 		var par;

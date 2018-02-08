@@ -62,32 +62,37 @@ public class Oauth2Action {
 		if(StringUtils.isNotBlank(fatherId)){
 			memberReleteService.saveMemberRelete(fatherId,openid);
 		}
-		SessionManage.setSessionManage(request, (MemberInfo)rs.getData());
-		switch (state) {
-		case "member":
-			view.setViewName("redirect:/wechat/shop/member/userPage");
-			break;
-		case "creditor":
-			view.setViewName("redirect:/wechat/shop/creditor/selectPage");
-			break;
-		case "goodsA":
-			view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=1");
-			break;
-		case "goodsB":
-			view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=2");
-			break;
-		case "ewm":
-			view.setViewName("redirect:/web/show/qr/index?memberId="+openid);
-			break;
-		case "relete":
-			view.setViewName("redirect:/wechat/shop/member/memberRelete");
-			break;
-		case "cash":
-			view.setViewName("redirect:/wechat/shop/cashback/index");
-			break;
-		default:
-			view.setViewName("redirect:/wechat/shop/member/userPage");
-			break;
+		MemberInfo info = (MemberInfo)rs.getData();
+		SessionManage.setSessionManage(request, info);
+		if(StringUtils.isNotBlank(info.getMemberName())||StringUtils.isNotBlank(info.getCellphone())){
+			switch (state) {
+			case "member":
+				view.setViewName("redirect:/wechat/shop/member/userPage");
+				break;
+			case "creditor":
+				view.setViewName("redirect:/wechat/shop/creditor/selectPage");
+				break;
+			case "goodsA":
+				view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=1");
+				break;
+			case "goodsB":
+				view.setViewName("redirect:/wechat/shop/goods/goodshome?goodsType=2");
+				break;
+			case "ewm":
+				view.setViewName("redirect:/web/show/qr/index?memberId="+openid);
+				break;
+			case "relete":
+				view.setViewName("redirect:/wechat/shop/member/memberRelete");
+				break;
+			case "cash":
+				view.setViewName("redirect:/wechat/shop/cashback/index");
+				break;
+			default:
+				view.setViewName("redirect:/wechat/shop/member/userPage");
+				break;
+			}
+		}else{
+			view.setViewName("redirect:/wechat/shop/member/memberInfo");
 		}
 		return view;
 	}

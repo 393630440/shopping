@@ -59,14 +59,15 @@
 							</div>
 						</li>
 						<li>
-							<div class="am-btn-group am-btn-group-xs">
-								<select id="goodsType" data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}">
-									<option value="">商品类型</option>
-									<option value="1">大众商品</option>
-									<option value="2">积分商品</option>
-								</select>
-							</div>
+						<input type="text" id="memberName" style="width: 160px" 
+							class="am-form-field am-input-sm am-input-xm" placeholder="用户名称" />
 						</li>
+						<li>
+						<input type="text" id="cellphone" style="width: 160px" 
+							class="am-form-field am-input-sm am-input-xm" placeholder="联系电话" />
+						</li>
+						
+						
 						<li><input type="text" id="orderCode" style="width: 160px" class="am-form-field am-input-sm am-input-xm" placeholder="订单编号" /></li>
 						<li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" onclick="init(0)" style="margin-top: -1px;">搜索</button></li>
 					</ul>
@@ -77,7 +78,8 @@
 							<tr class="am-success">
 								<th class="table-id">序号</th>
 								<th class="table-title">订单编号</th>
-								<th class="table-type">商品类型</th>
+								<th class="table-type">用户名称</th>
+								<th class="table-type">联系电话</th>
 								<th class="table-type">商品数量</th>
 								<th class="table-type">商品小计</th>
 								<th class="table-type">运费</th>
@@ -113,6 +115,6 @@
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${staticRoot}/admin/js/amazeui.min.js"></script>
 	<!--<![endif]-->
-	<script src="/resources/js/admin/order/index.js?0728"></script>
+	<script src="/resources/js/admin/order/index.js?0208"></script>
 </body>
 </html>

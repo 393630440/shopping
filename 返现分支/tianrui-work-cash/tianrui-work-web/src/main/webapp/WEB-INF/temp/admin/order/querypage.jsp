@@ -46,10 +46,15 @@
 							<div class="you">${orderInfo.orderCode}</div>
 						</div>
 						<div class="am-form-group am-cf">
-							<div class="zuo">商品类型：</div>
+							<div class="zuo">用户名称：</div>
 							<div class="you" style="margin-top: 5px;">
-								<c:if test="${orderInfo.goodsType == '1'}">大众商品</c:if>
-								<c:if test="${orderInfo.goodsType == '2'}">积分商品</c:if>
+								${orderInfo.memberName}
+							</div>
+						</div>
+						<div class="am-form-group am-cf">
+							<div class="zuo">联系电话：</div>
+							<div class="you" style="margin-top: 5px;">
+								${orderInfo.cellphone}
 							</div>
 						</div>
 						<div class="am-form-group am-cf">

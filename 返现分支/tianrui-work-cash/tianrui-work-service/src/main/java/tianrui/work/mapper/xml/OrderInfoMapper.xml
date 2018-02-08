@@ -22,6 +22,10 @@
 		<result column="refund_audit_time" property="refundAuditTime" jdbcType="BIGINT" />
 		<result column="send_time" property="sendTime" jdbcType="BIGINT" />
 		<result column="pay_time" property="payTime" jdbcType="BIGINT" />
+		
+		<result column="memberName" property="memberName" jdbcType="VARCHAR" />
+		<result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+		
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -39,29 +43,61 @@
 
 	<select id="selectByOrderInfo" resultMap="BaseResultMap" parameterType="tianrui.work.bean.OrderInfo">
 		select
-		<include refid="Base_Column_List" />
-		from order_info
+			ord.order_id order_id, 
+			ord.order_code order_code, 
+			ord.member_id member_id, 
+			ord.goods_type goods_type,
+			ord.goods_num goods_num, 
+			ord.goods_subtotal goods_subtotal, 
+			ord.express_fee express_fee,
+			ord.order_amount order_amount, 
+			ord.order_red_packet order_red_packet, 
+			ord.order_status order_status,
+			ord.buyer_word buyer_word, 
+			ord.creation_time creation_time, 
+			ord.recipients recipients,
+			ord.phone phone, 
+			ord.city city, 
+			ord.detail_address detail_address,
+			ord.refund_apply_time refund_apply_time, 
+			ord.refund_audit_time refund_audit_time,
+			ord.send_time send_time, 
+			ord.pay_time pay_time,
+			ord.wuliuName wuliuName,
+			ord.wuliuCode wuliuCode,
+			ord.wuliuNumb wuliuNumb,
+			mi.member_name memberName,
+			mi.cellphone cellphone
+		from order_info ord LEFT JOIN member_info mi ON mi.member_id = ord.member_id
 		<where>
-			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
-			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
-			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
-			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
-			<if test="true">and order_status not in ('8','9','0')</if>
+			<if test="memberId != null and memberId != ''">and ord.member_id = #{memberId,jdbcType=VARCHAR}</if>
+			<if test="orderCode != null and orderCode != ''">and ord.order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
+			<if test="goodsType != null and goodsType != ''">and ord.goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="orderStatus != null and orderStatus != ''">and ord.order_status = #{orderStatus,jdbcType=VARCHAR}</if>
+			<if test="true">and ord.order_status not in ('8','9','0')</if>
+			
+			<if test="memberName != null and memberName != ''">and mi.member_name like "%" #{memberName,jdbcType=VARCHAR} "%"</if>
+			<if test="cellphone != null and cellphone != ''">and mi.cellphone like "%" #{cellphone,jdbcType=VARCHAR} "%"</if>
 		</where>
-		order by creation_time desc
+		order by ord.creation_time desc
 		<if test="pageNo != null">
 			limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 		</if>
 	</select>
 
 	<select id="selectBycount" resultType="long" parameterType="tianrui.work.bean.OrderInfo">
-		select count(0) from order_info
+		select count(0) 
+		
+		from order_info ord LEFT JOIN member_info mi ON mi.member_id = ord.member_id
 		<where>
-			<if test="memberId != null and memberId != ''">and member_id = #{memberId,jdbcType=VARCHAR}</if>
-			<if test="orderCode != null and orderCode != ''">and order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
-			<if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType,jdbcType=VARCHAR}</if>
-			<if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus,jdbcType=VARCHAR}</if>
-			<if test="true">and order_status not in ('8','9','0')</if>
+			<if test="memberId != null and memberId != ''">and ord.member_id = #{memberId,jdbcType=VARCHAR}</if>
+			<if test="orderCode != null and orderCode != ''">and ord.order_code like "%" #{orderCode,jdbcType=VARCHAR} "%"</if>
+			<if test="goodsType != null and goodsType != ''">and ord.goods_type = #{goodsType,jdbcType=VARCHAR}</if>
+			<if test="orderStatus != null and orderStatus != ''">and ord.order_status = #{orderStatus,jdbcType=VARCHAR}</if>
+			<if test="true">and ord.order_status not in ('8','9','0')</if>
+			
+			<if test="memberName != null and memberName != ''">and mi.member_name like "%" #{memberName,jdbcType=VARCHAR} "%"</if>
+			<if test="cellphone != null and cellphone != ''">and mi.cellphone like "%" #{cellphone,jdbcType=VARCHAR} "%"</if>
 		</where>
 	</select>
 

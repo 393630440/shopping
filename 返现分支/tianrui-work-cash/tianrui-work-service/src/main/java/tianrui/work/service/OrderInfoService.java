@@ -122,8 +122,12 @@ public class OrderInfoService implements IOrderInfoService {
 	@Override
 	public OrderInfoFindResp queryOrderInfoByOne(String orderId) throws Exception {
 		OrderInfo record = orderInfoMapper.selectByPrimaryKey(orderId);
+		//TODO
+		MemberInfo info = memberInfoMapper.selectByPrimaryKey(record.getMemberId());
 		OrderInfoFindResp resp = new OrderInfoFindResp();
 		PropertyUtils.copyProperties(resp, record);
+		resp.setMemberName(info.getMemberName());
+		resp.setCellphone(info.getCellphone());
 		return resp;
 	}
 
@@ -142,6 +146,9 @@ public class OrderInfoService implements IOrderInfoService {
 		find.setGoodsType(req.getGoodsType());
 		find.setOrderStatus(req.getOrderStatus());
 		find.setMemberId(req.getMemberId());
+		find.setMemberName(req.getMemberName());
+		find.setCellphone(req.getCellphone());
+		
 		List<OrderInfo> list = orderInfoMapper.selectByOrderInfo(find);
 		long a = orderInfoMapper.selectBycount(find);
 

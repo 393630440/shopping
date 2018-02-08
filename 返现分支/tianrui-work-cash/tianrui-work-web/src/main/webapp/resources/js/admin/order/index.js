@@ -11,7 +11,9 @@ function init(pageNo) {
 			"pageSize" : 10,
 			"orderCode" : $("#orderCode").val(),
 			"goodsType" : $("#goodsType").val(),
-			"orderStatus" : $("#orderStatus").val()
+			"orderStatus" : $("#orderStatus").val(),
+			"memberName":$("#memberName").val(),
+			"cellphone":$("#cellphone").val()
 		},
 		success : function(ret) {
 			if (ret.code == "000000") {
@@ -32,14 +34,18 @@ function innerHTML(data, pageNo) {
 
 		var html = "<tr><td>" + (a + 1) + "</td>";
 		html += "<td>" + data[a].orderCode + "</td>";
-		html += "<td>" + goodsTypeMap[data[a].goodsType] + "</td>";
+//		html += "<td>" + goodsTypeMap[data[a].goodsType] + "</td>";
+		
+		html += "<td>" + data[a].memberName + "</td>";
+		html += "<td>" + data[a].cellphone + "</td>";
+		
 		html += "<td>" + data[a].goodsNum + "</td>";
 		html += "<td>" + data[a].goodsSubtotal + "</td>";
 		html += "<td>" + data[a].expressFee + "</td>";
 		html += "<td>" + data[a].orderAmount + "</td>";
 		html += "<td>" + data[a].orderRedPacket + "</td>";
 		html += "<td>" + orderStatusMap[data[a].orderStatus] + "</td>";
-		html += "<td>" + data[a].city + "</td>";
+		html += "<td>" + (data[a].city || "")+ "</td>";
 		html += "<td>" + ct + "</td>";
 		html += "<td><div class='am-btn-toolbar'><div class='am-btn-group am-btn-group-xs'>";
 		html += "<button onclick=\"query('" + data[a].orderId + "')\"";

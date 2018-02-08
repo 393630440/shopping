@@ -40,11 +40,10 @@
        <input type="text" id="price" class="txt-input txt-username" 
         placeholder="提现金额">
      </div>
-     
+        24小时内到账<br>
      <div class="ui-btn-wrap"> 
      <a class="ui-btn-lg ui-btn-primary" id="save" href="#">确定</a> 
      </div>
-        
      
      <div style="height: 30px">
      </div>

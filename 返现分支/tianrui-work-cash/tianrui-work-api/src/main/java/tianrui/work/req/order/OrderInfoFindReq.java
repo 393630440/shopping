@@ -9,6 +9,10 @@ import java.util.Date;
  * @author Joe
  */
 public class OrderInfoFindReq {
+	
+	private String memberName;
+	private String cellphone;
+	
 	private String orderId; // 订单ID
 	private String orderCode; // 订单编号
 	private String memberId; // 会员ID
@@ -293,6 +297,22 @@ public class OrderInfoFindReq {
 			payTimeStr = "";
 		}
 		return payTimeStr;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
 
 }

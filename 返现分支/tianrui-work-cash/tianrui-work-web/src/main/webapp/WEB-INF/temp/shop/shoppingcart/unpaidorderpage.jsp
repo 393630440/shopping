@@ -199,7 +199,7 @@
 			$(this).addClass("btn-on_PwdTwo");
 			$(this).removeClass("btn-off_PwdTwo");
 			$(this).attr("setType","1");
-			if(blan>price_info){
+			if(Number(blan)>Number(price_info)){
 				$("#show"+idtype).val(price_info);
 			}else{
 				$("#show"+idtype).val(blan);
