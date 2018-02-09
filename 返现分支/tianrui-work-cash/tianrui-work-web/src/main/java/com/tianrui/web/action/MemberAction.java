@@ -30,6 +30,14 @@ public class MemberAction {
 	@Autowired
 	IMemberReleteService memberReleteService;
 	
+	@RequestMapping("getMember")
+	@ResponseBody
+	public Result getMember(String id) throws Exception{
+		Result rs = Result.getSuccessful();
+		rs = memberInfoService.selectByOpenid(id);
+		return rs;
+	}
+	
 	@RequestMapping("infoPage")
 	public ModelAndView infoPage(String openid){
 		ModelAndView view = new ModelAndView();
@@ -43,7 +51,7 @@ public class MemberAction {
 		return view;
 	}
 	/**
-	 * 会员关系——我的会员
+	 * 锟斤拷员锟斤拷系锟斤拷锟斤拷锟揭的伙拷员
 	 */
 	@RequestMapping("memberRelete")
 	public ModelAndView memberRelete(HttpServletRequest request) throws Exception{
@@ -58,7 +66,7 @@ public class MemberAction {
 		return view;
 	}
 	/**
-	 * 查询用户关系
+	 * 锟斤拷询锟矫伙拷锟斤拷系
 	 */
 	@RequestMapping("findRelete")
 	@ResponseBody

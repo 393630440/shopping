@@ -54,17 +54,20 @@
          		<c:if test="${MemberInfo.memberRank eq 'C' }">VIP客户</c:if>        
          
 	            </div>
-	            <div class="user_dengji">账户余额：${balance}</div>
+	            <div class="user_dengji">账户余额：<span id="MemberInfo_balance"></span></div>
 	        </div>
 			</a>
 	    </div>
 		<ul class="ui-tab-nav">
-	         <li class="typeClass current" style="width: 33.33%"><a>补贴余额：${totalEarnings}</a></li>
-	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/Hbao/page">积分余额：${redParkEarnings}</a></li>
-	         <!-- 
-	         <li class="typeClass"><a href="/wechat/shop/deposit/page">消费记录</a></li>
-	          -->
-	         <li class="typeClass" style="width: 33.33%"><a href="/wechat/shop/cashback/mycashback">我的补贴</a></li>
+	         <li class="typeClass current" style="width: 33.33%">
+	         <a>补贴余额：<span id="MemberInfo_cashMoney"></span></a>
+	         </li>
+	         <li class="typeClass" style="width: 33.33%">
+	         <a href="/wechat/shop/Hbao/page">积分余额：<span id="MemberInfo_redPacket"></span></a>
+	         </li>
+	         <li class="typeClass" style="width: 33.33%">
+	         <a href="/wechat/shop/cashback/mycashback">我的补贴</a>
+	         </li>
 	   	</ul>
 	   	<div class="user_nav_list w">
 	   		<ul>
@@ -111,12 +114,32 @@
 </body>
 <input type="hidden" id="scrollPage">
 <input type="hidden" id="scrollTotal">
+<input type="hidden" id="member_id" value="${MemberInfo.memberId }">
 <script src="/resources/js/scroll/scroll.js"></script>
 <script type="text/javascript">
 	$(function(){
 		init(0,1);
 		init(0,0);
+		getBlance();
 	});
+	
+	function getBlance(){
+		$.ajax({
+			url : "/wechat/shop/member/getMember",
+			type : "POST",
+			data : {
+				"id": $("#member_id").val()
+			},
+			success : function(ret) {
+				if (ret.code == "000000") {
+					$("#MemberInfo_balance").html(ret.data.balance);
+					$("#MemberInfo_cashMoney").html(ret.data.cashMoney);
+					$("#MemberInfo_redPacket").html(ret.data.redPacket);
+				}
+			}
+		});
+	}
+	
 	function init(pageNo,type) {
 		$("#scrollPage").val(pageNo);
 		$.ajax({

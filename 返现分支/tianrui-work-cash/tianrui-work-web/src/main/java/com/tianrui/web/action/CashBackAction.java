@@ -53,9 +53,10 @@ public class CashBackAction {
 			todayEarnings = "0.00";
 		}
 		ModelAndView view = new ModelAndView();
-		view.addObject("balance", upt.getBalance());// 账户余额
-		view.addObject("totalEarnings", upt.getCashMoney());// 累计收益
-		view.addObject("redParkEarnings", upt.getRedPacket());//积分
+		view.addObject("info", upt);
+//		view.addObject("balance", upt.getBalance());// 账户余额
+//		view.addObject("totalEarnings", upt.getCashMoney());// 累计收益
+//		view.addObject("redParkEarnings", upt.getRedPacket());//积分
 		view.addObject("todayEarnings", todayEarnings);// 今日收益
 		view.setViewName("shop/cashback/cashback");
 		return view;
