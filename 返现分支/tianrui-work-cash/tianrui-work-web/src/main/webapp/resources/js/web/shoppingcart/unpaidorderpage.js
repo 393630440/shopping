@@ -40,7 +40,7 @@ function pay() {
 	show_redPacket = show_redPacket == ""?"0":show_redPacket;
 	show_balance = show_balance == ""?"0":show_balance;
 	var buyerWord = $("#buyerWord").val();
-	buyerWord = buyerWord == ""?"无":"";
+	buyerWord = buyerWord == ""?"无":buyerWord;
 	var uuul = "/wechat/shop/pay/billPay?id="+orderId+"&cashMoney="+show_cashMoney+"&redPacket="+show_redPacket+"&balance="+show_balance;
 	if (addressId == "-1" && buyerWord == "") {
 		window.location.href = uuul;

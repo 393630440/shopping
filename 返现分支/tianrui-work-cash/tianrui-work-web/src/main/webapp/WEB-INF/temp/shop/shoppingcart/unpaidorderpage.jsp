@@ -152,11 +152,13 @@
 			<p>快递单号：${orderInfo.wuliuNumb}</p>
 			<div style="clear: both;"></div>
 		</div>
-
+		<input type="hidden" id="buyerWord">
+		<!-- 
 		<div class="fbsd-info4">
-			<textarea placeholder="客户留言" id="buyerWord"></textarea>
+			<textarea placeholder="客户留言" id="buye_rWord"></textarea>
 			<div style="clear: both;"></div>
 		</div>
+		 -->
 		<c:if test="${orderInfo.orderStatus eq 1}">
 		<div class="w main">
 			<div class="ui-btn-wrap">
@@ -209,5 +211,5 @@
 		}
 	});
 </script>
-<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?0114"></script>
+<script src="/resources/js/web/shoppingcart/unpaidorderpage.js?0209"></script>
 </html>
