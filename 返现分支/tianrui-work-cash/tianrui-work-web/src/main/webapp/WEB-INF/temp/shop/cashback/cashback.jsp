@@ -60,10 +60,10 @@
 	    </div>
 		<ul class="ui-tab-nav">
 	         <li class="typeClass current" style="width: 33.33%">
-	         <a>补贴余额：<span id="MemberInfo_cashMoney"></span></a>
+	         <a>补贴：<span id="MemberInfo_cashMoney"></span></a>
 	         </li>
 	         <li class="typeClass" style="width: 33.33%">
-	         <a href="/wechat/shop/Hbao/page">积分余额：<span id="MemberInfo_redPacket"></span></a>
+	         <a href="/wechat/shop/Hbao/page">积分：<span id="MemberInfo_redPacket"></span></a>
 	         </li>
 	         <li class="typeClass" style="width: 33.33%">
 	         <a href="/wechat/shop/cashback/mycashback">我的补贴</a>
